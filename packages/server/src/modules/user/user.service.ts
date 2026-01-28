@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { and, eq, ne } from "drizzle-orm";
 import { db } from "../../db/client";
-import { users } from "../../db/schema";
+import { users, sessions } from "../../db/schema";
 import type { UserSettings } from "@acme/types";
 import { getMessage, type Language } from "../../i18n";
 
@@ -131,6 +131,46 @@ export class UserService {
 				code: "NOT_FOUND",
 				message: getMessage(language, "errors.user.notFound")
 			});
+		}
+
+		return updated;
+	}
+
+	async changePassword(
+		userId: string,
+		oldPassword: string,
+		newPassword: string,
+		currentSessionId: string | undefined,
+		language: Language
+	) {
+		const user = await this.getById(userId);
+		if (!user) {
+			throw new TRPCError({
+				code: "NOT_FOUND",
+				message: getMessage(language, "errors.user.notFound")
+			});
+		}
+
+		// 验证旧密码
+		if (user.passwordHash !== oldPassword) {
+			throw new TRPCError({
+				code: "BAD_REQUEST",
+				message: getMessage(language, "errors.user.wrongPassword")
+			});
+		}
+
+		// 更新密码
+		const [updated] = await db
+			.update(users)
+			.set({ passwordHash: newPassword })
+			.where(eq(users.id, userId))
+			.returning();
+
+		// 删除其他 session（强制其他设备重新登录）
+		if (currentSessionId) {
+			await db
+				.delete(sessions)
+				.where(and(eq(sessions.userId, userId), ne(sessions.id, currentSessionId)));
 		}
 
 		return updated;

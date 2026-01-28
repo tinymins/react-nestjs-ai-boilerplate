@@ -419,7 +419,8 @@ export const en: TranslationSchema = {
       },
       user: {
         notFound: "User not found",
-        emailInUse: "Email already in use"
+        emailInUse: "Email already in use",
+        wrongPassword: "Current password is incorrect"
       },
       workspace: {
         notFound: "Workspace not found",
