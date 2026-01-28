@@ -16,6 +16,11 @@ export const userUpdateInput = z.object({
 	settings: UserSettingsPatchSchema.nullable().optional()
 });
 
+export const changePasswordInput = z.object({
+	oldPassword: z.string().min(1),
+	newPassword: z.string().min(6)
+});
+
 @Router({ alias: "user" })
 export class UserRouter {
 	private readonly logger = new Logger(UserRouter.name);
@@ -52,5 +57,18 @@ export class UserRouter {
 	async deleteAvatar(@Ctx() ctx: Context) {
 		const updated = await userService.deleteAvatar(ctx.userId!, ctx.language);
 		return toUserOutput(updated);
+	}
+
+	@Mutation({ input: changePasswordInput, output: z.object({ success: z.boolean() }) })
+	@UseMiddlewares(requireUser)
+	async changePassword(input: z.infer<typeof changePasswordInput>, @Ctx() ctx: Context) {
+		await userService.changePassword(
+			ctx.userId!,
+			input.oldPassword,
+			input.newPassword,
+			ctx.sessionId,
+			ctx.language
+		);
+		return { success: true };
 	}
 }
