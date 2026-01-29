@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { App as AntdApp } from "antd";
 import { TRPCClientError } from "@trpc/client";
@@ -46,17 +46,6 @@ function AppContent() {
       setLangMode(nextUser.settings.langMode);
     }
   };
-
-  // Sync theme/lang from user settings only when user data changes (not on setter changes)
-  useEffect(() => {
-    if (user?.settings?.themeMode) {
-      setThemeMode(user.settings.themeMode);
-    }
-    if (user?.settings?.langMode) {
-      setLangMode(user.settings.langMode);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.settings?.themeMode, user?.settings?.langMode]);
 
   return (
     <Routes>

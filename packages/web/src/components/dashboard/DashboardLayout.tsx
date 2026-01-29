@@ -185,6 +185,40 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [createWorkspaceOpen, setCreateWorkspaceOpen] = useState(false);
+  const updateProfileMutation = trpc.user.updateProfile.useMutation();
+
+  // 处理主题切换，同时保存到后端
+  const handleThemeModeChange = (mode: ThemeMode) => {
+    onChangeThemeMode(mode);
+    // 如果用户已登录，同步到后端
+    if (user) {
+      updateProfileMutation.mutate(
+        { settings: { themeMode: mode } },
+        {
+          onSuccess: (updatedUser) => {
+            onUpdateUser(updatedUser);
+          }
+        }
+      );
+    }
+  };
+
+  // 处理语言切换，同时保存到后端
+  const handleLangModeChange = (mode: LangMode) => {
+    onChangeLangMode(mode);
+    // 如果用户已登录，同步到后端
+    if (user) {
+      updateProfileMutation.mutate(
+        { settings: { langMode: mode } },
+        {
+          onSuccess: (updatedUser) => {
+            onUpdateUser(updatedUser);
+          }
+        }
+      );
+    }
+  };
+
     const langLabel =
       langMode === "auto" ? (lang === "zh" ? "自动" : "Auto") : lang === "zh" ? "中文" : "English";
     const themeLabel =
@@ -351,7 +385,7 @@ export default function DashboardLayout({
                 trigger={["hover"]}
                 menu={{
                   items: langItems,
-                  onClick: ({ key }) => onChangeLangMode(key as LangMode)
+                  onClick: ({ key }) => handleLangModeChange(key as LangMode)
                 }}
               >
                 <Button size="middle" shape="circle" type="text" icon={<GlobalOutlined />} />
@@ -360,7 +394,7 @@ export default function DashboardLayout({
                 trigger={["hover"]}
                 menu={{
                   items: themeItems,
-                  onClick: ({ key }) => onChangeThemeMode(key as ThemeMode)
+                  onClick: ({ key }) => handleThemeModeChange(key as ThemeMode)
                 }}
               >
                 <Button size="middle" shape="circle" type="text" icon={<BulbOutlined />} />
