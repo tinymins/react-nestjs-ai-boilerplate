@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Outlet, Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Avatar, Button, Dropdown, Menu } from "antd";
-import { GlobalOutlined, BulbOutlined, PlusOutlined, SwapOutlined } from "@ant-design/icons";
+import { Avatar, Button, Dropdown, Menu, Drawer } from "antd";
+import { GlobalOutlined, BulbOutlined, PlusOutlined, SwapOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import type { User } from "@acme/types";
 import type { Theme, Lang, LangMode, ThemeMode } from "../../lib/types";
@@ -219,6 +219,7 @@ export default function DashboardLayout({
     }
   };
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const langLabel =
       langMode === "auto" ? (lang === "zh" ? "自动" : "Auto") : lang === "zh" ? "中文" : "English";
     const themeLabel =
@@ -308,6 +309,7 @@ export default function DashboardLayout({
   const handleMenuClick = (index: number) => {
     const suffix = menuRouteSuffixes[index];
     navigate(`/dashboard/${workspace}${suffix}`);
+    setMobileMenuOpen(false);
   };
 
   if (!user) {
@@ -379,7 +381,14 @@ export default function DashboardLayout({
         {/* Main Content */}
         <div className="flex h-full flex-1 flex-col overflow-hidden">
           {/* Header */}
-          <div className="flex flex-wrap items-center justify-end gap-4 border-b border-slate-200 bg-white px-6 py-4 dark:border-slate-800 dark:bg-slate-900">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white px-4 py-3 lg:justify-end lg:px-6 lg:py-4 dark:border-slate-800 dark:bg-slate-900">
+            {/* Mobile menu button */}
+            <Button
+              type="text"
+              icon={<MenuOutlined />}
+              onClick={() => setMobileMenuOpen(true)}
+              className="lg:!hidden"
+            />
             <div className="flex items-center gap-3 text-sm">
               <Dropdown
                 trigger={["hover"]}
@@ -434,8 +443,60 @@ export default function DashboardLayout({
         onSuccess={(newWorkspace) => {
           // Navigate to the newly created workspace
           navigate(`/dashboard/${newWorkspace.slug}`);
+          setMobileMenuOpen(false);
         }}
       />
+
+      {/* Mobile Drawer Menu */}
+      <Drawer
+        title={null}
+        placement="left"
+        closable={false}
+        onClose={() => setMobileMenuOpen(false)}
+        open={mobileMenuOpen}
+        width={280}
+        className="lg:hidden"
+        styles={{ body: { padding: 0 } }}
+      >
+        <div className="flex h-full flex-col bg-white dark:bg-slate-900">
+          {/* Close button */}
+          <div className="flex justify-end p-2">
+            <Button
+              type="text"
+              icon={<CloseOutlined />}
+              onClick={() => setMobileMenuOpen(false)}
+            />
+          </div>
+
+          {/* Workspace Switcher */}
+          <WorkspaceSwitcher
+            workspaces={workspaces}
+            currentWorkspace={workspace}
+            lang={lang}
+            onSwitch={(slug) => {
+              handleWorkspaceChange(slug);
+              setMobileMenuOpen(false);
+            }}
+            onOpenCreate={() => {
+              setCreateWorkspaceOpen(true);
+              setMobileMenuOpen(false);
+            }}
+          />
+
+          {/* Mobile Navigation */}
+          <nav className="flex-1 overflow-y-auto pt-2 text-sm">
+            <Menu
+              mode="inline"
+              items={menuItemConfigs}
+              selectedKeys={[String(activeIndex)]}
+              onClick={({ key }) => handleMenuClick(Number(key))}
+              className="border-none bg-transparent"
+              theme={theme === "dark" ? "dark" : "light"}
+              style={{ borderInlineEnd: 'none' }}
+            />
+          </nav>
+        </div>
+      </Drawer>
     </div>
   );
 }
