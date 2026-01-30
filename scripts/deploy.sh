@@ -102,7 +102,9 @@ show_help() {
     echo "  $0 -m                完整部署并执行数据库迁移"
     echo "  $0 -m -s             完整部署并执行迁移和种子数据"
     echo "  $0 -b                仅本地构建"
-    echo "  $0 -d -m             仅部署并迁移（使用已上传的镜像）"
+    echo "  $0 -m                仅执行数据库迁移（服务已部署时）"
+    echo "  $0 -s                仅执行种子数据"
+    echo "  $0 -r                重启服务"
 }
 
 # 构建镜像
@@ -246,7 +248,7 @@ full_deploy() {
     log_info "  前端: http://${SERVER}:8080"
     log_info "  后端: http://${SERVER}:4000"
     log_info ""
-    log_info "如需执行数据库迁移，运行: $0 -d -m"
+    log_info "如需执行数据库迁移，运行: $0 -m"
 }
 
 # 解析参数
@@ -278,10 +280,12 @@ while [[ $# -gt 0 ]]; do
             ;;
         -m|--migrate)
             DO_MIGRATE=true
+            DO_FULL=false
             shift
             ;;
         -s|--seed)
             DO_SEED=true
+            DO_FULL=false
             shift
             ;;
         -r|--restart)
@@ -326,8 +330,14 @@ else
     fi
 
     if $DO_DEPLOY; then
-        upload_configs
-        deploy_on_server
+        # 检查远程是否有镜像文件需要加载
+        if ssh "$SERVER" "test -f ${REMOTE_TMP}/${IMAGE_FILE}" 2>/dev/null; then
+            upload_configs
+            deploy_on_server
+        else
+            log_info "未发现待部署的镜像文件，跳过部署流程"
+            log_info "如需完整部署，请先运行: $0 (完整流程) 或 $0 -b && $0 -u (构建+上传)"
+        fi
     fi
 
     if $DO_RESTART; then
