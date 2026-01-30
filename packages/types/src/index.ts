@@ -1,5 +1,22 @@
-export { UserSchema, UserSettingsSchema, UserSettingsPatchSchema } from "./user";
-export type { User, UserSettings } from "./user";
+export {
+  UserSchema,
+  UserSettingsSchema,
+  UserSettingsPatchSchema,
+  UserRoleSchema,
+  SystemSettingsSchema,
+  AdminUserSchema,
+  UpdateUserRoleInputSchema,
+  ForceResetPasswordInputSchema
+} from "./user";
+export type {
+  User,
+  UserSettings,
+  UserRole,
+  SystemSettings,
+  AdminUser,
+  UpdateUserRoleInput,
+  ForceResetPasswordInput
+} from "./user";
 
 export {
   WorkspaceSchema,

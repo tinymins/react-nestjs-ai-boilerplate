@@ -5,7 +5,7 @@ import { Button, Dropdown } from "antd";
 import { GlobalOutlined, BulbOutlined } from "@ant-design/icons";
 import type { User } from "@acme/types";
 import type { LangMode, ThemeMode } from "../../lib/types";
-import { UserMenu, UserSettingsModal } from "../account";
+import { UserMenu, UserSettingsModal, SystemSettingsModal } from "../account";
 
 type SiteHeaderProps = {
 	user: User | null;
@@ -32,6 +32,7 @@ export default function SiteHeader({
 }: SiteHeaderProps) {
 	const { t } = useTranslation();
 	const [settingsOpen, setSettingsOpen] = useState(false);
+	const [systemSettingsOpen, setSystemSettingsOpen] = useState(false);
 	const navItems = t("nav.items", { returnObjects: true }) as {
 		label: string;
 		href: string;
@@ -103,6 +104,7 @@ export default function SiteHeader({
 								user={user}
 								lang={lang}
 								onOpenSettings={() => setSettingsOpen(true)}
+								onOpenSystemSettings={() => setSystemSettingsOpen(true)}
 								onLogout={onLogout}
 							/>
 							<UserSettingsModal
@@ -115,6 +117,12 @@ export default function SiteHeader({
 								onUpdateUser={onUpdateUser}
 								onChangeLangMode={onChangeLangMode}
 								onChangeThemeMode={onChangeThemeMode}
+							/>
+							<SystemSettingsModal
+								open={systemSettingsOpen}
+								onClose={() => setSystemSettingsOpen(false)}
+								user={user}
+								lang={lang}
 							/>
 						</>
 					) : (

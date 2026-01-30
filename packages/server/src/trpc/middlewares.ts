@@ -2,8 +2,9 @@ import { TRPCError } from "@trpc/server";
 import type { MiddlewareResult } from "@trpc/server/unstable-core-do-not-import";
 import { and, eq, or } from "drizzle-orm";
 import type { Context } from "./context";
-import { workspaceMembers, workspaces } from "../db/schema";
+import { workspaceMembers, workspaces, users } from "../db/schema";
 import { getMessage } from "../i18n";
+import type { UserRole } from "@acme/types";
 
 export const requireUser = async ({ ctx, next }: { ctx: Context; next: (opts?: { ctx?: Context }) => Promise<MiddlewareResult<Context>> }): Promise<MiddlewareResult<Context>> => {
   if (!ctx.userId) {
@@ -13,6 +14,56 @@ export const requireUser = async ({ ctx, next }: { ctx: Context; next: (opts?: {
     });
   }
   return next();
+};
+
+/** 要求管理员权限 (admin 或 superadmin) */
+export const requireAdmin = async ({ ctx, next }: { ctx: Context; next: (opts?: { ctx?: Context }) => Promise<MiddlewareResult<Context>> }): Promise<MiddlewareResult<Context>> => {
+  if (!ctx.userId) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: getMessage(ctx.language, "errors.common.unauthorized")
+    });
+  }
+
+  const [user] = await ctx.db
+    .select({ role: users.role })
+    .from(users)
+    .where(eq(users.id, ctx.userId))
+    .limit(1);
+
+  if (!user || !["admin", "superadmin"].includes(user.role)) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: getMessage(ctx.language, "errors.common.adminRequired")
+    });
+  }
+
+  return next({ ctx: { ...ctx, userRole: user.role as UserRole } });
+};
+
+/** 要求超级管理员权限 (superadmin only) */
+export const requireSuperAdmin = async ({ ctx, next }: { ctx: Context; next: (opts?: { ctx?: Context }) => Promise<MiddlewareResult<Context>> }): Promise<MiddlewareResult<Context>> => {
+  if (!ctx.userId) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: getMessage(ctx.language, "errors.common.unauthorized")
+    });
+  }
+
+  const [user] = await ctx.db
+    .select({ role: users.role })
+    .from(users)
+    .where(eq(users.id, ctx.userId))
+    .limit(1);
+
+  if (!user || user.role !== "superadmin") {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: getMessage(ctx.language, "errors.common.superadminRequired")
+    });
+  }
+
+  return next({ ctx: { ...ctx, userRole: user.role as UserRole } });
 };
 
 export const requireWorkspace = async ({ ctx, next }: { ctx: Context; next: (opts?: { ctx?: Context }) => Promise<MiddlewareResult<Context>> }): Promise<MiddlewareResult<Context>> => {

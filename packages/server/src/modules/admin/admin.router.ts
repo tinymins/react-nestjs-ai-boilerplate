@@ -1,6 +1,14 @@
 import { Logger } from "@nestjs/common";
 import { z } from "zod";
-import { Query, Router } from "../../trpc/decorators";
+import {
+	SystemSettingsSchema,
+	AdminUserSchema,
+	UpdateUserRoleInputSchema,
+	ForceResetPasswordInputSchema
+} from "@acme/types";
+import { Query, Mutation, Router, Ctx, UseMiddlewares } from "../../trpc/decorators";
+import { requireAdmin, requireSuperAdmin } from "../../trpc/middlewares";
+import type { Context } from "../../trpc/context";
 import { adminService } from "./admin.service";
 
 export const statsOutput = z.tuple([z.number(), z.number(), z.string()]);
@@ -12,6 +20,7 @@ export class AdminRouter {
 	constructor() {
 		this.logger.log("AdminRouter registered");
 	}
+
 	@Query({ output: statsOutput })
 	async stats() {
 		const stats = await adminService.getStats();
@@ -21,5 +30,56 @@ export class AdminRouter {
 	@Query({ output: z.string() })
 	async health() {
 		return "healthy";
+	}
+
+	// =========== 管理员功能（admin + superadmin） ===========
+
+	/** 获取系统设置 */
+	@Query({ output: SystemSettingsSchema })
+	@UseMiddlewares(requireAdmin)
+	async getSystemSettings() {
+		const settings = await adminService.getSystemSettings();
+		return { allowRegistration: settings.allowRegistration };
+	}
+
+	/** 更新系统设置 */
+	@Mutation({
+		input: z.object({ allowRegistration: z.boolean().optional() }),
+		output: SystemSettingsSchema
+	})
+	@UseMiddlewares(requireAdmin)
+	async updateSystemSettings(input: { allowRegistration?: boolean }) {
+		const updated = await adminService.updateSystemSettings(input);
+		return { allowRegistration: updated.allowRegistration };
+	}
+
+	// =========== 超级管理员功能（superadmin only） ===========
+
+	/** 获取所有用户列表 */
+	@Query({ output: z.array(AdminUserSchema) })
+	@UseMiddlewares(requireSuperAdmin)
+	async listUsers() {
+		return adminService.listUsers();
+	}
+
+	/** 更新用户角色 */
+	@Mutation({ input: UpdateUserRoleInputSchema, output: AdminUserSchema })
+	@UseMiddlewares(requireSuperAdmin)
+	async updateUserRole(input: z.infer<typeof UpdateUserRoleInputSchema>, @Ctx() ctx: Context) {
+		return adminService.updateUserRole(input.userId, input.role, ctx.userId!);
+	}
+
+	/** 强制重置用户密码 */
+	@Mutation({ input: ForceResetPasswordInputSchema, output: z.object({ success: z.boolean() }) })
+	@UseMiddlewares(requireSuperAdmin)
+	async forceResetPassword(input: z.infer<typeof ForceResetPasswordInputSchema>, @Ctx() ctx: Context) {
+		return adminService.forceResetPassword(input.userId, input.newPassword, ctx.userId!);
+	}
+
+	/** 删除用户 */
+	@Mutation({ input: z.object({ userId: z.string() }), output: z.object({ success: z.boolean() }) })
+	@UseMiddlewares(requireSuperAdmin)
+	async deleteUser(input: { userId: string }, @Ctx() ctx: Context) {
+		return adminService.deleteUser(input.userId, ctx.userId!);
 	}
 }

@@ -9,7 +9,7 @@ import type { Theme, Lang, LangMode, ThemeMode } from "../../lib/types";
 import { WorkspaceNotFoundPage } from "../../pages";
 import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
 import { trpc } from "../../lib/trpc";
-import { UserMenu, UserSettingsModal } from "../account";
+import { UserMenu, UserSettingsModal, SystemSettingsModal } from "../account";
 import { getAvatarColor, getAvatarInitial } from "../../lib/avatar";
 import CreateWorkspaceModal from "./CreateWorkspaceModal";
 
@@ -184,6 +184,7 @@ export default function DashboardLayout({
   onChangeThemeMode,
 }: DashboardLayoutProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [systemSettingsOpen, setSystemSettingsOpen] = useState(false);
   const [createWorkspaceOpen, setCreateWorkspaceOpen] = useState(false);
   const updateProfileMutation = trpc.user.updateProfile.useMutation();
 
@@ -412,6 +413,7 @@ export default function DashboardLayout({
                 user={user}
                 lang={lang}
                 onOpenSettings={() => setSettingsOpen(true)}
+                onOpenSystemSettings={() => setSystemSettingsOpen(true)}
                 onLogout={onLogout}
               />
               <UserSettingsModal
@@ -424,6 +426,12 @@ export default function DashboardLayout({
                 onUpdateUser={onUpdateUser}
                 onChangeLangMode={onChangeLangMode}
                 onChangeThemeMode={onChangeThemeMode}
+              />
+              <SystemSettingsModal
+                open={systemSettingsOpen}
+                onClose={() => setSystemSettingsOpen(false)}
+                user={user}
+                lang={lang}
               />
             </div>
           </div>
