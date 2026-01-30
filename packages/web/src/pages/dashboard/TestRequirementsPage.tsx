@@ -599,9 +599,9 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
 
       {/* 数据表格 */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
-        <Table
+        <Table<TestRequirement>
           columns={columns}
-          dataSource={listQuery.data?.items ?? []}
+          dataSource={(listQuery.data?.items ?? []) as TestRequirement[]}
           rowKey="id"
           loading={listQuery.isLoading}
           scroll={{ x: 1300 }}
@@ -856,16 +856,16 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
                 tab={
                   <Space>
                     {copy.detailTabChildren}
-                    {viewingRecord.childrenCount > 0 && (
+                    {(viewingRecord.childrenCount ?? 0) > 0 && (
                       <Tag color="purple">{viewingRecord.childrenCount}</Tag>
                     )}
                   </Space>
                 }
                 key="children"
               >
-                {viewingRecord.childrenCount > 0 ? (
+                {(viewingRecord.childrenCount ?? 0) > 0 ? (
                   <Text type="secondary">
-                    {copy.childrenCount(viewingRecord.childrenCount)}
+                    {copy.childrenCount(viewingRecord.childrenCount ?? 0)}
                   </Text>
                 ) : (
                   <Empty description={copy.childrenEmpty} />

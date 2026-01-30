@@ -29,7 +29,9 @@ type Workspace = {
   id: string;
   name: string;
   slug: string;
-  ownerId: string;
+  description?: string | null;
+  ownerId?: string | null;
+  createdAt?: string;
 };
 
 // Workspace Switcher Component
@@ -128,7 +130,7 @@ function WorkspaceSwitcher({
       <Dropdown
         menu={{ items: workspaceMenuItems, onClick: handleMenuClick }}
         trigger={["hover"]}
-        placement="right"
+        placement="bottomRight"
         classNames={{ root: "workspace-switcher-dropdown" }}
       >
         <button
