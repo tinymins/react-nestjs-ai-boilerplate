@@ -9,7 +9,7 @@ const seedUsers = [
     name: "Admin",
     email: "admin@example.com",
     passwordHash: "password",
-    role: "admin"
+    role: "superadmin"
   },
   {
     name: "User",

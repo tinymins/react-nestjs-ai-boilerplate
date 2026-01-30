@@ -410,12 +410,15 @@ export const en: TranslationSchema = {
         forbidden: "No permission to access",
         requestFailed: "Request failed",
         missingWorkspace: "Missing workspace parameter",
-        workspaceForbidden: "No permission to access this workspace"
+        workspaceForbidden: "No permission to access this workspace",
+        adminRequired: "Admin permission required",
+        superadminRequired: "Super admin permission required"
       },
       auth: {
         invalidCredentials: "Invalid email or password",
         defaultWorkspaceNotFound: "Default workspace not found",
-        emailAlreadyRegistered: "Email already registered"
+        emailAlreadyRegistered: "Email already registered",
+        registrationDisabled: "Registration is currently disabled"
       },
       user: {
         notFound: "User not found",
@@ -441,6 +444,31 @@ export const en: TranslationSchema = {
     footer: {
       copyright: "© 2026 TestOps AI. All rights reserved.",
       tagline: "AI-first testing operations platform"
+    },
+    systemSettings: {
+      title: "System Settings",
+      generalTab: "General",
+      usersTab: "User Management",
+      allowRegistration: "Allow New User Registration",
+      allowRegistrationDesc: "When disabled, new users cannot register",
+      userList: "User List",
+      userRole: "Role",
+      userCreatedAt: "Registered",
+      userActions: "Actions",
+      roleUser: "User",
+      roleAdmin: "Admin",
+      roleSuperAdmin: "Super Admin",
+      changeRole: "Change Role",
+      resetPassword: "Reset Password",
+      deleteUser: "Delete User",
+      confirmDelete: "Confirm Delete",
+      confirmDeleteDesc: "Are you sure you want to delete user {{name}}? This action cannot be undone.",
+      resetPasswordTitle: "Reset Password",
+      resetPasswordDesc: "Set a new password for user {{name}}",
+      newPassword: "New Password",
+      saveSuccess: "Saved successfully",
+      deleteSuccess: "Deleted successfully",
+      resetSuccess: "Password reset successfully"
     }
   }
 };

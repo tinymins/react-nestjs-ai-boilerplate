@@ -1,4 +1,5 @@
 import { Avatar, Dropdown } from "antd";
+import { SettingOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import type { User } from "@acme/types";
 import type { Lang } from "../../lib/types";
@@ -8,14 +9,16 @@ type UserMenuProps = {
   user: User;
   lang: Lang;
   onOpenSettings: () => void;
+  onOpenSystemSettings?: () => void;
   onLogout: () => void;
 };
 
-export default function UserMenu({ user, lang, onOpenSettings, onLogout }: UserMenuProps) {
+export default function UserMenu({ user, lang, onOpenSettings, onOpenSystemSettings, onLogout }: UserMenuProps) {
   const displayName = user.name || user.email;
   const settings = user.settings ?? {};
   const avatarColor = getAvatarColor(displayName);
   const avatarInitial = getAvatarInitial(user.name, user.email);
+  const isAdmin = user.role === "admin" || user.role === "superadmin";
 
   const items: MenuProps["items"] = [
     {
@@ -44,6 +47,16 @@ export default function UserMenu({ user, lang, onOpenSettings, onLogout }: UserM
       key: "settings",
       label: lang === "zh" ? "设置" : "Settings"
     },
+    // 管理员才显示系统设置
+    ...(isAdmin && onOpenSystemSettings
+      ? [
+          {
+            key: "systemSettings",
+            icon: <SettingOutlined />,
+            label: lang === "zh" ? "系统设置" : "System Settings"
+          } as const
+        ]
+      : []),
     {
       key: "logout",
       label: lang === "zh" ? "退出" : "Sign out"
@@ -53,6 +66,9 @@ export default function UserMenu({ user, lang, onOpenSettings, onLogout }: UserM
   const handleClick: MenuProps["onClick"] = ({ key }) => {
     if (key === "settings") {
       onOpenSettings();
+    }
+    if (key === "systemSettings" && onOpenSystemSettings) {
+      onOpenSystemSettings();
     }
     if (key === "logout") {
       onLogout();

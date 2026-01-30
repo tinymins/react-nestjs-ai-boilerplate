@@ -1,8 +1,8 @@
 import type { Response } from "express";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "../../db/client";
-import { sessions, users, workspaceMembers, workspaces } from "../../db/schema";
-import type { UserSettings } from "@acme/types";
+import { sessions, users, workspaceMembers, workspaces, systemSettings } from "../../db/schema";
+import type { UserSettings, UserRole } from "@acme/types";
 
 const SESSION_COOKIE_NAME = "SESSION_ID";
 const SESSION_COOKIE_MAX_AGE = 1000 * 60 * 60 * 24 * 7;
@@ -11,7 +11,7 @@ export const toUserOutput = (user: typeof users.$inferSelect) => ({
 	id: user.id,
 	name: user.name,
 	email: user.email,
-	role: user.role as "admin" | "user",
+	role: user.role as UserRole,
 	settings: (user.settings as UserSettings | null) ?? null
 });
 
@@ -73,9 +73,40 @@ export class AuthService {
 		await db.delete(sessions).where(eq(sessions.id, sessionId));
 	}
 
+	/** 检查系统是否有任何用户（用于判断第一个注册用户） */
+	async isFirstUser(): Promise<boolean> {
+		const result = await db.execute(sql`SELECT COUNT(*)::int AS count FROM users`);
+		const count = Number(result.rows?.[0]?.count ?? 0);
+		return count === 0;
+	}
+
+	/** 获取系统设置 */
+	async getSystemSettings() {
+		const [settings] = await db.select().from(systemSettings).limit(1);
+		if (!settings) {
+			// 初始化默认设置
+			const [created] = await db
+				.insert(systemSettings)
+				.values({ allowRegistration: true })
+				.returning();
+			return created;
+		}
+		return settings;
+	}
+
+	/** 检查是否允许注册 */
+	async isRegistrationAllowed(): Promise<boolean> {
+		const settings = await this.getSystemSettings();
+		return settings.allowRegistration;
+	}
+
 	async registerUser(input: { name: string; email: string; password: string }) {
 		const workspaceName = `${input.name}的空间站`;
 		const workspaceSlug = await this.ensureUniqueWorkspaceSlug(workspaceName);
+
+		// 检查是否是第一个用户
+		const isFirst = await this.isFirstUser();
+		const role: UserRole = isFirst ? "superadmin" : "user";
 
 		const result = await db.transaction(async (tx) => {
 			const [createdUser] = await tx
@@ -84,7 +115,7 @@ export class AuthService {
 					name: input.name,
 					email: input.email,
 					passwordHash: input.password,
-					role: "user"
+					role
 				})
 				.returning();
 

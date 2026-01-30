@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Alert, Button, Form, Input } from "antd";
+import { Alert, Button, Form, Input, Spin } from "antd";
 import type { User } from "@acme/types";
 import { trpc } from "../../lib/trpc";
 
@@ -15,6 +15,12 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
   const [searchParams] = useSearchParams();
   const loginMutation = trpc.auth.login.useMutation();
   const registerMutation = trpc.auth.register.useMutation();
+
+  // 查询注册状态
+  const registrationStatusQuery = trpc.auth.registrationStatus.useQuery();
+  const registrationAllowed = registrationStatusQuery.data?.allowed ?? true;
+  const isFirstUser = registrationStatusQuery.data?.isFirstUser ?? false;
+
   const [mode, setMode] = useState<"login" | "register">(initialMode);
   const error = (mode === "login" ? loginMutation.error : registerMutation.error)?.message;
   const { t, i18n } = useTranslation();
@@ -32,6 +38,15 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
     form.resetFields();
   }, [initialMode]);
 
+  // 如果正在检查注册状态，显示加载
+  if (registrationStatusQuery.isLoading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
+        <Spin size="large" />
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 px-4">
       <div className="w-full max-w-md">
@@ -41,7 +56,13 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
               {t("login.title")}
             </h1>
             <p className="text-slate-500 dark:text-slate-400">
-              请登录您的账户
+              {isFirstUser && mode === "register"
+                ? lang === "zh"
+                  ? "创建第一个管理员账户"
+                  : "Create the first admin account"
+                : lang === "zh"
+                  ? "请登录您的账户"
+                  : "Please sign in to your account"}
             </p>
           </div>
 
@@ -95,7 +116,7 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
               </Form.Item>
             ) : null}
 
-            {error ? <Alert type="error" title={error} showIcon /> : null}
+            {error ? <Alert type="error" message={error} showIcon className="mb-4" /> : null}
 
             <Button
               type="primary"
@@ -114,24 +135,46 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
                     : "Register"}
             </Button>
 
-            <Button
-              type="link"
-              block
-              onClick={() => {
-                const nextMode = mode === "login" ? "register" : "login";
-                setMode(nextMode);
-                form.resetFields();
-                navigate(nextMode === "login" ? `/login${redirectQuery}` : `/register${redirectQuery}`);
-              }}
-            >
-              {mode === "login"
-                ? lang === "zh"
-                  ? "没有账号？去注册"
-                  : "No account? Register"
-                : lang === "zh"
-                  ? "已有账号？去登录"
-                  : "Already have an account? Login"}
-            </Button>
+            {/* 只有允许注册时才显示切换按钮 */}
+            {registrationAllowed ? (
+              <Button
+                type="link"
+                block
+                onClick={() => {
+                  const nextMode = mode === "login" ? "register" : "login";
+                  setMode(nextMode);
+                  form.resetFields();
+                  navigate(nextMode === "login" ? `/login${redirectQuery}` : `/register${redirectQuery}`);
+                }}
+              >
+                {mode === "login"
+                  ? lang === "zh"
+                    ? "没有账号？去注册"
+                    : "No account? Register"
+                  : lang === "zh"
+                    ? "已有账号？去登录"
+                    : "Already have an account? Login"}
+              </Button>
+            ) : mode === "register" ? (
+              // 如果注册被禁用但当前在注册页，显示提示并跳转到登录
+              <div className="mt-4 text-center">
+                <Alert
+                  type="warning"
+                  message={lang === "zh" ? "系统暂不开放注册" : "Registration is currently disabled"}
+                  className="mb-4"
+                />
+                <Button
+                  type="link"
+                  onClick={() => {
+                    setMode("login");
+                    form.resetFields();
+                    navigate(`/login${redirectQuery}`);
+                  }}
+                >
+                  {lang === "zh" ? "返回登录" : "Back to login"}
+                </Button>
+              </div>
+            ) : null}
           </Form>
         </div>
       </div>

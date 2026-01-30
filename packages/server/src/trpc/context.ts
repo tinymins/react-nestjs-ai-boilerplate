@@ -4,6 +4,7 @@ import type { InferSelectModel } from "drizzle-orm";
 import { db } from "../db/client";
 import { sessions, workspaces } from "../db/schema";
 import { normalizeLanguage } from "../i18n";
+import type { UserRole } from "@acme/types";
 
 type Workspace = InferSelectModel<typeof workspaces>;
 
@@ -40,6 +41,7 @@ export const createContext = async ({ req, res }: CreateExpressContextOptions) =
     sessionId,
     workspaceKey: typeof workspaceKey === "string" ? workspaceKey : undefined,
     workspace: undefined as Workspace | undefined,
+    userRole: undefined as UserRole | undefined,
     language,
     res
   };

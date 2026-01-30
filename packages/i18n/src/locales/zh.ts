@@ -420,12 +420,15 @@ export const zh = {
           forbidden: "无权限访问",
           requestFailed: "请求失败",
           missingWorkspace: "缺少工作空间参数",
-          workspaceForbidden: "无权限访问该工作空间"
+          workspaceForbidden: "无权限访问该工作空间",
+          adminRequired: "需要管理员权限",
+          superadminRequired: "需要超级管理员权限"
         },
         auth: {
           invalidCredentials: "账号或密码错误",
           defaultWorkspaceNotFound: "未找到默认工作空间",
-          emailAlreadyRegistered: "邮箱已注册"
+          emailAlreadyRegistered: "邮箱已注册",
+          registrationDisabled: "系统暂不开放注册"
         },
         user: {
           notFound: "用户不存在",
@@ -451,6 +454,31 @@ export const zh = {
     footer: {
       copyright: "© 2026 TestOps AI. All rights reserved.",
       tagline: "AI 驱动的测试全流程平台"
+    },
+    systemSettings: {
+      title: "系统设置",
+      generalTab: "通用设置",
+      usersTab: "用户管理",
+      allowRegistration: "允许新用户注册",
+      allowRegistrationDesc: "关闭后，新用户将无法注册账号",
+      userList: "用户列表",
+      userRole: "角色",
+      userCreatedAt: "注册时间",
+      userActions: "操作",
+      roleUser: "普通用户",
+      roleAdmin: "管理员",
+      roleSuperAdmin: "超级管理员",
+      changeRole: "修改角色",
+      resetPassword: "重置密码",
+      deleteUser: "删除用户",
+      confirmDelete: "确认删除",
+      confirmDeleteDesc: "确定要删除用户 {{name}} 吗？此操作不可撤销。",
+      resetPasswordTitle: "重置密码",
+      resetPasswordDesc: "为用户 {{name}} 设置新密码",
+      newPassword: "新密码",
+      saveSuccess: "保存成功",
+      deleteSuccess: "删除成功",
+      resetSuccess: "密码重置成功"
     }
   }
 };

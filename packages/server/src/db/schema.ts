@@ -6,7 +6,7 @@ export const users = pgTable("users", {
   email: text("email").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
   settings: jsonb("settings"),
-  role: text("role").notNull().default("user"),
+  role: text("role").notNull().default("user"), // superadmin, admin, user
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow()
 });
 
@@ -15,6 +15,14 @@ export const sessions = pgTable("sessions", {
   userId: uuid("user_id").references(() => users.id).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
   expiresAt: timestamp("expires_at", { withTimezone: true }).notNull()
+});
+
+// 系统设置表（单行配置）
+export const systemSettings = pgTable("system_settings", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  allowRegistration: boolean("allow_registration").notNull().default(true),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow()
 });
 
 export const workspaces = pgTable("workspaces", {
