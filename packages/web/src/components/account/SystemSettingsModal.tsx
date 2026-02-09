@@ -187,23 +187,27 @@ export default function SystemSettingsModal({
     {
       title: t("systemSettings.userNameColumn"),
       dataIndex: "name",
-      key: "name"
+      key: "name",
+      width: 100
     },
     {
       title: t("systemSettings.emailColumn"),
       dataIndex: "email",
-      key: "email"
+      key: "email",
+      width: 160
     },
     {
       title: t("systemSettings.userRole"),
       dataIndex: "role",
       key: "role",
+      width: 120,
       render: (role: UserRole) => getRoleTag(role)
     },
     {
       title: t("systemSettings.lastLoginAt"),
       dataIndex: "lastLoginAt",
       key: "lastLoginAt",
+      width: 100,
       render: (date: string | null) =>
         date ? new Date(date).toLocaleString() : t("systemSettings.neverLogin")
     },
@@ -211,11 +215,13 @@ export default function SystemSettingsModal({
       title: t("systemSettings.userCreatedAt"),
       dataIndex: "createdAt",
       key: "createdAt",
+      width: 120,
       render: (date: string) => new Date(date).toLocaleDateString()
     },
     {
       title: t("systemSettings.userActions"),
       key: "actions",
+      width: 280,
       render: (_, record) => {
         const isCurrentUser = record.id === user.id;
         const isSuperAdminUser = record.role === "superadmin";
@@ -305,6 +311,7 @@ export default function SystemSettingsModal({
         rowKey="id"
         loading={usersQuery.isLoading}
         size="small"
+        scroll={{ x: 900 }}
         pagination={{ pageSize: 10 }}
       />
     </div>
