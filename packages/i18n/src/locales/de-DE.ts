@@ -1,0 +1,824 @@
+/**
+ * Deutsche Übersetzungsressourcen
+ */
+export const deDE = {
+  translation: {
+    brand: "TestOps AI",
+    common: {
+      loading: "Wird geladen...",
+      cancel: "Abbrechen",
+      delete: "Löschen",
+      remove: "Entfernen",
+      add: "Hinzufügen",
+      save: "Speichern",
+      saveChanges: "Änderungen speichern",
+      confirm: "Bestätigen",
+      auto: "Automatisch",
+      light: "Hell",
+      dark: "Dunkel",
+      member: "Mitglied",
+      owner: "Ersteller",
+      workspaceLabel: "Arbeitsbereich",
+      notFound: "Nicht gefunden",
+      saveSuccess: "Erfolgreich gespeichert",
+      saveFailed: "Speichern fehlgeschlagen",
+      deleteSuccess: "Gelöscht",
+      deleteFailed: "Löschen fehlgeschlagen",
+      severity: {
+        critical: "Kritisch",
+        high: "Hoch",
+        medium: "Mittel",
+        low: "Niedrig"
+      },
+      theme: {
+        light: "Hell",
+        dark: "Dunkel"
+      }
+    },
+    userMenu: {
+      account: "Kontoeinstellungen",
+      admin: "Admin-Bereich",
+      signOut: "Abmelden"
+    },
+    userSettings: {
+      title: "Kontoeinstellungen",
+      profileTab: "Profil",
+      passwordTab: "Passwort ändern",
+      uploadAvatar: "Avatar hochladen",
+      removeAvatar: "Avatar entfernen",
+      avatarRemoved: "Avatar entfernt",
+      pleaseUploadImage: "Bitte laden Sie eine Bilddatei hoch",
+      settingsSaved: "Einstellungen gespeichert",
+      passwordChanged: "Passwort geändert",
+      userName: "Benutzername",
+      userNameRequired: "Bitte geben Sie einen Benutzernamen ein",
+      userNamePlaceholder: "z.B.: Max Mustermann",
+      email: "E-Mail",
+      emailRequired: "Bitte geben Sie eine E-Mail-Adresse ein",
+      language: "Sprache",
+      theme: "Design",
+      currentPassword: "Aktuelles Passwort",
+      currentPasswordRequired: "Bitte geben Sie Ihr aktuelles Passwort ein",
+      currentPasswordPlaceholder: "Aktuelles Passwort eingeben",
+      newPassword: "Neues Passwort",
+      newPasswordRequired: "Bitte geben Sie ein neues Passwort ein",
+      newPasswordMin: "Passwort muss mindestens 6 Zeichen haben",
+      newPasswordPlaceholder: "Neues Passwort eingeben (min. 6 Zeichen)",
+      confirmPassword: "Passwort bestätigen",
+      confirmPasswordRequired: "Bitte bestätigen Sie das neue Passwort",
+      confirmPasswordPlaceholder: "Neues Passwort erneut eingeben",
+      passwordMismatch: "Passwörter stimmen nicht überein",
+      changePassword: "Passwort ändern"
+    },
+    createWorkspace: {
+      title: "Neuen Arbeitsbereich erstellen",
+      success: "Arbeitsbereich erfolgreich erstellt",
+      failed: "Erstellung fehlgeschlagen",
+      create: "Erstellen",
+      cancel: "Abbrechen",
+      nameLabel: "Name des Arbeitsbereichs",
+      nameRequired: "Bitte geben Sie einen Namen ein",
+      nameLength: "Name muss 1-50 Zeichen lang sein",
+      namePlaceholder: "z.B.: Mein Projekt",
+      slugLabel: "Arbeitsbereich-ID (URL)",
+      slugRequired: "Bitte geben Sie eine ID ein",
+      slugPattern: "Nur Kleinbuchstaben, Zahlen und Bindestriche erlaubt",
+      slugExtra: "Wird in der URL verwendet, z.B.: /dashboard/{{slug}}",
+      descLabel: "Beschreibung",
+      descPlaceholder: "Kurze Beschreibung des Arbeitsbereichs..."
+    },
+    nav: {
+      items: [
+        { label: "Startseite", href: "/#home" },
+        { label: "Lösungen", href: "/#solutions" },
+        { label: "Workflow", href: "/#workflow" },
+        { label: "AI-Funktionen", href: "/#ai" },
+        { label: "Preise", href: "/#plans" }
+      ],
+      login: "Anmelden",
+      dashboard: "Dashboard"
+    },
+    hero: {
+      badge: "AI TestOps",
+      title: "AI-gestütztes TestOps-System",
+      subtitle:
+        "Eine All-in-One-Plattform von der Anforderungserfassung über Testaktivitäten bis zur Berichterstellung. Machen Sie Testprozesse wie DevOps beobachtbar, messbar und automatisierbar.",
+      primary: "Demo vereinbaren",
+      secondary: "Architektur ansehen",
+      consoleTitle: "Echtzeit-Qualitätskontrollzentrum",
+      consoleLines: [
+        "✓ Anforderungsanalyse abgeschlossen · 12 Szenarien",
+        "✓ Testmatrix generiert · Abdeckung 92%",
+        "→ Automatisierte Regression wird geplant · 18/24",
+        "→ Risikobewertung läuft · 8%"
+      ],
+      metrics: [
+        { label: "End-to-End-Automatisierung", value: "90%" },
+        { label: "Liefervisualisierung", value: "100%" },
+        { label: "Effizienzsteigerung", value: "3x" }
+      ]
+    },
+    overview: {
+      title: "Machen Sie Tests zum Kernmotor der kontinuierlichen Lieferung",
+      description:
+        "TestOps AI reorganisiert die Entwicklungszusammenarbeit mit Tests im Mittelpunkt: Intelligente Anforderungszerlegung, Testdesign-Generierung, Ausführungs- und Regressions-Schleife, Risikovorhersage und Berichtseinblicke.",
+      cards: [
+        {
+          title: "AI-first TestOps",
+          desc: "Anforderungen, Testdesign, Ausführung und Berichte werden alle auf derselben AI-gesteuerten Pipeline abgeschlossen, in Echtzeit sichtbar und nachvollziehbar.",
+          bullets: [
+            "Automatische Testbereichs-Generierung und Abdeckungsvorschläge",
+            "Test-Assets werden als wiederverwendbare Wissensbasis gespeichert",
+            "Ein-Klick-Release-Gates und Qualitäts-Dashboards"
+          ]
+        },
+        {
+          title: "Einheitliche Qualitätsoperations-Perspektive",
+          desc: "Vereinen Sie manuelle und automatisierte Tests, Defekte, Risiken und Effizienzmetriken in einer einzigen Ansicht.",
+          bullets: [
+            "Automatische Erkennung von Testaktivitätsfortschritt und Blockaden",
+            "Defekttrends und Regression-Prioritätsvorschläge",
+            "Kontinuierliche Optimierung der Qualitäts-KPIs"
+          ]
+        }
+      ]
+    },
+    pillars: {
+      title: "Plattform-Fähigkeitsmatrix",
+      items: [
+        {
+          title: "Anforderungsgesteuert",
+          desc: "Automatische Generierung von Testumfang und Abdeckungsvorschlägen aus PRD/User Stories."
+        },
+        {
+          title: "Intelligentes Design",
+          desc: "AI vervollständigt automatisch Testfälle, Daten und Assertionen, unterstützt Template-Wiederverwendung."
+        },
+        {
+          title: "Ausführungsorchestrierung",
+          desc: "Einheitliche Planung von manuellen und automatisierten Tests, Echtzeit-Fortschritts-Feedback."
+        },
+        {
+          title: "Qualitätseinblicke",
+          desc: "Risiko-Heatmaps, Defekttrends, Abdeckung und Qualitäts-Gates."
+        },
+        {
+          title: "Wissensakkumulation",
+          desc: "Test-Assets werden als Wissensbasis gespeichert und kontinuierlich optimiert."
+        },
+        {
+          title: "Governance & Compliance",
+          desc: "Prozessaudits, Berechtigungsmatrix, nachvollziehbare Lieferung."
+        }
+      ]
+    },
+    flow: {
+      title: "End-to-End TestOps-Engine",
+      steps: [
+        {
+          title: "Anforderungserfassung",
+          desc: "Unterstützt Tickets, PRD, API-Dokumentation und Anforderungsvorlagen, erstellt automatisch Testumfang."
+        },
+        {
+          title: "Testplanung",
+          desc: "AI generiert Testmatrix, Risikobewertung und Testressourcenplanung."
+        },
+        {
+          title: "Testdesign",
+          desc: "Generiert Testfälle, Daten und Ausführungsskripte aus Modellen und historischen Assets."
+        },
+        {
+          title: "Testausführung",
+          desc: "Einheitliche Planung von Automatisierung, manuellen, Performance- und Sicherheitstestaktivitäten."
+        },
+        {
+          title: "Defektmanagement",
+          desc: "Intelligentes Clustering, Ursachenanalyse, Regressionsvorschläge und Auswirkungsbewertung."
+        },
+        {
+          title: "Testberichte",
+          desc: "Automatische Generierung von mehrdimensionalen Qualitätsberichten, unterstützt Release-Gates."
+        }
+      ]
+    },
+    testing: {
+      badge: "AI-gestützte Tests",
+      title: "Intelligente Planung, vollständige Szenarioabdeckung",
+      desc: "AI analysiert automatisch Anforderungen und generiert Testpläne, unterstützt mehrere Testprotokolle und Plattformen, All-in-One-Lösung für alle Testanforderungen",
+      capabilities: [
+        {
+          title: "HTTP / REST API",
+          desc: "Umfassende HTTP-Schnittstellentests, unterstützt RESTful, GraphQL, WebSocket"
+        },
+        {
+          title: "gRPC",
+          desc: "Hochleistungs-gRPC-Servicetests, unterstützt Unary- und Streaming-Aufrufe"
+        },
+        {
+          title: "Mobile UI",
+          desc: "iOS / Android native App-Automatisierungstests, unterstützt echte Geräte und Emulatoren"
+        },
+        {
+          title: "Browser-Tests",
+          desc: "Chrome / Firefox / Safari / Edge Cross-Browser-Automatisierungstests"
+        },
+        {
+          title: "Windows-Desktop",
+          desc: "Windows-Desktop-App-Automatisierung, unterstützt WinUI / WPF / Win32"
+        },
+        {
+          title: "AI Intelligente Planung",
+          desc: "Automatische Generierung von Testfällen basierend auf Anforderungen, intelligente Erkennung von Testszenarien und Randbedingungen"
+        }
+      ]
+    },
+    ai: {
+      title: "AI-First Kernfunktionen",
+      items: [
+        {
+          title: "Anforderungsverständnis-Engine",
+          desc: "Extrahiert Schlüsselszenarien aus dem Kontext, generiert Testumfang und Risiko-Tags."
+        },
+        {
+          title: "Test-Asset-Generierung",
+          desc: "Automatische Generierung von Testfällen, Daten, API-Testskripten und Testdokumentation."
+        },
+        {
+          title: "Ausführungs-Intelligenter Assistent",
+          desc: "Bietet Echtzeit-Blockierungsgründe, Behebungsvorschläge und Regression-Prioritäten."
+        },
+        {
+          title: "Berichtseinblicke",
+          desc: "Generiert Management-Perspektive-Berichte und Release-Entscheidungsempfehlungen."
+        }
+      ]
+    },
+    integrations: {
+      title: "Nahtlose Integration in das Entwicklungsökosystem",
+      items: [
+        "Jira / Tapd / Feishu",
+        "GitHub / GitLab / Azure DevOps",
+        "Jenkins / GitHub Actions / Argo",
+        "Postman / Playwright / Cypress",
+        "SonarQube / Sentry / Datadog",
+        "Enterprise-IM und Benachrichtigungszentrum"
+      ]
+    },
+    security: {
+      title: "Enterprise-Sicherheit und Governance",
+      items: [
+        "Rollenberechtigungen und Organisationstrennung",
+        "Datenverschlüsselung und Audit-Logs",
+        "Multi-Region-Deployment und Disaster Recovery",
+        "Compliance-Prozesse und Release-Gates",
+        "Asset-Versionierung und Genehmigungen"
+      ]
+    },
+    cta: {
+      title: "Beginnen Sie mit dem Aufbau eines AI-gesteuerten End-to-End-Testprozesses",
+      desc: "Machen Sie Ihr Testteam zum strategischen Motor der Entwicklungslieferung.",
+      primary: "Lösung anfragen",
+      secondary: "Testversion beantragen"
+    },
+    closing: {
+      title: "Lassen Sie Tests wie Code kontinuierlich weiterentwickeln",
+      subtitle: "AI TestOps · Verbindet Anforderungen, Qualität und Lieferung in jeder Iteration"
+    },
+    login: {
+      title: "Bei TestOps AI anmelden",
+      email: "E-Mail",
+      password: "Passwort",
+      submit: "Anmelden",
+      loading: "Anmeldung läuft...",
+      invitedRegister: "Sie wurden eingeladen, bitte registrieren Sie ein Konto",
+      firstAdmin: "Erstes Administratorkonto erstellen",
+      pleaseLogin: "Bitte melden Sie sich an",
+      userName: "Benutzername",
+      userNameRequired: "Bitte geben Sie einen Benutzernamen ein",
+      userNamePlaceholder: "z.B.: Max Mustermann",
+      register: "Registrieren",
+      noAccount: "Kein Konto? Registrieren",
+      hasAccount: "Bereits ein Konto? Anmelden",
+      registrationDisabled: "Registrierung ist derzeit nicht verfügbar",
+      backToLogin: "Zurück zur Anmeldung"
+    },
+    dashboard: {
+      title: "Test-Operations-Center",
+      welcome: "Willkommen zurück",
+      stats: ["Anforderungspool", "Laufende Tests", "Release-Gates"],
+      promptTitle: "Bitte zuerst anmelden",
+      promptBody: "Nach der Anmeldung können Sie Test-Operations-Daten und den Arbeitsbereich einsehen.",
+      toLogin: "Zur Anmeldung",
+      workspace: "Arbeitsbereich",
+      workspaceSwitcher: {
+        switchWorkspace: "Arbeitsbereich wechseln"
+      },
+      insightTitle: "Qualitätseinblicke",
+      insightDesc: "Automatische Generierung von Risiko-Heatmaps, Abdeckung und Release-Gate-Empfehlungen.",
+      insightItems: ["Anforderungsabdeckung 92%", "Regressionsrisiko 8%", "Blockiert 3", "Ausstehend 5"],
+      assistantTitle: "AI-Ausführungsassistent",
+      assistantDesc: "Erkennt automatisch Blockierungen, gibt Behebungsvorschläge und generiert Regression-Prioritäten.",
+      assistantItems: [
+        "Anmeldeprozess zeigt ungewöhnliche Schwankungen, priorisierte Regression empfohlen",
+        "Neue Version Zahlungs-API Abdeckung unzureichend 12%",
+        "Mobile Regression Defektkonvergenz verbessert um 20%"
+      ],
+      menu: [
+        "Arbeitsbereich",
+        "Testanforderungen",
+        "Testplanung",
+        "Testdesign",
+        "Ausführungszentrum",
+        "Defekte & Risiken",
+        "Qualitätsberichte",
+        "Automatisierungs-Assets",
+        "Systemeinstellungen"
+      ],
+      todoList: {
+        title: "📋 Entwicklungsaufgabenliste",
+        subtitle: "Fortschritt der Arbeitsbereich-Wechselfunktion",
+        currentWorkspace: "Aktueller Arbeitsbereich",
+        addPlaceholder: "Neue Aufgabe hinzufügen...",
+        completed: "Abgeschlossen",
+        summary: "🎯 Zusammenfassung",
+        noTodos: "Keine Aufgaben",
+        menuLabel: "📋 Aufgabenliste"
+      },
+      defects: {
+        description: "Defekte verfolgen und Risiken bewerten"
+      },
+      testDesign: {
+        description: "Testfälle entwerfen und schreiben",
+        caseLibrary: "Testfall-Bibliothek",
+        newCase: "+ Neuer Testfall",
+        totalCases: "Insgesamt {{count}} Testfälle"
+      },
+      settings: {
+        title: "Arbeitsbereich-Einstellungen",
+        subtitle: "Konfiguration und Mitglieder von \"{{name}}\" verwalten",
+        workspaceNotFound: "Arbeitsbereich nicht gefunden",
+        generalTab: "Allgemeine Einstellungen",
+        membersTab: "Mitgliederverwaltung",
+        dangerTab: "Gefahrenzone",
+        workspaceName: "Name des Arbeitsbereichs",
+        workspaceNamePlaceholder: "z.B.: Mein Projekt",
+        workspaceNameRequired: "Bitte geben Sie einen Namen ein",
+        workspaceNameLength: "Name muss 1-50 Zeichen lang sein",
+        workspaceSlug: "Arbeitsbereich-ID (URL)",
+        workspaceSlugRequired: "Bitte geben Sie eine ID ein",
+        workspaceSlugPattern: "Nur Kleinbuchstaben, Zahlen und Bindestriche erlaubt",
+        workspaceSlugExtra: "Wird in der URL verwendet, z.B.: /dashboard/my-project",
+        description: "Beschreibung",
+        descriptionPlaceholder: "Kurze Beschreibung des Arbeitsbereichs...",
+        workspaceDeleted: "Arbeitsbereich gelöscht",
+        confirmDeleteTitle: "Arbeitsbereich löschen bestätigen",
+        confirmDeleteContent: "Sind Sie sicher, dass Sie den Arbeitsbereich \"{{name}}\" löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+        confirmDeleteWarning: "Alle zugehörigen Daten (einschließlich Aufgaben) werden dauerhaft gelöscht.",
+        confirmDeleteOk: "Löschen bestätigen",
+        deleteWorkspace: "Arbeitsbereich löschen",
+        deleteWorkspaceDesc: "Nach dem Löschen werden alle Daten dauerhaft entfernt und können nicht wiederhergestellt werden.",
+        memberList: "Mitgliederliste",
+        memberListDesc: "Arbeitsbereich-Mitglieder und Berechtigungen verwalten",
+        inviteMember: "Mitglied einladen",
+        inviteModalTitle: "Mitglied einladen",
+        sendInvite: "Einladung senden",
+        emailAddress: "E-Mail-Adresse",
+        emailRequired: "Bitte geben Sie eine E-Mail ein",
+        emailInvalid: "Bitte geben Sie eine gültige E-Mail ein",
+        role: "Rolle",
+        memberDefault: "Mitglied (Standard)",
+        memberPermissionDesc: "Mitglieder können Inhalte im Arbeitsbereich anzeigen und bearbeiten",
+        tableColumnMember: "Mitglied",
+        tableColumnRole: "Rolle",
+        tableColumnJoined: "Beitrittsdatum",
+        tableColumnActions: "Aktionen",
+        removeMemberComingSoon: "Mitglied-Entfernungsfunktion in Entwicklung",
+        inviteComingSoon: "Einladungsfunktion in Entwicklung: Einladungs-E-Mail wird an {{email}} gesendet",
+        workspaceOwner: "Arbeitsbereich-Ersteller"
+      },
+      requirements: {
+        description: "Produktanforderungen verwalten und verfolgen",
+        workspaceLabel: "Arbeitsbereich",
+        toAnalyze: "Zur Analyse",
+        inDesign: "Im Design",
+        completed: "Abgeschlossen",
+        recentRequirements: "Letzte Anforderungen",
+        sampleTitle1: "Optimierung des Benutzeranmeldungsmoduls",
+        sampleTitle2: "Upgrade der Zahlungsschnittstelle",
+        sampleTitle3: "Leistungsoptimierung der Bestellabfrage"
+      },
+      execution: {
+        description: "Testaufgaben ausführen und Ergebnisse anzeigen",
+        workspaceLabel: "Arbeitsbereich",
+        running: "Wird ausgeführt",
+        passed: "Bestanden",
+        failed: "Fehlgeschlagen",
+        blocked: "Blockiert"
+      },
+      automation: {
+        description: "Automatisierte Testskripte und Ressourcen verwalten",
+        workspaceLabel: "Arbeitsbereich",
+        totalScripts: "Gesamtzahl Skripte",
+        successRate: "Erfolgsquote",
+        avgDuration: "Durchschnittliche Ausführungszeit"
+      },
+      reports: {
+        description: "Qualitätsmetriken anzeigen und Berichte generieren",
+        workspaceLabel: "Arbeitsbereich",
+        testCoverage: "Testabdeckung",
+        defectDensity: "Defektdichte",
+        automationRate: "Automatisierungsgrad"
+      },
+      testPlan: {
+        description: "Testpläne planen und verwalten",
+        workspaceLabel: "Arbeitsbereich",
+        inProgress: "In Bearbeitung",
+        completedThisWeek: "Diese Woche abgeschlossen",
+        avgCoverage: "Durchschnittliche Abdeckung"
+      },
+      testRequirements: {
+        titleTotal: "Gesamtanforderungen",
+        titleDraft: "Entwurf",
+        titleInProgress: "In Bearbeitung",
+        titleDone: "Abgeschlossen",
+        searchPlaceholder: "Anforderungen suchen...",
+        filterStatus: "Status filtern",
+        filterType: "Typ filtern",
+        filterPriority: "Priorität",
+        refresh: "Aktualisieren",
+        create: "Anforderung erstellen",
+        totalCount: "Insgesamt {{total}} Einträge",
+        view: "Details anzeigen",
+        edit: "Bearbeiten",
+        remove: "Löschen",
+        removeTitle: "Diese Anforderung wirklich löschen?",
+        removeDesc: "Nach dem Löschen nicht wiederherstellbar",
+        removeOk: "Löschen",
+        removeCancel: "Abbrechen",
+        modalCreate: "Neue Testanforderung erstellen",
+        modalEdit: "Testanforderung bearbeiten",
+        modalOkCreate: "Erstellen",
+        modalOkSave: "Speichern",
+        fieldTitle: "Anforderungsname",
+        fieldTitleRequired: "Bitte geben Sie einen Namen ein",
+        fieldType: "Anforderungstyp",
+        fieldDesc: "Beschreibung",
+        fieldContent: "Detailinhalt (Markdown unterstützt)",
+        fieldPriority: "Priorität",
+        fieldStatus: "Status",
+        fieldDueDate: "Fälligkeitsdatum",
+        dueDatePlaceholder: "Fälligkeitsdatum auswählen",
+        fieldEstimate: "Geschätzter Aufwand (Stunden)",
+        fieldTags: "Tags (kommagetrennt)",
+        tagsPlaceholder: "Tag1, Tag2, Tag3",
+        detailTabInfo: "Basisinformationen",
+        detailTabContent: "Detailinhalt",
+        detailTabChildren: "Unteranforderungen",
+        descEmpty: "Keine Beschreibung",
+        contentEmpty: "Kein Detailinhalt",
+        childrenEmpty: "Keine Unteranforderungen",
+        childrenCount: "Insgesamt {{count}} Unteranforderungen",
+        creator: "Ersteller",
+        assignee: "Zuständiger",
+        estimate: "Geschätzter Aufwand",
+        actual: "Tatsächlicher Aufwand",
+        createdAt: "Erstelldatum",
+        dueDate: "Fälligkeitsdatum",
+        hours: "Stunden",
+        children: "Unteranforderungen",
+        requirementId: "Anforderungs-ID",
+        requirementName: "Anforderungsname",
+        type: "Typ",
+        status: "Status",
+        priority: "Priorität",
+        creatorName: "Ersteller",
+        assigneeName: "Zuständiger",
+        createdTime: "Erstelldatum",
+        action: "Aktion",
+        toastCreateSuccess: "Erfolgreich erstellt",
+        toastCreateFail: "Erstellung fehlgeschlagen",
+        toastUpdateSuccess: "Erfolgreich aktualisiert",
+        toastUpdateFail: "Aktualisierung fehlgeschlagen",
+        toastDeleteSuccess: "Erfolgreich gelöscht",
+        toastDeleteFail: "Löschen fehlgeschlagen",
+        markdownPlaceholder: "# Testanforderungsdetails\n\n## Testziel\nHaupttestziel beschreiben...\n\n## Testumfang\n- Punkt 1\n- Punkt 2\n\n## Testschritte\n1. Schritt eins\n2. Schritt zwei\n\n## Erwartete Ergebnisse\nErwartete Testergebnisse beschreiben...",
+        statusLabels: {
+          draft: "Entwurf",
+          pending: "Ausstehende Überprüfung",
+          approved: "Genehmigt",
+          in_progress: "In Bearbeitung",
+          completed: "Abgeschlossen",
+          rejected: "Abgelehnt",
+          cancelled: "Abgebrochen"
+        },
+        typeLabels: {
+          functional: "Funktionstest",
+          performance: "Leistungstest",
+          security: "Sicherheitstest",
+          usability: "Benutzerfreundlichkeitstest",
+          compatibility: "Kompatibilitätstest",
+          integration: "Integrationstest",
+          regression: "Regressionstest"
+        },
+        priorityLabels: {
+          critical: "Dringend",
+          high: "Hoch",
+          medium: "Mittel",
+          low: "Niedrig"
+        }
+      }
+    },
+    aiWorkflow: {
+      aiAutoProcess: "AI Vollautomatischer Prozess",
+      upload: {
+        title: "Anforderungsdokument hochladen",
+        desc: "Datei hierher ziehen oder klicken um auszuwählen",
+        selectFile: "Datei auswählen",
+        sampleFile: "E-Commerce-Plattform_Anforderungsspezifikation_v3.2.pdf",
+        sampleMeta: "3,8 MB · 156 Seiten · Enthält API-Schnittstellendokumentation"
+      },
+      analyzing: {
+        title: "AI analysiert Anforderungsdokument intelligent",
+        desc: "Tiefenanalyse der Dokumentstruktur, Erkennung von Funktionsmodulen und Testpunkten",
+        docStructure: "Dokumentstrukturanalyse",
+        modules: [
+          "1. Benutzerverwaltungsmodul",
+          "2. Produktverwaltungsmodul",
+          "3. Bestellverarbeitungsmodul",
+          "4. Zahlungs-Gateway-Modul",
+          "5. Logistikverfolgungsmodul"
+        ],
+        stats: [
+          { label: "Funktionsmodule", value: "28" },
+          { label: "Testpunkte", value: "186" },
+          { label: "Randbedingungen", value: "42" },
+          { label: "API-Schnittstellen", value: "67" }
+        ],
+        progress: "Analysefortschritt",
+        analyzing: "Wird analysiert..."
+      },
+      testPlan: {
+        title: "AI erstellt Testplan",
+        desc: "Intelligente Teststrategieplanung und Priorisierung basierend auf Anforderungen",
+        complete: "Abgeschlossen",
+        testCases: "Testfälle",
+        modules: [
+          {
+            module: "Benutzerverwaltung",
+            priority: "Hoch",
+            items: ["Anmeldung/Registrierung", "Zugriffskontrolle", "Benutzerinfo", "OAuth-Integration"]
+          },
+          {
+            module: "Bestellverarbeitung",
+            priority: "Hoch",
+            items: ["Bestellung erstellen", "Statusübergänge", "Rückerstattung", "Parallelitätskontrolle"]
+          },
+          {
+            module: "Zahlungs-Gateway",
+            priority: "Kritisch",
+            items: ["PayPal", "Kreditkarte", "Banküberweisung", "Rückerstattungslogik"]
+          },
+          {
+            module: "Produktverwaltung",
+            priority: "Mittel",
+            items: ["Produkt-CRUD", "Lagerverwaltung", "Preisberechnung", "Kategorieverwaltung"]
+          },
+          {
+            module: "Logistikverfolgung",
+            priority: "Mittel",
+            items: ["Versandabfrage", "Statussynchronisation", "Ausnahmebehandlung", "Multi-Channel-Integration"]
+          },
+          {
+            module: "API-Gateway",
+            priority: "Hoch",
+            items: ["Rate Limiting", "Authentifizierung", "Log-Tracing", "Versionskontrolle"]
+          }
+        ]
+      },
+      generate: {
+        title: "AI generiert Testfälle intelligent",
+        desc: "Intelligente Erkennung von Testszenarien, automatische Generierung von Grenzfällen",
+        page: "Seite",
+        step1: "Intelligente Erkennung von Testszenarien",
+        step2: "Automatische Erkennung von Randbedingungen",
+        step3: "HTTP / REST API Testfallgenerierung",
+        step4: "Browser-UI-Testfallgenerierung",
+        step5: "Mobile-UI-Testfallgenerierung",
+        step6: "Testfallgenerierung abgeschlossen",
+        scenarios: [
+          {
+            scenario: "Positiver Ablauftest",
+            desc: "Benutzeranmeldung → Produkte durchsuchen → Zum Warenkorb → Bestellen und bezahlen"
+          },
+          {
+            scenario: "Anomalie-Ablauftest",
+            desc: "Netzwerkunterbrechung, Timeout-Wiederholung, Parallelitätskonflikte"
+          },
+          {
+            scenario: "Grenzwerttest",
+            desc: "Maximale Kaufmenge, Preisgrenzen, kritische Lagerbestände"
+          },
+          {
+            scenario: "Sicherheitstest",
+            desc: "SQL-Injection, XSS-Angriffe, unbefugter Zugriff"
+          }
+        ],
+        boundaries: [
+          { field: "Benutzername", min: "2 Zeichen", max: "32 Zeichen", special: "Sonderzeichen-Filterung" },
+          { field: "Passwort", min: "8 Zeichen", max: "128 Zeichen", special: "Stärkeprüfung" },
+          { field: "Produktpreis", min: "0,01", max: "999999,99", special: "Präzisionsbehandlung" },
+          { field: "Kaufmenge", min: "1", max: "9999", special: "Lagerprüfung" },
+          { field: "Gutscheinbetrag", min: "1", max: "Bestellbetrag", special: "Stapelregeln" },
+          { field: "Lieferadresse", min: "10 Zeichen", max: "200 Zeichen", special: "Adressauflösung" }
+        ],
+        apis: [
+          { method: "POST", path: "/api/v1/users/login", desc: "Benutzeranmelde-API" },
+          { method: "GET", path: "/api/v1/products", desc: "Produktlistenabfrage" },
+          { method: "POST", path: "/api/v1/orders", desc: "Bestellung-erstellen-API" },
+          { method: "PUT", path: "/api/v1/orders/:id/status", desc: "Bestellstatus-Update" },
+          { method: "DELETE", path: "/api/v1/cart/items/:id", desc: "Warenkorb-Artikel löschen" }
+        ],
+        cases: "Fälle",
+        browsers: [
+          { browser: "Chrome", version: "v120+" },
+          { browser: "Firefox", version: "v115+" },
+          { browser: "Safari", version: "v17+" },
+          { browser: "Edge", version: "v118+" }
+        ],
+        browserTests: ["Seiten-Rendering-Tests", "Interaktionsreaktions-Tests", "Formularvalidierungs-Tests", "Cross-Browser-Kompatibilität"],
+        iosPlatform: "iOS-Plattform",
+        androidPlatform: "Android-Plattform",
+        iosDevices: ["iPhone 15 Pro", "iPhone 14", "iPad Pro", "iPad Air"],
+        androidDevices: ["Pixel 8 Pro", "Samsung S24", "Xiaomi 14", "OPPO Find X7"],
+        summary: {
+          types: [
+            { type: "API-Tests", count: 562 },
+            { type: "Browser-UI", count: 438 },
+            { type: "Mobile iOS", count: 128 },
+            { type: "Mobile Android", count: 139 },
+            { type: "Leistungstests", count: 86 }
+          ],
+          total: "1.353",
+          readyToExecute: "Testfälle generiert, bereit zur Ausführung"
+        }
+      },
+      execute: {
+        title: "AI führt Tests automatisch aus",
+        desc: "Multi-Protokoll-Parallelausführung, Echtzeit-Fortschrittsüberwachung",
+        lanes: [
+          { type: "HTTP / REST API", desc: "Umfassende HTTP-Schnittstellentests, unterstützt RESTful, GraphQL" },
+          { type: "gRPC-Dienste", desc: "Hochleistungs-gRPC-Tests, Unary / Streaming" },
+          { type: "Browser-Tests", desc: "Chrome / Firefox / Safari / Edge Cross-Browser" },
+          { type: "Mobile iOS", desc: "iPhone / iPad echte Geräte und Simulator-Tests" },
+          { type: "Mobile Android", desc: "Pixel / Samsung / Xiaomi Multi-Geräte-Abdeckung" }
+        ],
+        stats: [
+          { label: "Gesamt ausgeführt", value: "1.353" },
+          { label: "Bestanden", value: "1.312" },
+          { label: "Fehlgeschlagen", value: "28" },
+          { label: "Dauer", value: "4m 32s" }
+        ]
+      },
+      report: {
+        title: "AI erstellt professionellen Testbericht",
+        desc: "Intelligente Analyse der Testergebnisse, Generierung von visualisierten Berichten",
+        complete: "Vollständiger Prozess abgeschlossen",
+        metrics: [
+          { label: "Bestehensquote", value: "97,1%" },
+          { label: "Abdeckung", value: "94,8%" },
+          { label: "Gesamtfälle", value: "1.353" },
+          { label: "Defekte", value: "28" }
+        ],
+        chartTitle: "Testtyp-Verteilung",
+        chartLabels: ["API", "UI", "iOS", "Android", "gRPC"],
+        defectTitle: "Defektverteilung",
+        defects: [
+          { module: "Zahlungsmodul", count: 12, severity: "Hoch" },
+          { module: "Bestellmodul", count: 8, severity: "Mittel" },
+          { module: "Benutzermodul", count: 5, severity: "Niedrig" },
+          { module: "Sonstige", count: 3, severity: "Niedrig" }
+        ],
+        browserRecording: "Browser-Test-Aufzeichnung - Chrome",
+        downloadReport: "Vollständigen Bericht herunterladen",
+        shareReport: "Bericht teilen",
+        timeSaved: "Gesamtdauer 4 Min. 32 Sek. · 48+ Stunden manueller Arbeit eingespart"
+      }
+    },
+      errors: {
+        common: {
+          unauthorized: "Nicht angemeldet",
+          forbidden: "Zugriff verweigert",
+          requestFailed: "Anfrage fehlgeschlagen",
+          missingWorkspace: "Arbeitsbereich-Parameter fehlt",
+          workspaceForbidden: "Kein Zugriff auf diesen Arbeitsbereich",
+          adminRequired: "Administratorrechte erforderlich",
+          superadminRequired: "Super-Administratorrechte erforderlich"
+        },
+        auth: {
+          invalidCredentials: "E-Mail oder Passwort falsch",
+          defaultWorkspaceNotFound: "Standard-Arbeitsbereich nicht gefunden",
+          emailAlreadyRegistered: "E-Mail bereits registriert",
+          registrationDisabled: "Registrierung ist derzeit nicht verfügbar",
+          invitationInvalid: "Einladungscode ungültig oder bereits verwendet",
+          invitationExpired: "Einladungscode abgelaufen"
+        },
+        user: {
+          notFound: "Benutzer nicht gefunden",
+          emailInUse: "E-Mail bereits in Verwendung",
+          wrongPassword: "Falsches aktuelles Passwort"
+        },
+        workspace: {
+          notFound: "Arbeitsbereich nicht gefunden",
+          onlyOwnerCanUpdate: "Nur der Ersteller kann bearbeiten",
+          onlyOwnerCanDelete: "Nur der Ersteller kann löschen",
+          slugExists: "Slug existiert bereits",
+          slugReserved: "Diese ID ist systemreserviert, bitte verwenden Sie einen anderen Namen"
+        },
+        todo: {
+          notFound: "Aufgabe nicht gefunden"
+        },
+        testRequirement: {
+          notFound: "Testanforderung nicht gefunden",
+          createFetchFailed: "Datensatz nach Erstellung nicht abrufbar",
+          updateFetchFailed: "Datensatz nach Aktualisierung nicht abrufbar",
+          deleteChildrenFirst: "Bitte löschen Sie zuerst alle Unteranforderungen"
+        }
+      },
+    footer: {
+      copyright: "© 2026 TestOps AI. Alle Rechte vorbehalten.",
+      tagline: "AI-gestützte End-to-End-Testplattform"
+    },
+    systemSettings: {
+      passwordMinLength: "Passwort muss mindestens 4 Zeichen haben",
+      fillAllFields: "Bitte füllen Sie alle Felder aus",
+      userNameColumn: "Benutzername",
+      emailColumn: "E-Mail",
+      roleColumn: "Rolle",
+      lastLoginColumn: "Letzter Login",
+      actionsColumn: "Aktionen",
+      neverLogin: "Nie angemeldet",
+      hoursUnit: "Stunden",
+      newPasswordPlaceholder: "Neues Passwort eingeben (min. 4 Zeichen)",
+      usernamePlaceholder: "Benutzernamen eingeben",
+      emailPlaceholder: "E-Mail-Adresse eingeben",
+      passwordPlaceholder: "Passwort eingeben (min. 4 Zeichen)",
+      title: "Systemeinstellungen",
+      generalTab: "Allgemeine Einstellungen",
+      usersTab: "Benutzerverwaltung",
+      allowRegistration: "Neue Benutzerregistrierung erlauben",
+      allowRegistrationDesc: "Bei Deaktivierung können sich neue Benutzer nicht registrieren",
+      singleWorkspaceMode: "Einzelarbeitsbereich-Modus",
+      singleWorkspaceModeDesc: "Wenn aktiviert, teilen sich alle Benutzer denselben Arbeitsbereich, und die Arbeitsbereich-ID wird nicht in der URL angezeigt",
+      userList: "Benutzerliste",
+      userRole: "Rolle",
+      lastLoginAt: "Letzter Login",
+      userCreatedAt: "Registrierungsdatum",
+      userActions: "Aktionen",
+      roleUser: "Standardbenutzer",
+      roleAdmin: "Administrator",
+      roleSuperAdmin: "Super-Administrator",
+      changeRole: "Rolle ändern",
+      resetPassword: "Passwort zurücksetzen",
+      deleteUser: "Benutzer löschen",
+      confirmDelete: "Löschen bestätigen",
+      confirmDeleteDesc: "Sind Sie sicher, dass Sie den Benutzer {{name}} löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+      resetPasswordTitle: "Passwort zurücksetzen",
+      resetPasswordDesc: "Neues Passwort für Benutzer {{name}} setzen",
+      newPassword: "Neues Passwort",
+      saveSuccess: "Erfolgreich gespeichert",
+      deleteSuccess: "Erfolgreich gelöscht",
+      resetSuccess: "Passwort erfolgreich zurückgesetzt",
+      addUser: "Benutzer hinzufügen",
+      addUserTitle: "Neuen Benutzer hinzufügen",
+      addUserDesc: "Manuell ein neues Benutzerkonto erstellen",
+      userName: "Benutzername",
+      userEmail: "E-Mail",
+      userPassword: "Passwort",
+      userRoleSelect: "Rolle auswählen",
+      addUserSuccess: "Benutzer erfolgreich erstellt",
+      emailExists: "Diese E-Mail ist bereits registriert",
+      invitationTab: "Einladungsregistrierung",
+      generateInvitation: "Einladungslink generieren",
+      invitationList: "Einladungscode-Liste",
+      invitationCode: "Einladungscode",
+      invitationStatus: "Status",
+      invitationCreatedAt: "Erstellt am",
+      invitationExpiresAt: "Läuft ab am",
+      invitationUsedBy: "Verwendet von",
+      invitationUsedAt: "Verwendet am",
+      invitationStatusUnused: "Nicht verwendet",
+      invitationStatusUsed: "Verwendet",
+      invitationStatusExpired: "Abgelaufen",
+      invitationNeverExpire: "Läuft nie ab",
+      invitationCopied: "Einladungslink in die Zwischenablage kopiert",
+      invitationGenerated: "Einladungslink generiert",
+      invitationDeleted: "Einladungscode gelöscht",
+      copyInvitationLink: "Link kopieren",
+      deleteInvitation: "Löschen",
+      expiresInHours: "Gültigkeit (Stunden)",
+      noExpiration: "Keine Ablaufzeit setzen"
+    }
+  }
+};
+
+export type TranslationSchema = typeof deDE;

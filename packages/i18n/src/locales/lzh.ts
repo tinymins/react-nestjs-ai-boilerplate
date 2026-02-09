@@ -1,0 +1,825 @@
+/**
+ * 文言文翻譯資源
+ * Classical Chinese / Literary Chinese Translation
+ */
+export const lzh = {
+  translation: {
+    brand: "TestOps AI",
+    common: {
+      loading: "載之...",
+      cancel: "罷",
+      delete: "除之",
+      remove: "去之",
+      add: "增",
+      save: "存",
+      saveChanges: "存之",
+      confirm: "誠是",
+      auto: "自取",
+      light: "明",
+      dark: "晦",
+      member: "士",
+      owner: "主",
+      workspaceLabel: "坊",
+      notFound: "無此物",
+      saveSuccess: "已存",
+      saveFailed: "存之不得",
+      deleteSuccess: "已除",
+      deleteFailed: "除之不得",
+      severity: {
+        critical: "甚急",
+        high: "上",
+        medium: "中",
+        low: "下"
+      },
+      theme: {
+        light: "明",
+        dark: "晦"
+      }
+    },
+    userMenu: {
+      account: "己設",
+      admin: "掌事臺",
+      signOut: "出"
+    },
+    userSettings: {
+      title: "己設",
+      profileTab: "本事",
+      passwordTab: "易符",
+      uploadAvatar: "上像",
+      removeAvatar: "去像",
+      avatarRemoved: "像已去",
+      pleaseUploadImage: "請上圖像",
+      settingsSaved: "設已存",
+      passwordChanged: "符已易",
+      userName: "名",
+      userNameRequired: "請書名",
+      userNamePlaceholder: "如：陳某",
+      email: "郵",
+      emailRequired: "請書郵",
+      language: "言",
+      theme: "色",
+      currentPassword: "今符",
+      currentPasswordRequired: "請書今符",
+      currentPasswordPlaceholder: "請書今符",
+      newPassword: "新符",
+      newPasswordRequired: "請書新符",
+      newPasswordMin: "符至少六字",
+      newPasswordPlaceholder: "請書新符（至少六字）",
+      confirmPassword: "覆新符",
+      confirmPasswordRequired: "請覆新符",
+      confirmPasswordPlaceholder: "再書新符",
+      passwordMismatch: "兩符不同",
+      changePassword: "易符"
+    },
+    createWorkspace: {
+      title: "建新坊",
+      success: "坊已建",
+      failed: "建之不得",
+      create: "建",
+      cancel: "罷",
+      nameLabel: "坊名",
+      nameRequired: "請書坊名",
+      nameLength: "名長一至五十字",
+      namePlaceholder: "如：吾之事",
+      slugLabel: "坊誌（URL）",
+      slugRequired: "請書誌",
+      slugPattern: "惟英文小字、數、連字符可用",
+      slugExtra: "用於址，如：/dashboard/{{slug}}",
+      descLabel: "述",
+      descPlaceholder: "略述此坊..."
+    },
+    systemSettings: {
+      passwordMinLength: "符至少四字",
+      fillAllFields: "請書齊全",
+      userNameColumn: "名",
+      emailColumn: "郵",
+      roleColumn: "位",
+      lastLoginColumn: "末入",
+      actionsColumn: "事",
+      neverLogin: "未嘗入",
+      hoursUnit: "時辰",
+      newPasswordPlaceholder: "請書新符（至少四字）",
+      usernamePlaceholder: "請書名",
+      emailPlaceholder: "請書郵",
+      passwordPlaceholder: "請書符（至少四字）",
+      title: "制設",
+      generalTab: "通設",
+      usersTab: "掌人",
+      allowRegistration: "許人註入",
+      allowRegistrationDesc: "閉之，則新人不得註",
+      singleWorkspaceMode: "獨坊制",
+      singleWorkspaceModeDesc: "啟之，則眾人共一坊，址中不見坊誌",
+      userList: "人籍",
+      userRole: "位",
+      lastLoginAt: "近入",
+      userCreatedAt: "註時",
+      userActions: "事",
+      roleUser: "民",
+      roleAdmin: "吏",
+      roleSuperAdmin: "上吏",
+      changeRole: "易位",
+      resetPassword: "重符",
+      deleteUser: "除人",
+      confirmDelete: "誠除",
+      confirmDeleteDesc: "誠欲除 {{name}} 乎？此事不可復。",
+      resetPasswordTitle: "重符",
+      resetPasswordDesc: "為 {{name}} 設新符",
+      newPassword: "新符",
+      saveSuccess: "已存",
+      deleteSuccess: "已除",
+      resetSuccess: "符已重",
+      addUser: "增人",
+      addUserTitle: "增新人",
+      addUserDesc: "手建新人戶",
+      userName: "名",
+      userEmail: "郵",
+      userPassword: "符",
+      userRoleSelect: "擇位",
+      addUserSuccess: "人已建",
+      emailExists: "此郵已有人用",
+      invitationTab: "召籍",
+      generateInvitation: "制召簡",
+      invitationList: "召符籍",
+      invitationCode: "召符",
+      invitationStatus: "狀",
+      invitationCreatedAt: "制時",
+      invitationExpiresAt: "期盡",
+      invitationUsedBy: "用者",
+      invitationUsedAt: "用時",
+      invitationStatusUnused: "未用",
+      invitationStatusUsed: "已用",
+      invitationStatusExpired: "已過",
+      invitationNeverExpire: "永無期",
+      invitationCopied: "召簡已備於牘",
+      invitationGenerated: "召簡已制",
+      invitationDeleted: "召符已除",
+      copyInvitationLink: "備簡",
+      deleteInvitation: "除",
+      expiresInHours: "期（時辰）",
+      noExpiration: "不設期"
+    },
+    nav: {
+      items: [
+        { label: "館", href: "/#home" },
+        { label: "解法", href: "/#solutions" },
+        { label: "全程", href: "/#workflow" },
+        { label: "AI 能", href: "/#ai" },
+        { label: "策", href: "/#plans" }
+      ],
+      login: "入",
+      dashboard: "臺"
+    },
+    hero: {
+      badge: "AI TestOps",
+      title: "AI 驅之 TestOps 制",
+      subtitle:
+        "自需入，至試事，至報成，一貫之臺。使試程如 DevOps 般可觀、可度、可自動。",
+      primary: "約演",
+      secondary: "覽構",
+      consoleTitle: "質運即時帥臺",
+      consoleLines: [
+        "✓ 需解畢 · 十二景",
+        "✓ 生試陣 · 覆九二成",
+        "→ 自動歸調中 · 十八廿四",
+        "→ 風門估中 · 八成"
+      ],
+      metrics: [
+        { label: "全程自動", value: "90%" },
+        { label: "付可見", value: "100%" },
+        { label: "協效增", value: "3x" }
+      ]
+    },
+    overview: {
+      title: "使試為持付之樞機",
+      description:
+        "TestOps AI 以試為要，重編研協：需智解、試設生、行與歸閉環、風預與報察。",
+      cards: [
+        {
+          title: "AI-first TestOps",
+          desc: "需、試設、行與報皆在同一 AI 驅之流水上成，即見可溯。",
+          bullets: [
+            "試範自生與覆議",
+            "試資沉為可復知庫",
+            "一鍵發門與質板"
+          ]
+        },
+        {
+          title: "統一質運視角",
+          desc: "將手與自動試、疵、風、效指標統於一圖。",
+          bullets: [
+            "試事進與阻自識",
+            "疵趨與歸優議",
+            "質 KPI 持優"
+          ]
+        }
+      ]
+    },
+    pillars: {
+      title: "臺能矩陣",
+      items: [
+        {
+          title: "需驅",
+          desc: "自 PRD/用戶事自生試範與覆議。"
+        },
+        {
+          title: "智設",
+          desc: "AI 自補例、據與斷，支範復用。"
+        },
+        {
+          title: "行編",
+          desc: "手與自動統排期，即報試進。"
+        },
+        {
+          title: "質察",
+          desc: "風熱圖、疵趨、覆率與質門。"
+        },
+        {
+          title: "知沉",
+          desc: "試資沉為知庫，持優。"
+        },
+        {
+          title: "治規",
+          desc: "程審、權陣、付可溯。"
+        }
+      ]
+    },
+    flow: {
+      title: "覆全程之 TestOps 機",
+      steps: [
+        {
+          title: "需入",
+          desc: "支工單、PRD、API 牘與需範，自建試範。"
+        },
+        {
+          title: "試規",
+          desc: "AI 生試陣、風估與試源計。"
+        },
+        {
+          title: "試設",
+          desc: "自範與歷資中生例、據與行本。"
+        },
+        {
+          title: "試行",
+          desc: "統調自動、手、效、安試事。"
+        },
+        {
+          title: "疵治",
+          desc: "智聚、根因析、歸議與響面估。"
+        },
+        {
+          title: "試報",
+          desc: "自生多維質報，支發門。"
+        }
+      ]
+    },
+    testing: {
+      badge: "AI 驅試",
+      title: "智規，全景覆",
+      desc: "AI 自析需、生試計，支多試約與臺，一貫解諸試需",
+      capabilities: [
+        {
+          title: "HTTP / REST API",
+          desc: "全面 HTTP 接口試，支 RESTful、GraphQL、WebSocket"
+        },
+        {
+          title: "gRPC",
+          desc: "高效 gRPC 服試，支 Unary、Streaming 呼"
+        },
+        {
+          title: "移動端 UI",
+          desc: "iOS / Android 原生 App 自動試，支真機與模"
+        },
+        {
+          title: "瀏覽器試",
+          desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器自動試"
+        },
+        {
+          title: "Windows 桌面",
+          desc: "Windows 桌面應自動，支 WinUI / WPF / Win32"
+        },
+        {
+          title: "AI 智規",
+          desc: "基於需自生試例，智識試景與界況"
+        }
+      ]
+    },
+    ai: {
+      title: "AI 優先之核能",
+      items: [
+        {
+          title: "需解機",
+          desc: "自上下文取關鍵景，生試範與風標。"
+        },
+        {
+          title: "試資生",
+          desc: "自生例、據、接口試本與試說。"
+        },
+        {
+          title: "行智助",
+          desc: "即給阻因、修議與歸優。"
+        },
+        {
+          title: "報察",
+          desc: "生上視報與發決議。"
+        }
+      ]
+    },
+    integrations: {
+      title: "無縫接研發生態",
+      items: [
+        "Jira / Tapd / 飛書",
+        "GitHub / GitLab / Azure DevOps",
+        "Jenkins / GitHub Actions / Argo",
+        "Postman / Playwright / Cypress",
+        "SonarQube / Sentry / Datadog",
+        "企業 IM 與報中臺"
+      ]
+    },
+    security: {
+      title: "企業級安與治",
+      items: [
+        "位權與組隔",
+        "據密與審誌",
+        "多域部與容災",
+        "規程與發門",
+        "資版治與審"
+      ]
+    },
+    cta: {
+      title: "始建 AI 驅之試全程",
+      desc: "使試隊為研付之略機。",
+      primary: "得策",
+      secondary: "請試"
+    },
+    closing: {
+      title: "使試如碼般持進化",
+      subtitle: "AI TestOps · 連需、質與付之每一迭"
+    },
+    login: {
+      title: "入 TestOps AI",
+      email: "郵",
+      password: "符",
+      submit: "入",
+      loading: "入中...",
+      invitedRegister: "君已受召，請註戶",
+      firstAdmin: "建首吏戶",
+      pleaseLogin: "請入君戶",
+      userName: "名",
+      userNameRequired: "請書名",
+      userNamePlaceholder: "如：張某",
+      register: "註",
+      noAccount: "無戶？往註",
+      hasAccount: "有戶？往入",
+      registrationDisabled: "制未開註",
+      backToLogin: "歸入"
+    },
+    dashboard: {
+      title: "試運樞",
+      welcome: "迎歸",
+      stats: ["需池", "試中", "發門"],
+      promptTitle: "請先入",
+      promptBody: "入後可覽試運據與臺。",
+      toLogin: "往入",
+      workspace: "坊",
+      workspaceSwitcher: {
+        switchWorkspace: "易坊"
+      },
+      insightTitle: "質察",
+      insightDesc: "自生風熱圖、覆率與發門議。",
+      insightItems: ["需覆九二成", "歸風八成", "阻三", "待定五"],
+      assistantTitle: "AI 行助",
+      assistantDesc: "自識阻項、給修議並生歸優。",
+      assistantItems: [
+        "入程異波，議優先歸",
+        "新版付接口覆不足一二成",
+        "移動端歸疵收度升二成"
+      ],
+      menu: [
+        "臺",
+        "試需",
+        "試計",
+        "試設",
+        "行樞",
+        "疵與風",
+        "質報",
+        "自動資",
+        "制設"
+      ],
+      todoList: {
+        title: "📋 開發事籍",
+        subtitle: "坊易能開發進度",
+        currentWorkspace: "今坊",
+        addPlaceholder: "增新事...",
+        completed: "已成",
+        summary: "🎯 成摘",
+        noTodos: "無待事",
+        menuLabel: "📋 待事籍"
+      },
+      defects: {
+        description: "追疵與估風"
+      },
+      testDesign: {
+        description: "設與撰試例",
+        caseLibrary: "試例庫",
+        newCase: "+ 新例",
+        totalCases: "共 {{count}} 條試例"
+      },
+      settings: {
+        title: "坊設",
+        subtitle: "治 \"{{name}}\" 之配與士",
+        workspaceNotFound: "坊無此物",
+        generalTab: "基設",
+        membersTab: "士治",
+        dangerTab: "險域",
+        workspaceName: "坊名",
+        workspaceNamePlaceholder: "如：吾之事",
+        workspaceNameRequired: "請書名",
+        workspaceNameLength: "名長一至五十字",
+        workspaceSlug: "坊誌（URL）",
+        workspaceSlugRequired: "請書誌",
+        workspaceSlugPattern: "惟英文小字、數、連字符可用",
+        workspaceSlugExtra: "用於址，如：/dashboard/my-project",
+        description: "述",
+        descriptionPlaceholder: "略述此坊...",
+        workspaceDeleted: "坊已除",
+        confirmDeleteTitle: "誠除坊",
+        confirmDeleteContent: "誠欲除坊 \"{{name}}\" 乎？此事不可復。",
+        confirmDeleteWarning: "凡關據（含待事）將永除。",
+        confirmDeleteOk: "誠除",
+        deleteWorkspace: "除坊",
+        deleteWorkspaceDesc: "除後，凡據將永清，不可復。",
+        memberList: "士籍",
+        memberListDesc: "治坊士與權",
+        inviteMember: "召士",
+        inviteModalTitle: "召士",
+        sendInvite: "發召",
+        emailAddress: "郵",
+        emailRequired: "請書郵",
+        emailInvalid: "請書正郵",
+        role: "位",
+        memberDefault: "士（默）",
+        memberPermissionDesc: "士可覽與編坊內",
+        tableColumnMember: "士",
+        tableColumnRole: "位",
+        tableColumnJoined: "入時",
+        tableColumnActions: "事",
+        removeMemberComingSoon: "去士能開發中",
+        inviteComingSoon: "召能開發中：將向 {{email}} 發召簡",
+        workspaceOwner: "坊主"
+      },
+      requirements: {
+        description: "治與追產品需",
+        workspaceLabel: "坊",
+        toAnalyze: "待析",
+        inDesign: "設中",
+        completed: "已成",
+        recentRequirements: "近需",
+        sampleTitle1: "用戶入模優化",
+        sampleTitle2: "付接口升",
+        sampleTitle3: "單查效優化"
+      },
+      execution: {
+        description: "行試事與覽果",
+        workspaceLabel: "坊",
+        running: "行中",
+        passed: "過",
+        failed: "敗",
+        blocked: "阻"
+      },
+      automation: {
+        description: "治自動試本與資",
+        workspaceLabel: "坊",
+        totalScripts: "本總數",
+        successRate: "行成率",
+        avgDuration: "均行時"
+      },
+      reports: {
+        description: "覽質指標與生報",
+        workspaceLabel: "坊",
+        testCoverage: "試覆率",
+        defectDensity: "疵密度",
+        automationRate: "自動率"
+      },
+      testPlan: {
+        description: "規與治試計",
+        workspaceLabel: "坊",
+        inProgress: "進中",
+        completedThisWeek: "本周成",
+        avgCoverage: "均覆率"
+      },
+      testRequirements: {
+        titleTotal: "總需數",
+        titleDraft: "草中",
+        titleInProgress: "進中",
+        titleDone: "已成",
+        searchPlaceholder: "索需...",
+        filterStatus: "狀篩",
+        filterType: "類篩",
+        filterPriority: "優",
+        refresh: "更",
+        create: "建需",
+        totalCount: "共 {{total}} 條",
+        view: "覽詳",
+        edit: "編",
+        remove: "除",
+        removeTitle: "誠除此需乎？",
+        removeDesc: "除後不可復",
+        removeOk: "除",
+        removeCancel: "罷",
+        modalCreate: "建試需",
+        modalEdit: "編試需",
+        modalOkCreate: "建",
+        modalOkSave: "存",
+        fieldTitle: "需名",
+        fieldTitleRequired: "請書需名",
+        fieldType: "需類",
+        fieldDesc: "需述",
+        fieldContent: "詳內（支 Markdown）",
+        fieldPriority: "優",
+        fieldStatus: "狀",
+        fieldDueDate: "期限",
+        dueDatePlaceholder: "擇期限",
+        fieldEstimate: "估工（時辰）",
+        fieldTags: "標（逗分）",
+        tagsPlaceholder: "標一, 標二, 標三",
+        detailTabInfo: "本事",
+        detailTabContent: "詳內",
+        detailTabChildren: "子需",
+        descEmpty: "無述",
+        contentEmpty: "無詳內",
+        childrenEmpty: "無子需",
+        childrenCount: "共 {{count}} 子需",
+        creator: "作者",
+        assignee: "任者",
+        estimate: "估工",
+        actual: "實工",
+        createdAt: "作時",
+        dueDate: "期限",
+        hours: "時辰",
+        children: "子需",
+        requirementId: "需號",
+        requirementName: "需名",
+        type: "類",
+        status: "狀",
+        priority: "優",
+        creatorName: "作者",
+        assigneeName: "任者",
+        createdTime: "作時",
+        action: "事",
+        toastCreateSuccess: "建成",
+        toastCreateFail: "建敗",
+        toastUpdateSuccess: "更成",
+        toastUpdateFail: "更敗",
+        toastDeleteSuccess: "除成",
+        toastDeleteFail: "除敗",
+        markdownPlaceholder: "# 試需詳\n\n## 試目\n述試之主目...\n\n## 試範\n- 範項一\n- 範項二\n\n## 試步\n1. 步一\n2. 步二\n\n## 期果\n述期之試果...",
+        statusLabels: {
+          draft: "草",
+          pending: "待審",
+          approved: "已准",
+          in_progress: "進中",
+          completed: "已成",
+          rejected: "已拒",
+          cancelled: "已廢"
+        },
+        typeLabels: {
+          functional: "功能試",
+          performance: "效能試",
+          security: "安全試",
+          usability: "易用試",
+          compatibility: "相容試",
+          integration: "集成試",
+          regression: "歸試"
+        },
+        priorityLabels: {
+          critical: "甚急",
+          high: "上",
+          medium: "中",
+          low: "下"
+        }
+      }
+    },
+    aiWorkflow: {
+      aiAutoProcess: "AI 全自程",
+      upload: {
+        title: "上需牘",
+        desc: "曳檔至此，或擊選檔",
+        selectFile: "選檔",
+        sampleFile: "電商臺需規說書_v3.2.pdf",
+        sampleMeta: "3.8 MB · 一百五十六頁 · 含 API 接口牘"
+      },
+      analyzing: {
+        title: "AI 智析需牘",
+        desc: "深解牘構，識功模與試點",
+        docStructure: "牘構析",
+        modules: [
+          "一、用戶治模",
+          "二、商品治模",
+          "三、單處模",
+          "四、付關模",
+          "五、物追模"
+        ],
+        stats: [
+          { label: "功模", value: "28" },
+          { label: "試點", value: "186" },
+          { label: "界況", value: "42" },
+          { label: "API接口", value: "67" }
+        ],
+        progress: "析進度",
+        analyzing: "析中..."
+      },
+      testPlan: {
+        title: "AI 建試計",
+        desc: "基於需智規試略與優",
+        complete: "成",
+        testCases: "試例",
+        modules: [
+          {
+            module: "用戶治",
+            priority: "上",
+            items: ["入註", "權控", "己事", "OAuth集成"]
+          },
+          {
+            module: "單處",
+            priority: "上",
+            items: ["建單", "狀流", "退處", "併控"]
+          },
+          {
+            module: "付關",
+            priority: "要",
+            items: ["支付寶", "微信付", "銀卡", "退邏輯"]
+          },
+          {
+            module: "商品治",
+            priority: "中",
+            items: ["商品CRUD", "庫治", "價算", "類治"]
+          },
+          {
+            module: "物追",
+            priority: "中",
+            items: ["物查", "狀同", "異處", "多渠接"]
+          },
+          {
+            module: "API關",
+            priority: "上",
+            items: ["限熔", "認鑑", "誌追", "版控"]
+          }
+        ]
+      },
+      generate: {
+        title: "AI 智生試例",
+        desc: "智識試景，自生界況例",
+        page: "頁",
+        step1: "智識試景",
+        step2: "自識界況",
+        step3: "HTTP / REST API 例生",
+        step4: "瀏覽器 UI 試例生",
+        step5: "移動端 UI 試例生",
+        step6: "例生成",
+        scenarios: [
+          {
+            scenario: "正向程試",
+            desc: "用戶入 → 覽商 → 入車 → 下單付"
+          },
+          {
+            scenario: "異程試",
+            desc: "網斷、逾重、併衝處"
+          },
+          {
+            scenario: "界值試",
+            desc: "最大購量、價界、庫臨值"
+          },
+          {
+            scenario: "安性試",
+            desc: "SQL注入、XSS攻、越權訪檢"
+          }
+        ],
+        boundaries: [
+          { field: "用戶名", min: "二字", max: "三十二字", special: "特字濾" },
+          { field: "符", min: "八字", max: "一百二十八字", special: "強驗" },
+          { field: "商價", min: "0.01", max: "999999.99", special: "精處" },
+          { field: "購量", min: "1", max: "9999", special: "庫校" },
+          { field: "券額", min: "1", max: "單額", special: "疊規" },
+          { field: "收址", min: "十字", max: "二百字", special: "址解" }
+        ],
+        apis: [
+          { method: "POST", path: "/api/v1/users/login", desc: "用戶入接口" },
+          { method: "GET", path: "/api/v1/products", desc: "商列查" },
+          { method: "POST", path: "/api/v1/orders", desc: "建單接口" },
+          { method: "PUT", path: "/api/v1/orders/:id/status", desc: "新單狀" },
+          { method: "DELETE", path: "/api/v1/cart/items/:id", desc: "除車商" }
+        ],
+        cases: "例",
+        browsers: [
+          { browser: "Chrome", version: "v120+" },
+          { browser: "Firefox", version: "v115+" },
+          { browser: "Safari", version: "v17+" },
+          { browser: "Edge", version: "v118+" }
+        ],
+        browserTests: ["頁渲試", "互響試", "表驗試", "跨瀏覽器相容"],
+        iosPlatform: "iOS 臺",
+        androidPlatform: "Android 臺",
+        iosDevices: ["iPhone 15 Pro", "iPhone 14", "iPad Pro", "iPad Air"],
+        androidDevices: ["Pixel 8 Pro", "Samsung S24", "Xiaomi 14", "OPPO Find X7"],
+        summary: {
+          types: [
+            { type: "API 試", count: 562 },
+            { type: "瀏覽器 UI", count: 438 },
+            { type: "移動端 iOS", count: 128 },
+            { type: "移動端 Android", count: 139 },
+            { type: "效壓試", count: 86 }
+          ],
+          total: "1,353",
+          readyToExecute: "試例已生，備行"
+        }
+      },
+      execute: {
+        title: "AI 自行試",
+        desc: "多約並行，即監試進",
+        lanes: [
+          { type: "HTTP / REST API", desc: "全面 HTTP 接口試，支 RESTful、GraphQL" },
+          { type: "gRPC 服", desc: "高效 gRPC 服試，Unary / Streaming" },
+          { type: "瀏覽器試", desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器" },
+          { type: "移動端 iOS", desc: "iPhone / iPad 真機與模試" },
+          { type: "移動端 Android", desc: "Pixel / Samsung / Xiaomi 多機覆" }
+        ],
+        stats: [
+          { label: "總行", value: "1,353" },
+          { label: "過", value: "1,312" },
+          { label: "敗", value: "28" },
+          { label: "耗時", value: "4m 32s" }
+        ]
+      },
+      report: {
+        title: "AI 出精美試報",
+        desc: "智析試果，生可視報",
+        complete: "全程成",
+        metrics: [
+          { label: "過率", value: "97.1%" },
+          { label: "覆率", value: "94.8%" },
+          { label: "總例", value: "1,353" },
+          { label: "疵數", value: "28" }
+        ],
+        chartTitle: "試類分布",
+        chartLabels: ["API", "UI", "iOS", "Android", "gRPC"],
+        defectTitle: "疵分布",
+        defects: [
+          { module: "付模", count: 12, severity: "上" },
+          { module: "單模", count: 8, severity: "中" },
+          { module: "用戶模", count: 5, severity: "下" },
+          { module: "他", count: 3, severity: "下" }
+        ],
+        browserRecording: "瀏覽器試錄屏 - Chrome",
+        downloadReport: "載全報",
+        shareReport: "分報",
+        timeSaved: "全程耗時四分三十二秒 · 省人工四十八時辰餘"
+      }
+    },
+    errors: {
+      common: {
+        unauthorized: "未入",
+        forbidden: "無權至此",
+        requestFailed: "請不得",
+        missingWorkspace: "缺坊參",
+        workspaceForbidden: "無權至此坊",
+        adminRequired: "需吏權",
+        superadminRequired: "需上吏權"
+      },
+      auth: {
+        invalidCredentials: "戶或符誤",
+        defaultWorkspaceNotFound: "未得默坊",
+        emailAlreadyRegistered: "郵已註",
+        registrationDisabled: "制未開註",
+        invitationInvalid: "召符無效或已用",
+        invitationExpired: "召符已過"
+      },
+      user: {
+        notFound: "人無此物",
+        emailInUse: "郵已用",
+        wrongPassword: "原符誤"
+      },
+      workspace: {
+        notFound: "坊無此物",
+        onlyOwnerCanUpdate: "惟主可改",
+        onlyOwnerCanDelete: "惟主可除",
+        slugExists: "誌已有",
+        slugReserved: "此誌為制保留，請用他名"
+      },
+      todo: {
+        notFound: "待事無此物"
+      },
+      testRequirement: {
+        notFound: "試需無此物",
+        createFetchFailed: "建後不得索",
+        updateFetchFailed: "更後不得索",
+        deleteChildrenFirst: "請先除諸子需"
+      }
+    },
+    footer: {
+      copyright: "© 2026 TestOps AI. 諸權所有。",
+      tagline: "AI 驅之試全程臺"
+    }
+  }
+};
+
+export type LzhTranslationSchema = typeof lzh;

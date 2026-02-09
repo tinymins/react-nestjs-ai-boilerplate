@@ -1,7 +1,7 @@
 /**
- * 中文翻译资源
+ * 简体中文翻译资源
  */
-export const zh = {
+export const zhCN = {
   translation: {
     brand: "TestOps AI",
     common: {
@@ -821,4 +821,4 @@ export const zh = {
   }
 };
 
-export type TranslationSchema = typeof zh;
+export type TranslationSchema = typeof zhCN;

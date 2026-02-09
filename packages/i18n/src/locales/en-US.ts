@@ -1,9 +1,9 @@
 /**
- * 英文翻译资源
+ * English translation resources
  */
-import type { TranslationSchema } from "./zh.js";
+import type { TranslationSchema } from "./zh-CN.js";
 
-export const en: TranslationSchema = {
+export const enUS: TranslationSchema = {
   translation: {
     brand: "TestOps AI",
     common: {

@@ -6,6 +6,7 @@ import { GlobalOutlined, BulbOutlined, PlusOutlined, SwapOutlined, MenuOutlined,
 import type { MenuProps } from "antd";
 import type { User } from "@acme/types";
 import type { Theme, Lang, LangMode, ThemeMode } from "../../lib/types";
+import { LANG_NAMES } from "../../lib/types";
 import { WorkspaceNotFoundPage } from "../../pages";
 import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
 import { trpc } from "../../lib/trpc";
@@ -213,15 +214,15 @@ export default function DashboardLayout({
   const { t } = useTranslation();
 
   const langLabel =
-    langMode === "auto" ? t("common.auto") : lang === "zh" ? "中文" : "English";
+    langMode === "auto" ? t("common.auto") : LANG_NAMES[lang];
   const themeLabel =
     themeMode === "auto" ? t("common.auto") : t(`common.theme.${theme}`);
 
-  const langItems = [
-    { key: "auto", label: t("common.auto") },
-    { key: "zh", label: "中文" },
-    { key: "en", label: "English" }
-  ];
+  const langItems = Object.entries(LANG_NAMES).map(([key, label]) => ({
+    key,
+    label
+  }));
+  langItems.unshift({ key: "auto", label: t("common.auto") });
 
   const themeItems = [
     { key: "auto", label: t("common.auto") },

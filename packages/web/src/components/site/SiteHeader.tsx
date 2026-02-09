@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 import { Button, Dropdown } from "antd";
 import { GlobalOutlined, BulbOutlined } from "@ant-design/icons";
 import type { User } from "@acme/types";
-import type { LangMode, ThemeMode } from "../../lib/types";
+import type { LangMode, ThemeMode, Lang } from "../../lib/types";
+import { LANG_NAMES as LangNames } from "../../lib/types";
 import { UserMenu, UserSettingsModal, SystemSettingsModal } from "../account";
 
 type SiteHeaderProps = {
 	user: User | null;
 	theme: "light" | "dark";
 	themeMode: ThemeMode;
-	lang: "zh" | "en";
+	lang: Lang;
 	langMode: LangMode;
 	onUpdateUser: (user: User) => void;
 	onLogout: () => void;
@@ -39,15 +40,15 @@ export default function SiteHeader({
 	}[];
 
 	const langLabel =
-		langMode === "auto" ? t("common.auto") : lang === "zh" ? "中文" : "English";
+		langMode === "auto" ? t("common.auto") : LangNames[lang];
 	const themeLabel =
 		themeMode === "auto" ? t("common.auto") : theme === "dark" ? t("common.dark") : t("common.light");
 
-	const langItems = [
-		{ key: "auto", label: t("common.auto") },
-		{ key: "zh", label: "中文" },
-		{ key: "en", label: "English" }
-	];
+	const langItems = Object.entries(LangNames).map(([key, label]) => ({
+		key,
+		label
+	}));
+	langItems.unshift({ key: "auto", label: t("common.auto") });
 
 	const themeItems = [
 		{ key: "auto", label: t("common.auto") },
@@ -102,7 +103,6 @@ export default function SiteHeader({
 						<>
 							<UserMenu
 								user={user}
-								lang={lang}
 								onOpenSettings={() => setSettingsOpen(true)}
 								onOpenSystemSettings={() => setSystemSettingsOpen(true)}
 								onLogout={onLogout}
@@ -111,7 +111,6 @@ export default function SiteHeader({
 								open={settingsOpen}
 								onClose={() => setSettingsOpen(false)}
 								user={user}
-								lang={lang}
 								langMode={langMode}
 								themeMode={themeMode}
 								onUpdateUser={onUpdateUser}
@@ -122,7 +121,6 @@ export default function SiteHeader({
 								open={systemSettingsOpen}
 								onClose={() => setSystemSettingsOpen(false)}
 								user={user}
-								lang={lang}
 							/>
 						</>
 					) : (

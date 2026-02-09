@@ -1,0 +1,825 @@
+/**
+ * 粵語翻譯資源 (Cantonese / 广东话 / 白话)
+ * 適用於廣東、香港、澳門及海外華人社區
+ */
+export const yue = {
+  translation: {
+    brand: "TestOps AI",
+    common: {
+      loading: "載入緊...",
+      cancel: "取消",
+      delete: "刪除",
+      remove: "移除",
+      add: "加入",
+      save: "儲存",
+      saveChanges: "儲存更改",
+      confirm: "確認",
+      auto: "自動",
+      light: "淺色",
+      dark: "深色",
+      member: "成員",
+      owner: "建立者",
+      workspaceLabel: "工作空間",
+      notFound: "唔存在",
+      saveSuccess: "儲存成功咗",
+      saveFailed: "儲存失敗咗",
+      deleteSuccess: "已經刪除咗",
+      deleteFailed: "刪除失敗咗",
+      severity: {
+        critical: "嚴重",
+        high: "高",
+        medium: "中",
+        low: "低"
+      },
+      theme: {
+        light: "淺色",
+        dark: "深色"
+      }
+    },
+    userMenu: {
+      account: "賬戶設定",
+      admin: "管理後台",
+      signOut: "登出"
+    },
+    userSettings: {
+      title: "賬戶設定",
+      profileTab: "基本資料",
+      passwordTab: "改密碼",
+      uploadAvatar: "上載頭像",
+      removeAvatar: "移除頭像",
+      avatarRemoved: "頭像已經移除咗",
+      pleaseUploadImage: "請上載圖片檔案",
+      settingsSaved: "設定已經儲存咗",
+      passwordChanged: "密碼已經改咗",
+      userName: "用戶名",
+      userNameRequired: "請輸入用戶名",
+      userNamePlaceholder: "例如：陳偉",
+      email: "電郵",
+      emailRequired: "請輸入電郵",
+      language: "語言",
+      theme: "主題",
+      currentPassword: "而家嘅密碼",
+      currentPasswordRequired: "請輸入而家嘅密碼",
+      currentPasswordPlaceholder: "請輸入而家嘅密碼",
+      newPassword: "新密碼",
+      newPasswordRequired: "請輸入新密碼",
+      newPasswordMin: "密碼最少要6位",
+      newPasswordPlaceholder: "請輸入新密碼（最少6位）",
+      confirmPassword: "確認新密碼",
+      confirmPasswordRequired: "請確認新密碼",
+      confirmPasswordPlaceholder: "再輸入一次新密碼",
+      passwordMismatch: "兩次密碼唔一樣",
+      changePassword: "改密碼"
+    },
+    createWorkspace: {
+      title: "建立空間站",
+      success: "空間站建立成功咗",
+      failed: "建立失敗咗",
+      create: "建立",
+      cancel: "取消",
+      nameLabel: "空間站名稱",
+      nameRequired: "請輸入空間站名稱",
+      nameLength: "名稱長度要 1-50 個字",
+      namePlaceholder: "例如：我嘅項目",
+      slugLabel: "空間站標識（URL）",
+      slugRequired: "請輸入標識",
+      slugPattern: "淨係可以用細楷英文字母、數字同連字符",
+      slugExtra: "用嚟做訪問地址，例如：/dashboard/{{slug}}",
+      descLabel: "描述",
+      descPlaceholder: "簡單描述吓呢個空間站..."
+    },
+    nav: {
+      items: [
+        { label: "官網", href: "/#home" },
+        { label: "解決方案", href: "/#solutions" },
+        { label: "全流程", href: "/#workflow" },
+        { label: "AI 能力", href: "/#ai" },
+        { label: "方案", href: "/#plans" }
+      ],
+      login: "登入",
+      dashboard: "控制台"
+    },
+    hero: {
+      badge: "AI TestOps",
+      title: "AI 驅動嘅 TestOps 系統",
+      subtitle:
+        "由需求錄入到測試活動，再到報告產出嘅一站式平台。令測試流程好似 DevOps 噉可觀測、可度量、可自動化。",
+      primary: "預約演示",
+      secondary: "了解架構",
+      consoleTitle: "質量運營實時指揮台",
+      consoleLines: [
+        "✓ 需求解析搞掂 · 12 個場景",
+        "✓ 生成測試矩陣 · 覆蓋率 92%",
+        "→ 自動化回歸調度緊 · 18/24",
+        "→ 風險門禁評估緊 · 8%"
+      ],
+      metrics: [
+        { label: "全流程自動化", value: "90%" },
+        { label: "交付可視化", value: "100%" },
+        { label: "協作效率提升", value: "3x" }
+      ]
+    },
+    overview: {
+      title: "令測試成為持續交付嘅核心引擎",
+      description:
+        "TestOps AI 以測試為中心重新編排研發協作：需求智能拆解、測試設計生成、執行同回歸閉環、風險預測同報告洞察。",
+      cards: [
+        {
+          title: "AI-first TestOps",
+          desc: "需求、測試設計、執行同報告都喺同一條 AI 驅動嘅流水線上搞掂，實時可視、可追溯。",
+          bullets: [
+            "測試範圍自動生成同覆蓋建議",
+            "測試資產沉澱成可複用知識庫",
+            "一鍵發佈門禁同質量看板"
+          ]
+        },
+        {
+          title: "統一質量運營視角",
+          desc: "將手工同自動化測試、缺陷、風險、效率指標統一喺一張圖入面展示。",
+          bullets: [
+            "測試活動進度同阻塞自動識別",
+            "缺陷趨勢同回歸優先級建議",
+            "質量 KPI 持續優化"
+          ]
+        }
+      ]
+    },
+    pillars: {
+      title: "平台能力矩陣",
+      items: [
+        {
+          title: "需求驅動",
+          desc: "由 PRD/用戶故事自動生成測試範圍同覆蓋建議。"
+        },
+        {
+          title: "智能設計",
+          desc: "AI 自動補全用例、數據同斷言，支援模板複用。"
+        },
+        {
+          title: "執行編排",
+          desc: "手工 + 自動化統一排期，實時反饋測試進度。"
+        },
+        {
+          title: "質量洞察",
+          desc: "風險熱力圖、缺陷趨勢、覆蓋率同質量門禁。"
+        },
+        {
+          title: "知識沉澱",
+          desc: "測試資產沉澱成知識庫，持續優化。"
+        },
+        {
+          title: "治理合規",
+          desc: "流程審計、權限矩陣、交付可追溯。"
+        }
+      ]
+    },
+    flow: {
+      title: "覆蓋全流程嘅 TestOps 引擎",
+      steps: [
+        {
+          title: "需求錄入",
+          desc: "支援工單、PRD、API 文檔同需求模板，自動建立測試範圍。"
+        },
+        {
+          title: "測試規劃",
+          desc: "AI 生成測試矩陣、風險評估同測試資源計劃。"
+        },
+        {
+          title: "測試設計",
+          desc: "由模型同歷史資產入面生成用例、數據同執行腳本。"
+        },
+        {
+          title: "測試執行",
+          desc: "統一調度自動化、手工、性能、安全測試活動。"
+        },
+        {
+          title: "缺陷管理",
+          desc: "智能聚類、根因分析、回歸建議同影響面評估。"
+        },
+        {
+          title: "測試報告",
+          desc: "自動生成多維度質量報告，支援發佈門禁。"
+        }
+      ]
+    },
+    testing: {
+      badge: "AI 驅動測試",
+      title: "智能規劃，全場景覆蓋",
+      desc: "AI 自動分析需求、生成測試計劃，支援多種測試協議同平台，一站式搞掂所有測試需求",
+      capabilities: [
+        {
+          title: "HTTP / REST API",
+          desc: "全面嘅 HTTP 接口測試，支援 RESTful、GraphQL、WebSocket"
+        },
+        {
+          title: "gRPC",
+          desc: "高性能 gRPC 服務測試，支援 Unary、Streaming 調用"
+        },
+        {
+          title: "移動端 UI",
+          desc: "iOS / Android 原生 App 自動化測試，支援真機同模擬器"
+        },
+        {
+          title: "瀏覽器測試",
+          desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器自動化測試"
+        },
+        {
+          title: "Windows 桌面",
+          desc: "Windows 桌面應用自動化，支援 WinUI / WPF / Win32"
+        },
+        {
+          title: "AI 智能規劃",
+          desc: "基於需求自動生成測試用例，智能識別測試場景同邊界條件"
+        }
+      ]
+    },
+    ai: {
+      title: "AI 優先嘅核心能力",
+      items: [
+        {
+          title: "需求理解引擎",
+          desc: "由上下文提取關鍵場景，生成測試範圍同風險標籤。"
+        },
+        {
+          title: "測試資產生成",
+          desc: "自動生成用例、數據、接口測試腳本同測試說明。"
+        },
+        {
+          title: "執行智能助手",
+          desc: "實時俾出阻塞原因、修復建議同回歸優先級。"
+        },
+        {
+          title: "報告洞察",
+          desc: "生成管理層視角報告同發佈決策建議。"
+        }
+      ]
+    },
+    integrations: {
+      title: "無縫集成研發生態",
+      items: [
+        "Jira / Tapd / 飛書",
+        "GitHub / GitLab / Azure DevOps",
+        "Jenkins / GitHub Actions / Argo",
+        "Postman / Playwright / Cypress",
+        "SonarQube / Sentry / Datadog",
+        "企業 IM 同通知中台"
+      ]
+    },
+    security: {
+      title: "企業級安全同治理",
+      items: [
+        "角色權限同組織隔離",
+        "數據加密同審計日誌",
+        "多地域部署同容災",
+        "合規流程同發佈門禁",
+        "資產版本管理同審批"
+      ]
+    },
+    cta: {
+      title: "開始建構 AI 驅動嘅測試全流程",
+      desc: "令測試團隊成為研發交付嘅戰略引擎。",
+      primary: "攞方案",
+      secondary: "申請試用"
+    },
+    closing: {
+      title: "令測試好似代碼噉持續進化",
+      subtitle: "AI TestOps · 連接需求、質量同交付嘅每一次迭代"
+    },
+    login: {
+      title: "登入 TestOps AI",
+      email: "電郵",
+      password: "密碼",
+      submit: "登入",
+      loading: "登入緊...",
+      invitedRegister: "你收到邀請喇，請註冊賬戶",
+      firstAdmin: "建立第一個管理員賬戶",
+      pleaseLogin: "請登入你嘅賬戶",
+      userName: "用戶名稱",
+      userNameRequired: "請輸入用戶名稱",
+      userNamePlaceholder: "例如：張三",
+      register: "註冊",
+      noAccount: "冇賬號？去註冊",
+      hasAccount: "已經有賬號？去登入",
+      registrationDisabled: "系統暫時唔開放註冊",
+      backToLogin: "返去登入"
+    },
+    dashboard: {
+      title: "測試運營中心",
+      welcome: "歡迎返嚟",
+      stats: ["需求池", "進行緊嘅測試", "發佈門禁"],
+      promptTitle: "請先登入",
+      promptBody: "登入之後可以睇到測試運營數據同工作台。",
+      toLogin: "去登入",
+      workspace: "工作空間",
+      workspaceSwitcher: {
+        switchWorkspace: "切換空間站"
+      },
+      insightTitle: "質量洞察",
+      insightDesc: "自動生成風險熱力圖、覆蓋率同發佈門禁建議。",
+      insightItems: ["需求覆蓋 92%", "回歸風險 8%", "阻塞 3", "待確認 5"],
+      assistantTitle: "AI 執行助理",
+      assistantDesc: "自動識別阻塞項、俾出修復建議同生成回歸優先級。",
+      assistantItems: [
+        "登入流程有異常波動，建議優先回歸",
+        "新版本支付接口覆蓋唔夠 12%",
+        "移動端回歸缺陷收斂度提升咗 20%"
+      ],
+      menu: [
+        "工作台",
+        "測試需求",
+        "測試計劃",
+        "測試設計",
+        "執行中心",
+        "缺陷同風險",
+        "質量報告",
+        "自動化資產",
+        "系統設定"
+      ],
+      todoList: {
+        title: "📋 開發任務清單",
+        subtitle: "工作空間切換功能開發進度",
+        currentWorkspace: "而家嘅工作空間",
+        addPlaceholder: "加入新任務...",
+        completed: "已完成",
+        summary: "🎯 完成摘要",
+        noTodos: "暫時冇待辦",
+        menuLabel: "📋 待辦清單"
+      },
+      defects: {
+        description: "追蹤缺陷同評估風險"
+      },
+      testDesign: {
+        description: "設計同編寫測試用例",
+        caseLibrary: "測試用例庫",
+        newCase: "+ 新建用例",
+        totalCases: "共 {{count}} 條測試用例"
+      },
+      settings: {
+        title: "空間站設定",
+        subtitle: "管理 \"{{name}}\" 嘅配置同成員",
+        workspaceNotFound: "空間站唔存在",
+        generalTab: "基本設定",
+        membersTab: "成員管理",
+        dangerTab: "危險區域",
+        workspaceName: "空間站名稱",
+        workspaceNamePlaceholder: "例如：我嘅項目",
+        workspaceNameRequired: "請輸入名稱",
+        workspaceNameLength: "名稱長度要 1-50 個字",
+        workspaceSlug: "空間站標識（URL）",
+        workspaceSlugRequired: "請輸入標識",
+        workspaceSlugPattern: "淨係可以用細楷英文字母、數字同連字符",
+        workspaceSlugExtra: "用嚟做訪問地址，例如：/dashboard/my-project",
+        description: "描述",
+        descriptionPlaceholder: "簡單描述吓呢個空間站...",
+        workspaceDeleted: "空間站已經刪除咗",
+        confirmDeleteTitle: "確認刪除空間站",
+        confirmDeleteContent: "確定要刪除空間站 \"{{name}}\" 咩？呢個操作冇得撤銷㗎。",
+        confirmDeleteWarning: "所有相關數據（包括待辦事項）都會永久刪除。",
+        confirmDeleteOk: "確認刪除",
+        deleteWorkspace: "刪除空間站",
+        deleteWorkspaceDesc: "刪除之後，所有數據都會永久清除，而且冇得恢復。",
+        memberList: "成員列表",
+        memberListDesc: "管理空間站成員同權限",
+        inviteMember: "邀請成員",
+        inviteModalTitle: "邀請成員",
+        sendInvite: "發送邀請",
+        emailAddress: "電郵地址",
+        emailRequired: "請輸入電郵",
+        emailInvalid: "請輸入有效電郵",
+        role: "角色",
+        memberDefault: "成員（預設）",
+        memberPermissionDesc: "成員可以睇同編輯空間站內容",
+        tableColumnMember: "成員",
+        tableColumnRole: "角色",
+        tableColumnJoined: "加入時間",
+        tableColumnActions: "操作",
+        removeMemberComingSoon: "移除成員功能開發緊",
+        inviteComingSoon: "邀請功能開發緊：將會向 {{email}} 發送邀請電郵",
+        workspaceOwner: "空間站建立者"
+      },
+      requirements: {
+        description: "管理同追蹤產品需求",
+        workspaceLabel: "工作空間",
+        toAnalyze: "待分析",
+        inDesign: "設計緊",
+        completed: "已完成",
+        recentRequirements: "最近需求",
+        sampleTitle1: "用戶登入模組優化",
+        sampleTitle2: "支付接口升級",
+        sampleTitle3: "訂單查詢性能優化"
+      },
+      execution: {
+        description: "執行測試任務同睇結果",
+        workspaceLabel: "工作空間",
+        running: "執行緊",
+        passed: "通過",
+        failed: "失敗",
+        blocked: "阻塞"
+      },
+      automation: {
+        description: "管理自動化測試腳本同資源",
+        workspaceLabel: "工作空間",
+        totalScripts: "腳本總數",
+        successRate: "執行成功率",
+        avgDuration: "平均執行時間"
+      },
+      reports: {
+        description: "睇質量指標同生成報告",
+        workspaceLabel: "工作空間",
+        testCoverage: "測試覆蓋率",
+        defectDensity: "缺陷密度",
+        automationRate: "自動化率"
+      },
+      testPlan: {
+        description: "規劃同管理測試計劃",
+        workspaceLabel: "工作空間",
+        inProgress: "進行緊",
+        completedThisWeek: "呢個禮拜完成",
+        avgCoverage: "平均覆蓋率"
+      },
+      testRequirements: {
+        titleTotal: "總需求數",
+        titleDraft: "草稿緊",
+        titleInProgress: "進行緊",
+        titleDone: "已完成",
+        searchPlaceholder: "搜索需求...",
+        filterStatus: "狀態篩選",
+        filterType: "類型篩選",
+        filterPriority: "優先級",
+        refresh: "刷新",
+        create: "新建需求",
+        totalCount: "共 {{total}} 條",
+        view: "睇詳情",
+        edit: "編輯",
+        remove: "刪除",
+        removeTitle: "確定刪除呢個需求咩？",
+        removeDesc: "刪除之後冇得恢復",
+        removeOk: "刪除",
+        removeCancel: "取消",
+        modalCreate: "新建測試需求",
+        modalEdit: "編輯測試需求",
+        modalOkCreate: "建立",
+        modalOkSave: "儲存",
+        fieldTitle: "需求名稱",
+        fieldTitleRequired: "請輸入需求名稱",
+        fieldType: "需求類型",
+        fieldDesc: "需求描述",
+        fieldContent: "詳細內容 (支援 Markdown)",
+        fieldPriority: "優先級",
+        fieldStatus: "狀態",
+        fieldDueDate: "截止日期",
+        dueDatePlaceholder: "揀截止日期",
+        fieldEstimate: "預估工時 (鐘頭)",
+        fieldTags: "標籤 (逗號分隔)",
+        tagsPlaceholder: "標籤1, 標籤2, 標籤3",
+        detailTabInfo: "基本資料",
+        detailTabContent: "詳細內容",
+        detailTabChildren: "子需求",
+        descEmpty: "暫時冇描述",
+        contentEmpty: "暫時冇詳細內容",
+        childrenEmpty: "暫時冇子需求",
+        childrenCount: "共 {{count}} 個子需求",
+        creator: "建立者",
+        assignee: "負責人",
+        estimate: "預估工時",
+        actual: "實際工時",
+        createdAt: "建立時間",
+        dueDate: "截止日期",
+        hours: "鐘頭",
+        children: "子需求",
+        requirementId: "需求編號",
+        requirementName: "需求名稱",
+        type: "類型",
+        status: "狀態",
+        priority: "優先級",
+        creatorName: "建立者",
+        assigneeName: "負責人",
+        createdTime: "建立時間",
+        action: "操作",
+        toastCreateSuccess: "建立成功咗",
+        toastCreateFail: "建立失敗咗",
+        toastUpdateSuccess: "更新成功咗",
+        toastUpdateFail: "更新失敗咗",
+        toastDeleteSuccess: "刪除成功咗",
+        toastDeleteFail: "刪除失敗咗",
+        markdownPlaceholder: "# 測試需求詳情\n\n## 測試目標\n描述測試嘅主要目標...\n\n## 測試範圍\n- 範圍項 1\n- 範圍項 2\n\n## 測試步驟\n1. 步驟一\n2. 步驟二\n\n## 預期結果\n描述預期嘅測試結果...",
+        statusLabels: {
+          draft: "草稿",
+          pending: "待審核",
+          approved: "已批准",
+          in_progress: "進行緊",
+          completed: "已完成",
+          rejected: "已拒絕",
+          cancelled: "已取消"
+        },
+        typeLabels: {
+          functional: "功能測試",
+          performance: "性能測試",
+          security: "安全測試",
+          usability: "易用性測試",
+          compatibility: "兼容性測試",
+          integration: "集成測試",
+          regression: "回歸測試"
+        },
+        priorityLabels: {
+          critical: "緊急",
+          high: "高",
+          medium: "中",
+          low: "低"
+        }
+      }
+    },
+    aiWorkflow: {
+      aiAutoProcess: "AI 全自動流程",
+      upload: {
+        title: "上載需求文檔",
+        desc: "拖曳文件去呢度，或者撳嚟揀文件",
+        selectFile: "揀文件",
+        sampleFile: "電商平台需求規格說明書_v3.2.pdf",
+        sampleMeta: "3.8 MB · 156 頁 · 包含 API 接口文檔"
+      },
+      analyzing: {
+        title: "AI 智能分析需求文檔",
+        desc: "深度解析文檔結構，識別功能模組同測試點",
+        docStructure: "文檔結構分析",
+        modules: [
+          "1. 用戶管理模組",
+          "2. 商品管理模組",
+          "3. 訂單處理模組",
+          "4. 支付網關模組",
+          "5. 物流追蹤模組"
+        ],
+        stats: [
+          { label: "功能模組", value: "28" },
+          { label: "測試點", value: "186" },
+          { label: "邊界條件", value: "42" },
+          { label: "API接口", value: "67" }
+        ],
+        progress: "分析進度",
+        analyzing: "分析緊..."
+      },
+      testPlan: {
+        title: "AI 建立測試計劃",
+        desc: "基於需求智能規劃測試策略同優先級",
+        complete: "搞掂",
+        testCases: "測試用例",
+        modules: [
+          {
+            module: "用戶管理",
+            priority: "高",
+            items: ["登入註冊", "權限控制", "個人資料", "OAuth集成"]
+          },
+          {
+            module: "訂單處理",
+            priority: "高",
+            items: ["建立訂單", "狀態流轉", "退款處理", "並發控制"]
+          },
+          {
+            module: "支付網關",
+            priority: "關鍵",
+            items: ["支付寶", "微信支付", "銀行卡", "退款邏輯"]
+          },
+          {
+            module: "商品管理",
+            priority: "中",
+            items: ["商品CRUD", "庫存管理", "價格計算", "分類管理"]
+          },
+          {
+            module: "物流追蹤",
+            priority: "中",
+            items: ["物流查詢", "狀態同步", "異常處理", "多渠道對接"]
+          },
+          {
+            module: "API網關",
+            priority: "高",
+            items: ["限流熔斷", "認證鑒權", "日誌追蹤", "版本控制"]
+          }
+        ]
+      },
+      generate: {
+        title: "AI 智能生成測試用例",
+        desc: "智能識別測試場景，自動生成邊界條件用例",
+        page: "頁",
+        step1: "智能識別測試場景",
+        step2: "自動識別邊界條件",
+        step3: "HTTP / REST API 用例生成",
+        step4: "瀏覽器 UI 測試用例生成",
+        step5: "移動端 UI 測試用例生成",
+        step6: "用例生成搞掂",
+        scenarios: [
+          {
+            scenario: "正向流程測試",
+            desc: "用戶登入 → 瀏覽商品 → 加入購物車 → 落單支付"
+          },
+          {
+            scenario: "異常流程測試",
+            desc: "網絡中斷、超時重試、並發衝突處理"
+          },
+          {
+            scenario: "邊界值測試",
+            desc: "最大購買數量、價格邊界、庫存臨界值"
+          },
+          {
+            scenario: "安全性測試",
+            desc: "SQL注入、XSS攻擊、越權訪問檢測"
+          }
+        ],
+        boundaries: [
+          { field: "用戶名", min: "2字符", max: "32字符", special: "特殊字符過濾" },
+          { field: "密碼", min: "8字符", max: "128字符", special: "強度驗證" },
+          { field: "商品價格", min: "0.01", max: "999999.99", special: "精度處理" },
+          { field: "購買數量", min: "1", max: "9999", special: "庫存校驗" },
+          { field: "優惠券金額", min: "1", max: "訂單金額", special: "疊加規則" },
+          { field: "收貨地址", min: "10字符", max: "200字符", special: "地址解析" }
+        ],
+        apis: [
+          { method: "POST", path: "/api/v1/users/login", desc: "用戶登入接口" },
+          { method: "GET", path: "/api/v1/products", desc: "商品列表查詢" },
+          { method: "POST", path: "/api/v1/orders", desc: "建立訂單接口" },
+          { method: "PUT", path: "/api/v1/orders/:id/status", desc: "更新訂單狀態" },
+          { method: "DELETE", path: "/api/v1/cart/items/:id", desc: "刪除購物車商品" }
+        ],
+        cases: "用例",
+        browsers: [
+          { browser: "Chrome", version: "v120+" },
+          { browser: "Firefox", version: "v115+" },
+          { browser: "Safari", version: "v17+" },
+          { browser: "Edge", version: "v118+" }
+        ],
+        browserTests: ["頁面渲染測試", "交互響應測試", "表單驗證測試", "跨瀏覽器兼容性"],
+        iosPlatform: "iOS 平台",
+        androidPlatform: "Android 平台",
+        iosDevices: ["iPhone 15 Pro", "iPhone 14", "iPad Pro", "iPad Air"],
+        androidDevices: ["Pixel 8 Pro", "Samsung S24", "Xiaomi 14", "OPPO Find X7"],
+        summary: {
+          types: [
+            { type: "API 測試", count: 562 },
+            { type: "瀏覽器 UI", count: 438 },
+            { type: "移動端 iOS", count: 128 },
+            { type: "移動端 Android", count: 139 },
+            { type: "性能壓測", count: 86 }
+          ],
+          total: "1,353",
+          readyToExecute: "個測試用例已經生成咗，準備執行"
+        }
+      },
+      execute: {
+        title: "AI 自動執行測試",
+        desc: "多協議並行執行，實時監控測試進度",
+        lanes: [
+          { type: "HTTP / REST API", desc: "全面嘅 HTTP 接口測試，支援 RESTful、GraphQL" },
+          { type: "gRPC 服務", desc: "高性能 gRPC 服務測試，Unary / Streaming" },
+          { type: "瀏覽器測試", desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器" },
+          { type: "移動端 iOS", desc: "iPhone / iPad 真機同模擬器測試" },
+          { type: "移動端 Android", desc: "Pixel / Samsung / Xiaomi 多設備覆蓋" }
+        ],
+        stats: [
+          { label: "總執行", value: "1,353" },
+          { label: "通過", value: "1,312" },
+          { label: "失敗", value: "28" },
+          { label: "耗時", value: "4分32秒" }
+        ]
+      },
+      report: {
+        title: "AI 產出精美測試報告",
+        desc: "智能分析測試結果，生成可視化報告",
+        complete: "全流程搞掂",
+        metrics: [
+          { label: "通過率", value: "97.1%" },
+          { label: "覆蓋率", value: "94.8%" },
+          { label: "總用例", value: "1,353" },
+          { label: "缺陷數", value: "28" }
+        ],
+        chartTitle: "測試類型分佈",
+        chartLabels: ["API", "UI", "iOS", "Android", "gRPC"],
+        defectTitle: "缺陷分佈",
+        defects: [
+          { module: "支付模組", count: 12, severity: "高" },
+          { module: "訂單模組", count: 8, severity: "中" },
+          { module: "用戶模組", count: 5, severity: "低" },
+          { module: "其他", count: 3, severity: "低" }
+        ],
+        browserRecording: "瀏覽器測試錄屏 - Chrome",
+        downloadReport: "下載完整報告",
+        shareReport: "分享報告",
+        timeSaved: "全程耗時 4分32秒 · 慳咗人工 48+ 鐘頭"
+      }
+    },
+    errors: {
+      common: {
+        unauthorized: "未登入",
+        forbidden: "冇權限訪問",
+        requestFailed: "請求失敗咗",
+        missingWorkspace: "缺少工作空間參數",
+        workspaceForbidden: "冇權限訪問呢個工作空間",
+        adminRequired: "需要管理員權限",
+        superadminRequired: "需要超級管理員權限"
+      },
+      auth: {
+        invalidCredentials: "賬號或者密碼錯咗",
+        defaultWorkspaceNotFound: "搵唔到預設工作空間",
+        emailAlreadyRegistered: "電郵已經註冊咗",
+        registrationDisabled: "系統暫時唔開放註冊",
+        invitationInvalid: "邀請碼無效或者已經用咗",
+        invitationExpired: "邀請碼已經過期"
+      },
+      user: {
+        notFound: "用戶唔存在",
+        emailInUse: "電郵已經俾人用咗",
+        wrongPassword: "原密碼錯咗"
+      },
+      workspace: {
+        notFound: "工作空間唔存在",
+        onlyOwnerCanUpdate: "淨係建立者可以改",
+        onlyOwnerCanDelete: "淨係建立者可以刪除",
+        slugExists: "Slug 已經存在",
+        slugReserved: "呢個標識係系統保留嘅，請用其他名稱"
+      },
+      todo: {
+        notFound: "待辦唔存在"
+      },
+      testRequirement: {
+        notFound: "測試需求唔存在",
+        createFetchFailed: "建立之後搵唔到記錄",
+        updateFetchFailed: "更新之後搵唔到記錄",
+        deleteChildrenFirst: "請先刪除所有子需求"
+      }
+    },
+    footer: {
+      copyright: "© 2026 TestOps AI. All rights reserved.",
+      tagline: "AI 驅動嘅測試全流程平台"
+    },
+    systemSettings: {
+      title: "系統設定",
+      generalTab: "通用設定",
+      usersTab: "用戶管理",
+      passwordMinLength: "密碼最少要4位",
+      fillAllFields: "請填寫齊晒所有資料",
+      userNameColumn: "用戶名",
+      emailColumn: "電郵",
+      roleColumn: "角色",
+      lastLoginColumn: "最後登入",
+      actionsColumn: "操作",
+      neverLogin: "從未登入過",
+      hoursUnit: "鐘頭",
+      newPasswordPlaceholder: "請輸入新密碼（最少4位）",
+      usernamePlaceholder: "請輸入用戶名",
+      emailPlaceholder: "請輸入電郵",
+      passwordPlaceholder: "請輸入密碼（最少4位）",
+      allowRegistration: "允許新用戶註冊",
+      allowRegistrationDesc: "閂咗之後，新用戶就冇辦法註冊賬號",
+      singleWorkspaceMode: "單一空間模式",
+      singleWorkspaceModeDesc: "開咗之後，所有用戶共用同一個工作空間，URL 入面唔會顯示空間 ID",
+      userList: "用戶列表",
+      userRole: "角色",
+      lastLoginAt: "最近登入",
+      userCreatedAt: "註冊時間",
+      userActions: "操作",
+      roleUser: "普通用戶",
+      roleAdmin: "管理員",
+      roleSuperAdmin: "超級管理員",
+      changeRole: "改角色",
+      resetPassword: "重設密碼",
+      deleteUser: "刪除用戶",
+      confirmDelete: "確認刪除",
+      confirmDeleteDesc: "確定要刪除用戶 {{name}} 咩？呢個操作冇得撤銷㗎。",
+      resetPasswordTitle: "重設密碼",
+      resetPasswordDesc: "幫用戶 {{name}} 設定新密碼",
+      newPassword: "新密碼",
+      saveSuccess: "儲存成功咗",
+      deleteSuccess: "刪除成功咗",
+      resetSuccess: "密碼重設成功咗",
+      addUser: "加入用戶",
+      addUserTitle: "加入新用戶",
+      addUserDesc: "手動建立新用戶賬號",
+      userName: "用戶名",
+      userEmail: "電郵",
+      userPassword: "密碼",
+      userRoleSelect: "揀角色",
+      addUserSuccess: "用戶建立成功咗",
+      emailExists: "呢個電郵已經註冊咗",
+      invitationTab: "邀請註冊",
+      generateInvitation: "生成邀請連結",
+      invitationList: "邀請碼列表",
+      invitationCode: "邀請碼",
+      invitationStatus: "狀態",
+      invitationCreatedAt: "建立時間",
+      invitationExpiresAt: "過期時間",
+      invitationUsedBy: "使用者",
+      invitationUsedAt: "使用時間",
+      invitationStatusUnused: "未使用",
+      invitationStatusUsed: "已使用",
+      invitationStatusExpired: "已過期",
+      invitationNeverExpire: "永不過期",
+      invitationCopied: "邀請連結已經複製到剪貼簿",
+      invitationGenerated: "邀請連結已經生成咗",
+      invitationDeleted: "邀請碼已經刪除咗",
+      copyInvitationLink: "複製連結",
+      deleteInvitation: "刪除",
+      expiresInHours: "有效期（鐘頭）",
+      noExpiration: "唔設定過期時間"
+    }
+  }
+};
+
+export type TranslationSchema = typeof yue;

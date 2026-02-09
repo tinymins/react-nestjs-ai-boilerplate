@@ -5,6 +5,7 @@ import { Avatar, Button, Dropdown, Menu, Drawer } from "antd";
 import { GlobalOutlined, BulbOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import type { User } from "@acme/types";
 import type { Theme, Lang, LangMode, ThemeMode } from "../../lib/types";
+import { LANG_NAMES } from "../../lib/types";
 import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
 import { trpc } from "../../lib/trpc";
 import { UserMenu, UserSettingsModal, SystemSettingsModal } from "../account";
@@ -59,11 +60,11 @@ export default function SingleWorkspaceDashboardLayout({
 
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const langItems = [
-    { key: "auto", label: t("common.auto") },
-    { key: "zh", label: "中文" },
-    { key: "en", label: "English" }
-  ];
+  const langItems = Object.entries(LANG_NAMES).map(([key, label]) => ({
+    key,
+    label
+  }));
+  langItems.unshift({ key: "auto", label: t("common.auto") });
 
   const themeItems = [
     { key: "auto", label: t("common.auto") },

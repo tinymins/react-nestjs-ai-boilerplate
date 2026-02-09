@@ -172,8 +172,15 @@ export default function UserSettingsModal({
             <Select
               options={[
                 { value: "auto", label: t("common.auto") },
-                { value: "zh", label: "中文" },
-                { value: "en", label: "English" }
+                { value: "zh-CN", label: "简体中文" },
+                { value: "zh-TW", label: "繁體中文" },
+                { value: "en-US", label: "English" },
+                { value: "ja-JP", label: "日本語" },
+                { value: "de-DE", label: "Deutsch" },
+                { value: "lzh", label: "文言文" },
+                { value: "wuu", label: "吴语" },
+                { value: "hak", label: "客家話" },
+                { value: "yue", label: "粥語" }
               ]}
             />
           </Form.Item>

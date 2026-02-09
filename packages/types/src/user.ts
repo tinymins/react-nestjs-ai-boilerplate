@@ -6,7 +6,7 @@ export type UserRole = z.infer<typeof UserRoleSchema>;
 
 export const UserSettingsSchema = z.object({
   avatarUrl: z.string().nullable().optional(),
-  langMode: z.enum(["auto", "zh", "en"]).optional(),
+  langMode: z.enum(["auto", "zh-CN", "zh-TW", "en-US", "ja-JP", "de-DE", "lzh", "wuu", "hak", "yue"]).optional(),
   themeMode: z.enum(["auto", "light", "dark"]).optional()
 });
 

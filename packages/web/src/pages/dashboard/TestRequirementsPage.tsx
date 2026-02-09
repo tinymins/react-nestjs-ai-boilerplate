@@ -539,7 +539,7 @@ export default function TestRequirementsPage() {
             total: listQuery.data?.total ?? 0,
             showSizeChanger: true,
             showQuickJumper: true,
-            showTotal: (total) => tr("totalCount")(total),
+            showTotal: (total) => tr("totalCount", { count: total }),
             onChange: (page, pageSize) => setPagination({ page, pageSize })
           }}
           rowClassName={(_, index) =>
@@ -793,7 +793,7 @@ export default function TestRequirementsPage() {
               >
                 {(viewingRecord.childrenCount ?? 0) > 0 ? (
                   <Text type="secondary">
-                    {tr("childrenCount")(viewingRecord.childrenCount ?? 0)}
+                    {tr("childrenCount", { count: viewingRecord.childrenCount ?? 0 })}
                   </Text>
                 ) : (
                   <Empty description={tr("childrenEmpty")} />

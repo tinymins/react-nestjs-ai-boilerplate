@@ -88,9 +88,16 @@ export const saveThemeMode = (mode: ThemeMode) => {
 
 export const loadLangMode = (): LangMode => {
   const savedMode = getCookieValue(LANG_MODE_COOKIE_KEY);
-  if (savedMode === "auto" || savedMode === "zh" || savedMode === "en") {
-    return savedMode;
+  // Valid BCP 47 language codes
+  const validModes: LangMode[] = ["auto", "zh-CN", "zh-TW", "en-US", "ja-JP", "de-DE", "lzh", "wuu", "hak", "yue"];
+  if (validModes.includes(savedMode as LangMode)) {
+    return savedMode as LangMode;
   }
+  // Legacy support: convert old codes
+  if (savedMode === "zh") return "zh-CN";
+  if (savedMode === "en") return "en-US";
+  if (savedMode === "ja") return "ja-JP";
+  if (savedMode === "de") return "de-DE";
   return "auto";
 };
 

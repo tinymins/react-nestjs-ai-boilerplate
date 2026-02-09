@@ -36,7 +36,7 @@ const trpcClient = trpc.createClient({
         const workspaceSlug = getWorkspaceFromPath();
         return {
           ...(workspaceSlug ? { "x-workspace-id": workspaceSlug } : {}),
-          "x-lang": i18n.resolvedLanguage ?? i18n.language ?? "zh"
+          "x-lang": i18n.resolvedLanguage ?? i18n.language ?? "zh-CN"
         };
       }
     })
