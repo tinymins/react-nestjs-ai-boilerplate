@@ -74,6 +74,7 @@ init: ## 首次初始化项目（清理+安装+迁移+种子）
 	@printf "\n"
 	@printf "$(YELLOW)🗑️  [3/9] 清理数据库数据目录...$(NC)\n"
 	@sudo rm -rf .data/postgres
+	@sudo chown -R $(shell id -u):$(shell id -g) .data 2>/dev/null || true
 	@printf "$(GREEN)✓ 数据目录已清理$(NC)\n"
 	@printf "\n"
 	@printf "$(YELLOW)📁 [4/9] 创建数据目录...$(NC)\n"
