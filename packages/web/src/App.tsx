@@ -32,18 +32,18 @@ import {
 } from "./pages";
 
 // Dashboard child routes (shared between both modes)
-const dashboardChildRoutes = (user: User | null, lang: "zh" | "en") => [
+const dashboardChildRoutes = (user: User | null) => [
   <Route key="index" index element={<WorkspacePage user={user} />} />,
-  <Route key="requirements" path="requirements" element={<RequirementsPage lang={lang} />} />,
-  <Route key="test-requirements" path="test-requirements" element={<TestRequirementsPage lang={lang} />} />,
-  <Route key="test-plan" path="test-plan" element={<TestPlanPage lang={lang} />} />,
-  <Route key="test-design" path="test-design" element={<TestDesignPage lang={lang} />} />,
-  <Route key="execution" path="execution" element={<ExecutionPage lang={lang} />} />,
-  <Route key="defects" path="defects" element={<DefectsPage lang={lang} />} />,
-  <Route key="reports" path="reports" element={<ReportsPage lang={lang} />} />,
-  <Route key="automation" path="automation" element={<AutomationPage lang={lang} />} />,
-  <Route key="settings" path="settings" element={<SettingsPage lang={lang} />} />,
-  <Route key="todulist" path="todulist" element={<TodoListPage lang={lang} />} />,
+  <Route key="requirements" path="requirements" element={<RequirementsPage />} />,
+  <Route key="test-requirements" path="test-requirements" element={<TestRequirementsPage />} />,
+  <Route key="test-plan" path="test-plan" element={<TestPlanPage />} />,
+  <Route key="test-design" path="test-design" element={<TestDesignPage />} />,
+  <Route key="execution" path="execution" element={<ExecutionPage />} />,
+  <Route key="defects" path="defects" element={<DefectsPage />} />,
+  <Route key="reports" path="reports" element={<ReportsPage />} />,
+  <Route key="automation" path="automation" element={<AutomationPage />} />,
+  <Route key="settings" path="settings" element={<SettingsPage />} />,
+  <Route key="todulist" path="todulist" element={<TodoListPage />} />,
   <Route key="not-found" path="*" element={<DashboardNotFoundPage />} />,
 ];
 
@@ -109,7 +109,7 @@ function AppContent() {
                   path="/dashboard"
                   element={<SingleWorkspaceDashboardLayout {...dashboardLayoutProps} />}
                 >
-                  {dashboardChildRoutes(user, lang)}
+                  {dashboardChildRoutes(user)}
                 </Route>
                 {/* 兼容旧 URL，重定向到不带 workspace 的路径 */}
                 <Route path="/dashboard/:workspace/*" element={<Navigate to="/dashboard" replace />} />
@@ -122,7 +122,7 @@ function AppContent() {
                   path="/dashboard/:workspace"
                   element={<DashboardLayout {...dashboardLayoutProps} />}
                 >
-                  {dashboardChildRoutes(user, lang)}
+                  {dashboardChildRoutes(user)}
                 </Route>
               </>
             )}

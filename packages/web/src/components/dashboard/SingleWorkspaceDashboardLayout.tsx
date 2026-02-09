@@ -57,20 +57,19 @@ export default function SingleWorkspaceDashboardLayout({
     }
   };
 
+  const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const langItems = [
-    { key: "auto", label: lang === "zh" ? "自动" : "Auto" },
+    { key: "auto", label: t("common.auto") },
     { key: "zh", label: "中文" },
     { key: "en", label: "English" }
   ];
 
   const themeItems = [
-    { key: "auto", label: lang === "zh" ? "自动" : "Auto" },
-    { key: "light", label: lang === "zh" ? "亮色" : "Light" },
-    { key: "dark", label: lang === "zh" ? "暗黑" : "Dark" }
+    { key: "auto", label: t("common.auto") },
+    { key: "light", label: t("common.light") },
+    { key: "dark", label: t("common.dark") }
   ];
-
-  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -79,7 +78,7 @@ export default function SingleWorkspaceDashboardLayout({
 
   const menuItems = [
     ...(t("dashboard.menu", { returnObjects: true }) as string[]),
-    lang === "zh" ? "📋 待办清单" : "📋 Todo List",
+    t("dashboard.todoList.menuLabel"),
   ];
 
   const menuItemConfigs = menuItems.map((label, index) => ({
@@ -196,7 +195,6 @@ export default function SingleWorkspaceDashboardLayout({
               </Dropdown>
               <UserMenu
                 user={user}
-                lang={lang}
                 onOpenSettings={() => setSettingsOpen(true)}
                 onOpenSystemSettings={() => setSystemSettingsOpen(true)}
                 onLogout={onLogout}
@@ -205,7 +203,6 @@ export default function SingleWorkspaceDashboardLayout({
                 open={settingsOpen}
                 onClose={() => setSettingsOpen(false)}
                 user={user}
-                lang={lang}
                 langMode={langMode}
                 themeMode={themeMode}
                 onUpdateUser={onUpdateUser}
@@ -216,7 +213,6 @@ export default function SingleWorkspaceDashboardLayout({
                 open={systemSettingsOpen}
                 onClose={() => setSystemSettingsOpen(false)}
                 user={user}
-                lang={lang}
               />
             </div>
           </div>

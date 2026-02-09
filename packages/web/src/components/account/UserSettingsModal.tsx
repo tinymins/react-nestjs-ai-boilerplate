@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Avatar, Button, Form, Input, Modal, Select, Tabs, Upload } from "antd";
 import type { UploadProps } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useMessage } from "../../hooks";
 import type { User } from "@acme/types";
-import type { Lang, LangMode, ThemeMode } from "../../lib/types";
+import type { LangMode, ThemeMode } from "../../lib/types";
 import { trpc } from "../../lib/trpc";
 import { getAvatarColor, getAvatarInitial } from "../../lib/avatar";
 
@@ -12,7 +13,6 @@ type UserSettingsModalProps = {
   open: boolean;
   onClose: () => void;
   user: User;
-  lang: Lang;
   langMode: LangMode;
   themeMode: ThemeMode;
   onUpdateUser: (user: User) => void;
@@ -24,13 +24,13 @@ export default function UserSettingsModal({
   open,
   onClose,
   user,
-  lang,
   langMode,
   themeMode,
   onUpdateUser,
   onChangeLangMode,
   onChangeThemeMode
 }: UserSettingsModalProps) {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const [passwordForm] = Form.useForm();
   const message = useMessage();
@@ -69,7 +69,7 @@ export default function UserSettingsModal({
       showUploadList: false,
       beforeUpload: (file) => {
         if (!file.type.startsWith("image/")) {
-          message.error(lang === "zh" ? "请上传图片文件" : "Please upload an image file");
+          message.error(t("userSettings.pleaseUploadImage"));
           return Upload.LIST_IGNORE;
         }
         const reader = new FileReader();
@@ -80,7 +80,7 @@ export default function UserSettingsModal({
         return false;
       }
     }),
-    [lang]
+    [t]
   );
 
   const handleSave = async () => {
@@ -105,7 +105,7 @@ export default function UserSettingsModal({
       onChangeThemeMode(payload.settings.themeMode);
     }
 
-    message.success(lang === "zh" ? "设置已保存" : "Settings saved");
+    message.success(t("userSettings.settingsSaved"));
     onClose();
   };
 
@@ -113,7 +113,7 @@ export default function UserSettingsModal({
     setAvatarValue(null);
     const updated = await deleteAvatarMutation.mutateAsync();
     onUpdateUser(updated as User);
-    message.success(lang === "zh" ? "头像已移除" : "Avatar removed");
+    message.success(t("userSettings.avatarRemoved"));
   };
 
   const handleChangePassword = async () => {
@@ -124,7 +124,7 @@ export default function UserSettingsModal({
         newPassword: values.newPassword
       });
       passwordForm.resetFields();
-      message.success(lang === "zh" ? "密码已修改" : "Password changed successfully");
+      message.success(t("userSettings.passwordChanged"));
     } catch (error) {
       // 错误由 tRPC 错误处理器处理
     }
@@ -142,48 +142,48 @@ export default function UserSettingsModal({
         </Avatar>
         <div className="flex flex-col gap-2">
           <Upload {...uploadProps}>
-            <Button size="small">{lang === "zh" ? "上传头像" : "Upload avatar"}</Button>
+            <Button size="small">{t("userSettings.uploadAvatar")}</Button>
           </Upload>
           <Button size="small" danger disabled={!avatarValue} onClick={handleRemoveAvatar}>
-            {lang === "zh" ? "移除头像" : "Remove avatar"}
+            {t("userSettings.removeAvatar")}
           </Button>
         </div>
       </div>
 
       <Form form={form} layout="vertical">
         <Form.Item
-          label={lang === "zh" ? "用户名" : "User name"}
+          label={t("userSettings.userName")}
           name="name"
-          rules={[{ required: true, message: lang === "zh" ? "请输入用户名" : "Please enter a user name" }]}
+          rules={[{ required: true, message: t("userSettings.userNameRequired") }]}
         >
-          <Input placeholder={lang === "zh" ? "例如：陈伟" : "e.g. Chen Wei"} />
+          <Input placeholder={t("userSettings.userNamePlaceholder")} />
         </Form.Item>
 
         <Form.Item
-          label={lang === "zh" ? "邮箱" : "Email"}
+          label={t("userSettings.email")}
           name="email"
-          rules={[{ required: true, message: lang === "zh" ? "请输入邮箱" : "Please enter your email" }]}
+          rules={[{ required: true, message: t("userSettings.emailRequired") }]}
         >
           <Input type="email" placeholder="name@example.com" />
         </Form.Item>
 
         <div className="grid gap-4 md:grid-cols-2">
-          <Form.Item label={lang === "zh" ? "语言" : "Language"} name="langMode">
+          <Form.Item label={t("userSettings.language")} name="langMode">
             <Select
               options={[
-                { value: "auto", label: lang === "zh" ? "自动" : "Auto" },
+                { value: "auto", label: t("common.auto") },
                 { value: "zh", label: "中文" },
                 { value: "en", label: "English" }
               ]}
             />
           </Form.Item>
 
-          <Form.Item label={lang === "zh" ? "主题" : "Theme"} name="themeMode">
+          <Form.Item label={t("userSettings.theme")} name="themeMode">
             <Select
               options={[
-                { value: "auto", label: lang === "zh" ? "自动" : "Auto" },
-                { value: "light", label: lang === "zh" ? "亮色" : "Light" },
-                { value: "dark", label: lang === "zh" ? "暗黑" : "Dark" }
+                { value: "auto", label: t("common.auto") },
+                { value: "light", label: t("common.light") },
+                { value: "dark", label: t("common.dark") }
               ]}
             />
           </Form.Item>
@@ -191,9 +191,9 @@ export default function UserSettingsModal({
       </Form>
 
       <div className="flex justify-end gap-2 mt-4">
-        <Button onClick={onClose}>{lang === "zh" ? "取消" : "Cancel"}</Button>
+        <Button onClick={onClose}>{t("common.cancel")}</Button>
         <Button type="primary" loading={updateMutation.isPending} onClick={handleSave}>
-          {lang === "zh" ? "保存" : "Save"}
+          {t("common.save")}
         </Button>
       </div>
     </>
@@ -203,52 +203,52 @@ export default function UserSettingsModal({
     <>
       <Form form={passwordForm} layout="vertical">
         <Form.Item
-          label={lang === "zh" ? "当前密码" : "Current Password"}
+          label={t("userSettings.currentPassword")}
           name="oldPassword"
-          rules={[{ required: true, message: lang === "zh" ? "请输入当前密码" : "Please enter current password" }]}
+          rules={[{ required: true, message: t("userSettings.currentPasswordRequired") }]}
         >
-          <Input.Password placeholder={lang === "zh" ? "请输入当前密码" : "Enter current password"} />
+          <Input.Password placeholder={t("userSettings.currentPasswordPlaceholder")} />
         </Form.Item>
 
         <Form.Item
-          label={lang === "zh" ? "新密码" : "New Password"}
+          label={t("userSettings.newPassword")}
           name="newPassword"
           rules={[
-            { required: true, message: lang === "zh" ? "请输入新密码" : "Please enter new password" },
-            { min: 6, message: lang === "zh" ? "密码至少6位" : "Password must be at least 6 characters" }
+            { required: true, message: t("userSettings.newPasswordRequired") },
+            { min: 6, message: t("userSettings.newPasswordMin") }
           ]}
         >
-          <Input.Password placeholder={lang === "zh" ? "请输入新密码（至少6位）" : "Enter new password (min 6 chars)"} />
+          <Input.Password placeholder={t("userSettings.newPasswordPlaceholder")} />
         </Form.Item>
 
         <Form.Item
-          label={lang === "zh" ? "确认新密码" : "Confirm New Password"}
+          label={t("userSettings.confirmPassword")}
           name="confirmPassword"
           dependencies={["newPassword"]}
           rules={[
-            { required: true, message: lang === "zh" ? "请确认新密码" : "Please confirm new password" },
+            { required: true, message: t("userSettings.confirmPasswordRequired") },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue("newPassword") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error(lang === "zh" ? "两次密码不一致" : "Passwords do not match"));
+                return Promise.reject(new Error(t("userSettings.passwordMismatch")));
               }
             })
           ]}
         >
-          <Input.Password placeholder={lang === "zh" ? "再次输入新密码" : "Confirm new password"} />
+          <Input.Password placeholder={t("userSettings.confirmPasswordPlaceholder")} />
         </Form.Item>
       </Form>
 
       <div className="flex justify-end gap-2 mt-4">
-        <Button onClick={onClose}>{lang === "zh" ? "取消" : "Cancel"}</Button>
+        <Button onClick={onClose}>{t("common.cancel")}</Button>
         <Button
           type="primary"
           loading={changePasswordMutation.isPending}
           onClick={handleChangePassword}
         >
-          {lang === "zh" ? "修改密码" : "Change Password"}
+          {t("userSettings.changePassword")}
         </Button>
       </div>
     </>
@@ -257,7 +257,7 @@ export default function UserSettingsModal({
   return (
     <Modal
       open={open}
-      title={lang === "zh" ? "账户设置" : "Account Settings"}
+      title={t("userSettings.title")}
       onCancel={onClose}
       footer={null}
       destroyOnHidden
@@ -272,7 +272,7 @@ export default function UserSettingsModal({
             label: (
               <span>
                 <UserOutlined className="mr-1" />
-                {lang === "zh" ? "基本信息" : "Profile"}
+                {t("userSettings.profileTab")}
               </span>
             ),
             children: profileTab
@@ -282,7 +282,7 @@ export default function UserSettingsModal({
             label: (
               <span>
                 <LockOutlined className="mr-1" />
-                {lang === "zh" ? "修改密码" : "Password"}
+                {t("userSettings.passwordTab")}
               </span>
             ),
             children: passwordTab

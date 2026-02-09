@@ -38,10 +38,10 @@ import {
 } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import { useMessage } from "../../hooks";
 import { trpc } from "../../lib/trpc";
-import type { Lang } from "../../lib/types";
 import type {
   TestRequirement,
   TestRequirementStatus,
@@ -53,47 +53,43 @@ const { TextArea } = Input;
 const { Text, Paragraph } = Typography;
 const { TabPane } = Tabs;
 
-type TestRequirementsPageProps = {
-  lang: Lang;
-};
-
 // 状态配置
 const STATUS_CONFIG: Record<
   TestRequirementStatus,
-  { label: { zh: string; en: string }; color: string; icon: React.ReactNode }
+  { labelKey: string; color: string; icon: React.ReactNode }
 > = {
   draft: {
-    label: { zh: "草稿", en: "Draft" },
+    labelKey: "draft",
     color: "default",
     icon: <FileTextOutlined />
   },
   pending: {
-    label: { zh: "待审核", en: "Pending" },
+    labelKey: "pending",
     color: "processing",
     icon: <ClockCircleOutlined />
   },
   approved: {
-    label: { zh: "已批准", en: "Approved" },
+    labelKey: "approved",
     color: "cyan",
     icon: <CheckCircleOutlined />
   },
   in_progress: {
-    label: { zh: "进行中", en: "In Progress" },
+    labelKey: "in_progress",
     color: "blue",
     icon: <ClockCircleOutlined />
   },
   completed: {
-    label: { zh: "已完成", en: "Completed" },
+    labelKey: "completed",
     color: "success",
     icon: <CheckCircleOutlined />
   },
   rejected: {
-    label: { zh: "已拒绝", en: "Rejected" },
+    labelKey: "rejected",
     color: "error",
     icon: <CloseCircleOutlined />
   },
   cancelled: {
-    label: { zh: "已取消", en: "Cancelled" },
+    labelKey: "cancelled",
     color: "default",
     icon: <CloseCircleOutlined />
   }
@@ -102,102 +98,34 @@ const STATUS_CONFIG: Record<
 // 类型配置
 const TYPE_CONFIG: Record<
   TestRequirementType,
-  { label: { zh: string; en: string }; color: string }
+  { labelKey: string; color: string }
 > = {
-  functional: { label: { zh: "功能测试", en: "Functional" }, color: "blue" },
-  performance: { label: { zh: "性能测试", en: "Performance" }, color: "orange" },
-  security: { label: { zh: "安全测试", en: "Security" }, color: "red" },
-  usability: { label: { zh: "易用性测试", en: "Usability" }, color: "purple" },
-  compatibility: { label: { zh: "兼容性测试", en: "Compatibility" }, color: "cyan" },
-  integration: { label: { zh: "集成测试", en: "Integration" }, color: "geekblue" },
-  regression: { label: { zh: "回归测试", en: "Regression" }, color: "magenta" }
+  functional: { labelKey: "functional", color: "blue" },
+  performance: { labelKey: "performance", color: "orange" },
+  security: { labelKey: "security", color: "red" },
+  usability: { labelKey: "usability", color: "purple" },
+  compatibility: { labelKey: "compatibility", color: "cyan" },
+  integration: { labelKey: "integration", color: "geekblue" },
+  regression: { labelKey: "regression", color: "magenta" }
 };
 
 // 优先级配置
 const PRIORITY_CONFIG: Record<
   TestRequirementPriority,
-  { label: { zh: string; en: string }; color: string }
+  { labelKey: string; color: string }
 > = {
-  critical: { label: { zh: "紧急", en: "Critical" }, color: "red" },
-  high: { label: { zh: "高", en: "High" }, color: "orange" },
-  medium: { label: { zh: "中", en: "Medium" }, color: "blue" },
-  low: { label: { zh: "低", en: "Low" }, color: "green" }
+  critical: { labelKey: "critical", color: "red" },
+  high: { labelKey: "high", color: "orange" },
+  medium: { labelKey: "medium", color: "blue" },
+  low: { labelKey: "low", color: "green" }
 };
 
-export default function TestRequirementsPage({ lang }: TestRequirementsPageProps) {
+export default function TestRequirementsPage() {
   const { workspace } = useParams<{ workspace: string }>();
   const message = useMessage();
-  const isZh = lang === "zh";
-  const copy = {
-    titleTotal: isZh ? "总需求数" : "Total",
-    titleDraft: isZh ? "草稿中" : "Draft",
-    titleInProgress: isZh ? "进行中" : "In Progress",
-    titleDone: isZh ? "已完成" : "Completed",
-    searchPlaceholder: isZh ? "搜索需求..." : "Search requirements...",
-    filterStatus: isZh ? "状态筛选" : "Status",
-    filterType: isZh ? "类型筛选" : "Type",
-    filterPriority: isZh ? "优先级" : "Priority",
-    refresh: isZh ? "刷新" : "Refresh",
-    create: isZh ? "新建需求" : "New Requirement",
-    totalCount: (total: number) => (isZh ? `共 ${total} 条` : `${total} items`),
-    view: isZh ? "查看详情" : "View",
-    edit: isZh ? "编辑" : "Edit",
-    remove: isZh ? "删除" : "Delete",
-    removeTitle: isZh ? "确定删除此需求吗？" : "Delete this requirement?",
-    removeDesc: isZh ? "删除后不可恢复" : "This action cannot be undone",
-    removeOk: isZh ? "删除" : "Delete",
-    removeCancel: isZh ? "取消" : "Cancel",
-    modalCreate: isZh ? "新建测试需求" : "Create Test Requirement",
-    modalEdit: isZh ? "编辑测试需求" : "Edit Test Requirement",
-    modalOkCreate: isZh ? "创建" : "Create",
-    modalOkSave: isZh ? "保存" : "Save",
-    fieldTitle: isZh ? "需求名称" : "Title",
-    fieldTitleRequired: isZh ? "请输入需求名称" : "Please enter a title",
-    fieldType: isZh ? "需求类型" : "Type",
-    fieldDesc: isZh ? "需求描述" : "Description",
-    fieldContent: isZh ? "详细内容 (支持 Markdown)" : "Details (Markdown)",
-    fieldPriority: isZh ? "优先级" : "Priority",
-    fieldStatus: isZh ? "状态" : "Status",
-    fieldDueDate: isZh ? "截止日期" : "Due Date",
-    dueDatePlaceholder: isZh ? "选择截止日期" : "Select due date",
-    fieldEstimate: isZh ? "预估工时 (小时)" : "Estimated Hours",
-    fieldTags: isZh ? "标签 (逗号分隔)" : "Tags (comma separated)",
-    tagsPlaceholder: isZh ? "标签1, 标签2, 标签3" : "tag1, tag2, tag3",
-    detailTabInfo: isZh ? "基本信息" : "Overview",
-    detailTabContent: isZh ? "详细内容" : "Details",
-    detailTabChildren: isZh ? "子需求" : "Sub-requirements",
-    descEmpty: isZh ? "暂无描述" : "No description",
-    contentEmpty: isZh ? "暂无详细内容" : "No details",
-    childrenEmpty: isZh ? "暂无子需求" : "No sub-requirements",
-    childrenCount: (count: number) =>
-      isZh ? `共 ${count} 个子需求` : `${count} sub-requirements`,
-    creator: isZh ? "创建者" : "Creator",
-    assignee: isZh ? "负责人" : "Assignee",
-    estimate: isZh ? "预估工时" : "Estimated",
-    actual: isZh ? "实际工时" : "Actual",
-    createdAt: isZh ? "创建时间" : "Created",
-    dueDate: isZh ? "截止日期" : "Due",
-    hours: isZh ? "小时" : "h",
-    children: isZh ? "子需求" : "Sub",
-    requirementId: isZh ? "需求编号" : "ID",
-    requirementName: isZh ? "需求名称" : "Title",
-    type: isZh ? "类型" : "Type",
-    status: isZh ? "状态" : "Status",
-    priority: isZh ? "优先级" : "Priority",
-    creatorName: isZh ? "创建者" : "Creator",
-    assigneeName: isZh ? "负责人" : "Assignee",
-    createdTime: isZh ? "创建时间" : "Created",
-    action: isZh ? "操作" : "Actions",
-    toastCreateSuccess: isZh ? "创建成功" : "Created successfully",
-    toastCreateFail: isZh ? "创建失败" : "Create failed",
-    toastUpdateSuccess: isZh ? "更新成功" : "Updated successfully",
-    toastUpdateFail: isZh ? "更新失败" : "Update failed",
-    toastDeleteSuccess: isZh ? "删除成功" : "Deleted successfully",
-    toastDeleteFail: isZh ? "删除失败" : "Delete failed",
-    markdownPlaceholder: isZh
-      ? "# 测试需求详情\n\n## 测试目标\n描述测试的主要目标...\n\n## 测试范围\n- 范围项 1\n- 范围项 2\n\n## 测试步骤\n1. 步骤一\n2. 步骤二\n\n## 预期结果\n描述预期的测试结果..."
-      : "# Test Requirement Details\n\n## Objective\nDescribe the test objective...\n\n## Scope\n- Scope item 1\n- Scope item 2\n\n## Steps\n1. Step one\n2. Step two\n\n## Expected Result\nDescribe expected results..."
-  };
+  const { t } = useTranslation();
+  // Helper to get testRequirements namespace translations
+  const tr = (key: string, options?: object) => t(`dashboard.testRequirements.${key}`, options);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [editingRecord, setEditingRecord] = useState<TestRequirement | null>(null);
@@ -226,38 +154,38 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
   // 创建
   const createMutation = trpc.testRequirement.create.useMutation({
     onSuccess: async () => {
-      message.success(copy.toastCreateSuccess);
+      message.success(tr("toastCreateSuccess"));
       setIsModalOpen(false);
       form.resetFields();
       await utils.testRequirement.list.invalidate();
     },
     onError: (error) => {
-      message.error(error.message || copy.toastCreateFail);
+      message.error(error.message || tr("toastCreateFail"));
     }
   });
 
   // 更新
   const updateMutation = trpc.testRequirement.update.useMutation({
     onSuccess: async () => {
-      message.success(copy.toastUpdateSuccess);
+      message.success(tr("toastUpdateSuccess"));
       setIsModalOpen(false);
       setEditingRecord(null);
       form.resetFields();
       await utils.testRequirement.list.invalidate();
     },
     onError: (error) => {
-      message.error(error.message || copy.toastUpdateFail);
+      message.error(error.message || tr("toastUpdateFail"));
     }
   });
 
   // 删除
   const deleteMutation = trpc.testRequirement.delete.useMutation({
     onSuccess: async () => {
-      message.success(copy.toastDeleteSuccess);
+      message.success(tr("toastDeleteSuccess"));
       await utils.testRequirement.list.invalidate();
     },
     onError: (error) => {
-      message.error(error.message || copy.toastDeleteFail);
+      message.error(error.message || tr("toastDeleteFail"));
     }
   });
 
@@ -344,7 +272,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
   // 表格列定义
   const columns: ColumnsType<TestRequirement> = [
     {
-      title: copy.requirementId,
+      title: tr("requirementId"),
       dataIndex: "code",
       key: "code",
       width: 120,
@@ -356,7 +284,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
       )
     },
     {
-      title: copy.requirementName,
+      title: tr("requirementName"),
       dataIndex: "title",
       key: "title",
       ellipsis: true,
@@ -372,29 +300,29 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
       )
     },
     {
-      title: copy.type,
+      title: tr("type"),
       dataIndex: "type",
       key: "type",
       width: 110,
       render: (type: TestRequirementType) => (
         <Tag color={TYPE_CONFIG[type]?.color}>
-          {TYPE_CONFIG[type]?.label[lang]}
+          {tr(`typeLabels.${TYPE_CONFIG[type]?.labelKey}`)}
         </Tag>
       )
     },
     {
-      title: copy.priority,
+      title: tr("priority"),
       dataIndex: "priority",
       key: "priority",
       width: 90,
       render: (priority: TestRequirementPriority) => (
         <Tag color={PRIORITY_CONFIG[priority]?.color} style={{ margin: 0 }}>
-          {PRIORITY_CONFIG[priority]?.label[lang]}
+          {tr(`priorityLabels.${PRIORITY_CONFIG[priority]?.labelKey}`)}
         </Tag>
       )
     },
     {
-      title: copy.status,
+      title: tr("status"),
       dataIndex: "status",
       key: "status",
       width: 100,
@@ -403,26 +331,26 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
           icon={STATUS_CONFIG[status]?.icon}
           color={STATUS_CONFIG[status]?.color}
         >
-          {STATUS_CONFIG[status]?.label[lang]}
+          {tr(`statusLabels.${STATUS_CONFIG[status]?.labelKey}`)}
         </Tag>
       )
     },
     {
-      title: copy.creatorName,
+      title: tr("creatorName"),
       dataIndex: "creatorName",
       key: "creatorName",
       width: 100,
       render: (name: string | null) => name || "-"
     },
     {
-      title: copy.assigneeName,
+      title: tr("assigneeName"),
       dataIndex: "assigneeName",
       key: "assigneeName",
       width: 100,
       render: (name: string | null) => name || "-"
     },
     {
-      title: copy.children,
+      title: tr("children"),
       dataIndex: "childrenCount",
       key: "childrenCount",
       width: 80,
@@ -437,7 +365,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
         )
     },
     {
-      title: copy.createdTime,
+      title: tr("createdTime"),
       dataIndex: "createdAt",
       key: "createdAt",
       width: 160,
@@ -445,13 +373,13 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
         date ? dayjs(date).format("YYYY-MM-DD HH:mm") : "-"
     },
     {
-      title: copy.action,
+      title: tr("action"),
       key: "action",
       width: 150,
       fixed: "right",
       render: (_, record) => (
         <Space size="small">
-          <Tooltip title={copy.view}>
+          <Tooltip title={tr("view")}>
             <Button
               type="text"
               size="small"
@@ -459,7 +387,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
               onClick={() => handleView(record)}
             />
           </Tooltip>
-          <Tooltip title={copy.edit}>
+          <Tooltip title={tr("edit")}>
             <Button
               type="text"
               size="small"
@@ -468,14 +396,14 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
             />
           </Tooltip>
           <Popconfirm
-            title={copy.removeTitle}
-            description={copy.removeDesc}
+            title={tr("removeTitle")}
+            description={tr("removeDesc")}
             onConfirm={() => handleDelete(record.id)}
-            okText={copy.removeOk}
-            cancelText={copy.removeCancel}
+            okText={tr("removeOk")}
+            cancelText={tr("removeCancel")}
             okButtonProps={{ danger: true }}
           >
-            <Tooltip title={copy.remove}>
+            <Tooltip title={tr("remove")}>
               <Button
                 type="text"
                 size="small"
@@ -491,28 +419,28 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
 
   const statsCards = [
     {
-      title: copy.titleTotal,
+      title: tr("titleTotal"),
       value: stats.total,
       icon: <FileTextOutlined />,
       className:
         "bg-gradient-to-br from-stats-total-from to-stats-total-to dark:from-stats-total-from-dark dark:to-stats-total-to-dark"
     },
     {
-      title: copy.titleDraft,
+      title: tr("titleDraft"),
       value: stats.draft,
       icon: <EditOutlined />,
       className:
         "bg-gradient-to-br from-stats-draft-from to-stats-draft-to dark:from-stats-draft-from-dark dark:to-stats-draft-to-dark"
     },
     {
-      title: copy.titleInProgress,
+      title: tr("titleInProgress"),
       value: stats.inProgress,
       icon: <ClockCircleOutlined />,
       className:
         "bg-gradient-to-br from-stats-progress-from to-stats-progress-to dark:from-stats-progress-from-dark dark:to-stats-progress-to-dark"
     },
     {
-      title: copy.titleDone,
+      title: tr("titleDone"),
       value: stats.completed,
       icon: <CheckCircleOutlined />,
       className:
@@ -545,7 +473,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Space wrap>
             <Input.Search
-              placeholder={copy.searchPlaceholder}
+              placeholder={tr("searchPlaceholder")}
               allowClear
               style={{ width: 200 }}
               prefix={<SearchOutlined />}
@@ -553,45 +481,45 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
               onChange={(e) => !e.target.value && setSearchKeyword("")}
             />
             <Select
-              placeholder={copy.filterStatus}
+              placeholder={tr("filterStatus")}
               allowClear
               style={{ width: 120 }}
               value={filterStatus}
               onChange={setFilterStatus}
               options={Object.entries(STATUS_CONFIG).map(([key, val]) => ({
                 value: key,
-                label: val.label[lang]
+                label: tr(`statusLabels.${val.labelKey}`)
               }))}
             />
             <Select
-              placeholder={copy.filterType}
+              placeholder={tr("filterType")}
               allowClear
               style={{ width: 120 }}
               value={filterType}
               onChange={setFilterType}
               options={Object.entries(TYPE_CONFIG).map(([key, val]) => ({
                 value: key,
-                label: val.label[lang]
+                label: tr(`typeLabels.${val.labelKey}`)
               }))}
             />
             <Select
-              placeholder={copy.filterPriority}
+              placeholder={tr("filterPriority")}
               allowClear
               style={{ width: 100 }}
               value={filterPriority}
               onChange={setFilterPriority}
               options={Object.entries(PRIORITY_CONFIG).map(([key, val]) => ({
                 value: key,
-                label: val.label[lang]
+                label: tr(`priorityLabels.${val.labelKey}`)
               }))}
             />
           </Space>
           <Space>
             <Button icon={<ReloadOutlined />} onClick={handleRefresh}>
-              {copy.refresh}
+              {tr("refresh")}
             </Button>
             <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-              {copy.create}
+              {tr("create")}
             </Button>
           </Space>
         </div>
@@ -611,7 +539,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
             total: listQuery.data?.total ?? 0,
             showSizeChanger: true,
             showQuickJumper: true,
-            showTotal: (total) => copy.totalCount(total),
+            showTotal: (total) => tr("totalCount")(total),
             onChange: (page, pageSize) => setPagination({ page, pageSize })
           }}
           rowClassName={(_, index) =>
@@ -622,7 +550,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
 
       {/* 新建/编辑弹窗 */}
       <Modal
-        title={editingRecord ? copy.modalEdit : copy.modalCreate}
+        title={editingRecord ? tr("modalEdit") : tr("modalCreate")}
         open={isModalOpen}
         onOk={handleSubmit}
         onCancel={() => {
@@ -631,8 +559,8 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
           form.resetFields();
         }}
         width={800}
-        okText={editingRecord ? copy.modalOkSave : copy.modalOkCreate}
-        cancelText={copy.removeCancel}
+        okText={editingRecord ? tr("modalOkSave") : tr("modalOkCreate")}
+        cancelText={tr("removeCancel")}
         confirmLoading={createMutation.isPending || updateMutation.isPending}
         destroyOnHidden
       >
@@ -641,56 +569,56 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
             <Col span={16}>
               <Form.Item
                 name="title"
-                label={copy.fieldTitle}
-                rules={[{ required: true, message: copy.fieldTitleRequired }]}
+                label={tr("fieldTitle")}
+                rules={[{ required: true, message: tr("fieldTitleRequired") }]}
               >
-                <Input placeholder={copy.fieldTitle} />
+                <Input placeholder={tr("fieldTitle")} />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item name="type" label={copy.fieldType} initialValue="functional">
+              <Form.Item name="type" label={tr("fieldType")} initialValue="functional">
                 <Select
                   options={Object.entries(TYPE_CONFIG).map(([key, val]) => ({
                     value: key,
-                    label: val.label[lang]
+                    label: tr(`typeLabels.${val.labelKey}`)
                   }))}
                 />
               </Form.Item>
             </Col>
           </Row>
 
-          <Form.Item name="description" label={copy.fieldDesc}>
-            <TextArea rows={2} placeholder={copy.fieldDesc} />
+          <Form.Item name="description" label={tr("fieldDesc")}>
+            <TextArea rows={2} placeholder={tr("fieldDesc")} />
           </Form.Item>
 
-          <Form.Item name="content" label={copy.fieldContent}>
+          <Form.Item name="content" label={tr("fieldContent")}>
             <TextArea
               rows={8}
-              placeholder={copy.markdownPlaceholder}
+              placeholder={tr("markdownPlaceholder")}
               style={{ fontFamily: "monospace" }}
             />
           </Form.Item>
 
           <Row gutter={16}>
             <Col span={8}>
-              <Form.Item name="priority" label={copy.fieldPriority} initialValue="medium">
+              <Form.Item name="priority" label={tr("fieldPriority")} initialValue="medium">
                 <Select
                   options={Object.entries(PRIORITY_CONFIG).map(([key, val]) => ({
                     value: key,
-                    label: val.label[lang]
+                    label: tr(`priorityLabels.${val.labelKey}`)
                   }))}
                 />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item name="status" label={copy.fieldStatus} initialValue="draft">
+              <Form.Item name="status" label={tr("fieldStatus")} initialValue="draft">
                 <Select
                   options={Object.entries(STATUS_CONFIG).map(([key, val]) => ({
                     value: key,
                     label: (
                       <Space>
                         {val.icon}
-                        {val.label[lang]}
+                        {tr(`statusLabels.${val.labelKey}`)}
                       </Space>
                     )
                   }))}
@@ -698,26 +626,26 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item name="dueDate" label={copy.fieldDueDate}>
-                <DatePicker style={{ width: "100%" }} placeholder={copy.dueDatePlaceholder} />
+              <Form.Item name="dueDate" label={tr("fieldDueDate")}>
+                <DatePicker style={{ width: "100%" }} placeholder={tr("dueDatePlaceholder")} />
               </Form.Item>
             </Col>
           </Row>
 
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="estimatedHours" label={copy.fieldEstimate}>
+              <Form.Item name="estimatedHours" label={tr("fieldEstimate")}>
                 <InputNumber
                   min={0}
                   step={0.5}
                   style={{ width: "100%" }}
-                  placeholder={copy.fieldEstimate}
+                  placeholder={tr("fieldEstimate")}
                 />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="tags" label={copy.fieldTags}>
-                <Input placeholder={copy.tagsPlaceholder} prefix={<TagsOutlined />} />
+              <Form.Item name="tags" label={tr("fieldTags")}>
+                <Input placeholder={tr("tagsPlaceholder")} prefix={<TagsOutlined />} />
               </Form.Item>
             </Col>
           </Row>
@@ -750,7 +678,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
               if (viewingRecord) handleEdit(viewingRecord);
             }}
           >
-            {copy.edit}
+            {tr("edit")}
           </Button>
         }
       >
@@ -758,59 +686,59 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
           <div className="space-y-4">
             <div className="flex flex-wrap gap-2">
               <Tag color={TYPE_CONFIG[viewingRecord.type]?.color}>
-                {TYPE_CONFIG[viewingRecord.type]?.label[lang]}
+                {tr(`typeLabels.${TYPE_CONFIG[viewingRecord.type]?.labelKey}`)}
               </Tag>
               <Tag
                 icon={STATUS_CONFIG[viewingRecord.status]?.icon}
                 color={STATUS_CONFIG[viewingRecord.status]?.color}
               >
-                {STATUS_CONFIG[viewingRecord.status]?.label[lang]}
+                {tr(`statusLabels.${STATUS_CONFIG[viewingRecord.status]?.labelKey}`)}
               </Tag>
               <Tag color={PRIORITY_CONFIG[viewingRecord.priority]?.color}>
-                {PRIORITY_CONFIG[viewingRecord.priority]?.label[lang]}
+                {tr(`priorityLabels.${PRIORITY_CONFIG[viewingRecord.priority]?.labelKey}`)}
               </Tag>
             </div>
 
             <Divider />
 
             <Tabs defaultActiveKey="info">
-              <TabPane tab={copy.detailTabInfo} key="info">
+              <TabPane tab={tr("detailTabInfo")} key="info">
                 <div className="space-y-3">
                   <div>
-                    <Text type="secondary">{copy.fieldDesc}：</Text>
-                    <Paragraph>{viewingRecord.description || copy.descEmpty}</Paragraph>
+                    <Text type="secondary">{tr("fieldDesc")}：</Text>
+                    <Paragraph>{viewingRecord.description || tr("descEmpty")}</Paragraph>
                   </div>
                   <Row gutter={16}>
                     <Col span={12}>
-                      <Text type="secondary">{copy.creator}：</Text>
+                      <Text type="secondary">{tr("creator")}：</Text>
                       <Text className="ml-2">{viewingRecord.creatorName || "-"}</Text>
                     </Col>
                     <Col span={12}>
-                      <Text type="secondary">{copy.assignee}：</Text>
+                      <Text type="secondary">{tr("assignee")}：</Text>
                       <Text className="ml-2">{viewingRecord.assigneeName || "-"}</Text>
                     </Col>
                   </Row>
                   <Row gutter={16}>
                     <Col span={12}>
-                      <Text type="secondary">{copy.estimate}：</Text>
+                      <Text type="secondary">{tr("estimate")}：</Text>
                       <Text className="ml-2">
                         {viewingRecord.estimatedHours
-                          ? `${viewingRecord.estimatedHours} ${copy.hours}`
+                          ? `${viewingRecord.estimatedHours} ${tr("hours")}`
                           : "-"}
                       </Text>
                     </Col>
                     <Col span={12}>
-                      <Text type="secondary">{copy.actual}：</Text>
+                      <Text type="secondary">{tr("actual")}：</Text>
                       <Text className="ml-2">
                         {viewingRecord.actualHours
-                          ? `${viewingRecord.actualHours} ${copy.hours}`
+                          ? `${viewingRecord.actualHours} ${tr("hours")}`
                           : "-"}
                       </Text>
                     </Col>
                   </Row>
                   <Row gutter={16}>
                     <Col span={12}>
-                      <Text type="secondary">{copy.createdAt}：</Text>
+                      <Text type="secondary">{tr("createdAt")}：</Text>
                       <Text className="ml-2">
                         {viewingRecord.createdAt
                           ? dayjs(viewingRecord.createdAt).format("YYYY-MM-DD HH:mm")
@@ -818,7 +746,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
                       </Text>
                     </Col>
                     <Col span={12}>
-                      <Text type="secondary">{copy.dueDate}：</Text>
+                      <Text type="secondary">{tr("dueDate")}：</Text>
                       <Text className="ml-2">
                         {viewingRecord.dueDate
                           ? dayjs(viewingRecord.dueDate).format("YYYY-MM-DD")
@@ -828,7 +756,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
                   </Row>
                   {viewingRecord.tags && viewingRecord.tags.length > 0 && (
                     <div>
-                      <Text type="secondary">{copy.fieldTags}：</Text>
+                      <Text type="secondary">{tr("fieldTags")}：</Text>
                       <div className="mt-1">
                         {viewingRecord.tags.map((tag) => (
                           <Tag key={tag} color="blue">
@@ -840,7 +768,7 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
                   )}
                 </div>
               </TabPane>
-              <TabPane tab={copy.detailTabContent} key="content">
+              <TabPane tab={tr("detailTabContent")} key="content">
                 {viewingRecord.content ? (
                   <div
                     className="prose dark:prose-invert max-w-none"
@@ -849,13 +777,13 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
                     {viewingRecord.content}
                   </div>
                 ) : (
-                  <Empty description={copy.contentEmpty} />
+                  <Empty description={tr("contentEmpty")} />
                 )}
               </TabPane>
               <TabPane
                 tab={
                   <Space>
-                    {copy.detailTabChildren}
+                    {tr("detailTabChildren")}
                     {(viewingRecord.childrenCount ?? 0) > 0 && (
                       <Tag color="purple">{viewingRecord.childrenCount}</Tag>
                     )}
@@ -865,10 +793,10 @@ export default function TestRequirementsPage({ lang }: TestRequirementsPageProps
               >
                 {(viewingRecord.childrenCount ?? 0) > 0 ? (
                   <Text type="secondary">
-                    {copy.childrenCount(viewingRecord.childrenCount ?? 0)}
+                    {tr("childrenCount")(viewingRecord.childrenCount ?? 0)}
                   </Text>
                 ) : (
-                  <Empty description={copy.childrenEmpty} />
+                  <Empty description={tr("childrenEmpty")} />
                 )}
               </TabPane>
             </Tabs>

@@ -27,8 +27,7 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
 
   const [mode, setMode] = useState<"login" | "register">(initialMode);
   const error = (mode === "login" ? loginMutation.error : registerMutation.error)?.message;
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language === "zh" ? "zh" : "en";
+  const { t } = useTranslation();
   const redirect = searchParams.get("redirect");
   const redirectQuery = redirect ? `?redirect=${encodeURIComponent(redirect)}` : "";
   const [form] = Form.useForm();
@@ -66,16 +65,10 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
             </h1>
             <p className="text-slate-500 dark:text-slate-400">
               {hasValidInvitation && mode === "register"
-                ? lang === "zh"
-                  ? "您已收到邀请，请注册账户"
-                  : "You have been invited, please register"
+                ? t("login.invitedRegister")
                 : isFirstUser && mode === "register"
-                  ? lang === "zh"
-                    ? "创建第一个管理员账户"
-                    : "Create the first admin account"
-                  : lang === "zh"
-                    ? "请登录您的账户"
-                    : "Please sign in to your account"}
+                  ? t("login.firstAdmin")
+                  : t("login.pleaseLogin")}
             </p>
           </div>
 
@@ -122,11 +115,11 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
 
             {mode === "register" ? (
               <Form.Item
-                label={lang === "zh" ? "用户名称" : "User name"}
+                label={t("login.userName")}
                 name="name"
-                rules={[{ required: true, message: lang === "zh" ? "请输入用户名称" : "Please enter your name" }]}
+                rules={[{ required: true, message: t("login.userNameRequired") }]}
               >
-                <Input placeholder={lang === "zh" ? "例如：张三" : "e.g. Alex"} size="large" />
+                <Input placeholder={t("login.userNamePlaceholder")} size="large" />
               </Form.Item>
             ) : null}
 
@@ -144,9 +137,7 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
                 ? t("login.loading")
                 : mode === "login"
                   ? t("login.submit")
-                  : lang === "zh"
-                    ? "注册"
-                    : "Register"}
+                  : t("login.register")}
             </Button>
 
             {/* 只有允许注册或有邀请码时才显示切换按钮 */}
@@ -164,19 +155,15 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
                 }}
               >
                 {mode === "login"
-                  ? lang === "zh"
-                    ? "没有账号？去注册"
-                    : "No account? Register"
-                  : lang === "zh"
-                    ? "已有账号？去登录"
-                    : "Already have an account? Login"}
+                  ? t("login.noAccount")
+                  : t("login.hasAccount")}
               </Button>
             ) : mode === "register" ? (
               // 如果注册被禁用但当前在注册页，显示提示并跳转到登录
               <div className="mt-4 text-center">
                 <Alert
                   type="warning"
-                  message={lang === "zh" ? "系统暂不开放注册" : "Registration is currently disabled"}
+                  message={t("login.registrationDisabled")}
                   className="mb-4"
                 />
                 <Button
@@ -187,7 +174,7 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
                     navigate(`/login${redirectQuery}`);
                   }}
                 >
-                  {lang === "zh" ? "返回登录" : "Back to login"}
+                  {t("login.backToLogin")}
                 </Button>
               </div>
             ) : null}

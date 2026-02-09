@@ -19,21 +19,18 @@ import type { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import { useMessage } from "../../hooks";
 import type { User, AdminUser, UserRole, InvitationCode } from "@acme/types";
-import type { Lang } from "../../lib/types";
 import { trpc } from "../../lib/trpc";
 
 type SystemSettingsModalProps = {
   open: boolean;
   onClose: () => void;
   user: User;
-  lang: Lang;
 };
 
 export default function SystemSettingsModal({
   open,
   onClose,
-  user,
-  lang
+  user
 }: SystemSettingsModalProps) {
   const { t } = useTranslation();
   const message = useMessage();
@@ -107,7 +104,7 @@ export default function SystemSettingsModal({
 
   const handleResetPassword = async () => {
     if (!newPassword || newPassword.length < 4) {
-      message.error(lang === "zh" ? "密码至少4位" : "Password must be at least 4 characters");
+      message.error(t("systemSettings.passwordMinLength"));
       return;
     }
     await forceResetPasswordMutation.mutateAsync({
@@ -121,11 +118,11 @@ export default function SystemSettingsModal({
 
   const handleAddUser = async () => {
     if (!addUserForm.name || !addUserForm.email || !addUserForm.password) {
-      message.error(lang === "zh" ? "请填写完整信息" : "Please fill in all fields");
+      message.error(t("systemSettings.fillAllFields"));
       return;
     }
     if (addUserForm.password.length < 4) {
-      message.error(lang === "zh" ? "密码至少4位" : "Password must be at least 4 characters");
+      message.error(t("systemSettings.passwordMinLength"));
       return;
     }
     try {
@@ -188,12 +185,12 @@ export default function SystemSettingsModal({
 
   const columns: ColumnsType<AdminUser> = [
     {
-      title: lang === "zh" ? "用户名" : "Name",
+      title: t("systemSettings.userNameColumn"),
       dataIndex: "name",
       key: "name"
     },
     {
-      title: lang === "zh" ? "邮箱" : "Email",
+      title: t("systemSettings.emailColumn"),
       dataIndex: "email",
       key: "email"
     },
@@ -208,7 +205,7 @@ export default function SystemSettingsModal({
       dataIndex: "lastLoginAt",
       key: "lastLoginAt",
       render: (date: string | null) =>
-        date ? new Date(date).toLocaleString() : (lang === "zh" ? "从未登录" : "Never")
+        date ? new Date(date).toLocaleString() : t("systemSettings.neverLogin")
     },
     {
       title: t("systemSettings.userCreatedAt"),
@@ -379,7 +376,7 @@ export default function SystemSettingsModal({
           min={1}
           value={invitationExpiresHours}
           onChange={(v) => setInvitationExpiresHours(v)}
-          addonAfter={lang === "zh" ? "小时" : "hours"}
+          addonAfter={t("systemSettings.hoursUnit")}
           style={{ width: 180 }}
         />
         <span className="text-slate-500 text-sm">
@@ -460,7 +457,7 @@ export default function SystemSettingsModal({
             <Input.Password
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              placeholder={lang === "zh" ? "请输入新密码（至少4位）" : "Enter new password (min 4 chars)"}
+              placeholder={t("systemSettings.newPasswordPlaceholder")}
             />
           </Form.Item>
         </Form>
@@ -485,7 +482,7 @@ export default function SystemSettingsModal({
             <Input
               value={addUserForm.name}
               onChange={(e) => setAddUserForm((f) => ({ ...f, name: e.target.value }))}
-              placeholder={lang === "zh" ? "请输入用户名" : "Enter username"}
+              placeholder={t("systemSettings.usernamePlaceholder")}
             />
           </Form.Item>
           <Form.Item label={t("systemSettings.userEmail")} required>
@@ -493,14 +490,14 @@ export default function SystemSettingsModal({
               type="email"
               value={addUserForm.email}
               onChange={(e) => setAddUserForm((f) => ({ ...f, email: e.target.value }))}
-              placeholder={lang === "zh" ? "请输入邮箱" : "Enter email"}
+              placeholder={t("systemSettings.emailPlaceholder")}
             />
           </Form.Item>
           <Form.Item label={t("systemSettings.userPassword")} required>
             <Input.Password
               value={addUserForm.password}
               onChange={(e) => setAddUserForm((f) => ({ ...f, password: e.target.value }))}
-              placeholder={lang === "zh" ? "请输入密码（至少4位）" : "Enter password (min 4 chars)"}
+              placeholder={t("systemSettings.passwordPlaceholder")}
             />
           </Form.Item>
           <Form.Item label={t("systemSettings.userRoleSelect")}>

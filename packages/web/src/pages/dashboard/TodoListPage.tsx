@@ -1,14 +1,11 @@
 import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import type { Lang } from "../../lib/types";
+import { useTranslation } from "react-i18next";
 import { trpc } from "../../lib/trpc";
 
-type TodoListPageProps = {
-  lang: Lang;
-};
-
-export default function TodoListPage({ lang }: TodoListPageProps) {
+export default function TodoListPage() {
   const { workspace } = useParams<{ workspace: string }>();
+  const { t } = useTranslation();
   const [newTodo, setNewTodo] = useState("");
   const utils = trpc.useUtils();
 
@@ -71,13 +68,13 @@ export default function TodoListPage({ lang }: TodoListPageProps) {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-semibold">
-              {lang === "zh" ? "📋 开发任务清单" : "📋 Development Todo List"}
+              {t("dashboard.todoList.title")}
             </h2>
             <p className="mt-2 text-slate-500 dark:text-slate-300">
-              {lang === "zh" ? "工作空间切换功能开发进度" : "Workspace switching feature progress"}
+              {t("dashboard.todoList.subtitle")}
             </p>
             <p className="mt-1 text-sm text-blue-600 dark:text-blue-400">
-              当前工作空间: {workspace}
+              {t("dashboard.todoList.currentWorkspace")}: {workspace}
             </p>
           </div>
           <div className="text-right">
@@ -85,7 +82,7 @@ export default function TodoListPage({ lang }: TodoListPageProps) {
               {progress}%
             </div>
             <div className="text-sm text-slate-500 dark:text-slate-400">
-              {completedCount} / {totalCount} {lang === "zh" ? "已完成" : "completed"}
+              {completedCount} / {totalCount} {t("dashboard.todoList.completed")}
             </div>
           </div>
         </div>
@@ -107,7 +104,7 @@ export default function TodoListPage({ lang }: TodoListPageProps) {
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && addTodo()}
-            placeholder={lang === "zh" ? "添加新任务..." : "Add new task..."}
+            placeholder={t("dashboard.todoList.addPlaceholder")}
             className="flex-1 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
@@ -116,7 +113,7 @@ export default function TodoListPage({ lang }: TodoListPageProps) {
             className="rounded-lg bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 transition-colors"
             disabled={createMutation.isPending}
           >
-            {lang === "zh" ? "添加" : "Add"}
+            {t("common.add")}
           </button>
         </div>
       </div>
@@ -167,7 +164,7 @@ export default function TodoListPage({ lang }: TodoListPageProps) {
                       }}
                       className="ml-auto text-xs text-slate-400 hover:text-rose-500"
                     >
-                      {lang === "zh" ? "删除" : "Delete"}
+                      {t("common.delete")}
                     </button>
                   </div>
                 ))}
@@ -180,12 +177,12 @@ export default function TodoListPage({ lang }: TodoListPageProps) {
       {/* Summary Card */}
       <div className="card bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20">
         <h3 className="text-lg font-semibold mb-3">
-          {lang === "zh" ? "🎯 完成摘要" : "🎯 Completion Summary"}
+          {t("dashboard.todoList.summary")}
         </h3>
         <div className="grid gap-4 md:grid-cols-4">
           {categoryStats.length === 0 ? (
             <div className="text-sm text-slate-500 dark:text-slate-400">
-              {lang === "zh" ? "暂无待办" : "No todos yet"}
+              {t("dashboard.todoList.noTodos")}
             </div>
           ) : (
             categoryStats.map((stat) => (

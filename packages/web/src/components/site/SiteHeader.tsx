@@ -39,20 +39,20 @@ export default function SiteHeader({
 	}[];
 
 	const langLabel =
-		langMode === "auto" ? (lang === "zh" ? "自动" : "Auto") : lang === "zh" ? "中文" : "English";
+		langMode === "auto" ? t("common.auto") : lang === "zh" ? "中文" : "English";
 	const themeLabel =
-		themeMode === "auto" ? (lang === "zh" ? "自动" : "Auto") : theme === "dark" ? "暗黑" : "亮色";
+		themeMode === "auto" ? t("common.auto") : theme === "dark" ? t("common.dark") : t("common.light");
 
 	const langItems = [
-		{ key: "auto", label: lang === "zh" ? "自动" : "Auto" },
+		{ key: "auto", label: t("common.auto") },
 		{ key: "zh", label: "中文" },
 		{ key: "en", label: "English" }
 	];
 
 	const themeItems = [
-		{ key: "auto", label: lang === "zh" ? "自动" : "Auto" },
-		{ key: "light", label: lang === "zh" ? "亮色" : "Light" },
-		{ key: "dark", label: lang === "zh" ? "暗黑" : "Dark" }
+		{ key: "auto", label: t("common.auto") },
+		{ key: "light", label: t("common.light") },
+		{ key: "dark", label: t("common.dark") }
 	];
 
 	return (

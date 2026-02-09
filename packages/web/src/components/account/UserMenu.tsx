@@ -1,19 +1,19 @@
 import { Avatar, Dropdown } from "antd";
+import { useTranslation } from "react-i18next";
 import { UserOutlined, ControlOutlined, LogoutOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import type { User } from "@acme/types";
-import type { Lang } from "../../lib/types";
 import { getAvatarColor, getAvatarInitial } from "../../lib/avatar";
 
 type UserMenuProps = {
   user: User;
-  lang: Lang;
   onOpenSettings: () => void;
   onOpenSystemSettings?: () => void;
   onLogout: () => void;
 };
 
-export default function UserMenu({ user, lang, onOpenSettings, onOpenSystemSettings, onLogout }: UserMenuProps) {
+export default function UserMenu({ user, onOpenSettings, onOpenSystemSettings, onLogout }: UserMenuProps) {
+  const { t } = useTranslation();
   const displayName = user.name || user.email;
   const settings = user.settings ?? {};
   const avatarColor = getAvatarColor(displayName);
@@ -46,7 +46,7 @@ export default function UserMenu({ user, lang, onOpenSettings, onOpenSystemSetti
     {
       key: "settings",
       icon: <UserOutlined style={{ color: "#1677ff" }} />,
-      label: lang === "zh" ? "账户设置" : "Account"
+      label: t("userMenu.account")
     },
     // 管理员才显示管理后台
     ...(isAdmin && onOpenSystemSettings
@@ -54,14 +54,14 @@ export default function UserMenu({ user, lang, onOpenSettings, onOpenSystemSetti
           {
             key: "systemSettings",
             icon: <ControlOutlined style={{ color: "#722ed1" }} />,
-            label: lang === "zh" ? "管理后台" : "Admin"
+            label: t("userMenu.admin")
           } as const
         ]
       : []),
     {
       key: "logout",
       icon: <LogoutOutlined style={{ color: "#ff4d4f" }} />,
-      label: lang === "zh" ? "退出" : "Sign out"
+      label: t("userMenu.signOut")
     }
   ];
 

@@ -38,16 +38,15 @@ type Workspace = {
 function WorkspaceSwitcher({
   workspaces,
   currentWorkspace,
-  lang,
   onSwitch,
   onOpenCreate,
 }: {
   workspaces: Workspace[];
   currentWorkspace?: string;
-  lang: Lang;
   onSwitch: (slug: string) => void;
   onOpenCreate: () => void;
 }) {
+  const { t } = useTranslation();
   const current = workspaces.find((ws) => ws.slug === currentWorkspace);
   const initial = current?.name?.charAt(0).toUpperCase() ?? "W";
   const avatarColor = getAvatarColor(current?.name ?? "Workspace");
@@ -84,7 +83,7 @@ function WorkspaceSwitcher({
     {
       key: "switch-title",
       type: "group",
-      label: lang === "zh" ? "切换空间站" : "Switch Workspace",
+      label: t("dashboard.workspaceSwitcher.switchWorkspace"),
       children: workspaces.map((ws) => ({
         key: ws.slug,
         label: (
@@ -111,7 +110,7 @@ function WorkspaceSwitcher({
     {
       key: "create",
       icon: <PlusOutlined />,
-      label: lang === "zh" ? "新建空间站" : "Create Workspace",
+      label: t("createWorkspace.title"),
     },
   ];
 
@@ -211,23 +210,24 @@ export default function DashboardLayout({
   };
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const langLabel =
-      langMode === "auto" ? (lang === "zh" ? "自动" : "Auto") : lang === "zh" ? "中文" : "English";
-    const themeLabel =
-      themeMode === "auto" ? (lang === "zh" ? "自动" : "Auto") : theme === "dark" ? "暗黑" : "亮色";
-
-    const langItems = [
-      { key: "auto", label: lang === "zh" ? "自动" : "Auto" },
-      { key: "zh", label: "中文" },
-      { key: "en", label: "English" }
-    ];
-
-    const themeItems = [
-      { key: "auto", label: lang === "zh" ? "自动" : "Auto" },
-      { key: "light", label: lang === "zh" ? "亮色" : "Light" },
-      { key: "dark", label: lang === "zh" ? "暗黑" : "Dark" }
-    ];
   const { t } = useTranslation();
+
+  const langLabel =
+    langMode === "auto" ? t("common.auto") : lang === "zh" ? "中文" : "English";
+  const themeLabel =
+    themeMode === "auto" ? t("common.auto") : t(`common.theme.${theme}`);
+
+  const langItems = [
+    { key: "auto", label: t("common.auto") },
+    { key: "zh", label: "中文" },
+    { key: "en", label: "English" }
+  ];
+
+  const themeItems = [
+    { key: "auto", label: t("common.auto") },
+    { key: "light", label: t("common.theme.light") },
+    { key: "dark", label: t("common.theme.dark") }
+  ];
   const location = useLocation();
   const navigate = useNavigate();
   const { workspace } = useParams<{ workspace: string }>();
@@ -257,7 +257,7 @@ export default function DashboardLayout({
 
   const menuItems = [
     ...(t("dashboard.menu", { returnObjects: true }) as string[]),
-    lang === "zh" ? "📋 待办清单" : "📋 Todo List",
+    t("dashboard.todoList.menuLabel"),
   ];
 
   const menuItemConfigs = menuItems.map((label, index) => ({
@@ -350,7 +350,6 @@ export default function DashboardLayout({
           <WorkspaceSwitcher
             workspaces={workspaces}
             currentWorkspace={workspace}
-            lang={lang}
             onSwitch={handleWorkspaceChange}
             onOpenCreate={() => setCreateWorkspaceOpen(true)}
           />
@@ -401,7 +400,6 @@ export default function DashboardLayout({
               </Dropdown>
               <UserMenu
                 user={user}
-                lang={lang}
                 onOpenSettings={() => setSettingsOpen(true)}
                 onOpenSystemSettings={() => setSystemSettingsOpen(true)}
                 onLogout={onLogout}
@@ -410,7 +408,6 @@ export default function DashboardLayout({
                 open={settingsOpen}
                 onClose={() => setSettingsOpen(false)}
                 user={user}
-                lang={lang}
                 langMode={langMode}
                 themeMode={themeMode}
                 onUpdateUser={onUpdateUser}
@@ -421,7 +418,6 @@ export default function DashboardLayout({
                 open={systemSettingsOpen}
                 onClose={() => setSystemSettingsOpen(false)}
                 user={user}
-                lang={lang}
               />
             </div>
           </div>
@@ -437,7 +433,6 @@ export default function DashboardLayout({
       <CreateWorkspaceModal
         open={createWorkspaceOpen}
         onClose={() => setCreateWorkspaceOpen(false)}
-        lang={lang}
         onSuccess={(newWorkspace) => {
           // Navigate to the newly created workspace
           navigate(`/dashboard/${newWorkspace.slug}`);
@@ -470,7 +465,6 @@ export default function DashboardLayout({
           <WorkspaceSwitcher
             workspaces={workspaces}
             currentWorkspace={workspace}
-            lang={lang}
             onSwitch={(slug) => {
               handleWorkspaceChange(slug);
               setMobileMenuOpen(false);
