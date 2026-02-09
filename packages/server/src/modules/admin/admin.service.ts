@@ -18,7 +18,7 @@ export class AdminService {
 		if (!settings) {
 			const [created] = await db
 				.insert(systemSettings)
-				.values({ allowRegistration: true })
+				.values({ allowRegistration: true, singleWorkspaceMode: false })
 				.returning();
 			return created;
 		}
@@ -26,7 +26,7 @@ export class AdminService {
 	}
 
 	/** 更新系统设置 */
-	async updateSystemSettings(updates: { allowRegistration?: boolean }) {
+	async updateSystemSettings(updates: { allowRegistration?: boolean; singleWorkspaceMode?: boolean }) {
 		const settings = await this.getSystemSettings();
 		const [updated] = await db
 			.update(systemSettings)

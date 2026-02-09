@@ -160,19 +160,7 @@ function WorkspaceSwitcher({
   );
 }
 
-// 菜单路由后缀（相对于 /dashboard/:workspace）
-const menuRouteSuffixes = [
-  "", // 工作台
-  "/test-requirements", // 测试需求（改名自需求中心）
-  "/test-plan",
-  "/test-design",
-  "/execution",
-  "/defects",
-  "/reports",
-  "/automation",
-  "/settings",
-  "/todulist", // 新增 TodoList 页面
-];
+import { menuRouteSuffixes } from "./constants";
 
 export default function DashboardLayout({
   user,

@@ -9,7 +9,7 @@ import i18n from "./lib/i18n";
 import { saveUser } from "./lib/storage";
 import { trpc } from "./lib/trpc";
 import { SiteLayout, HomePage } from "./components/site";
-import { DashboardLayout } from "./components/dashboard";
+import { DashboardLayout, SingleWorkspaceDashboardLayout } from "./components/dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import {
   WorkspacePage,
@@ -31,11 +31,31 @@ import {
   UnauthorizedPage,
 } from "./pages";
 
+// Dashboard child routes (shared between both modes)
+const dashboardChildRoutes = (user: User | null, lang: "zh" | "en") => [
+  <Route key="index" index element={<WorkspacePage user={user} />} />,
+  <Route key="requirements" path="requirements" element={<RequirementsPage lang={lang} />} />,
+  <Route key="test-requirements" path="test-requirements" element={<TestRequirementsPage lang={lang} />} />,
+  <Route key="test-plan" path="test-plan" element={<TestPlanPage lang={lang} />} />,
+  <Route key="test-design" path="test-design" element={<TestDesignPage lang={lang} />} />,
+  <Route key="execution" path="execution" element={<ExecutionPage lang={lang} />} />,
+  <Route key="defects" path="defects" element={<DefectsPage lang={lang} />} />,
+  <Route key="reports" path="reports" element={<ReportsPage lang={lang} />} />,
+  <Route key="automation" path="automation" element={<AutomationPage lang={lang} />} />,
+  <Route key="settings" path="settings" element={<SettingsPage lang={lang} />} />,
+  <Route key="todulist" path="todulist" element={<TodoListPage lang={lang} />} />,
+  <Route key="not-found" path="*" element={<DashboardNotFoundPage />} />,
+];
+
 // Inner component that uses App.useApp() for message API
 function AppContent() {
   const { user, isAuthed, login, updateUser, logout } = useAuth();
   const { theme, themeMode, setThemeMode } = useThemeContext();
   const { lang, langMode, setLangMode } = useLang();
+
+  // Query system settings to determine routing mode
+  const systemSettingsQuery = trpc.auth.systemSettings.useQuery();
+  const singleWorkspaceMode = systemSettingsQuery.data?.singleWorkspaceMode ?? false;
 
   const handleLogin = (nextUser: User) => {
     login(nextUser);
@@ -45,6 +65,18 @@ function AppContent() {
     if (nextUser.settings?.langMode) {
       setLangMode(nextUser.settings.langMode);
     }
+  };
+
+  const dashboardLayoutProps = {
+    user,
+    lang,
+    langMode,
+    theme,
+    themeMode,
+    onUpdateUser: updateUser,
+    onLogout: logout,
+    onChangeLangMode: setLangMode,
+    onChangeThemeMode: setThemeMode,
   };
 
   return (
@@ -70,38 +102,30 @@ function AppContent() {
             <Route path="/" element={<HomePage />} />
           </Route>
           <Route element={<ProtectedRoute isAuthed={isAuthed} />}>
-            {/* 重定向到默认工作空间 */}
-            <Route path="/dashboard" element={<DashboardIndexRedirect />} />
-
-            <Route
-              path="/dashboard/:workspace"
-              element={
-                <DashboardLayout
-                  user={user}
-                  lang={lang}
-                  langMode={langMode}
-                  theme={theme}
-                  themeMode={themeMode}
-                  onUpdateUser={updateUser}
-                  onLogout={logout}
-                  onChangeLangMode={setLangMode}
-                  onChangeThemeMode={setThemeMode}
-                />
-              }
-            >
-              <Route index element={<WorkspacePage user={user} />} />
-              <Route path="requirements" element={<RequirementsPage lang={lang} />} />
-              <Route path="test-requirements" element={<TestRequirementsPage lang={lang} />} />
-              <Route path="test-plan" element={<TestPlanPage lang={lang} />} />
-              <Route path="test-design" element={<TestDesignPage lang={lang} />} />
-              <Route path="execution" element={<ExecutionPage lang={lang} />} />
-              <Route path="defects" element={<DefectsPage lang={lang} />} />
-              <Route path="reports" element={<ReportsPage lang={lang} />} />
-              <Route path="automation" element={<AutomationPage lang={lang} />} />
-              <Route path="settings" element={<SettingsPage lang={lang} />} />
-              <Route path="todulist" element={<TodoListPage lang={lang} />} />
-              <Route path="*" element={<DashboardNotFoundPage />} />
-            </Route>
+            {singleWorkspaceMode ? (
+              <>
+                {/* 单一空间模式：URL 不包含 workspace 参数 */}
+                <Route
+                  path="/dashboard"
+                  element={<SingleWorkspaceDashboardLayout {...dashboardLayoutProps} />}
+                >
+                  {dashboardChildRoutes(user, lang)}
+                </Route>
+                {/* 兼容旧 URL，重定向到不带 workspace 的路径 */}
+                <Route path="/dashboard/:workspace/*" element={<Navigate to="/dashboard" replace />} />
+              </>
+            ) : (
+              <>
+                {/* 正常模式：URL 包含 workspace 参数 */}
+                <Route path="/dashboard" element={<DashboardIndexRedirect />} />
+                <Route
+                  path="/dashboard/:workspace"
+                  element={<DashboardLayout {...dashboardLayoutProps} />}
+                >
+                  {dashboardChildRoutes(user, lang)}
+                </Route>
+              </>
+            )}
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

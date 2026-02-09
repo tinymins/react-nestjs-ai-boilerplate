@@ -5,13 +5,20 @@ import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined, UserAddOutline
 import { useMessage } from "../../hooks";
 import type { Lang } from "../../lib/types";
 import { trpc } from "../../lib/trpc";
+import { SYSTEM_SHARED_SLUG } from "../../main";
 
 type SettingsPageProps = {
   lang: Lang;
 };
 
 export default function SettingsPage({ lang }: SettingsPageProps) {
-  const { workspace: workspaceSlug } = useParams<{ workspace: string }>();
+  const { workspace: workspaceSlugFromUrl } = useParams<{ workspace: string }>();
+  // 查询系统设置判断是否为单一空间模式
+  const systemSettingsQuery = trpc.auth.systemSettings.useQuery();
+  const singleWorkspaceMode = systemSettingsQuery.data?.singleWorkspaceMode ?? false;
+  // 在单一空间模式下使用系统共享空间，否则使用 URL 参数
+  const workspaceSlug = singleWorkspaceMode ? SYSTEM_SHARED_SLUG : workspaceSlugFromUrl;
+
   const navigate = useNavigate();
   const message = useMessage();
   const [form] = Form.useForm();
@@ -32,6 +39,13 @@ export default function SettingsPage({ lang }: SettingsPageProps) {
   const updateMutation = trpc.workspace.update.useMutation({
     onSuccess: async (data) => {
       message.success(lang === "zh" ? "保存成功" : "Saved successfully");
+
+      // In single workspace mode, don't navigate on slug change
+      if (singleWorkspaceMode) {
+        await utils.workspace.list.invalidate();
+        await utils.workspace.getBySlug.invalidate({ slug: "shared" });
+        return;
+      }
 
       // If slug changed, use optimistic update to avoid flickering
       if (data.slug !== workspaceSlug) {
@@ -243,20 +257,23 @@ export default function SettingsPage({ lang }: SettingsPageProps) {
               <Input placeholder={lang === "zh" ? "例如：我的项目" : "e.g., My Project"} maxLength={50} />
             </Form.Item>
 
-            <Form.Item
-              name="slug"
-              label={lang === "zh" ? "空间站标识（URL）" : "Workspace Slug (URL)"}
-              rules={[
-                { required: true, message: lang === "zh" ? "请输入标识" : "Please enter slug" },
-                {
-                  pattern: /^[a-z0-9-]+$/,
-                  message: lang === "zh" ? "只能包含小写字母、数字和连字符" : "Only lowercase letters, numbers and hyphens allowed",
-                },
-              ]}
-              extra={lang === "zh" ? "用于访问地址，例如：/dashboard/my-project" : "Used in URL, e.g., /dashboard/my-project"}
-            >
-              <Input placeholder="my-project" maxLength={50} />
-            </Form.Item>
+            {/* 单一空间模式下隐藏 slug 字段 */}
+            {!singleWorkspaceMode && (
+              <Form.Item
+                name="slug"
+                label={lang === "zh" ? "空间站标识（URL）" : "Workspace Slug (URL)"}
+                rules={[
+                  { required: true, message: lang === "zh" ? "请输入标识" : "Please enter slug" },
+                  {
+                    pattern: /^[a-z0-9-]+$/,
+                    message: lang === "zh" ? "只能包含小写字母、数字和连字符" : "Only lowercase letters, numbers and hyphens allowed",
+                  },
+                ]}
+                extra={lang === "zh" ? "用于访问地址，例如：/dashboard/my-project" : "Used in URL, e.g., /dashboard/my-project"}
+              >
+                <Input placeholder="my-project" maxLength={50} />
+              </Form.Item>
+            )}
 
             <Form.Item
               name="description"
@@ -338,7 +355,8 @@ export default function SettingsPage({ lang }: SettingsPageProps) {
         </Card>
       ),
     },
-    {
+    // 单一空间模式下隐藏危险区域
+    ...(!singleWorkspaceMode ? [{
       key: "danger",
       label: lang === "zh" ? "危险区域" : "Danger Zone",
       children: (
@@ -366,7 +384,7 @@ export default function SettingsPage({ lang }: SettingsPageProps) {
           </div>
         </Card>
       ),
-    },
+    }] : []),
   ];
 
   return (

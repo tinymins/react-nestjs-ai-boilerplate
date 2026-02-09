@@ -41,18 +41,27 @@ export class AdminRouter {
 	@UseMiddlewares(requireAdmin)
 	async getSystemSettings() {
 		const settings = await adminService.getSystemSettings();
-		return { allowRegistration: settings.allowRegistration };
+		return {
+			allowRegistration: settings.allowRegistration,
+			singleWorkspaceMode: settings.singleWorkspaceMode
+		};
 	}
 
 	/** 更新系统设置 */
 	@Mutation({
-		input: z.object({ allowRegistration: z.boolean().optional() }),
+		input: z.object({
+			allowRegistration: z.boolean().optional(),
+			singleWorkspaceMode: z.boolean().optional()
+		}),
 		output: SystemSettingsSchema
 	})
 	@UseMiddlewares(requireAdmin)
-	async updateSystemSettings(input: { allowRegistration?: boolean }) {
+	async updateSystemSettings(input: { allowRegistration?: boolean; singleWorkspaceMode?: boolean }) {
 		const updated = await adminService.updateSystemSettings(input);
-		return { allowRegistration: updated.allowRegistration };
+		return {
+			allowRegistration: updated.allowRegistration,
+			singleWorkspaceMode: updated.singleWorkspaceMode
+		};
 	}
 
 	// =========== 超级管理员功能（superadmin only） ===========

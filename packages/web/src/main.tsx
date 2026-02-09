@@ -12,9 +12,16 @@ import i18n from "./lib/i18n";
 import { trpc } from "./lib/trpc";
 import { ThemeProvider, useThemeContext } from "./hooks";
 
+// 系统保留的共享空间 slug
+export const SYSTEM_SHARED_SLUG = "::SYSTEM_SHARED::";
+
 const getWorkspaceFromPath = () => {
   if (typeof window === "undefined") return undefined;
   const match = window.location.pathname.match(/^\/dashboard\/([^/]+)/);
+  // If we're on /dashboard (single workspace mode), return system shared slug
+  if (!match && window.location.pathname.startsWith("/dashboard")) {
+    return SYSTEM_SHARED_SLUG;
+  }
   return match?.[1];
 };
 

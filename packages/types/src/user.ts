@@ -26,7 +26,8 @@ export type User = z.infer<typeof UserSchema>;
 
 // 系统设置 Schema
 export const SystemSettingsSchema = z.object({
-  allowRegistration: z.boolean()
+  allowRegistration: z.boolean(),
+  singleWorkspaceMode: z.boolean()
 });
 
 export type SystemSettings = z.infer<typeof SystemSettingsSchema>;

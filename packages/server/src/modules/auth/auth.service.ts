@@ -2,6 +2,7 @@ import type { Response } from "express";
 import { eq, sql } from "drizzle-orm";
 import { db } from "../../db/client";
 import { sessions, users, workspaceMembers, workspaces, systemSettings } from "../../db/schema";
+import { SYSTEM_SHARED_SLUG } from "@acme/types";
 import type { UserSettings, UserRole } from "@acme/types";
 
 const SESSION_COOKIE_NAME = "SESSION_ID";
@@ -47,8 +48,18 @@ export class AuthService {
 		let slug = baseSlug;
 		let suffix = 1;
 
+		// 系统保留的 slug 列表
+		const reservedSlugs = [SYSTEM_SHARED_SLUG];
+
 		// eslint-disable-next-line no-constant-condition
 		while (true) {
+			// 检查是否是系统保留 slug
+			if (reservedSlugs.includes(slug)) {
+				slug = `${baseSlug}-${suffix}`;
+				suffix += 1;
+				continue;
+			}
+
 			const [existing] = await db
 				.select({ id: workspaces.id })
 				.from(workspaces)
@@ -94,7 +105,7 @@ export class AuthService {
 			// 初始化默认设置
 			const [created] = await db
 				.insert(systemSettings)
-				.values({ allowRegistration: true })
+				.values({ allowRegistration: true, singleWorkspaceMode: false })
 				.returning();
 			return created;
 		}
@@ -107,13 +118,40 @@ export class AuthService {
 		return settings.allowRegistration;
 	}
 
-	async registerUser(input: { name: string; email: string; password: string }) {
-		const workspaceName = `${input.name}的空间站`;
-		const workspaceSlug = await this.ensureUniqueWorkspaceSlug(workspaceName);
+	/** 获取或创建共享工作空间（用于单一空间模式） */
+	async getOrCreateSharedWorkspace() {
+		const sharedSlug = SYSTEM_SHARED_SLUG;
+		const [existing] = await db
+			.select()
+			.from(workspaces)
+			.where(eq(workspaces.slug, sharedSlug))
+			.limit(1);
 
+		if (existing) {
+			return existing;
+		}
+
+		// 创建共享工作空间
+		const [created] = await db
+			.insert(workspaces)
+			.values({
+				slug: sharedSlug,
+				name: "共享空间",
+				description: "系统共享工作空间",
+				ownerId: null
+			})
+			.returning();
+
+		return created;
+	}
+
+	async registerUser(input: { name: string; email: string; password: string }) {
 		// 检查是否是第一个用户
 		const isFirst = await this.isFirstUser();
 		const role: UserRole = isFirst ? "superadmin" : "user";
+
+		// 检查是否启用单一空间模式
+		const settings = await this.getSystemSettings();
 
 		const result = await db.transaction(async (tx) => {
 			const [createdUser] = await tx
@@ -126,23 +164,49 @@ export class AuthService {
 				})
 				.returning();
 
-			const [createdWorkspace] = await tx
-				.insert(workspaces)
-				.values({
-					slug: workspaceSlug,
-					name: workspaceName,
-					description: "默认工作空间",
-					ownerId: createdUser.id
-				})
-				.returning();
+			let workspace;
 
-			await tx.insert(workspaceMembers).values({
-				workspaceId: createdWorkspace.id,
-				userId: createdUser.id,
-				role: "owner"
-			});
+			if (settings.singleWorkspaceMode) {
+				// 单一空间模式：使用共享空间
+				workspace = await this.getOrCreateSharedWorkspace();
 
-			return { user: createdUser, workspace: createdWorkspace };
+				// 检查用户是否已经是共享空间的成员
+				const [existingMember] = await tx
+					.select()
+					.from(workspaceMembers)
+					.where(eq(workspaceMembers.workspaceId, workspace.id))
+					.limit(1);
+
+				await tx.insert(workspaceMembers).values({
+					workspaceId: workspace.id,
+					userId: createdUser.id,
+					role: existingMember ? "member" : "owner"
+				});
+			} else {
+				// 正常模式：创建个人工作空间
+				const workspaceName = `${input.name}的空间站`;
+				const workspaceSlug = await this.ensureUniqueWorkspaceSlug(workspaceName);
+
+				const [createdWorkspace] = await tx
+					.insert(workspaces)
+					.values({
+						slug: workspaceSlug,
+						name: workspaceName,
+						description: "默认工作空间",
+						ownerId: createdUser.id
+					})
+					.returning();
+
+				await tx.insert(workspaceMembers).values({
+					workspaceId: createdWorkspace.id,
+					userId: createdUser.id,
+					role: "owner"
+				});
+
+				workspace = createdWorkspace;
+			}
+
+			return { user: createdUser, workspace };
 		});
 
 		return result;

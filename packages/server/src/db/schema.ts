@@ -22,6 +22,7 @@ export const sessions = pgTable("sessions", {
 export const systemSettings = pgTable("system_settings", {
   id: uuid("id").defaultRandom().primaryKey(),
   allowRegistration: boolean("allow_registration").notNull().default(true),
+  singleWorkspaceMode: boolean("single_workspace_mode").notNull().default(false),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow()
 });

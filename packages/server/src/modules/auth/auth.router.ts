@@ -59,7 +59,10 @@ export class AuthRouter {
 	@Query({ output: SystemSettingsSchema })
 	async systemSettings() {
 		const settings = await authService.getSystemSettings();
-		return { allowRegistration: settings.allowRegistration };
+		return {
+			allowRegistration: settings.allowRegistration,
+			singleWorkspaceMode: settings.singleWorkspaceMode
+		};
 	}
 
 	@Mutation({ input: loginInput, output: authOutput })

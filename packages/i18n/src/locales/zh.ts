@@ -441,7 +441,8 @@ export const zh = {
           notFound: "工作空间不存在",
           onlyOwnerCanUpdate: "仅创建者可修改",
           onlyOwnerCanDelete: "仅创建者可删除",
-          slugExists: "Slug 已存在"
+          slugExists: "Slug 已存在",
+          slugReserved: "该标识为系统保留，请使用其他名称"
         },
         todo: {
           notFound: "待办不存在"
@@ -463,6 +464,8 @@ export const zh = {
       usersTab: "用户管理",
       allowRegistration: "允许新用户注册",
       allowRegistrationDesc: "关闭后，新用户将无法注册账号",
+      singleWorkspaceMode: "单一空间模式",
+      singleWorkspaceModeDesc: "启用后，所有用户共享同一个工作空间，URL 中将不显示空间 ID",
       userList: "用户列表",
       userRole: "角色",
       lastLoginAt: "最近登录",

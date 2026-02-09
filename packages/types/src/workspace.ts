@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+/**
+ * 系统保留的共享工作空间 slug
+ * 使用特殊字符模式，确保无法被用户创建的 slug 冲突
+ */
+export const SYSTEM_SHARED_SLUG = "::SYSTEM_SHARED::";
+
 // Zod schemas for workspace (single source of truth)
 export const WorkspaceSchema = z.object({
   id: z.string(),

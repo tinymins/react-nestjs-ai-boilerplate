@@ -431,7 +431,8 @@ export const en: TranslationSchema = {
         notFound: "Workspace not found",
         onlyOwnerCanUpdate: "Only the owner can update",
         onlyOwnerCanDelete: "Only the owner can delete",
-        slugExists: "Slug already exists"
+        slugExists: "Slug already exists",
+        slugReserved: "This slug is reserved by the system"
       },
       todo: {
         notFound: "Todo not found"
@@ -453,6 +454,8 @@ export const en: TranslationSchema = {
       usersTab: "User Management",
       allowRegistration: "Allow New User Registration",
       allowRegistrationDesc: "When disabled, new users cannot register",
+      singleWorkspaceMode: "Single Workspace Mode",
+      singleWorkspaceModeDesc: "When enabled, all users share one workspace and workspace ID is hidden from URL",
       userList: "User List",
       userRole: "Role",
       lastLoginAt: "Last Login",

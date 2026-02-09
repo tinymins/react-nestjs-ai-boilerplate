@@ -12,6 +12,8 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const mutation = trpc.auth.login.useMutation();
+  const systemSettingsQuery = trpc.auth.systemSettings.useQuery();
+  const singleWorkspaceMode = systemSettingsQuery.data?.singleWorkspaceMode ?? false;
   const error = mutation.error?.message;
   const { t } = useTranslation();
   const redirect = searchParams.get("redirect");
@@ -38,7 +40,12 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
                 password: values.password
               });
               onLogin(result.user as User);
-              navigate(redirect || `/dashboard/${result.defaultWorkspaceSlug}`);
+              // 根据系统设置决定跳转路径
+              if (singleWorkspaceMode) {
+                navigate(redirect || "/dashboard");
+              } else {
+                navigate(redirect || `/dashboard/${result.defaultWorkspaceSlug}`);
+              }
             }}
           >
             <Form.Item

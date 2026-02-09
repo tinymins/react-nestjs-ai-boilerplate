@@ -87,6 +87,12 @@ export default function SystemSettingsModal({
     message.success(t("systemSettings.saveSuccess"));
   };
 
+  const handleToggleSingleWorkspaceMode = async (checked: boolean) => {
+    await updateSettingsMutation.mutateAsync({ singleWorkspaceMode: checked });
+    settingsQuery.refetch();
+    message.success(t("systemSettings.saveSuccess"));
+  };
+
   const handleChangeRole = async (userId: string, role: UserRole) => {
     await updateRoleMutation.mutateAsync({ userId, role });
     usersQuery.refetch();
@@ -273,6 +279,18 @@ export default function SystemSettingsModal({
             loading={updateSettingsMutation.isPending}
           />
         </Form.Item>
+        {isSuperAdmin && (
+          <Form.Item
+            label={t("systemSettings.singleWorkspaceMode")}
+            extra={t("systemSettings.singleWorkspaceModeDesc")}
+          >
+            <Switch
+              checked={settingsQuery.data?.singleWorkspaceMode ?? false}
+              onChange={handleToggleSingleWorkspaceMode}
+              loading={updateSettingsMutation.isPending}
+            />
+          </Form.Item>
+        )}
       </Form>
     </div>
   );

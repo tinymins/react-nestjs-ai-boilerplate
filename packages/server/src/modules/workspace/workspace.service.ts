@@ -3,6 +3,7 @@ import { and, eq } from "drizzle-orm";
 import { db } from "../../db/client";
 import { todos, workspaceMembers, workspaces } from "../../db/schema";
 import { getMessage, type Language } from "../../i18n";
+import { SYSTEM_SHARED_SLUG } from "@acme/types";
 
 export const toWorkspaceOutput = (dbWorkspace: typeof workspaces.$inferSelect) => ({
 	id: dbWorkspace.id,
@@ -57,12 +58,22 @@ export class WorkspaceService {
 		return workspace ?? null;
 	}
 
+	/** 系统保留的 slug */
+	static readonly RESERVED_SLUGS = [SYSTEM_SHARED_SLUG];
+
 	async ensureUniqueSlug(baseSlug: string) {
 		let slug = baseSlug;
 		let suffix = 1;
 
 		// eslint-disable-next-line no-constant-condition
 		while (true) {
+			// 检查是否是系统保留 slug
+			if (WorkspaceService.RESERVED_SLUGS.includes(slug)) {
+				suffix += 1;
+				slug = `${baseSlug}-${suffix}`;
+				continue;
+			}
+
 			const [existing] = await db
 				.select({ id: workspaces.id })
 				.from(workspaces)
@@ -128,6 +139,15 @@ export class WorkspaceService {
 		let nextSlug = input.slug?.trim();
 		if (nextSlug) {
 			nextSlug = slugify(nextSlug) || workspace.slug;
+
+			// 检查是否是系统保留 slug
+			if (WorkspaceService.RESERVED_SLUGS.includes(nextSlug)) {
+				throw new TRPCError({
+					code: "BAD_REQUEST",
+					message: getMessage(language, "errors.workspace.slugReserved")
+				});
+			}
+
 			const [existing] = await db
 				.select({ id: workspaces.id })
 				.from(workspaces)
