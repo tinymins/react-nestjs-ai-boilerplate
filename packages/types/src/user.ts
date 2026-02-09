@@ -27,7 +27,9 @@ export type User = z.infer<typeof UserSchema>;
 // 系统设置 Schema
 export const SystemSettingsSchema = z.object({
   allowRegistration: z.boolean(),
-  singleWorkspaceMode: z.boolean()
+  singleWorkspaceMode: z.boolean(),
+  // 当通过环境变量覆盖时为 true，此时前端应隐藏相关 UI
+  singleWorkspaceModeOverridden: z.boolean().optional()
 });
 
 export type SystemSettings = z.infer<typeof SystemSettingsSchema>;

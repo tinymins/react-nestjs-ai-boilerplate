@@ -41,9 +41,12 @@ export class AdminRouter {
 	@UseMiddlewares(requireAdmin)
 	async getSystemSettings() {
 		const settings = await adminService.getSystemSettings();
+		const override = process.env.SINGLE_WORKSPACE_MODE_OVERRIDE;
+		const isOverridden = override === "true" || override === "false";
 		return {
 			allowRegistration: settings.allowRegistration,
-			singleWorkspaceMode: settings.singleWorkspaceMode
+			singleWorkspaceMode: isOverridden ? override === "true" : settings.singleWorkspaceMode,
+			singleWorkspaceModeOverridden: isOverridden
 		};
 	}
 
@@ -57,10 +60,16 @@ export class AdminRouter {
 	})
 	@UseMiddlewares(requireAdmin)
 	async updateSystemSettings(input: { allowRegistration?: boolean; singleWorkspaceMode?: boolean }) {
-		const updated = await adminService.updateSystemSettings(input);
+		const override = process.env.SINGLE_WORKSPACE_MODE_OVERRIDE;
+		const isOverridden = override === "true" || override === "false";
+		// 如果环境变量覆盖了 singleWorkspaceMode，则忽略该字段的更新
+		const { singleWorkspaceMode, ...rest } = input;
+		const updateInput = isOverridden ? rest : input;
+		const updated = await adminService.updateSystemSettings(updateInput);
 		return {
 			allowRegistration: updated.allowRegistration,
-			singleWorkspaceMode: updated.singleWorkspaceMode
+			singleWorkspaceMode: isOverridden ? override === "true" : updated.singleWorkspaceMode,
+			singleWorkspaceModeOverridden: isOverridden
 		};
 	}
 

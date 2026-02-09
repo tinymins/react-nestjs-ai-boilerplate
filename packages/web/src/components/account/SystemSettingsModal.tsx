@@ -282,7 +282,8 @@ export default function SystemSettingsModal({
             loading={updateSettingsMutation.isPending}
           />
         </Form.Item>
-        {isSuperAdmin && (
+        {/* 仅当超管且未被环境变量覆盖时显示单一空间模式开关 */}
+        {isSuperAdmin && !settingsQuery.data?.singleWorkspaceModeOverridden && (
           <Form.Item
             label={t("systemSettings.singleWorkspaceMode")}
             extra={t("systemSettings.singleWorkspaceModeDesc")}

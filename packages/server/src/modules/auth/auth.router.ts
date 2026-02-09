@@ -59,9 +59,12 @@ export class AuthRouter {
 	@Query({ output: SystemSettingsSchema })
 	async systemSettings() {
 		const settings = await authService.getSystemSettings();
+		const override = process.env.SINGLE_WORKSPACE_MODE_OVERRIDE;
+		const isOverridden = override === "true" || override === "false";
 		return {
 			allowRegistration: settings.allowRegistration,
-			singleWorkspaceMode: settings.singleWorkspaceMode
+			singleWorkspaceMode: isOverridden ? override === "true" : settings.singleWorkspaceMode,
+			singleWorkspaceModeOverridden: isOverridden
 		};
 	}
 
