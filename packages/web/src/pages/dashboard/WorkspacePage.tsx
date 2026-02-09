@@ -28,7 +28,7 @@ export default function WorkspacePage({ user }: WorkspacePageProps) {
           {t("dashboard.welcome")}，{user?.name || user?.email}（{user?.role}）
         </p>
         <p className="mt-1 text-sm text-blue-600 dark:text-blue-400">
-          当前工作空间: {workspace}
+          {t("dashboard.todoList.currentWorkspace")}: {workspace}
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-3">
