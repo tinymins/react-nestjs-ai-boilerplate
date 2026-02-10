@@ -49,6 +49,17 @@ if (!rootElement) {
   throw new Error("Root element not found");
 }
 
+// 将 React root 存储在 window 上以支持 HMR
+// 不能用模块级 const，因为 Vite HMR 会重新执行整个模块，
+// 导致 createRoot() 被重复调用并报错。window 对象在页面生命周期内持久存在。
+declare global {
+  interface Window {
+    __REACT_ROOT__?: ReactDOM.Root;
+  }
+}
+
+window.__REACT_ROOT__ ??= ReactDOM.createRoot(rootElement);
+
 function AppWrapper() {
   const { theme } = useThemeContext();
 
@@ -70,7 +81,7 @@ function AppWrapper() {
   );
 }
 
-ReactDOM.createRoot(rootElement).render(
+window.__REACT_ROOT__.render(
   <React.StrictMode>
     <I18nextProvider i18n={i18n}>
       <BrowserRouter>
