@@ -110,11 +110,7 @@ init: ## 首次初始化项目（清理+安装+迁移+种子）
 	@printf "\n"
 
 dev: ## 启动开发环境（数据库+开发服务器）
-	@printf "$(GREEN)� 启动开发环境...$(NC)\n"
-	@docker-compose up -d db
-	@printf "$(GREEN)✓ 数据库已启动$(NC)\n"
-	@printf "$(YELLOW)启动开发服务器...$(NC)\n"
-	@pnpm dev
+	@./scripts/dev.sh
 
 build: ## 编译生产版本
 	@printf "$(GREEN)�🔨 开始编译...$(NC)\n"
