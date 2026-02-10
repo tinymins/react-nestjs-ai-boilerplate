@@ -160,7 +160,7 @@ function WorkspaceSwitcher({
   );
 }
 
-import { menuRouteSuffixes } from "./constants";
+import { menuConfig, findMenuKeysByPath, getRouteFromKey, getDefaultOpenKeys, type MenuItemConfig } from "./constants";
 
 export default function DashboardLayout({
   user,
@@ -256,35 +256,54 @@ export default function DashboardLayout({
     prevWorkspaceRef.current = workspace;
   }, [workspace]);
 
-  const menuItems = [
-    ...(t("dashboard.menu", { returnObjects: true }) as string[]),
-    t("dashboard.todoList.menuLabel"),
-  ];
+  // 将 menuConfig 转换为 Ant Design Menu 的 items 格式
+  const buildMenuItems = (items: MenuItemConfig[]): MenuProps["items"] => {
+    return items.map((item) => {
+      // 获取翻译标签：使用 _ 作为父级标签，或直接使用 labelKey
+      const getLabel = (labelKey: string): string => {
+        // 检查是否有嵌套的 _ 翻译
+        const nestedKey = `dashboard.menu.${labelKey}._`;
+        const directKey = `dashboard.menu.${labelKey}`;
+        const nestedLabel = t(nestedKey);
+        // 如果 nested key 存在（不返回 key 本身），使用它
+        if (nestedLabel !== nestedKey) {
+          return nestedLabel;
+        }
+        return t(directKey);
+      };
 
-  const menuItemConfigs = menuItems.map((label, index) => ({
-    key: String(index),
-    label
-  }));
+      const label = getLabel(item.labelKey);
 
-  // 根据当前路径计算激活的菜单索引
-  const getActiveIndex = () => {
-    const path = location.pathname;
-    const basePath = `/dashboard/${workspace}`;
-
-    for (let i = menuRouteSuffixes.length - 1; i >= 0; i--) {
-      const suffix = menuRouteSuffixes[i];
-      if (suffix && path === `${basePath}${suffix}`) {
-        return i;
+      if (item.children && item.children.length > 0) {
+        return {
+          key: item.key,
+          label,
+          children: buildMenuItems(item.children),
+        };
       }
-    }
-    // 默认工作台
-    if (path === basePath || path === `${basePath}/`) {
-      return 0;
-    }
-    return 0;
+
+      return {
+        key: item.key,
+        label,
+      };
+    });
   };
 
-  const activeIndex = getActiveIndex();
+  const menuItemConfigs = buildMenuItems(menuConfig);
+
+  // 根据当前路径计算激活的菜单 keys
+  const basePath = `/dashboard/${workspace}`;
+  const selectedKeys = findMenuKeysByPath(location.pathname, basePath);
+  const [openKeys, setOpenKeys] = useState<string[]>(() => getDefaultOpenKeys(selectedKeys));
+
+  // 当选中项变化时，自动展开父级菜单
+  useEffect(() => {
+    const defaultOpenKeys = getDefaultOpenKeys(selectedKeys);
+    setOpenKeys((prev) => {
+      const newKeys = new Set([...prev, ...defaultOpenKeys]);
+      return Array.from(newKeys);
+    });
+  }, [selectedKeys.join(",")]);
 
   const handleWorkspaceChange = async (newWorkspace: string) => {
     // 跳转到新空间站的首页（工作台）
@@ -298,10 +317,17 @@ export default function DashboardLayout({
     ]);
   };
 
-  const handleMenuClick = (index: number) => {
-    const suffix = menuRouteSuffixes[index];
-    navigate(`/dashboard/${workspace}${suffix}`);
-    setMobileMenuOpen(false);
+  const handleMenuClick = (key: string) => {
+    const routeSuffix = getRouteFromKey(key);
+    if (routeSuffix !== null) {
+      navigate(`/dashboard/${workspace}${routeSuffix}`);
+      setMobileMenuOpen(false);
+    }
+    // 如果 routeSuffix 为 null，说明是父级菜单，不执行跳转
+  };
+
+  const handleOpenChange = (keys: string[]) => {
+    setOpenKeys(keys);
   };
 
   if (!user) {
@@ -359,8 +385,10 @@ export default function DashboardLayout({
             <Menu
               mode="inline"
               items={menuItemConfigs}
-              selectedKeys={[String(activeIndex)]}
-              onClick={({ key }) => handleMenuClick(Number(key))}
+              selectedKeys={selectedKeys}
+              openKeys={openKeys}
+              onOpenChange={handleOpenChange}
+              onClick={({ key }) => handleMenuClick(key)}
               className="border-none bg-transparent"
               theme={theme === "dark" ? "dark" : "light"}
               style={{ borderInlineEnd: 'none' }}
@@ -481,8 +509,10 @@ export default function DashboardLayout({
             <Menu
               mode="inline"
               items={menuItemConfigs}
-              selectedKeys={[String(activeIndex)]}
-              onClick={({ key }) => handleMenuClick(Number(key))}
+              selectedKeys={selectedKeys}
+              openKeys={openKeys}
+              onOpenChange={handleOpenChange}
+              onClick={({ key }) => handleMenuClick(key)}
               className="border-none bg-transparent"
               theme={theme === "dark" ? "dark" : "light"}
               style={{ borderInlineEnd: 'none' }}

@@ -323,17 +323,31 @@ export const jaJP = {
         "新バージョン決済APIのカバレッジ不足12%",
         "モバイル回帰欠陥の収束率が20%向上"
       ],
-      menu: [
-        "ワークベンチ",
-        "テスト要件",
-        "テスト計画",
-        "テスト設計",
-        "実行センター",
-        "欠陥とリスク",
-        "品質レポート",
-        "自動化資産",
-        "システム設定"
-      ],
+      menu: {
+        workbench: "ワークベンチ",
+        requirements: "テスト要件",
+        testPlan: "テスト計画",
+        testDesign: {
+          _: "テスト設計",
+          caseLibrary: "ケースライブラリ",
+          caseReview: "ケースレビュー",
+          dataManagement: {
+            _: "データ管理",
+            testData: "テストデータ",
+            mockData: "Mockデータ",
+          },
+        },
+        execution: {
+          _: "実行センター",
+          center: "実行タスク",
+          history: "実行履歴",
+        },
+        defects: "欠陥とリスク",
+        reports: "品質レポート",
+        automation: "自動化資産",
+        settings: "システム設定",
+        todolist: "📋 タスクリスト",
+      },
       todoList: {
         title: "📋 開発タスクリスト",
         subtitle: "ワークスペース切り替え機能の開発進捗",

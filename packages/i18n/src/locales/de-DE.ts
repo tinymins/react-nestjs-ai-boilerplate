@@ -323,17 +323,31 @@ export const deDE = {
         "Neue Version Zahlungs-API Abdeckung unzureichend 12%",
         "Mobile Regression Defektkonvergenz verbessert um 20%"
       ],
-      menu: [
-        "Arbeitsbereich",
-        "Testanforderungen",
-        "Testplanung",
-        "Testdesign",
-        "Ausführungszentrum",
-        "Defekte & Risiken",
-        "Qualitätsberichte",
-        "Automatisierungs-Assets",
-        "Systemeinstellungen"
-      ],
+      menu: {
+        workbench: "Arbeitsbereich",
+        requirements: "Testanforderungen",
+        testPlan: "Testplanung",
+        testDesign: {
+          _: "Testdesign",
+          caseLibrary: "Fallbibliothek",
+          caseReview: "Fallprüfung",
+          dataManagement: {
+            _: "Datenverwaltung",
+            testData: "Testdaten",
+            mockData: "Mock-Daten",
+          },
+        },
+        execution: {
+          _: "Ausführungszentrum",
+          center: "Ausführungsaufgaben",
+          history: "Ausführungsverlauf",
+        },
+        defects: "Defekte & Risiken",
+        reports: "Qualitätsberichte",
+        automation: "Automatisierungs-Assets",
+        settings: "Systemeinstellungen",
+        todolist: "📋 Aufgabenliste",
+      },
       todoList: {
         title: "📋 Entwicklungsaufgabenliste",
         subtitle: "Fortschritt der Arbeitsbereich-Wechselfunktion",

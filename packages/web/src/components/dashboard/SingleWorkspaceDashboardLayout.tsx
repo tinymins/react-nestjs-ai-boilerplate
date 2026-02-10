@@ -9,7 +9,8 @@ import { LANG_NAMES } from "../../lib/types";
 import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
 import { trpc } from "../../lib/trpc";
 import { UserMenu, UserSettingsModal, SystemSettingsModal } from "../account";
-import { menuRouteSuffixes } from "./constants";
+import { menuConfig, findMenuKeysByPath, getRouteFromKey, getDefaultOpenKeys, type MenuItemConfig } from "./constants";
+import type { MenuProps } from "antd";
 
 type SingleWorkspaceDashboardLayoutProps = {
   user: User | null;
@@ -77,39 +78,62 @@ export default function SingleWorkspaceDashboardLayout({
   // 获取工作空间列表（需要获取 shared 工作空间的 ID）
   const workspacesQuery = trpc.workspace.list.useQuery();
 
-  const menuItems = [
-    ...(t("dashboard.menu", { returnObjects: true }) as string[]),
-    t("dashboard.todoList.menuLabel"),
-  ];
+  // 将 menuConfig 转换为 Ant Design Menu 的 items 格式
+  const buildMenuItems = (items: MenuItemConfig[]): MenuProps["items"] => {
+    return items.map((item) => {
+      const getLabel = (labelKey: string): string => {
+        const nestedKey = `dashboard.menu.${labelKey}._`;
+        const directKey = `dashboard.menu.${labelKey}`;
+        const nestedLabel = t(nestedKey);
+        if (nestedLabel !== nestedKey) {
+          return nestedLabel;
+        }
+        return t(directKey);
+      };
 
-  const menuItemConfigs = menuItems.map((label, index) => ({
-    key: String(index),
-    label
-  }));
+      const label = getLabel(item.labelKey);
 
-  // 根据当前路径计算激活的菜单索引
-  const getActiveIndex = () => {
-    const path = location.pathname;
-    const basePath = "/dashboard";
-
-    for (let i = menuRouteSuffixes.length - 1; i >= 0; i--) {
-      const suffix = menuRouteSuffixes[i];
-      if (suffix && path === `${basePath}${suffix}`) {
-        return i;
+      if (item.children && item.children.length > 0) {
+        return {
+          key: item.key,
+          label,
+          children: buildMenuItems(item.children),
+        };
       }
-    }
-    if (path === basePath || path === `${basePath}/`) {
-      return 0;
-    }
-    return 0;
+
+      return {
+        key: item.key,
+        label,
+      };
+    });
   };
 
-  const activeIndex = getActiveIndex();
+  const menuItemConfigs = buildMenuItems(menuConfig);
 
-  const handleMenuClick = (index: number) => {
-    const suffix = menuRouteSuffixes[index];
-    navigate(`/dashboard${suffix}`);
-    setMobileMenuOpen(false);
+  // 根据当前路径计算激活的菜单 keys
+  const basePath = "/dashboard";
+  const selectedKeys = findMenuKeysByPath(location.pathname, basePath);
+  const [openKeys, setOpenKeys] = useState<string[]>(() => getDefaultOpenKeys(selectedKeys));
+
+  // 当选中项变化时，自动展开父级菜单
+  useEffect(() => {
+    const defaultOpenKeys = getDefaultOpenKeys(selectedKeys);
+    setOpenKeys((prev) => {
+      const newKeys = new Set([...prev, ...defaultOpenKeys]);
+      return Array.from(newKeys);
+    });
+  }, [selectedKeys.join(",")]);
+
+  const handleMenuClick = (key: string) => {
+    const routeSuffix = getRouteFromKey(key);
+    if (routeSuffix !== null) {
+      navigate(`/dashboard${routeSuffix}`);
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const handleOpenChange = (keys: string[]) => {
+    setOpenKeys(keys);
   };
 
   if (!user) {
@@ -156,8 +180,10 @@ export default function SingleWorkspaceDashboardLayout({
             <Menu
               mode="inline"
               items={menuItemConfigs}
-              selectedKeys={[String(activeIndex)]}
-              onClick={({ key }) => handleMenuClick(Number(key))}
+              selectedKeys={selectedKeys}
+              openKeys={openKeys}
+              onOpenChange={handleOpenChange}
+              onClick={({ key }) => handleMenuClick(key)}
               className="border-none bg-transparent"
               theme={theme === "dark" ? "dark" : "light"}
               style={{ borderInlineEnd: 'none' }}
@@ -256,8 +282,10 @@ export default function SingleWorkspaceDashboardLayout({
             <Menu
               mode="inline"
               items={menuItemConfigs}
-              selectedKeys={[String(activeIndex)]}
-              onClick={({ key }) => handleMenuClick(Number(key))}
+              selectedKeys={selectedKeys}
+              openKeys={openKeys}
+              onOpenChange={handleOpenChange}
+              onClick={({ key }) => handleMenuClick(key)}
               className="border-none bg-transparent"
               theme={theme === "dark" ? "dark" : "light"}
               style={{ borderInlineEnd: 'none' }}

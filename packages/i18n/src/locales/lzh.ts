@@ -394,17 +394,31 @@ export const lzh = {
         "新版付接口覆不足一二成",
         "移動端歸疵收度升二成"
       ],
-      menu: [
-        "臺",
-        "試需",
-        "試計",
-        "試設",
-        "行樞",
-        "疵與風",
-        "質報",
-        "自動資",
-        "制設"
-      ],
+      menu: {
+        workbench: "臺",
+        requirements: "試需",
+        testPlan: "試計",
+        testDesign: {
+          _: "試設",
+          caseLibrary: "例庫",
+          caseReview: "例審",
+          dataManagement: {
+            _: "數管",
+            testData: "試數",
+            mockData: "擬數",
+          },
+        },
+        execution: {
+          _: "行樞",
+          center: "行務",
+          history: "行史",
+        },
+        defects: "疵與風",
+        reports: "質報",
+        automation: "自動資",
+        settings: "制設",
+        todolist: "📋 待事",
+      },
       todoList: {
         title: "📋 開發事籍",
         subtitle: "坊易能開發進度",

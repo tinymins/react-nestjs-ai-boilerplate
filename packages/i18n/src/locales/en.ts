@@ -325,17 +325,31 @@ export const en: TranslationSchema = {
         "Payment API coverage dropped by 12%",
         "Mobile regression defect convergence up 20%"
       ],
-      menu: [
-        "Workbench",
-        "Test Requirements",
-        "Test Plans",
-        "Test Design",
-        "Execution",
-        "Defects & Risk",
-        "Quality Reports",
-        "Automation Assets",
-        "Settings"
-      ],
+      menu: {
+        workbench: "Workbench",
+        requirements: "Test Requirements",
+        testPlan: "Test Plans",
+        testDesign: {
+          _: "Test Design",
+          caseLibrary: "Case Library",
+          caseReview: "Case Review",
+          dataManagement: {
+            _: "Data Management",
+            testData: "Test Data",
+            mockData: "Mock Data",
+          },
+        },
+        execution: {
+          _: "Execution",
+          center: "Execution Center",
+          history: "Execution History",
+        },
+        defects: "Defects & Risk",
+        reports: "Quality Reports",
+        automation: "Automation Assets",
+        settings: "Settings",
+        todolist: "📋 Todo List",
+      },
       todoList: {
         title: "📋 Development Todo List",
         subtitle: "Workspace switching feature progress",
