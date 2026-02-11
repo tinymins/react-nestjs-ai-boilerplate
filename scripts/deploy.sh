@@ -327,7 +327,9 @@ full_deploy() {
     log_info ""
     log_info "服务地址:"
     log_info "  前端: http://${SERVER}:${WEB_PORT:-8080}"
-    log_info "  后端: http://${SERVER}:${SERVER_PORT:-4000}"
+    if [ -n "${SERVER_PORT}" ]; then
+        log_info "  后端: http://${SERVER}:${SERVER_PORT}"
+    fi
     log_info ""
     log_info "如需执行数据库迁移，运行: $0 -m"
 }

@@ -30,8 +30,8 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-apps_db}
       NODE_ENV: production
       PORT: 4000
-    ports:
-      - "${SERVER_PORT:-4000}:4000"
+    # 默认不暴露端口到宿主机（前端 Nginx 通过 Docker 内网代理 /trpc 到 server:4000）
+    # 如需直接访问后端 API 调试，在 .env 中启用 COMPOSE_FILE 叠加 docker-compose.debug.yml
     depends_on:
       db:
         condition: service_healthy
