@@ -97,6 +97,14 @@ check_required_var "DEPLOY_REMOTE_TMP"
 check_required_var "DEPLOY_REMOTE_DIR"
 check_required_var "DEPLOY_IMAGE_FILE"
 
+# 加载项目根目录的 .env（获取端口配置等，用于显示）
+ROOT_ENV="${PROJECT_ROOT}/.env"
+if [ -f "$ROOT_ENV" ]; then
+    set -a
+    source "$ROOT_ENV"
+    set +a
+fi
+
 # 使用环境变量
 SERVER="$DEPLOY_SERVER"
 LOCAL_TMP="$DEPLOY_LOCAL_TMP"
@@ -313,8 +321,8 @@ full_deploy() {
     log_info "总耗时: ${duration} 秒"
     log_info ""
     log_info "服务地址:"
-    log_info "  前端: http://${SERVER}:8080"
-    log_info "  后端: http://${SERVER}:4000"
+    log_info "  前端: http://${SERVER}:${WEB_PORT:-8080}"
+    log_info "  后端: http://${SERVER}:${SERVER_PORT:-4000}"
     log_info ""
     log_info "如需执行数据库迁移，运行: $0 -m"
 }
