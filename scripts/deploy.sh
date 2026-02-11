@@ -182,6 +182,11 @@ upload_configs() {
         log_info "docker-compose.yml 已存在，跳过上传"
     fi
 
+    # 上传 docker-compose.debug.yml（叠加文件，始终更新）
+    if [ -f "docker-compose.debug.yml" ]; then
+        scp docker-compose.debug.yml "${SERVER}:${REMOTE_DIR}/"
+    fi
+
     # 检查 .env 是否存在，不存在则上传 .env.example
     if ! ssh "$SERVER" "test -f ${REMOTE_DIR}/.env"; then
         if [ -f ".env.example" ]; then

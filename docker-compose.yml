@@ -7,8 +7,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: ${POSTGRES_DB:-apps_db}
-    ports:
-      - "${DB_PORT:-5432}:5432"
+    # 默认不暴露端口到宿主机（后端通过 Docker 内网 db:5432 连接）
+    # 如需暴露，在 .env 中启用 COMPOSE_FILE 叠加 docker-compose.debug.yml
     volumes:
       - ./.data/postgres:/var/lib/postgresql/data
     networks:
