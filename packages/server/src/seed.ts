@@ -3,6 +3,7 @@ import "dotenv/config";
 import { eq, sql } from "drizzle-orm";
 import { db } from "./db/client";
 import { users, workspaces, workspaceMembers } from "./db/schema";
+import { getMessage } from "./i18n";
 
 const seedUsers = [
   {
@@ -98,7 +99,7 @@ async function seed() {
 
     if (!existingMembership) {
       // 为用户创建默认工作空间
-      const workspaceName = `${seedUser.name}的空间站`;
+      const workspaceName = `${seedUser.name}${getMessage("zh-CN", "errors.admin.workspaceSuffix")}`;
       const workspaceSlug = seedUser.name.toLowerCase();
 
       const [workspace] = await db
@@ -106,7 +107,7 @@ async function seed() {
         .values({
           slug: workspaceSlug,
           name: workspaceName,
-          description: "默认工作空间",
+          description: getMessage("zh-CN", "errors.admin.defaultWorkspaceDesc"),
           ownerId: user.id
         })
         .returning();

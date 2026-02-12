@@ -230,6 +230,14 @@ export const deDE = {
           title: "AI Intelligente Planung",
           desc: "Automatische Generierung von Testfällen basierend auf Anforderungen, intelligente Erkennung von Testszenarien und Randbedingungen"
         }
+      ],
+      aiFlowSteps: [
+        { step: "Anforderungen", icon: "📄" },
+        { step: "KI-Analyse", icon: "🤖" },
+        { step: "Testplanung", icon: "📋" },
+        { step: "Fallerstellung", icon: "✨" },
+        { step: "Auto-Ausführung", icon: "🚀" },
+        { step: "Smart-Bericht", icon: "📊" }
       ]
     },
     ai: {
@@ -300,11 +308,43 @@ export const deDE = {
       noAccount: "Kein Konto? Registrieren",
       hasAccount: "Bereits ein Konto? Anmelden",
       registrationDisabled: "Registrierung ist derzeit nicht verfügbar",
-      backToLogin: "Zurück zur Anmeldung"
+      backToLogin: "Zurück zur Anmeldung",
+      emailPlaceholder: "E-Mail eingeben",
+      passwordPlaceholder: "Passwort eingeben"
+    },
+    pages: {
+      notFound: {
+        title: "Seite nicht gefunden",
+        description: "Entschuldigung, die aufgerufene Seite existiert nicht oder wurde entfernt",
+        goHome: "Zur Startseite",
+        goBack: "Zurück"
+      },
+      unauthorized: {
+        title: "Zugriff verweigert",
+        description: "Entschuldigung, Sie haben keine Berechtigung, auf diese Seite zuzugreifen",
+        goHome: "Zur Startseite",
+        reLogin: "Erneut anmelden"
+      },
+      workspaceNotFound: {
+        title: "Arbeitsbereich nicht gefunden",
+        notFoundNamed: "Arbeitsbereich \"{{name}}\" wurde nicht gefunden",
+        notFoundGeneric: "Der angeforderte Arbeitsbereich wurde nicht gefunden",
+        goBack: "Zurück zu Arbeitsbereichen"
+      },
+      dashboardNotFound: {
+        title: "Seite nicht gefunden",
+        description: "Entschuldigung, die aufgerufene Seite existiert nicht oder wurde verschoben",
+        goBack: "Zurück zum Dashboard"
+      }
     },
     dashboard: {
       title: "Test-Operations-Center",
       welcome: "Willkommen zurück",
+      loadError: "Arbeitsbereiche konnten nicht geladen werden",
+      retryLater: "Bitte versuchen Sie es später erneut",
+      noWorkspace: "Keine Arbeitsbereiche",
+      createFirst: "Bitte erstellen Sie zuerst einen Arbeitsbereich",
+      noWorkspaceSelected: "Kein Arbeitsbereich ausgewählt",
       stats: ["Anforderungspool", "Laufende Tests", "Release-Gates"],
       promptTitle: "Bitte zuerst anmelden",
       promptBody: "Nach der Anmeldung können Sie Test-Operations-Daten und den Arbeitsbereich einsehen.",
@@ -356,7 +396,8 @@ export const deDE = {
         completed: "Abgeschlossen",
         summary: "🎯 Zusammenfassung",
         noTodos: "Keine Aufgaben",
-        menuLabel: "📋 Aufgabenliste"
+        menuLabel: "📋 Aufgabenliste",
+        defaultCategory: "Benutzerdefiniert"
       },
       defects: {
         description: "Defekte verfolgen und Risiken bewerten"
@@ -756,6 +797,18 @@ export const deDE = {
           createFetchFailed: "Datensatz nach Erstellung nicht abrufbar",
           updateFetchFailed: "Datensatz nach Aktualisierung nicht abrufbar",
           deleteChildrenFirst: "Bitte löschen Sie zuerst alle Unteranforderungen"
+        },
+        admin: {
+          cannotChangeOwnRole: "Eigene Rolle kann nicht geändert werden",
+          userNotFound: "Benutzer nicht gefunden",
+          usePersonalSettings: "Bitte ändern Sie Ihr Passwort in den persönlichen Einstellungen",
+          cannotDeleteSelf: "Eigenes Konto kann nicht gelöscht werden",
+          cannotDeleteSuperadmin: "Super-Admin kann nicht gelöscht werden",
+          emailAlreadyRegistered: "Diese E-Mail ist bereits registriert",
+          defaultWorkspaceDesc: "Standard-Arbeitsbereich",
+          workspaceSuffix: "s Arbeitsbereich",
+          sharedWorkspaceName: "Gemeinsamer Arbeitsbereich",
+          sharedWorkspaceDesc: "Systemweiter gemeinsamer Arbeitsbereich"
         }
       },
     footer: {

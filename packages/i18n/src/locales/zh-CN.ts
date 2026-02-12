@@ -230,6 +230,14 @@ export const zhCN = {
           title: "AI 智能规划",
           desc: "基于需求自动生成测试用例，智能识别测试场景和边界条件"
         }
+      ],
+      aiFlowSteps: [
+        { step: "需求文档", icon: "📄" },
+        { step: "AI 分析", icon: "🤖" },
+        { step: "测试计划", icon: "📋" },
+        { step: "用例生成", icon: "✨" },
+        { step: "自动执行", icon: "🚀" },
+        { step: "智能报告", icon: "📊" }
       ]
     },
     ai: {
@@ -300,11 +308,43 @@ export const zhCN = {
       noAccount: "没有账号？去注册",
       hasAccount: "已有账号？去登录",
       registrationDisabled: "系统暂不开放注册",
-      backToLogin: "返回登录"
+      backToLogin: "返回登录",
+      emailPlaceholder: "请输入邮箱",
+      passwordPlaceholder: "请输入密码"
+    },
+    pages: {
+      notFound: {
+        title: "页面走丢了",
+        description: "抱歉，您访问的页面不存在或已被移除",
+        goHome: "返回首页",
+        goBack: "返回上一页"
+      },
+      unauthorized: {
+        title: "访问受限",
+        description: "抱歉，您没有权限访问此页面",
+        goHome: "返回首页",
+        reLogin: "重新登录"
+      },
+      workspaceNotFound: {
+        title: "空间站不存在",
+        notFoundNamed: "未找到名为 \"{{name}}\" 的空间站",
+        notFoundGeneric: "未找到对应空间站",
+        goBack: "返回可用空间站"
+      },
+      dashboardNotFound: {
+        title: "页面不存在",
+        description: "抱歉，您访问的页面不存在或已被移动",
+        goBack: "返回工作台"
+      }
     },
     dashboard: {
       title: "测试运营中心",
       welcome: "欢迎回来",
+      loadError: "无法加载工作空间",
+      retryLater: "请稍后重试",
+      noWorkspace: "暂无工作空间",
+      createFirst: "请先创建工作空间",
+      noWorkspaceSelected: "未选择空间站",
       stats: ["需求池", "进行中测试", "发布门禁"],
       promptTitle: "请先登录",
       promptBody: "登录后可查看测试运营数据与工作台。",
@@ -356,7 +396,8 @@ export const zhCN = {
         completed: "已完成",
         summary: "🎯 完成摘要",
         noTodos: "暂无待办",
-        menuLabel: "📋 待办清单"
+        menuLabel: "📋 待办清单",
+        defaultCategory: "自定义"
       },
       defects: {
         description: "跟踪缺陷和评估风险"
@@ -756,6 +797,18 @@ export const zhCN = {
           createFetchFailed: "创建后无法查询到记录",
           updateFetchFailed: "更新后无法查询到记录",
           deleteChildrenFirst: "请先删除所有子需求"
+        },
+        admin: {
+          cannotChangeOwnRole: "不能修改自己的角色",
+          userNotFound: "用户不存在",
+          usePersonalSettings: "请通过个人设置修改自己的密码",
+          cannotDeleteSelf: "不能删除自己的账号",
+          cannotDeleteSuperadmin: "不能删除超级管理员",
+          emailAlreadyRegistered: "该邮箱已被注册",
+          defaultWorkspaceDesc: "默认工作空间",
+          workspaceSuffix: "的空间站",
+          sharedWorkspaceName: "共享空间",
+          sharedWorkspaceDesc: "系统共享工作空间"
         }
       },
     footer: {

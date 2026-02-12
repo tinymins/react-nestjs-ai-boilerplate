@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 type WorkspaceNotFoundPageProps = {
   workspace?: string;
@@ -7,6 +8,7 @@ type WorkspaceNotFoundPageProps = {
 
 export default function WorkspaceNotFoundPage({ workspace, fallbackWorkspace }: WorkspaceNotFoundPageProps) {
   const fallbackLink = fallbackWorkspace ? `/dashboard/${fallbackWorkspace}` : "/dashboard";
+  const { t } = useTranslation();
 
   return (
     <div className="flex h-full items-center justify-center px-4">
@@ -24,15 +26,15 @@ export default function WorkspaceNotFoundPage({ workspace, fallbackWorkspace }: 
           </div>
 
           <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-200">
-            空间站不存在
+            {t("pages.workspaceNotFound.title")}
           </h2>
           <p className="mt-3 text-slate-500 dark:text-slate-400">
             {workspace ? (
               <>
-                未找到名为 <span className="font-medium text-slate-700 dark:text-slate-300">"{workspace}"</span> 的空间站
+                {t("pages.workspaceNotFound.notFoundNamed", { name: workspace })}
               </>
             ) : (
-              "未找到对应空间站"
+              t("pages.workspaceNotFound.notFoundGeneric")
             )}
           </p>
 
@@ -43,7 +45,7 @@ export default function WorkspaceNotFoundPage({ workspace, fallbackWorkspace }: 
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
             </svg>
-            返回可用空间站
+            {t("pages.workspaceNotFound.goBack")}
           </Link>
         </div>
       </div>

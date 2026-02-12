@@ -4,6 +4,7 @@ import { db } from "../../db/client";
 import { sessions, users, workspaceMembers, workspaces, systemSettings } from "../../db/schema";
 import { SYSTEM_SHARED_SLUG } from "@acme/types";
 import type { UserSettings, UserRole } from "@acme/types";
+import { getMessage, type Language } from "../../i18n";
 
 const SESSION_COOKIE_NAME = "SESSION_ID";
 const SESSION_COOKIE_MAX_AGE = 1000 * 60 * 60 * 24 * 7;
@@ -119,7 +120,7 @@ export class AuthService {
 	}
 
 	/** 获取或创建共享工作空间（用于单一空间模式） */
-	async getOrCreateSharedWorkspace() {
+	async getOrCreateSharedWorkspace(language: Language) {
 		const sharedSlug = SYSTEM_SHARED_SLUG;
 		const [existing] = await db
 			.select()
@@ -136,8 +137,8 @@ export class AuthService {
 			.insert(workspaces)
 			.values({
 				slug: sharedSlug,
-				name: "共享空间",
-				description: "系统共享工作空间",
+				name: getMessage(language, "errors.admin.sharedWorkspaceName"),
+				description: getMessage(language, "errors.admin.sharedWorkspaceDesc"),
 				ownerId: null
 			})
 			.returning();
@@ -145,7 +146,7 @@ export class AuthService {
 		return created;
 	}
 
-	async registerUser(input: { name: string; email: string; password: string }) {
+	async registerUser(input: { name: string; email: string; password: string }, language: Language) {
 		// 检查是否是第一个用户
 		const isFirst = await this.isFirstUser();
 		const role: UserRole = isFirst ? "superadmin" : "user";
@@ -168,7 +169,7 @@ export class AuthService {
 
 			if (settings.singleWorkspaceMode) {
 				// 单一空间模式：使用共享空间
-				workspace = await this.getOrCreateSharedWorkspace();
+				workspace = await this.getOrCreateSharedWorkspace(language);
 
 				// 检查用户是否已经是共享空间的成员
 				const [existingMember] = await tx
@@ -184,7 +185,7 @@ export class AuthService {
 				});
 			} else {
 				// 正常模式：创建个人工作空间
-				const workspaceName = `${input.name}的空间站`;
+				const workspaceName = `${input.name}${getMessage(language, "errors.admin.workspaceSuffix")}`;
 				const workspaceSlug = await this.ensureUniqueWorkspaceSlug(workspaceName);
 
 				const [createdWorkspace] = await tx
@@ -192,7 +193,7 @@ export class AuthService {
 					.values({
 						slug: workspaceSlug,
 						name: workspaceName,
-						description: "默认工作空间",
+						description: getMessage(language, "errors.admin.defaultWorkspaceDesc"),
 						ownerId: createdUser.id
 					})
 					.returning();

@@ -231,6 +231,14 @@ export const yue = {
           title: "AI 智能規劃",
           desc: "基於需求自動生成測試用例，智能識別測試場景同邊界條件"
         }
+      ],
+      aiFlowSteps: [
+        { step: "需求文檔", icon: "📄" },
+        { step: "AI 分析", icon: "🤖" },
+        { step: "測試計畫", icon: "📋" },
+        { step: "用例產生", icon: "✨" },
+        { step: "自動執行", icon: "🚀" },
+        { step: "智能報告", icon: "📊" }
       ]
     },
     ai: {
@@ -301,11 +309,43 @@ export const yue = {
       noAccount: "冇賬號？去註冊",
       hasAccount: "已經有賬號？去登入",
       registrationDisabled: "系統暫時唔開放註冊",
-      backToLogin: "返去登入"
+      backToLogin: "返去登入",
+      emailPlaceholder: "請輸入電郵",
+      passwordPlaceholder: "請輸入密碼"
+    },
+    pages: {
+      notFound: {
+        title: "頁面搞唔見",
+        description: "不好意思，你訪問嘅頁面唔存在或已被移除",
+        goHome: "返去首頁",
+        goBack: "返去上一頁"
+      },
+      unauthorized: {
+        title: "存取受限",
+        description: "不好意思，你唔有權限存取呢個頁面",
+        goHome: "返去首頁",
+        reLogin: "重新登入"
+      },
+      workspaceNotFound: {
+        title: "空間站唔存在",
+        notFoundNamed: "搞唔到名叫 \"{{name}}\" 嘅空間站",
+        notFoundGeneric: "搞唔到對應空間站",
+        goBack: "返去可用空間站"
+      },
+      dashboardNotFound: {
+        title: "頁面唔存在",
+        description: "不好意思，你訪問嘅頁面唔存在或已被移動",
+        goBack: "返去工作台"
+      }
     },
     dashboard: {
       title: "測試運營中心",
-      welcome: "歡迎返嚟",
+      welcome: "歡迎返嘼",
+      loadError: "載入唔到工作空間",
+      retryLater: "請陣間再試下",
+      noWorkspace: "暫時冇工作空間",
+      createFirst: "請先建個工作空間",
+      noWorkspaceSelected: "未揀空間站",
       stats: ["需求池", "進行緊嘅測試", "發佈門禁"],
       promptTitle: "請先登入",
       promptBody: "登入之後可以睇到測試運營數據同工作台。",
@@ -357,7 +397,8 @@ export const yue = {
         completed: "已完成",
         summary: "🎯 完成摘要",
         noTodos: "暫時冇待辦",
-        menuLabel: "📋 待辦清單"
+        menuLabel: "📋 待辦清單",
+        defaultCategory: "自訂"
       },
       defects: {
         description: "追蹤缺陷同評估風險"
@@ -756,7 +797,18 @@ export const yue = {
         notFound: "測試需求唔存在",
         createFetchFailed: "建立之後搵唔到記錄",
         updateFetchFailed: "更新之後搵唔到記錄",
-        deleteChildrenFirst: "請先刪除所有子需求"
+        deleteChildrenFirst: "請先刪除所有子需求"      },
+      admin: {
+        cannotChangeOwnRole: "唔能改自己嘅角色",
+        userNotFound: "用戶唔存在",
+        usePersonalSettings: "請到個人設定改密碼",
+        cannotDeleteSelf: "唔能刪自己嘅賬戶",
+        cannotDeleteSuperadmin: "唔能刪超級管理員",
+        emailAlreadyRegistered: "呢個電郵已被註冊",
+        defaultWorkspaceDesc: "預設工作空間",
+        workspaceSuffix: "嘅空間站",
+        sharedWorkspaceName: "共享空間",
+        sharedWorkspaceDesc: "系統共享工作空間"
       }
     },
     footer: {

@@ -230,6 +230,14 @@ export const hak = {
           title: "AI 智能規劃",
           desc: "基於需求自動生成測試用例，智能識別測試場景同邊界條件"
         }
+      ],
+      aiFlowSteps: [
+        { step: "需求文件", icon: "📄" },
+        { step: "AI 分析", icon: "🤖" },
+        { step: "測試計畫", icon: "📋" },
+        { step: "用例產生", icon: "✨" },
+        { step: "自動執行", icon: "🚀" },
+        { step: "智慧報告", icon: "📊" }
       ]
     },
     ai: {
@@ -300,11 +308,43 @@ export const hak = {
       noAccount: "㧯無賬號？去註冊",
       hasAccount: "有賬號咧？去登入",
       registrationDisabled: "系統暫時毋開放註冊",
-      backToLogin: "轉去登入"
+      backToLogin: "轉去登入",
+      emailPlaceholder: "請輸入電郵",
+      passwordPlaceholder: "請輸入密碼"
+    },
+    pages: {
+      notFound: {
+        title: "頁面尋毋到",
+        description: "抱歉，汝訪問之頁面毋存在或已被移除",
+        goHome: "轉去首頁",
+        goBack: "轉去前一頁"
+      },
+      unauthorized: {
+        title: "存取受限",
+        description: "抱歉，汝毋權限存取此頁面",
+        goHome: "轉去首頁",
+        reLogin: "重新登入"
+      },
+      workspaceNotFound: {
+        title: "空間站毋存在",
+        notFoundNamed: "尋毋到名為 \"{{name}}\" 之空間站",
+        notFoundGeneric: "尋毋到對應空間站",
+        goBack: "轉去可用空間站"
+      },
+      dashboardNotFound: {
+        title: "頁面毋存在",
+        description: "抱歉，汝訪問之頁面毋存在或已被移動",
+        goBack: "轉去工作台"
+      }
     },
     dashboard: {
       title: "測試運營中心",
       welcome: "歡迎轉來",
+      loadError: "無法載入工作空間",
+      retryLater: "請稍後再試",
+      noWorkspace: "暫時毛有工作空間",
+      createFirst: "請先建立工作空間",
+      noWorkspaceSelected: "未選擇空間站",
       stats: ["需求池", "進行緊个測試", "發布門禁"],
       promptTitle: "請先登入",
       promptBody: "登入之後正做得看測試運營數據同工作台。",
@@ -356,7 +396,8 @@ export const hak = {
         completed: "完成咧",
         summary: "🎯 完成摘要",
         noTodos: "暫時㧯無待辦",
-        menuLabel: "📋 待辦清單"
+        menuLabel: "📋 待辦清單",
+        defaultCategory: "自訂"
       },
       defects: {
         description: "跟蹤缺陷同評估風險"
@@ -756,6 +797,18 @@ export const hak = {
           createFetchFailed: "創建之後尋毋到記錄",
           updateFetchFailed: "更新之後尋毋到記錄",
           deleteChildrenFirst: "請先刪撇全部子需求"
+        },
+        admin: {
+          cannotChangeOwnRole: "毋能修改自己个角色",
+          userNotFound: "用戶毋存在",
+          usePersonalSettings: "請透過個人設定修改自己个密碼",
+          cannotDeleteSelf: "毋能刪撇自己个賬戶",
+          cannotDeleteSuperadmin: "毋能刪撇超級管理員",
+          emailAlreadyRegistered: "該電郵已被註冊",
+          defaultWorkspaceDesc: "預設工作空間",
+          workspaceSuffix: "个空間站",
+          sharedWorkspaceName: "共用空間",
+          sharedWorkspaceDesc: "系統共用工作空間"
         }
       },
     footer: {

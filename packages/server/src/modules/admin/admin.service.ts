@@ -4,6 +4,7 @@ import { db } from "../../db/client";
 import { users, systemSettings, sessions, workspaces, workspaceMembers, todos, testRequirements, invitationCodes } from "../../db/schema";
 import type { UserRole } from "@acme/types";
 import { randomBytes } from "crypto";
+import { getMessage, type Language } from "../../i18n";
 
 export class AdminService {
 	async getStats() {
@@ -64,12 +65,12 @@ export class AdminService {
 	}
 
 	/** 更新用户角色（超管功能） */
-	async updateUserRole(userId: string, role: UserRole, operatorId: string) {
+	async updateUserRole(userId: string, role: UserRole, operatorId: string, language: Language) {
 		// 不能修改自己的角色
 		if (userId === operatorId) {
 			throw new TRPCError({
 				code: "BAD_REQUEST",
-				message: "不能修改自己的角色"
+				message: getMessage(language, "errors.admin.cannotChangeOwnRole")
 			});
 		}
 
@@ -82,7 +83,7 @@ export class AdminService {
 		if (!user) {
 			throw new TRPCError({
 				code: "NOT_FOUND",
-				message: "用户不存在"
+				message: getMessage(language, "errors.admin.userNotFound")
 			});
 		}
 
@@ -103,12 +104,12 @@ export class AdminService {
 	}
 
 	/** 强制重置用户密码（超管功能） */
-	async forceResetPassword(userId: string, newPassword: string, operatorId: string) {
+	async forceResetPassword(userId: string, newPassword: string, operatorId: string, language: Language) {
 		// 不能重置自己的密码（应该用个人设置）
 		if (userId === operatorId) {
 			throw new TRPCError({
 				code: "BAD_REQUEST",
-				message: "请通过个人设置修改自己的密码"
+				message: getMessage(language, "errors.admin.usePersonalSettings")
 			});
 		}
 
@@ -121,7 +122,7 @@ export class AdminService {
 		if (!user) {
 			throw new TRPCError({
 				code: "NOT_FOUND",
-				message: "用户不存在"
+				message: getMessage(language, "errors.admin.userNotFound")
 			});
 		}
 
@@ -134,12 +135,12 @@ export class AdminService {
 	}
 
 	/** 删除用户（超管功能） */
-	async deleteUser(userId: string, operatorId: string) {
+	async deleteUser(userId: string, operatorId: string, language: Language) {
 		// 不能删除自己
 		if (userId === operatorId) {
 			throw new TRPCError({
 				code: "BAD_REQUEST",
-				message: "不能删除自己的账号"
+				message: getMessage(language, "errors.admin.cannotDeleteSelf")
 			});
 		}
 
@@ -152,7 +153,7 @@ export class AdminService {
 		if (!user) {
 			throw new TRPCError({
 				code: "NOT_FOUND",
-				message: "用户不存在"
+				message: getMessage(language, "errors.admin.userNotFound")
 			});
 		}
 
@@ -160,7 +161,7 @@ export class AdminService {
 		if (user.role === "superadmin") {
 			throw new TRPCError({
 				code: "FORBIDDEN",
-				message: "不能删除超级管理员"
+				message: getMessage(language, "errors.admin.cannotDeleteSuperadmin")
 			});
 		}
 
@@ -209,7 +210,7 @@ export class AdminService {
 	}
 
 	/** 手动创建用户（超管功能） */
-	async createUser(input: { name: string; email: string; password: string; role?: UserRole }) {
+	async createUser(input: { name: string; email: string; password: string; role?: UserRole }, language: Language) {
 		// 检查邮箱是否已存在
 		const [existing] = await db
 			.select({ id: users.id })
@@ -220,12 +221,12 @@ export class AdminService {
 		if (existing) {
 			throw new TRPCError({
 				code: "CONFLICT",
-				message: "该邮箱已被注册"
+				message: getMessage(language, "errors.admin.emailAlreadyRegistered")
 			});
 		}
 
 		const role = input.role ?? "user";
-		const workspaceName = `${input.name}的空间站`;
+		const workspaceName = `${input.name}${getMessage(language, "errors.admin.workspaceSuffix")}`;
 
 		// 生成唯一的 workspace slug
 		const baseSlug =
@@ -265,7 +266,7 @@ export class AdminService {
 				.values({
 					slug,
 					name: workspaceName,
-					description: "默认工作空间",
+					description: getMessage(language, "errors.admin.defaultWorkspaceDesc"),
 					ownerId: createdUser.id
 				})
 				.returning();

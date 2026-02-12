@@ -230,6 +230,14 @@ export const jaJP = {
           title: "AIインテリジェント計画",
           desc: "要件に基づいてテストケースを自動生成。テストシナリオと境界条件をインテリジェントに識別"
         }
+      ],
+      aiFlowSteps: [
+        { step: "要件ドキュメント", icon: "📄" },
+        { step: "AI 分析", icon: "🤖" },
+        { step: "テスト計画", icon: "📋" },
+        { step: "ケース生成", icon: "✨" },
+        { step: "自動実行", icon: "🚀" },
+        { step: "スマートレポート", icon: "📊" }
       ]
     },
     ai: {
@@ -300,11 +308,43 @@ export const jaJP = {
       noAccount: "アカウントをお持ちでないですか？登録する",
       hasAccount: "すでにアカウントをお持ちですか？ログインする",
       registrationDisabled: "現在、新規登録は受け付けておりません",
-      backToLogin: "ログインに戻る"
+      backToLogin: "ログインに戻る",
+      emailPlaceholder: "メールアドレスを入力",
+      passwordPlaceholder: "パスワードを入力"
+    },
+    pages: {
+      notFound: {
+        title: "ページが見つかりません",
+        description: "申し訳ございません、お探しのページは存在しないか削除されました",
+        goHome: "ホームへ",
+        goBack: "前のページへ"
+      },
+      unauthorized: {
+        title: "アクセス拒否",
+        description: "申し訳ございません、このページへのアクセス権がありません",
+        goHome: "ホームへ",
+        reLogin: "再ログイン"
+      },
+      workspaceNotFound: {
+        title: "ワークスペースが見つかりません",
+        notFoundNamed: "\"{{name}}\" というワークスペースが見つかりません",
+        notFoundGeneric: "該当のワークスペースが見つかりません",
+        goBack: "ワークスペース一覧へ"
+      },
+      dashboardNotFound: {
+        title: "ページが存在しません",
+        description: "申し訳ございません、お探しのページは存在しないか移動されました",
+        goBack: "ダッシュボードへ"
+      }
     },
     dashboard: {
       title: "テスト運用センター",
       welcome: "おかえりなさい",
+      loadError: "ワークスペースを読み込めません",
+      retryLater: "後でもう一度お試しください",
+      noWorkspace: "ワークスペースがありません",
+      createFirst: "まずワークスペースを作成してください",
+      noWorkspaceSelected: "ワークスペース未選択",
       stats: ["要件プール", "実行中テスト", "リリースゲート"],
       promptTitle: "ログインしてください",
       promptBody: "ログインするとテスト運用データとワークベンチを確認できます。",
@@ -356,7 +396,8 @@ export const jaJP = {
         completed: "完了",
         summary: "🎯 完了サマリー",
         noTodos: "タスクはありません",
-        menuLabel: "📋 タスクリスト"
+        menuLabel: "📋 タスクリスト",
+        defaultCategory: "カスタム"
       },
       defects: {
         description: "欠陥を追跡しリスクを評価"
@@ -756,6 +797,18 @@ export const jaJP = {
           createFetchFailed: "作成後にレコードを取得できませんでした",
           updateFetchFailed: "更新後にレコードを取得できませんでした",
           deleteChildrenFirst: "先にすべての子要件を削除してください"
+        },
+        admin: {
+          cannotChangeOwnRole: "自分の役割を変更することはできません",
+          userNotFound: "ユーザーが存在しません",
+          usePersonalSettings: "個人設定でパスワードを変更してください",
+          cannotDeleteSelf: "自分のアカウントを削除することはできません",
+          cannotDeleteSuperadmin: "スーパー管理者を削除することはできません",
+          emailAlreadyRegistered: "このメールアドレスは既に登録されています",
+          defaultWorkspaceDesc: "デフォルトワークスペース",
+          workspaceSuffix: "のワークスペース",
+          sharedWorkspaceName: "共有ワークスペース",
+          sharedWorkspaceDesc: "システム共有ワークスペース"
         }
       },
     footer: {

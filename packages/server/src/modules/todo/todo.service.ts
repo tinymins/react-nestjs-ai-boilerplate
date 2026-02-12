@@ -23,13 +23,13 @@ export class TodoService {
 		return todo ?? null;
 	}
 
-	async create(input: { title: string; category?: string }, workspaceId: string, createdBy?: string) {
+	async create(input: { title: string; category?: string }, workspaceId: string, createdBy?: string, language?: Language) {
 		const [created] = await db
 			.insert(todos)
 			.values({
 				workspaceId,
 				title: input.title,
-				category: input.category ?? "默认",
+				category: input.category ?? getMessage(language ?? "zh-CN", "dashboard.todoList.defaultCategory"),
 				createdBy
 			})
 			.returning();

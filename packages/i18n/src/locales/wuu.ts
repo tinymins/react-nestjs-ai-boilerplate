@@ -231,6 +231,14 @@ export const wuu = {
           title: "AI 智能规划",
           desc: "基于需求自动生成测试用例，智能识别测试场景帮边界条件"
         }
+      ],
+      aiFlowSteps: [
+        { step: "需求文档", icon: "📄" },
+        { step: "AI 分析", icon: "🤖" },
+        { step: "测试计划", icon: "📋" },
+        { step: "用例生成", icon: "✨" },
+        { step: "自动执行", icon: "🚀" },
+        { step: "智能报告", icon: "📊" }
       ]
     },
     ai: {
@@ -301,11 +309,43 @@ export const wuu = {
       noAccount: "呒没账号？去注册",
       hasAccount: "有账号哉？去登进",
       registrationDisabled: "系统现在勿开放注册",
-      backToLogin: "回去登录"
+      backToLogin: "回去登录",
+      emailPlaceholder: "请写邮箱",
+      passwordPlaceholder: "请写密码"
+    },
+    pages: {
+      notFound: {
+        title: "页面寻勿着",
+        description: "抱歉，侬访问的页面勿存在或已被移除",
+        goHome: "回去首页",
+        goBack: "回去前一页"
+      },
+      unauthorized: {
+        title: "访问受限",
+        description: "抱歉，侬没有权限访问呃个页面",
+        goHome: "回去首页",
+        reLogin: "重新登进"
+      },
+      workspaceNotFound: {
+        title: "空间站勿存在",
+        notFoundNamed: "寻勿着名字叫 \"{{name}}\" 的空间站",
+        notFoundGeneric: "寻勿着对应空间站",
+        goBack: "回去可用空间站"
+      },
+      dashboardNotFound: {
+        title: "页面勿存在",
+        description: "抱歉，侬访问的页面勿存在或已被移动",
+        goBack: "回去工作台"
+      }
     },
     dashboard: {
       title: "测试运营中心",
       welcome: "侬来哉",
+      loadError: "空间站加载勿出来",
+      retryLater: "请稍后再试",
+      noWorkspace: "呢没工作空间",
+      createFirst: "请先开个工作空间",
+      noWorkspaceSelected: "未选择空间站",
       stats: ["需求池", "进行辰光额测试", "发布门禁"],
       promptTitle: "请先登进去",
       promptBody: "登进后好看测试运营数据帮工作台。",
@@ -357,7 +397,8 @@ export const wuu = {
         completed: "弄好哉",
         summary: "🎯 完成摘要",
         noTodos: "呒没待办",
-        menuLabel: "📋 待办清单"
+        menuLabel: "📋 待办清单",
+        defaultCategory: "自定义"
       },
       defects: {
         description: "跟踪缺陷帮评估风险"
@@ -757,6 +798,18 @@ export const wuu = {
         createFetchFailed: "创建后查勿着记录",
         updateFetchFailed: "更新后查勿着记录",
         deleteChildrenFirst: "请先删脱所有子需求"
+      },
+      admin: {
+        cannotChangeOwnRole: "勿能改自己的角色",
+        userNotFound: "用户勿存在",
+        usePersonalSettings: "请到个人设置里改密码",
+        cannotDeleteSelf: "勿能删脱自己的账户",
+        cannotDeleteSuperadmin: "勿能删脱超级管理员",
+        emailAlreadyRegistered: "呃个邮箱已被注册",
+        defaultWorkspaceDesc: "默认工作空间",
+        workspaceSuffix: "的空间站",
+        sharedWorkspaceName: "共享空间",
+        sharedWorkspaceDesc: "系统共享工作空间"
       }
     },
     footer: {

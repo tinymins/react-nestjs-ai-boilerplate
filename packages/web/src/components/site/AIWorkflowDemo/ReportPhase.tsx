@@ -115,7 +115,7 @@ export const ReportPhase = () => {
                     <span className="text-slate-600 dark:text-slate-400">{defect.module}</span>
                     <div className="flex items-center gap-2">
                       <span
-                        className={`rounded px-1.5 py-0.5 ${defect.severity === "高" || defect.severity === "High" ? "bg-rose-500 text-white" : defect.severity === "中" || defect.severity === "Medium" ? "bg-amber-500 text-white" : "bg-slate-300 text-slate-700 dark:bg-slate-600 dark:text-slate-300"}`}
+                        className={`rounded px-1.5 py-0.5 ${defect.severity === t("common.severity.high") ? "bg-rose-500 text-white" : defect.severity === t("common.severity.medium") ? "bg-amber-500 text-white" : "bg-slate-300 text-slate-700 dark:bg-slate-600 dark:text-slate-300"}`}
                       >
                         {defect.severity}
                       </span>

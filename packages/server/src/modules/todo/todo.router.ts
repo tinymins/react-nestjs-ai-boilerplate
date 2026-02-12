@@ -50,7 +50,7 @@ export class TodoRouter {
 	@UseMiddlewares(requireWorkspace)
 	@Mutation({ input: todoCreateInput, output: todoSchema })
 	async create(input: z.infer<typeof todoCreateInput>, @Ctx() ctx: Context) {
-		return todoService.create(input, ctx.workspace!.id, ctx.userId);
+		return todoService.create(input, ctx.workspace!.id, ctx.userId, ctx.language);
 	}
 
 	@UseMiddlewares(requireWorkspace)

@@ -125,7 +125,7 @@ export default function TestRequirementsPage() {
   const message = useMessage();
   const { t } = useTranslation();
   // Helper to get testRequirements namespace translations
-  const tr = (key: string, options?: object) => t(`dashboard.testRequirements.${key}`, options);
+  const tr = (key: string, options?: Record<string, unknown>) => t(`dashboard.testRequirements.${key}`, options);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [editingRecord, setEditingRecord] = useState<TestRequirement | null>(null);

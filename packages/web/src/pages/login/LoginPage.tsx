@@ -102,7 +102,7 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
               name="email"
               rules={[{ required: true, message: t("login.email") }]}
             >
-              <Input type="email" placeholder="请输入邮箱" size="large" />
+              <Input type="email" placeholder={t("login.emailPlaceholder")} size="large" />
             </Form.Item>
 
             <Form.Item
@@ -110,7 +110,7 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
               name="password"
               rules={[{ required: true, message: t("login.password") }]}
             >
-              <Input.Password placeholder="请输入密码" size="large" />
+              <Input.Password placeholder={t("login.passwordPlaceholder")} size="large" />
             </Form.Item>
 
             {mode === "register" ? (

@@ -86,28 +86,28 @@ export class AdminRouter {
 	@Mutation({ input: UpdateUserRoleInputSchema, output: AdminUserSchema })
 	@UseMiddlewares(requireSuperAdmin)
 	async updateUserRole(input: z.infer<typeof UpdateUserRoleInputSchema>, @Ctx() ctx: Context) {
-		return adminService.updateUserRole(input.userId, input.role, ctx.userId!);
+		return adminService.updateUserRole(input.userId, input.role, ctx.userId!, ctx.language);
 	}
 
 	/** 强制重置用户密码 */
 	@Mutation({ input: ForceResetPasswordInputSchema, output: z.object({ success: z.boolean() }) })
 	@UseMiddlewares(requireSuperAdmin)
 	async forceResetPassword(input: z.infer<typeof ForceResetPasswordInputSchema>, @Ctx() ctx: Context) {
-		return adminService.forceResetPassword(input.userId, input.newPassword, ctx.userId!);
+		return adminService.forceResetPassword(input.userId, input.newPassword, ctx.userId!, ctx.language);
 	}
 
 	/** 删除用户 */
 	@Mutation({ input: z.object({ userId: z.string() }), output: z.object({ success: z.boolean() }) })
 	@UseMiddlewares(requireSuperAdmin)
 	async deleteUser(input: { userId: string }, @Ctx() ctx: Context) {
-		return adminService.deleteUser(input.userId, ctx.userId!);
+		return adminService.deleteUser(input.userId, ctx.userId!, ctx.language);
 	}
 
 	/** 手动创建用户 */
 	@Mutation({ input: CreateUserInputSchema, output: AdminUserSchema })
 	@UseMiddlewares(requireSuperAdmin)
-	async createUser(input: z.infer<typeof CreateUserInputSchema>) {
-		return adminService.createUser(input);
+	async createUser(input: z.infer<typeof CreateUserInputSchema>, @Ctx() ctx: Context) {
+		return adminService.createUser(input, ctx.language);
 	}
 
 	// =========== 邀请码功能（superadmin only） ===========

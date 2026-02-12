@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TRPCClientError } from "@trpc/client";
 import {
   Button,
   Form,
@@ -132,7 +133,7 @@ export default function SystemSettingsModal({
       usersQuery.refetch();
       message.success(t("systemSettings.addUserSuccess"));
     } catch (error: unknown) {
-      if (error instanceof Error && error.message.includes("已被注册")) {
+      if (error instanceof TRPCClientError && error.data?.code === "CONFLICT") {
         message.error(t("systemSettings.emailExists"));
       } else {
         throw error;

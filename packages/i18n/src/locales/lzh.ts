@@ -301,6 +301,14 @@ export const lzh = {
           title: "AI 智規",
           desc: "基於需自生試例，智識試景與界況"
         }
+      ],
+      aiFlowSteps: [
+        { step: "需文", icon: "📄" },
+        { step: "AI 析", icon: "🤖" },
+        { step: "試策", icon: "📋" },
+        { step: "例生", icon: "✨" },
+        { step: "自行", icon: "🚀" },
+        { step: "智報", icon: "📊" }
       ]
     },
     ai: {
@@ -371,11 +379,43 @@ export const lzh = {
       noAccount: "無戶？往註",
       hasAccount: "有戶？往入",
       registrationDisabled: "制未開註",
-      backToLogin: "歸入"
+      backToLogin: "歸入",
+      emailPlaceholder: "請書郵",
+      passwordPlaceholder: "請書符"
+    },
+    pages: {
+      notFound: {
+        title: "頁失蹤",
+        description: "歉，君訪之頁不存或已除",
+        goHome: "歸首頁",
+        goBack: "歸前頁"
+      },
+      unauthorized: {
+        title: "存取受限",
+        description: "歉，君無權訪此頁",
+        goHome: "歸首頁",
+        reLogin: "重入"
+      },
+      workspaceNotFound: {
+        title: "坊不存",
+        notFoundNamed: "未尋名為 \"{{name}}\" 之坊",
+        notFoundGeneric: "未尋得對應之坊",
+        goBack: "歸可用之坊"
+      },
+      dashboardNotFound: {
+        title: "頁不存",
+        description: "歉，君訪之頁不存或已移",
+        goBack: "歸工臺"
+      }
     },
     dashboard: {
       title: "試運樞",
       welcome: "迎歸",
+      loadError: "無法載入工作空間",
+      retryLater: "請稍後再試",
+      noWorkspace: "暫無工作空間",
+      createFirst: "請先建工作空間",
+      noWorkspaceSelected: "未選坊",
       stats: ["需池", "試中", "發門"],
       promptTitle: "請先入",
       promptBody: "入後可覽試運據與臺。",
@@ -427,7 +467,8 @@ export const lzh = {
         completed: "已成",
         summary: "🎯 成摘",
         noTodos: "無待事",
-        menuLabel: "📋 待事籍"
+        menuLabel: "📋 待事籍",
+        defaultCategory: "自訂"
       },
       defects: {
         description: "追疵與估風"
@@ -827,6 +868,18 @@ export const lzh = {
         createFetchFailed: "建後不得索",
         updateFetchFailed: "更後不得索",
         deleteChildrenFirst: "請先除諸子需"
+      },
+      admin: {
+        cannotChangeOwnRole: "不得改己之角色",
+        userNotFound: "用戶不存",
+        usePersonalSettings: "請於個人設定改符",
+        cannotDeleteSelf: "不得除己之戶",
+        cannotDeleteSuperadmin: "不得除超級管理員",
+        emailAlreadyRegistered: "此郵已被註",
+        defaultWorkspaceDesc: "預設工作空間",
+        workspaceSuffix: "之坊",
+        sharedWorkspaceName: "共用之所",
+        sharedWorkspaceDesc: "系統共用工坊"
       }
     },
     footer: {

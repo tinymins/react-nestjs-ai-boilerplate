@@ -67,7 +67,7 @@ function WorkspaceSwitcher({
             </Avatar>
             <div className="flex-1 min-w-0">
               <div className="font-semibold text-slate-800 dark:text-slate-200 truncate">
-                {current?.name ?? "未选择空间站"}
+                {current?.name ?? t("dashboard.noWorkspaceSelected")}
               </div>
               <div className="flex items-center gap-2 mt-1">
                 <span className="inline-flex items-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-2 py-0.5 text-xs font-medium text-white">
@@ -145,7 +145,7 @@ function WorkspaceSwitcher({
           </div>
           <div className="flex-1 min-w-0">
             <div className="truncate text-sm font-semibold text-slate-800 dark:text-slate-200">
-              {current?.name ?? "未选择空间站"}
+              {current?.name ?? t("dashboard.noWorkspaceSelected")}
             </div>
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="inline-flex items-center rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-400">

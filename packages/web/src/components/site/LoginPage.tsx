@@ -27,7 +27,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
               {t("login.title")}
             </h1>
             <p className="text-slate-500 dark:text-slate-400">
-              请登录您的账户
+              {t("login.pleaseLogin")}
             </p>
           </div>
 
@@ -53,7 +53,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
               name="email"
               rules={[{ required: true, message: t("login.email") }]}
             >
-              <Input type="email" placeholder="请输入邮箱" size="large" />
+              <Input type="email" placeholder={t("login.emailPlaceholder")} size="large" />
             </Form.Item>
 
             <Form.Item
@@ -61,7 +61,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
               name="password"
               rules={[{ required: true, message: t("login.password") }]}
             >
-              <Input.Password placeholder="请输入密码" size="large" />
+              <Input.Password placeholder={t("login.passwordPlaceholder")} size="large" />
             </Form.Item>
 
             {error ? <Alert type="error" title={error} showIcon /> : null}

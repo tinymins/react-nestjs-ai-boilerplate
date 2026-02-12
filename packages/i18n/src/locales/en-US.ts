@@ -232,6 +232,14 @@ export const enUS: TranslationSchema = {
           title: "AI Planning",
           desc: "Auto-generate test cases from requirements with intelligent scenario and boundary detection"
         }
+      ],
+      aiFlowSteps: [
+        { step: "Requirements", icon: "📄" },
+        { step: "AI Analysis", icon: "🤖" },
+        { step: "Test Plan", icon: "📋" },
+        { step: "Case Generation", icon: "✨" },
+        { step: "Auto Execute", icon: "🚀" },
+        { step: "Smart Report", icon: "📊" }
       ]
     },
     ai: {
@@ -302,11 +310,43 @@ export const enUS: TranslationSchema = {
       noAccount: "No account? Register",
       hasAccount: "Already have an account? Login",
       registrationDisabled: "Registration is currently disabled",
-      backToLogin: "Back to login"
+      backToLogin: "Back to login",
+      emailPlaceholder: "Enter your email",
+      passwordPlaceholder: "Enter your password"
+    },
+    pages: {
+      notFound: {
+        title: "Page not found",
+        description: "Sorry, the page you visited does not exist or has been removed",
+        goHome: "Go home",
+        goBack: "Go back"
+      },
+      unauthorized: {
+        title: "Access denied",
+        description: "Sorry, you do not have permission to access this page",
+        goHome: "Go home",
+        reLogin: "Sign in again"
+      },
+      workspaceNotFound: {
+        title: "Workspace not found",
+        notFoundNamed: "Workspace \"{{name}}\" was not found",
+        notFoundGeneric: "The requested workspace was not found",
+        goBack: "Back to workspaces"
+      },
+      dashboardNotFound: {
+        title: "Page not found",
+        description: "Sorry, the page you visited does not exist or has been moved",
+        goBack: "Back to dashboard"
+      }
     },
     dashboard: {
       title: "TestOps Command Center",
       welcome: "Welcome back",
+      loadError: "Unable to load workspaces",
+      retryLater: "Please try again later",
+      noWorkspace: "No workspaces",
+      createFirst: "Please create a workspace first",
+      noWorkspaceSelected: "No workspace selected",
       stats: ["Requirement backlog", "Active test runs", "Release gates"],
       promptTitle: "Please sign in",
       promptBody: "Sign in to view your operational insights.",
@@ -358,7 +398,8 @@ export const enUS: TranslationSchema = {
         completed: "completed",
         summary: "🎯 Completion Summary",
         noTodos: "No todos yet",
-        menuLabel: "📋 Todo List"
+        menuLabel: "📋 Todo List",
+        defaultCategory: "Custom"
       },
       defects: {
         description: "Track defects and assess risks"
@@ -746,6 +787,18 @@ export const enUS: TranslationSchema = {
         createFetchFailed: "Unable to query record after creation",
         updateFetchFailed: "Unable to query record after update",
         deleteChildrenFirst: "Please delete all child requirements first"
+      },
+      admin: {
+        cannotChangeOwnRole: "Cannot change your own role",
+        userNotFound: "User not found",
+        usePersonalSettings: "Please change your password in personal settings",
+        cannotDeleteSelf: "Cannot delete your own account",
+        cannotDeleteSuperadmin: "Cannot delete a super admin",
+        emailAlreadyRegistered: "This email is already registered",
+        defaultWorkspaceDesc: "Default workspace",
+        workspaceSuffix: "'s workspace",
+        sharedWorkspaceName: "Shared Workspace",
+        sharedWorkspaceDesc: "System shared workspace"
       }
     },
     footer: {

@@ -134,7 +134,7 @@ export class AuthRouter {
 			});
 		}
 
-		const result = await authService.registerUser(input);
+		const result = await authService.registerUser(input, ctx.language);
 
 		// 如果使用了邀请码，标记为已使用
 		if (input.invitationCode && validInvitation) {

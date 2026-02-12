@@ -40,7 +40,7 @@ export default function TodoListPage() {
 
   const addTodo = () => {
     if (!newTodo.trim()) return;
-    createMutation.mutate({ title: newTodo.trim(), category: "自定义" });
+    createMutation.mutate({ title: newTodo.trim(), category: t("dashboard.todoList.defaultCategory") });
   };
 
   const todos = todosQuery.data ?? [];

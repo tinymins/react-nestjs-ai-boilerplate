@@ -300,6 +300,14 @@ export const zhTW = {
           title: "AI 智慧規劃",
           desc: "基於需求自動產生測試用例，智慧識別測試場景和邊界條件"
         }
+      ],
+      aiFlowSteps: [
+        { step: "需求文件", icon: "📄" },
+        { step: "AI 分析", icon: "🤖" },
+        { step: "測試計畫", icon: "📋" },
+        { step: "用例產生", icon: "✨" },
+        { step: "自動執行", icon: "🚀" },
+        { step: "智慧報告", icon: "📊" }
       ]
     },
     ai: {
@@ -370,11 +378,43 @@ export const zhTW = {
       noAccount: "沒有帳號？去註冊",
       hasAccount: "已有帳號？去登入",
       registrationDisabled: "系統暫不開放註冊",
-      backToLogin: "返回登入"
+      backToLogin: "返回登入",
+      emailPlaceholder: "請輸入電子郵件",
+      passwordPlaceholder: "請輸入密碼"
+    },
+    pages: {
+      notFound: {
+        title: "頁面走丟了",
+        description: "抱歉，您造訪的頁面不存在或已被移除",
+        goHome: "返回首頁",
+        goBack: "返回上一頁"
+      },
+      unauthorized: {
+        title: "存取受限",
+        description: "抱歉，您沒有權限存取此頁面",
+        goHome: "返回首頁",
+        reLogin: "重新登入"
+      },
+      workspaceNotFound: {
+        title: "空間站不存在",
+        notFoundNamed: "未找到名為 \"{{name}}\" 的空間站",
+        notFoundGeneric: "未找到對應空間站",
+        goBack: "返回可用空間站"
+      },
+      dashboardNotFound: {
+        title: "頁面不存在",
+        description: "抱歉，您造訪的頁面不存在或已被移動",
+        goBack: "返回工作台"
+      }
     },
     dashboard: {
       title: "測試運營中心",
       welcome: "歡迎回來",
+      loadError: "無法載入工作空間",
+      retryLater: "請稍後重試",
+      noWorkspace: "暫無工作空間",
+      createFirst: "請先建立工作空間",
+      noWorkspaceSelected: "未選擇空間站",
       stats: ["需求池", "進行中測試", "發布門禁"],
       promptTitle: "請先登入",
       promptBody: "登入後可檢視測試運營資料與工作台。",
@@ -426,7 +466,8 @@ export const zhTW = {
         completed: "已完成",
         summary: "🎯 完成摘要",
         noTodos: "暫無待辦",
-        menuLabel: "📋 待辦清單"
+        menuLabel: "📋 待辦清單",
+        defaultCategory: "自訂"
       },
       defects: {
         description: "追蹤缺陷和評估風險"
@@ -826,6 +867,18 @@ export const zhTW = {
         createFetchFailed: "建立後無法查詢到記錄",
         updateFetchFailed: "更新後無法查詢到記錄",
         deleteChildrenFirst: "請先刪除所有子需求"
+      },
+      admin: {
+        cannotChangeOwnRole: "不能修改自己的角色",
+        userNotFound: "使用者不存在",
+        usePersonalSettings: "請透過個人設定修改自己的密碼",
+        cannotDeleteSelf: "不能刪除自己的帳號",
+        cannotDeleteSuperadmin: "不能刪除超級管理員",
+        emailAlreadyRegistered: "該電子郵件已被註冊",
+        defaultWorkspaceDesc: "預設工作空間",
+        workspaceSuffix: "的空間站",
+        sharedWorkspaceName: "共享空間",
+        sharedWorkspaceDesc: "系統共享工作空間"
       }
     },
     footer: {
