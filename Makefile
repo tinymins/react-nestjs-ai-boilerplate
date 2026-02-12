@@ -51,7 +51,10 @@ init: ## 首次初始化项目（清理+安装+迁移+种子）
 	@printf "$(YELLOW)📝 [1/9] 检查环境变量文件...$(NC)\n"
 	@if [ ! -f .env ]; then \
 		cp .env.example .env; \
-		printf "$(GREEN)✓ 已从 .env.example 创建根目录 .env 文件（用于 Docker）$(NC)\n"; \
+		sed -i 's|^# COMPOSE_FILE=|COMPOSE_FILE=|' .env; \
+		sed -i 's|^# SERVER_PORT=|SERVER_PORT=|' .env; \
+		sed -i 's|^# DB_PORT=|DB_PORT=|' .env; \
+		printf "$(GREEN)✓ 已从 .env.example 创建根目录 .env 文件（已启用本地调试端口）$(NC)\n"; \
 	else \
 		printf "$(GREEN)✓ 根目录 .env 文件已存在$(NC)\n"; \
 	fi
