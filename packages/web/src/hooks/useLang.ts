@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { loadLangMode, saveLangMode } from "../lib/storage";
 import type { Lang, LangMode } from "../lib/types";
 import { LANG_NAMES } from "../lib/types";
-import { loadLangMode, saveLangMode } from "../lib/storage";
 
 // All valid language codes (BCP 47)
 const VALID_LANGS = Object.keys(LANG_NAMES) as Lang[];
@@ -11,7 +11,7 @@ export function useLang() {
   const { i18n } = useTranslation();
   const [langMode, setLangMode] = useState<LangMode>(() => loadLangMode());
 
-  const normalizeLang = (value?: string): Lang => {
+  const normalizeLang = useCallback((value?: string): Lang => {
     const lowerVal = value?.toLowerCase() ?? "";
 
     // Exact match first (for full BCP 47 codes)
@@ -20,7 +20,12 @@ export function useLang() {
     }
 
     // Cantonese (yue): yue, zh-yue, zh-hk, zh-mo
-    if (lowerVal === "yue" || lowerVal.startsWith("zh-yue") || lowerVal === "zh-hk" || lowerVal === "zh-mo") {
+    if (
+      lowerVal === "yue" ||
+      lowerVal.startsWith("zh-yue") ||
+      lowerVal === "zh-hk" ||
+      lowerVal === "zh-mo"
+    ) {
       return "yue";
     }
     // Traditional Chinese (zh-TW): zh-tw, zh-hant
@@ -45,9 +50,9 @@ export function useLang() {
     }
     // Default to English
     return "en-US";
-  };
+  }, []);
 
-  const detectAutoLang = (): Lang => {
+  const detectAutoLang = useCallback((): Lang => {
     if (typeof navigator !== "undefined") {
       const browserLang = navigator.languages?.[0] ?? navigator.language;
       return normalizeLang(browserLang);
@@ -56,12 +61,7 @@ export function useLang() {
       return normalizeLang(document.documentElement.lang);
     }
     return "en-US";
-  };
-
-  const detectedLang: Lang = useMemo(
-    () => normalizeLang(i18n.language),
-    [i18n.language]
-  );
+  }, [normalizeLang]);
 
   const lang: Lang = langMode === "auto" ? detectAutoLang() : langMode;
 
@@ -71,7 +71,7 @@ export function useLang() {
     if (i18n.language !== nextLang) {
       i18n.changeLanguage(nextLang);
     }
-  }, [langMode, i18n]);
+  }, [langMode, i18n, detectAutoLang]);
 
   return { lang, langMode, setLangMode };
 }

@@ -19,10 +19,26 @@ export default function DefectsPage() {
       </div>
       <div className="grid gap-6 md:grid-cols-4">
         {[
-          { labelKey: "common.severity.critical", value: "2", color: "bg-red-100 text-red-700 dark:bg-red-900/30" },
-          { labelKey: "common.severity.high", value: "5", color: "bg-orange-100 text-orange-700 dark:bg-orange-900/30" },
-          { labelKey: "common.severity.medium", value: "12", color: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30" },
-          { labelKey: "common.severity.low", value: "8", color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30" }
+          {
+            labelKey: "common.severity.critical",
+            value: "2",
+            color: "bg-red-100 text-red-700 dark:bg-red-900/30",
+          },
+          {
+            labelKey: "common.severity.high",
+            value: "5",
+            color: "bg-orange-100 text-orange-700 dark:bg-orange-900/30",
+          },
+          {
+            labelKey: "common.severity.medium",
+            value: "12",
+            color: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30",
+          },
+          {
+            labelKey: "common.severity.low",
+            value: "8",
+            color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30",
+          },
         ].map((stat) => (
           <div key={stat.labelKey} className={`card ${stat.color}`}>
             <p className="text-sm font-medium">{t(stat.labelKey)}</p>

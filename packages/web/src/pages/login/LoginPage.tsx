@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Alert, Button, Form, Input, Spin } from "antd";
 import type { User } from "@acme/types";
+import { Alert, Button, Form, Input, Spin } from "antd";
+import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { trpc } from "../../lib/trpc";
 
 type LoginPageProps = {
@@ -10,7 +10,10 @@ type LoginPageProps = {
   initialMode?: "login" | "register";
 };
 
-export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageProps) {
+export default function LoginPage({
+  onLogin,
+  initialMode = "login",
+}: LoginPageProps) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const loginMutation = trpc.auth.login.useMutation();
@@ -26,14 +29,18 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
   const hasValidInvitation = !!invitationCode;
 
   const [mode, setMode] = useState<"login" | "register">(initialMode);
-  const error = (mode === "login" ? loginMutation.error : registerMutation.error)?.message;
+  const error = (
+    mode === "login" ? loginMutation.error : registerMutation.error
+  )?.message;
   const { t } = useTranslation();
   const redirect = searchParams.get("redirect");
-  const redirectQuery = redirect ? `?redirect=${encodeURIComponent(redirect)}` : "";
+  const redirectQuery = redirect
+    ? `?redirect=${encodeURIComponent(redirect)}`
+    : "";
   const [form] = Form.useForm();
   const submitDisabled = useMemo(
     () => loginMutation.isPending || registerMutation.isPending,
-    [loginMutation.isPending, registerMutation.isPending]
+    [loginMutation.isPending, registerMutation.isPending],
   );
 
   useEffect(() => {
@@ -44,7 +51,7 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
       setMode(initialMode);
     }
     form.resetFields();
-  }, [initialMode, hasValidInvitation]);
+  }, [initialMode, hasValidInvitation, form.resetFields]);
 
   // 如果正在检查注册状态，显示加载
   if (registrationStatusQuery.isLoading) {
@@ -80,10 +87,12 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
               if (mode === "login") {
                 const result = await loginMutation.mutateAsync({
                   email: values.email,
-                  password: values.password
+                  password: values.password,
                 });
                 onLogin(result.user as User);
-                navigate(redirect || `/dashboard/${result.defaultWorkspaceSlug}`);
+                navigate(
+                  redirect || `/dashboard/${result.defaultWorkspaceSlug}`,
+                );
                 return;
               }
 
@@ -91,7 +100,7 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
                 name: values.name?.trim(),
                 email: values.email,
                 password: values.password,
-                invitationCode: invitationCode ?? undefined
+                invitationCode: invitationCode ?? undefined,
               });
               onLogin(result.user as User);
               navigate(redirect || `/dashboard/${result.defaultWorkspaceSlug}`);
@@ -102,7 +111,11 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
               name="email"
               rules={[{ required: true, message: t("login.email") }]}
             >
-              <Input type="email" placeholder={t("login.emailPlaceholder")} size="large" />
+              <Input
+                type="email"
+                placeholder={t("login.emailPlaceholder")}
+                size="large"
+              />
             </Form.Item>
 
             <Form.Item
@@ -110,20 +123,30 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
               name="password"
               rules={[{ required: true, message: t("login.password") }]}
             >
-              <Input.Password placeholder={t("login.passwordPlaceholder")} size="large" />
+              <Input.Password
+                placeholder={t("login.passwordPlaceholder")}
+                size="large"
+              />
             </Form.Item>
 
             {mode === "register" ? (
               <Form.Item
                 label={t("login.userName")}
                 name="name"
-                rules={[{ required: true, message: t("login.userNameRequired") }]}
+                rules={[
+                  { required: true, message: t("login.userNameRequired") },
+                ]}
               >
-                <Input placeholder={t("login.userNamePlaceholder")} size="large" />
+                <Input
+                  placeholder={t("login.userNamePlaceholder")}
+                  size="large"
+                />
               </Form.Item>
             ) : null}
 
-            {error ? <Alert type="error" message={error} showIcon className="mb-4" /> : null}
+            {error ? (
+              <Alert type="error" message={error} showIcon className="mb-4" />
+            ) : null}
 
             <Button
               type="primary"
@@ -150,8 +173,14 @@ export default function LoginPage({ onLogin, initialMode = "login" }: LoginPageP
                   setMode(nextMode);
                   form.resetFields();
                   // 保留邀请码参数
-                  const inviteParam = invitationCode ? `&invite=${invitationCode}` : "";
-                  navigate(nextMode === "login" ? `/login${redirectQuery}` : `/register${redirectQuery}${inviteParam}`);
+                  const inviteParam = invitationCode
+                    ? `&invite=${invitationCode}`
+                    : "";
+                  navigate(
+                    nextMode === "login"
+                      ? `/login${redirectQuery}`
+                      : `/register${redirectQuery}${inviteParam}`,
+                  );
                 }}
               >
                 {mode === "login"

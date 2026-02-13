@@ -1,16 +1,27 @@
-import { useState, useEffect, useRef } from "react";
-import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Avatar, Button, Dropdown, Menu, Drawer } from "antd";
-import { GlobalOutlined, BulbOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import type { User } from "@acme/types";
-import type { Theme, Lang, LangMode, ThemeMode } from "../../lib/types";
-import { LANG_NAMES } from "../../lib/types";
+import {
+  BulbOutlined,
+  CloseOutlined,
+  GlobalOutlined,
+  MenuOutlined,
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import { Button, Drawer, Dropdown, Menu } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
 import { trpc } from "../../lib/trpc";
-import { UserMenu, UserSettingsModal, SystemSettingsModal } from "../account";
-import { menuConfig, findMenuKeysByPath, getRouteFromKey, getDefaultOpenKeys, type MenuItemConfig } from "./constants";
-import type { MenuProps } from "antd";
+import type { Lang, LangMode, Theme, ThemeMode } from "../../lib/types";
+import { LANG_NAMES } from "../../lib/types";
+import { SystemSettingsModal, UserMenu, UserSettingsModal } from "../account";
+import {
+  findMenuKeysByPath,
+  getDefaultOpenKeys,
+  getRouteFromKey,
+  type MenuItemConfig,
+  menuConfig,
+} from "./constants";
 
 type SingleWorkspaceDashboardLayoutProps = {
   user: User | null;
@@ -26,7 +37,7 @@ type SingleWorkspaceDashboardLayoutProps = {
 
 export default function SingleWorkspaceDashboardLayout({
   user,
-  lang,
+  lang: _lang,
   langMode,
   theme,
   themeMode,
@@ -44,7 +55,7 @@ export default function SingleWorkspaceDashboardLayout({
     if (user) {
       updateProfileMutation.mutate(
         { settings: { themeMode: mode } },
-        { onSuccess: (updatedUser: User) => onUpdateUser(updatedUser) }
+        { onSuccess: (updatedUser: User) => onUpdateUser(updatedUser) },
       );
     }
   };
@@ -54,7 +65,7 @@ export default function SingleWorkspaceDashboardLayout({
     if (user) {
       updateProfileMutation.mutate(
         { settings: { langMode: mode } },
-        { onSuccess: (updatedUser: User) => onUpdateUser(updatedUser) }
+        { onSuccess: (updatedUser: User) => onUpdateUser(updatedUser) },
       );
     }
   };
@@ -63,14 +74,14 @@ export default function SingleWorkspaceDashboardLayout({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const langItems = Object.entries(LANG_NAMES).map(([key, label]) => ({
     key,
-    label
+    label,
   }));
   langItems.unshift({ key: "auto", label: t("common.auto") });
 
   const themeItems = [
     { key: "auto", label: t("common.auto") },
     { key: "light", label: t("common.light") },
-    { key: "dark", label: t("common.dark") }
+    { key: "dark", label: t("common.dark") },
   ];
   const location = useLocation();
   const navigate = useNavigate();
@@ -113,7 +124,9 @@ export default function SingleWorkspaceDashboardLayout({
   // 根据当前路径计算激活的菜单 keys
   const basePath = "/dashboard";
   const selectedKeys = findMenuKeysByPath(location.pathname, basePath);
-  const [openKeys, setOpenKeys] = useState<string[]>(() => getDefaultOpenKeys(selectedKeys));
+  const [openKeys, setOpenKeys] = useState<string[]>(() =>
+    getDefaultOpenKeys(selectedKeys),
+  );
 
   // 当选中项变化时，自动展开父级菜单
   useEffect(() => {
@@ -122,7 +135,7 @@ export default function SingleWorkspaceDashboardLayout({
       const newKeys = new Set([...prev, ...defaultOpenKeys]);
       return Array.from(newKeys);
     });
-  }, [selectedKeys.join(",")]);
+  }, [selectedKeys]);
 
   const handleMenuClick = (key: string) => {
     const routeSuffix = getRouteFromKey(key);
@@ -186,7 +199,7 @@ export default function SingleWorkspaceDashboardLayout({
               onClick={({ key }) => handleMenuClick(key)}
               className="border-none bg-transparent"
               theme={theme === "dark" ? "dark" : "light"}
-              style={{ borderInlineEnd: 'none' }}
+              style={{ borderInlineEnd: "none" }}
             />
           </nav>
         </aside>
@@ -206,19 +219,29 @@ export default function SingleWorkspaceDashboardLayout({
                 trigger={["hover"]}
                 menu={{
                   items: langItems,
-                  onClick: ({ key }) => handleLangModeChange(key as LangMode)
+                  onClick: ({ key }) => handleLangModeChange(key as LangMode),
                 }}
               >
-                <Button size="middle" shape="circle" type="text" icon={<GlobalOutlined />} />
+                <Button
+                  size="middle"
+                  shape="circle"
+                  type="text"
+                  icon={<GlobalOutlined />}
+                />
               </Dropdown>
               <Dropdown
                 trigger={["hover"]}
                 menu={{
                   items: themeItems,
-                  onClick: ({ key }) => handleThemeModeChange(key as ThemeMode)
+                  onClick: ({ key }) => handleThemeModeChange(key as ThemeMode),
                 }}
               >
-                <Button size="middle" shape="circle" type="text" icon={<BulbOutlined />} />
+                <Button
+                  size="middle"
+                  shape="circle"
+                  type="text"
+                  icon={<BulbOutlined />}
+                />
               </Dropdown>
               <UserMenu
                 user={user}
@@ -288,7 +311,7 @@ export default function SingleWorkspaceDashboardLayout({
               onClick={({ key }) => handleMenuClick(key)}
               className="border-none bg-transparent"
               theme={theme === "dark" ? "dark" : "light"}
-              style={{ borderInlineEnd: 'none' }}
+              style={{ borderInlineEnd: "none" }}
             />
           </nav>
         </div>

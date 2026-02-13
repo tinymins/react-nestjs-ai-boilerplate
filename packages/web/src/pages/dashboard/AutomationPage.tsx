@@ -21,10 +21,12 @@ export default function AutomationPage() {
         {[
           { labelKey: "dashboard.automation.totalScripts", value: "324" },
           { labelKey: "dashboard.automation.successRate", value: "94%" },
-          { labelKey: "dashboard.automation.avgDuration", value: "12m" }
+          { labelKey: "dashboard.automation.avgDuration", value: "12m" },
         ].map((stat) => (
           <div key={stat.labelKey} className="card">
-            <p className="text-sm text-slate-500 dark:text-slate-400">{t(stat.labelKey)}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              {t(stat.labelKey)}
+            </p>
             <p className="mt-2 text-3xl font-semibold">{stat.value}</p>
           </div>
         ))}

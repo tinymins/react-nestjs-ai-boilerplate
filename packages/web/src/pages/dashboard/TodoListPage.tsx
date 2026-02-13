@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { trpc } from "../../lib/trpc";
 
 export default function TodoListPage() {
@@ -10,26 +10,26 @@ export default function TodoListPage() {
   const utils = trpc.useUtils();
 
   const todosQuery = trpc.todo.list.useQuery(undefined, {
-    enabled: Boolean(workspace)
+    enabled: Boolean(workspace),
   });
 
   const createMutation = trpc.todo.create.useMutation({
     onSuccess: async () => {
       await utils.todo.list.invalidate();
       setNewTodo("");
-    }
+    },
   });
 
   const updateMutation = trpc.todo.update.useMutation({
     onSuccess: async () => {
       await utils.todo.list.invalidate();
-    }
+    },
   });
 
   const deleteMutation = trpc.todo.delete.useMutation({
     onSuccess: async () => {
       await utils.todo.list.invalidate();
-    }
+    },
   });
 
   const toggleTodo = (id: string) => {
@@ -40,25 +40,31 @@ export default function TodoListPage() {
 
   const addTodo = () => {
     if (!newTodo.trim()) return;
-    createMutation.mutate({ title: newTodo.trim(), category: t("dashboard.todoList.defaultCategory") });
+    createMutation.mutate({
+      title: newTodo.trim(),
+      category: t("dashboard.todoList.defaultCategory"),
+    });
   };
 
   const todos = todosQuery.data ?? [];
   const categories = useMemo(
     () => [...new Set(todos.map((todo) => todo.category))],
-    [todos]
+    [todos],
   );
   const completedCount = todos.filter((todo) => todo.completed).length;
   const totalCount = todos.length;
-  const progress = totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
+  const progress =
+    totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
   const categoryStats = useMemo(
     () =>
       categories.map((category) => ({
         category,
-        completed: todos.filter((todo) => todo.category === category && todo.completed).length,
-        total: todos.filter((todo) => todo.category === category).length
+        completed: todos.filter(
+          (todo) => todo.category === category && todo.completed,
+        ).length,
+        total: todos.filter((todo) => todo.category === category).length,
       })),
-    [categories, todos]
+    [categories, todos],
   );
 
   return (
@@ -82,7 +88,8 @@ export default function TodoListPage() {
               {progress}%
             </div>
             <div className="text-sm text-slate-500 dark:text-slate-400">
-              {completedCount} / {totalCount} {t("dashboard.todoList.completed")}
+              {completedCount} / {totalCount}{" "}
+              {t("dashboard.todoList.completed")}
             </div>
           </div>
         </div>
@@ -121,8 +128,10 @@ export default function TodoListPage() {
       {/* Todo List by Category */}
       <div className="grid gap-6 lg:grid-cols-2">
         {categories.map((category) => {
-          const categoryTodos = todos.filter(t => t.category === category);
-          const categoryCompleted = categoryTodos.filter(t => t.completed).length;
+          const categoryTodos = todos.filter((t) => t.category === category);
+          const categoryCompleted = categoryTodos.filter(
+            (t) => t.completed,
+          ).length;
           const allCompleted = categoryCompleted === categoryTodos.length;
 
           return (
@@ -131,29 +140,46 @@ export default function TodoListPage() {
                 <h3 className="text-lg font-semibold flex items-center gap-2">
                   {allCompleted ? "✅" : "📦"} {category}
                 </h3>
-                <span className={`text-sm px-2 py-1 rounded-full ${
-                  allCompleted
-                    ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
-                    : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
-                }`}>
+                <span
+                  className={`text-sm px-2 py-1 rounded-full ${
+                    allCompleted
+                      ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
+                      : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+                  }`}
+                >
                   {categoryCompleted}/{categoryTodos.length}
                 </span>
               </div>
               <div className="space-y-2">
                 {categoryTodos.map((todo) => (
+                  // biome-ignore lint/a11y/useSemanticElements: complex layout requires div wrapper
                   <div
                     key={todo.id}
+                    role="button"
+                    tabIndex={0}
                     onClick={() => toggleTodo(todo.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ")
+                        toggleTodo(todo.id);
+                    }}
                     className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-all ${
                       todo.completed
                         ? "border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20"
                         : "border-slate-200 bg-white hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
                     }`}
                   >
-                    <span className={`text-lg ${todo.completed ? "text-green-500" : "text-slate-300"}`}>
+                    <span
+                      className={`text-lg ${todo.completed ? "text-green-500" : "text-slate-300"}`}
+                    >
                       {todo.completed ? "✓" : "○"}
                     </span>
-                    <span className={todo.completed ? "line-through text-slate-400" : "text-slate-700 dark:text-slate-200"}>
+                    <span
+                      className={
+                        todo.completed
+                          ? "line-through text-slate-400"
+                          : "text-slate-700 dark:text-slate-200"
+                      }
+                    >
                       {todo.title}
                     </span>
                     <button

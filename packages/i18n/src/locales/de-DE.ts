@@ -28,17 +28,17 @@ export const deDE = {
         critical: "Kritisch",
         high: "Hoch",
         medium: "Mittel",
-        low: "Niedrig"
+        low: "Niedrig",
       },
       theme: {
         light: "Hell",
-        dark: "Dunkel"
-      }
+        dark: "Dunkel",
+      },
     },
     userMenu: {
       account: "Kontoeinstellungen",
       admin: "Admin-Bereich",
-      signOut: "Abmelden"
+      signOut: "Abmelden",
     },
     userSettings: {
       title: "Kontoeinstellungen",
@@ -68,7 +68,7 @@ export const deDE = {
       confirmPasswordRequired: "Bitte bestätigen Sie das neue Passwort",
       confirmPasswordPlaceholder: "Neues Passwort erneut eingeben",
       passwordMismatch: "Passwörter stimmen nicht überein",
-      changePassword: "Passwort ändern"
+      changePassword: "Passwort ändern",
     },
     createWorkspace: {
       title: "Neuen Arbeitsbereich erstellen",
@@ -85,7 +85,7 @@ export const deDE = {
       slugPattern: "Nur Kleinbuchstaben, Zahlen und Bindestriche erlaubt",
       slugExtra: "Wird in der URL verwendet, z.B.: /dashboard/{{slug}}",
       descLabel: "Beschreibung",
-      descPlaceholder: "Kurze Beschreibung des Arbeitsbereichs..."
+      descPlaceholder: "Kurze Beschreibung des Arbeitsbereichs...",
     },
     nav: {
       items: [
@@ -93,10 +93,10 @@ export const deDE = {
         { label: "Lösungen", href: "/#solutions" },
         { label: "Workflow", href: "/#workflow" },
         { label: "AI-Funktionen", href: "/#ai" },
-        { label: "Preise", href: "/#plans" }
+        { label: "Preise", href: "/#plans" },
       ],
       login: "Anmelden",
-      dashboard: "Dashboard"
+      dashboard: "Dashboard",
     },
     hero: {
       badge: "AI TestOps",
@@ -110,13 +110,13 @@ export const deDE = {
         "✓ Anforderungsanalyse abgeschlossen · 12 Szenarien",
         "✓ Testmatrix generiert · Abdeckung 92%",
         "→ Automatisierte Regression wird geplant · 18/24",
-        "→ Risikobewertung läuft · 8%"
+        "→ Risikobewertung läuft · 8%",
       ],
       metrics: [
         { label: "End-to-End-Automatisierung", value: "90%" },
         { label: "Liefervisualisierung", value: "100%" },
-        { label: "Effizienzsteigerung", value: "3x" }
-      ]
+        { label: "Effizienzsteigerung", value: "3x" },
+      ],
     },
     overview: {
       title: "Machen Sie Tests zum Kernmotor der kontinuierlichen Lieferung",
@@ -129,8 +129,8 @@ export const deDE = {
           bullets: [
             "Automatische Testbereichs-Generierung und Abdeckungsvorschläge",
             "Test-Assets werden als wiederverwendbare Wissensbasis gespeichert",
-            "Ein-Klick-Release-Gates und Qualitäts-Dashboards"
-          ]
+            "Ein-Klick-Release-Gates und Qualitäts-Dashboards",
+          ],
         },
         {
           title: "Einheitliche Qualitätsoperations-Perspektive",
@@ -138,68 +138,68 @@ export const deDE = {
           bullets: [
             "Automatische Erkennung von Testaktivitätsfortschritt und Blockaden",
             "Defekttrends und Regression-Prioritätsvorschläge",
-            "Kontinuierliche Optimierung der Qualitäts-KPIs"
-          ]
-        }
-      ]
+            "Kontinuierliche Optimierung der Qualitäts-KPIs",
+          ],
+        },
+      ],
     },
     pillars: {
       title: "Plattform-Fähigkeitsmatrix",
       items: [
         {
           title: "Anforderungsgesteuert",
-          desc: "Automatische Generierung von Testumfang und Abdeckungsvorschlägen aus PRD/User Stories."
+          desc: "Automatische Generierung von Testumfang und Abdeckungsvorschlägen aus PRD/User Stories.",
         },
         {
           title: "Intelligentes Design",
-          desc: "AI vervollständigt automatisch Testfälle, Daten und Assertionen, unterstützt Template-Wiederverwendung."
+          desc: "AI vervollständigt automatisch Testfälle, Daten und Assertionen, unterstützt Template-Wiederverwendung.",
         },
         {
           title: "Ausführungsorchestrierung",
-          desc: "Einheitliche Planung von manuellen und automatisierten Tests, Echtzeit-Fortschritts-Feedback."
+          desc: "Einheitliche Planung von manuellen und automatisierten Tests, Echtzeit-Fortschritts-Feedback.",
         },
         {
           title: "Qualitätseinblicke",
-          desc: "Risiko-Heatmaps, Defekttrends, Abdeckung und Qualitäts-Gates."
+          desc: "Risiko-Heatmaps, Defekttrends, Abdeckung und Qualitäts-Gates.",
         },
         {
           title: "Wissensakkumulation",
-          desc: "Test-Assets werden als Wissensbasis gespeichert und kontinuierlich optimiert."
+          desc: "Test-Assets werden als Wissensbasis gespeichert und kontinuierlich optimiert.",
         },
         {
           title: "Governance & Compliance",
-          desc: "Prozessaudits, Berechtigungsmatrix, nachvollziehbare Lieferung."
-        }
-      ]
+          desc: "Prozessaudits, Berechtigungsmatrix, nachvollziehbare Lieferung.",
+        },
+      ],
     },
     flow: {
       title: "End-to-End TestOps-Engine",
       steps: [
         {
           title: "Anforderungserfassung",
-          desc: "Unterstützt Tickets, PRD, API-Dokumentation und Anforderungsvorlagen, erstellt automatisch Testumfang."
+          desc: "Unterstützt Tickets, PRD, API-Dokumentation und Anforderungsvorlagen, erstellt automatisch Testumfang.",
         },
         {
           title: "Testplanung",
-          desc: "AI generiert Testmatrix, Risikobewertung und Testressourcenplanung."
+          desc: "AI generiert Testmatrix, Risikobewertung und Testressourcenplanung.",
         },
         {
           title: "Testdesign",
-          desc: "Generiert Testfälle, Daten und Ausführungsskripte aus Modellen und historischen Assets."
+          desc: "Generiert Testfälle, Daten und Ausführungsskripte aus Modellen und historischen Assets.",
         },
         {
           title: "Testausführung",
-          desc: "Einheitliche Planung von Automatisierung, manuellen, Performance- und Sicherheitstestaktivitäten."
+          desc: "Einheitliche Planung von Automatisierung, manuellen, Performance- und Sicherheitstestaktivitäten.",
         },
         {
           title: "Defektmanagement",
-          desc: "Intelligentes Clustering, Ursachenanalyse, Regressionsvorschläge und Auswirkungsbewertung."
+          desc: "Intelligentes Clustering, Ursachenanalyse, Regressionsvorschläge und Auswirkungsbewertung.",
         },
         {
           title: "Testberichte",
-          desc: "Automatische Generierung von mehrdimensionalen Qualitätsberichten, unterstützt Release-Gates."
-        }
-      ]
+          desc: "Automatische Generierung von mehrdimensionalen Qualitätsberichten, unterstützt Release-Gates.",
+        },
+      ],
     },
     testing: {
       badge: "AI-gestützte Tests",
@@ -208,28 +208,28 @@ export const deDE = {
       capabilities: [
         {
           title: "HTTP / REST API",
-          desc: "Umfassende HTTP-Schnittstellentests, unterstützt RESTful, GraphQL, WebSocket"
+          desc: "Umfassende HTTP-Schnittstellentests, unterstützt RESTful, GraphQL, WebSocket",
         },
         {
           title: "gRPC",
-          desc: "Hochleistungs-gRPC-Servicetests, unterstützt Unary- und Streaming-Aufrufe"
+          desc: "Hochleistungs-gRPC-Servicetests, unterstützt Unary- und Streaming-Aufrufe",
         },
         {
           title: "Mobile UI",
-          desc: "iOS / Android native App-Automatisierungstests, unterstützt echte Geräte und Emulatoren"
+          desc: "iOS / Android native App-Automatisierungstests, unterstützt echte Geräte und Emulatoren",
         },
         {
           title: "Browser-Tests",
-          desc: "Chrome / Firefox / Safari / Edge Cross-Browser-Automatisierungstests"
+          desc: "Chrome / Firefox / Safari / Edge Cross-Browser-Automatisierungstests",
         },
         {
           title: "Windows-Desktop",
-          desc: "Windows-Desktop-App-Automatisierung, unterstützt WinUI / WPF / Win32"
+          desc: "Windows-Desktop-App-Automatisierung, unterstützt WinUI / WPF / Win32",
         },
         {
           title: "AI Intelligente Planung",
-          desc: "Automatische Generierung von Testfällen basierend auf Anforderungen, intelligente Erkennung von Testszenarien und Randbedingungen"
-        }
+          desc: "Automatische Generierung von Testfällen basierend auf Anforderungen, intelligente Erkennung von Testszenarien und Randbedingungen",
+        },
       ],
       aiFlowSteps: [
         { step: "Anforderungen", icon: "📄" },
@@ -237,29 +237,29 @@ export const deDE = {
         { step: "Testplanung", icon: "📋" },
         { step: "Fallerstellung", icon: "✨" },
         { step: "Auto-Ausführung", icon: "🚀" },
-        { step: "Smart-Bericht", icon: "📊" }
-      ]
+        { step: "Smart-Bericht", icon: "📊" },
+      ],
     },
     ai: {
       title: "AI-First Kernfunktionen",
       items: [
         {
           title: "Anforderungsverständnis-Engine",
-          desc: "Extrahiert Schlüsselszenarien aus dem Kontext, generiert Testumfang und Risiko-Tags."
+          desc: "Extrahiert Schlüsselszenarien aus dem Kontext, generiert Testumfang und Risiko-Tags.",
         },
         {
           title: "Test-Asset-Generierung",
-          desc: "Automatische Generierung von Testfällen, Daten, API-Testskripten und Testdokumentation."
+          desc: "Automatische Generierung von Testfällen, Daten, API-Testskripten und Testdokumentation.",
         },
         {
           title: "Ausführungs-Intelligenter Assistent",
-          desc: "Bietet Echtzeit-Blockierungsgründe, Behebungsvorschläge und Regression-Prioritäten."
+          desc: "Bietet Echtzeit-Blockierungsgründe, Behebungsvorschläge und Regression-Prioritäten.",
         },
         {
           title: "Berichtseinblicke",
-          desc: "Generiert Management-Perspektive-Berichte und Release-Entscheidungsempfehlungen."
-        }
-      ]
+          desc: "Generiert Management-Perspektive-Berichte und Release-Entscheidungsempfehlungen.",
+        },
+      ],
     },
     integrations: {
       title: "Nahtlose Integration in das Entwicklungsökosystem",
@@ -269,8 +269,8 @@ export const deDE = {
         "Jenkins / GitHub Actions / Argo",
         "Postman / Playwright / Cypress",
         "SonarQube / Sentry / Datadog",
-        "Enterprise-IM und Benachrichtigungszentrum"
-      ]
+        "Enterprise-IM und Benachrichtigungszentrum",
+      ],
     },
     security: {
       title: "Enterprise-Sicherheit und Governance",
@@ -279,18 +279,20 @@ export const deDE = {
         "Datenverschlüsselung und Audit-Logs",
         "Multi-Region-Deployment und Disaster Recovery",
         "Compliance-Prozesse und Release-Gates",
-        "Asset-Versionierung und Genehmigungen"
-      ]
+        "Asset-Versionierung und Genehmigungen",
+      ],
     },
     cta: {
-      title: "Beginnen Sie mit dem Aufbau eines AI-gesteuerten End-to-End-Testprozesses",
+      title:
+        "Beginnen Sie mit dem Aufbau eines AI-gesteuerten End-to-End-Testprozesses",
       desc: "Machen Sie Ihr Testteam zum strategischen Motor der Entwicklungslieferung.",
       primary: "Lösung anfragen",
-      secondary: "Testversion beantragen"
+      secondary: "Testversion beantragen",
     },
     closing: {
       title: "Lassen Sie Tests wie Code kontinuierlich weiterentwickeln",
-      subtitle: "AI TestOps · Verbindet Anforderungen, Qualität und Lieferung in jeder Iteration"
+      subtitle:
+        "AI TestOps · Verbindet Anforderungen, Qualität und Lieferung in jeder Iteration",
     },
     login: {
       title: "Bei TestOps AI anmelden",
@@ -298,7 +300,8 @@ export const deDE = {
       password: "Passwort",
       submit: "Anmelden",
       loading: "Anmeldung läuft...",
-      invitedRegister: "Sie wurden eingeladen, bitte registrieren Sie ein Konto",
+      invitedRegister:
+        "Sie wurden eingeladen, bitte registrieren Sie ein Konto",
       firstAdmin: "Erstes Administratorkonto erstellen",
       pleaseLogin: "Bitte melden Sie sich an",
       userName: "Benutzername",
@@ -310,32 +313,35 @@ export const deDE = {
       registrationDisabled: "Registrierung ist derzeit nicht verfügbar",
       backToLogin: "Zurück zur Anmeldung",
       emailPlaceholder: "E-Mail eingeben",
-      passwordPlaceholder: "Passwort eingeben"
+      passwordPlaceholder: "Passwort eingeben",
     },
     pages: {
       notFound: {
         title: "Seite nicht gefunden",
-        description: "Entschuldigung, die aufgerufene Seite existiert nicht oder wurde entfernt",
+        description:
+          "Entschuldigung, die aufgerufene Seite existiert nicht oder wurde entfernt",
         goHome: "Zur Startseite",
-        goBack: "Zurück"
+        goBack: "Zurück",
       },
       unauthorized: {
         title: "Zugriff verweigert",
-        description: "Entschuldigung, Sie haben keine Berechtigung, auf diese Seite zuzugreifen",
+        description:
+          "Entschuldigung, Sie haben keine Berechtigung, auf diese Seite zuzugreifen",
         goHome: "Zur Startseite",
-        reLogin: "Erneut anmelden"
+        reLogin: "Erneut anmelden",
       },
       workspaceNotFound: {
         title: "Arbeitsbereich nicht gefunden",
-        notFoundNamed: "Arbeitsbereich \"{{name}}\" wurde nicht gefunden",
+        notFoundNamed: 'Arbeitsbereich "{{name}}" wurde nicht gefunden',
         notFoundGeneric: "Der angeforderte Arbeitsbereich wurde nicht gefunden",
-        goBack: "Zurück zu Arbeitsbereichen"
+        goBack: "Zurück zu Arbeitsbereichen",
       },
       dashboardNotFound: {
         title: "Seite nicht gefunden",
-        description: "Entschuldigung, die aufgerufene Seite existiert nicht oder wurde verschoben",
-        goBack: "Zurück zum Dashboard"
-      }
+        description:
+          "Entschuldigung, die aufgerufene Seite existiert nicht oder wurde verschoben",
+        goBack: "Zurück zum Dashboard",
+      },
     },
     dashboard: {
       title: "Test-Operations-Center",
@@ -347,21 +353,29 @@ export const deDE = {
       noWorkspaceSelected: "Kein Arbeitsbereich ausgewählt",
       stats: ["Anforderungspool", "Laufende Tests", "Release-Gates"],
       promptTitle: "Bitte zuerst anmelden",
-      promptBody: "Nach der Anmeldung können Sie Test-Operations-Daten und den Arbeitsbereich einsehen.",
+      promptBody:
+        "Nach der Anmeldung können Sie Test-Operations-Daten und den Arbeitsbereich einsehen.",
       toLogin: "Zur Anmeldung",
       workspace: "Arbeitsbereich",
       workspaceSwitcher: {
-        switchWorkspace: "Arbeitsbereich wechseln"
+        switchWorkspace: "Arbeitsbereich wechseln",
       },
       insightTitle: "Qualitätseinblicke",
-      insightDesc: "Automatische Generierung von Risiko-Heatmaps, Abdeckung und Release-Gate-Empfehlungen.",
-      insightItems: ["Anforderungsabdeckung 92%", "Regressionsrisiko 8%", "Blockiert 3", "Ausstehend 5"],
+      insightDesc:
+        "Automatische Generierung von Risiko-Heatmaps, Abdeckung und Release-Gate-Empfehlungen.",
+      insightItems: [
+        "Anforderungsabdeckung 92%",
+        "Regressionsrisiko 8%",
+        "Blockiert 3",
+        "Ausstehend 5",
+      ],
       assistantTitle: "AI-Ausführungsassistent",
-      assistantDesc: "Erkennt automatisch Blockierungen, gibt Behebungsvorschläge und generiert Regression-Prioritäten.",
+      assistantDesc:
+        "Erkennt automatisch Blockierungen, gibt Behebungsvorschläge und generiert Regression-Prioritäten.",
       assistantItems: [
         "Anmeldeprozess zeigt ungewöhnliche Schwankungen, priorisierte Regression empfohlen",
         "Neue Version Zahlungs-API Abdeckung unzureichend 12%",
-        "Mobile Regression Defektkonvergenz verbessert um 20%"
+        "Mobile Regression Defektkonvergenz verbessert um 20%",
       ],
       menu: {
         workbench: "Arbeitsbereich",
@@ -397,20 +411,20 @@ export const deDE = {
         summary: "🎯 Zusammenfassung",
         noTodos: "Keine Aufgaben",
         menuLabel: "📋 Aufgabenliste",
-        defaultCategory: "Benutzerdefiniert"
+        defaultCategory: "Benutzerdefiniert",
       },
       defects: {
-        description: "Defekte verfolgen und Risiken bewerten"
+        description: "Defekte verfolgen und Risiken bewerten",
       },
       testDesign: {
         description: "Testfälle entwerfen und schreiben",
         caseLibrary: "Testfall-Bibliothek",
         newCase: "+ Neuer Testfall",
-        totalCases: "Insgesamt {{count}} Testfälle"
+        totalCases: "Insgesamt {{count}} Testfälle",
       },
       settings: {
         title: "Arbeitsbereich-Einstellungen",
-        subtitle: "Konfiguration und Mitglieder von \"{{name}}\" verwalten",
+        subtitle: 'Konfiguration und Mitglieder von "{{name}}" verwalten',
         workspaceNotFound: "Arbeitsbereich nicht gefunden",
         generalTab: "Allgemeine Einstellungen",
         membersTab: "Mitgliederverwaltung",
@@ -421,19 +435,25 @@ export const deDE = {
         workspaceNameLength: "Name muss 1-50 Zeichen lang sein",
         workspaceSlug: "Arbeitsbereich-ID (URL)",
         workspaceSlugRequired: "Bitte geben Sie eine ID ein",
-        workspaceSlugPattern: "Nur Kleinbuchstaben, Zahlen und Bindestriche erlaubt",
-        workspaceSlugExtra: "Wird in der URL verwendet, z.B.: /dashboard/my-project",
+        workspaceSlugPattern:
+          "Nur Kleinbuchstaben, Zahlen und Bindestriche erlaubt",
+        workspaceSlugExtra:
+          "Wird in der URL verwendet, z.B.: /dashboard/my-project",
         description: "Beschreibung",
         descriptionPlaceholder: "Kurze Beschreibung des Arbeitsbereichs...",
         workspaceDeleted: "Arbeitsbereich gelöscht",
         confirmDeleteTitle: "Arbeitsbereich löschen bestätigen",
-        confirmDeleteContent: "Sind Sie sicher, dass Sie den Arbeitsbereich \"{{name}}\" löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
-        confirmDeleteWarning: "Alle zugehörigen Daten (einschließlich Aufgaben) werden dauerhaft gelöscht.",
+        confirmDeleteContent:
+          'Sind Sie sicher, dass Sie den Arbeitsbereich "{{name}}" löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.',
+        confirmDeleteWarning:
+          "Alle zugehörigen Daten (einschließlich Aufgaben) werden dauerhaft gelöscht.",
         confirmDeleteOk: "Löschen bestätigen",
         deleteWorkspace: "Arbeitsbereich löschen",
-        deleteWorkspaceDesc: "Nach dem Löschen werden alle Daten dauerhaft entfernt und können nicht wiederhergestellt werden.",
+        deleteWorkspaceDesc:
+          "Nach dem Löschen werden alle Daten dauerhaft entfernt und können nicht wiederhergestellt werden.",
         memberList: "Mitgliederliste",
-        memberListDesc: "Arbeitsbereich-Mitglieder und Berechtigungen verwalten",
+        memberListDesc:
+          "Arbeitsbereich-Mitglieder und Berechtigungen verwalten",
         inviteMember: "Mitglied einladen",
         inviteModalTitle: "Mitglied einladen",
         sendInvite: "Einladung senden",
@@ -442,14 +462,16 @@ export const deDE = {
         emailInvalid: "Bitte geben Sie eine gültige E-Mail ein",
         role: "Rolle",
         memberDefault: "Mitglied (Standard)",
-        memberPermissionDesc: "Mitglieder können Inhalte im Arbeitsbereich anzeigen und bearbeiten",
+        memberPermissionDesc:
+          "Mitglieder können Inhalte im Arbeitsbereich anzeigen und bearbeiten",
         tableColumnMember: "Mitglied",
         tableColumnRole: "Rolle",
         tableColumnJoined: "Beitrittsdatum",
         tableColumnActions: "Aktionen",
         removeMemberComingSoon: "Mitglied-Entfernungsfunktion in Entwicklung",
-        inviteComingSoon: "Einladungsfunktion in Entwicklung: Einladungs-E-Mail wird an {{email}} gesendet",
-        workspaceOwner: "Arbeitsbereich-Ersteller"
+        inviteComingSoon:
+          "Einladungsfunktion in Entwicklung: Einladungs-E-Mail wird an {{email}} gesendet",
+        workspaceOwner: "Arbeitsbereich-Ersteller",
       },
       requirements: {
         description: "Produktanforderungen verwalten und verfolgen",
@@ -460,7 +482,7 @@ export const deDE = {
         recentRequirements: "Letzte Anforderungen",
         sampleTitle1: "Optimierung des Benutzeranmeldungsmoduls",
         sampleTitle2: "Upgrade der Zahlungsschnittstelle",
-        sampleTitle3: "Leistungsoptimierung der Bestellabfrage"
+        sampleTitle3: "Leistungsoptimierung der Bestellabfrage",
       },
       execution: {
         description: "Testaufgaben ausführen und Ergebnisse anzeigen",
@@ -468,28 +490,28 @@ export const deDE = {
         running: "Wird ausgeführt",
         passed: "Bestanden",
         failed: "Fehlgeschlagen",
-        blocked: "Blockiert"
+        blocked: "Blockiert",
       },
       automation: {
         description: "Automatisierte Testskripte und Ressourcen verwalten",
         workspaceLabel: "Arbeitsbereich",
         totalScripts: "Gesamtzahl Skripte",
         successRate: "Erfolgsquote",
-        avgDuration: "Durchschnittliche Ausführungszeit"
+        avgDuration: "Durchschnittliche Ausführungszeit",
       },
       reports: {
         description: "Qualitätsmetriken anzeigen und Berichte generieren",
         workspaceLabel: "Arbeitsbereich",
         testCoverage: "Testabdeckung",
         defectDensity: "Defektdichte",
-        automationRate: "Automatisierungsgrad"
+        automationRate: "Automatisierungsgrad",
       },
       testPlan: {
         description: "Testpläne planen und verwalten",
         workspaceLabel: "Arbeitsbereich",
         inProgress: "In Bearbeitung",
         completedThisWeek: "Diese Woche abgeschlossen",
-        avgCoverage: "Durchschnittliche Abdeckung"
+        avgCoverage: "Durchschnittliche Abdeckung",
       },
       testRequirements: {
         titleTotal: "Gesamtanforderungen",
@@ -556,7 +578,8 @@ export const deDE = {
         toastUpdateFail: "Aktualisierung fehlgeschlagen",
         toastDeleteSuccess: "Erfolgreich gelöscht",
         toastDeleteFail: "Löschen fehlgeschlagen",
-        markdownPlaceholder: "# Testanforderungsdetails\n\n## Testziel\nHaupttestziel beschreiben...\n\n## Testumfang\n- Punkt 1\n- Punkt 2\n\n## Testschritte\n1. Schritt eins\n2. Schritt zwei\n\n## Erwartete Ergebnisse\nErwartete Testergebnisse beschreiben...",
+        markdownPlaceholder:
+          "# Testanforderungsdetails\n\n## Testziel\nHaupttestziel beschreiben...\n\n## Testumfang\n- Punkt 1\n- Punkt 2\n\n## Testschritte\n1. Schritt eins\n2. Schritt zwei\n\n## Erwartete Ergebnisse\nErwartete Testergebnisse beschreiben...",
         statusLabels: {
           draft: "Entwurf",
           pending: "Ausstehende Überprüfung",
@@ -564,7 +587,7 @@ export const deDE = {
           in_progress: "In Bearbeitung",
           completed: "Abgeschlossen",
           rejected: "Abgelehnt",
-          cancelled: "Abgebrochen"
+          cancelled: "Abgebrochen",
         },
         typeLabels: {
           functional: "Funktionstest",
@@ -573,15 +596,15 @@ export const deDE = {
           usability: "Benutzerfreundlichkeitstest",
           compatibility: "Kompatibilitätstest",
           integration: "Integrationstest",
-          regression: "Regressionstest"
+          regression: "Regressionstest",
         },
         priorityLabels: {
           critical: "Dringend",
           high: "Hoch",
           medium: "Mittel",
-          low: "Niedrig"
-        }
-      }
+          low: "Niedrig",
+        },
+      },
     },
     aiWorkflow: {
       aiAutoProcess: "AI Vollautomatischer Prozess",
@@ -590,7 +613,8 @@ export const deDE = {
         desc: "Datei hierher ziehen oder klicken um auszuwählen",
         selectFile: "Datei auswählen",
         sampleFile: "E-Commerce-Plattform_Anforderungsspezifikation_v3.2.pdf",
-        sampleMeta: "3,8 MB · 156 Seiten · Enthält API-Schnittstellendokumentation"
+        sampleMeta:
+          "3,8 MB · 156 Seiten · Enthält API-Schnittstellendokumentation",
       },
       analyzing: {
         title: "AI analysiert Anforderungsdokument intelligent",
@@ -601,16 +625,16 @@ export const deDE = {
           "2. Produktverwaltungsmodul",
           "3. Bestellverarbeitungsmodul",
           "4. Zahlungs-Gateway-Modul",
-          "5. Logistikverfolgungsmodul"
+          "5. Logistikverfolgungsmodul",
         ],
         stats: [
           { label: "Funktionsmodule", value: "28" },
           { label: "Testpunkte", value: "186" },
           { label: "Randbedingungen", value: "42" },
-          { label: "API-Schnittstellen", value: "67" }
+          { label: "API-Schnittstellen", value: "67" },
         ],
         progress: "Analysefortschritt",
-        analyzing: "Wird analysiert..."
+        analyzing: "Wird analysiert...",
       },
       testPlan: {
         title: "AI erstellt Testplan",
@@ -621,34 +645,64 @@ export const deDE = {
           {
             module: "Benutzerverwaltung",
             priority: "Hoch",
-            items: ["Anmeldung/Registrierung", "Zugriffskontrolle", "Benutzerinfo", "OAuth-Integration"]
+            items: [
+              "Anmeldung/Registrierung",
+              "Zugriffskontrolle",
+              "Benutzerinfo",
+              "OAuth-Integration",
+            ],
           },
           {
             module: "Bestellverarbeitung",
             priority: "Hoch",
-            items: ["Bestellung erstellen", "Statusübergänge", "Rückerstattung", "Parallelitätskontrolle"]
+            items: [
+              "Bestellung erstellen",
+              "Statusübergänge",
+              "Rückerstattung",
+              "Parallelitätskontrolle",
+            ],
           },
           {
             module: "Zahlungs-Gateway",
             priority: "Kritisch",
-            items: ["PayPal", "Kreditkarte", "Banküberweisung", "Rückerstattungslogik"]
+            items: [
+              "PayPal",
+              "Kreditkarte",
+              "Banküberweisung",
+              "Rückerstattungslogik",
+            ],
           },
           {
             module: "Produktverwaltung",
             priority: "Mittel",
-            items: ["Produkt-CRUD", "Lagerverwaltung", "Preisberechnung", "Kategorieverwaltung"]
+            items: [
+              "Produkt-CRUD",
+              "Lagerverwaltung",
+              "Preisberechnung",
+              "Kategorieverwaltung",
+            ],
           },
           {
             module: "Logistikverfolgung",
             priority: "Mittel",
-            items: ["Versandabfrage", "Statussynchronisation", "Ausnahmebehandlung", "Multi-Channel-Integration"]
+            items: [
+              "Versandabfrage",
+              "Statussynchronisation",
+              "Ausnahmebehandlung",
+              "Multi-Channel-Integration",
+            ],
           },
           {
             module: "API-Gateway",
             priority: "Hoch",
-            items: ["Rate Limiting", "Authentifizierung", "Log-Tracing", "Versionskontrolle"]
-          }
-        ]
+            items: [
+              "Rate Limiting",
+              "Authentifizierung",
+              "Log-Tracing",
+              "Versionskontrolle",
+            ],
+          },
+        ],
       },
       generate: {
         title: "AI generiert Testfälle intelligent",
@@ -663,76 +717,151 @@ export const deDE = {
         scenarios: [
           {
             scenario: "Positiver Ablauftest",
-            desc: "Benutzeranmeldung → Produkte durchsuchen → Zum Warenkorb → Bestellen und bezahlen"
+            desc: "Benutzeranmeldung → Produkte durchsuchen → Zum Warenkorb → Bestellen und bezahlen",
           },
           {
             scenario: "Anomalie-Ablauftest",
-            desc: "Netzwerkunterbrechung, Timeout-Wiederholung, Parallelitätskonflikte"
+            desc: "Netzwerkunterbrechung, Timeout-Wiederholung, Parallelitätskonflikte",
           },
           {
             scenario: "Grenzwerttest",
-            desc: "Maximale Kaufmenge, Preisgrenzen, kritische Lagerbestände"
+            desc: "Maximale Kaufmenge, Preisgrenzen, kritische Lagerbestände",
           },
           {
             scenario: "Sicherheitstest",
-            desc: "SQL-Injection, XSS-Angriffe, unbefugter Zugriff"
-          }
+            desc: "SQL-Injection, XSS-Angriffe, unbefugter Zugriff",
+          },
         ],
         boundaries: [
-          { field: "Benutzername", min: "2 Zeichen", max: "32 Zeichen", special: "Sonderzeichen-Filterung" },
-          { field: "Passwort", min: "8 Zeichen", max: "128 Zeichen", special: "Stärkeprüfung" },
-          { field: "Produktpreis", min: "0,01", max: "999999,99", special: "Präzisionsbehandlung" },
-          { field: "Kaufmenge", min: "1", max: "9999", special: "Lagerprüfung" },
-          { field: "Gutscheinbetrag", min: "1", max: "Bestellbetrag", special: "Stapelregeln" },
-          { field: "Lieferadresse", min: "10 Zeichen", max: "200 Zeichen", special: "Adressauflösung" }
+          {
+            field: "Benutzername",
+            min: "2 Zeichen",
+            max: "32 Zeichen",
+            special: "Sonderzeichen-Filterung",
+          },
+          {
+            field: "Passwort",
+            min: "8 Zeichen",
+            max: "128 Zeichen",
+            special: "Stärkeprüfung",
+          },
+          {
+            field: "Produktpreis",
+            min: "0,01",
+            max: "999999,99",
+            special: "Präzisionsbehandlung",
+          },
+          {
+            field: "Kaufmenge",
+            min: "1",
+            max: "9999",
+            special: "Lagerprüfung",
+          },
+          {
+            field: "Gutscheinbetrag",
+            min: "1",
+            max: "Bestellbetrag",
+            special: "Stapelregeln",
+          },
+          {
+            field: "Lieferadresse",
+            min: "10 Zeichen",
+            max: "200 Zeichen",
+            special: "Adressauflösung",
+          },
         ],
         apis: [
-          { method: "POST", path: "/api/v1/users/login", desc: "Benutzeranmelde-API" },
-          { method: "GET", path: "/api/v1/products", desc: "Produktlistenabfrage" },
-          { method: "POST", path: "/api/v1/orders", desc: "Bestellung-erstellen-API" },
-          { method: "PUT", path: "/api/v1/orders/:id/status", desc: "Bestellstatus-Update" },
-          { method: "DELETE", path: "/api/v1/cart/items/:id", desc: "Warenkorb-Artikel löschen" }
+          {
+            method: "POST",
+            path: "/api/v1/users/login",
+            desc: "Benutzeranmelde-API",
+          },
+          {
+            method: "GET",
+            path: "/api/v1/products",
+            desc: "Produktlistenabfrage",
+          },
+          {
+            method: "POST",
+            path: "/api/v1/orders",
+            desc: "Bestellung-erstellen-API",
+          },
+          {
+            method: "PUT",
+            path: "/api/v1/orders/:id/status",
+            desc: "Bestellstatus-Update",
+          },
+          {
+            method: "DELETE",
+            path: "/api/v1/cart/items/:id",
+            desc: "Warenkorb-Artikel löschen",
+          },
         ],
         cases: "Fälle",
         browsers: [
           { browser: "Chrome", version: "v120+" },
           { browser: "Firefox", version: "v115+" },
           { browser: "Safari", version: "v17+" },
-          { browser: "Edge", version: "v118+" }
+          { browser: "Edge", version: "v118+" },
         ],
-        browserTests: ["Seiten-Rendering-Tests", "Interaktionsreaktions-Tests", "Formularvalidierungs-Tests", "Cross-Browser-Kompatibilität"],
+        browserTests: [
+          "Seiten-Rendering-Tests",
+          "Interaktionsreaktions-Tests",
+          "Formularvalidierungs-Tests",
+          "Cross-Browser-Kompatibilität",
+        ],
         iosPlatform: "iOS-Plattform",
         androidPlatform: "Android-Plattform",
         iosDevices: ["iPhone 15 Pro", "iPhone 14", "iPad Pro", "iPad Air"],
-        androidDevices: ["Pixel 8 Pro", "Samsung S24", "Xiaomi 14", "OPPO Find X7"],
+        androidDevices: [
+          "Pixel 8 Pro",
+          "Samsung S24",
+          "Xiaomi 14",
+          "OPPO Find X7",
+        ],
         summary: {
           types: [
             { type: "API-Tests", count: 562 },
             { type: "Browser-UI", count: 438 },
             { type: "Mobile iOS", count: 128 },
             { type: "Mobile Android", count: 139 },
-            { type: "Leistungstests", count: 86 }
+            { type: "Leistungstests", count: 86 },
           ],
           total: "1.353",
-          readyToExecute: "Testfälle generiert, bereit zur Ausführung"
-        }
+          readyToExecute: "Testfälle generiert, bereit zur Ausführung",
+        },
       },
       execute: {
         title: "AI führt Tests automatisch aus",
         desc: "Multi-Protokoll-Parallelausführung, Echtzeit-Fortschrittsüberwachung",
         lanes: [
-          { type: "HTTP / REST API", desc: "Umfassende HTTP-Schnittstellentests, unterstützt RESTful, GraphQL" },
-          { type: "gRPC-Dienste", desc: "Hochleistungs-gRPC-Tests, Unary / Streaming" },
-          { type: "Browser-Tests", desc: "Chrome / Firefox / Safari / Edge Cross-Browser" },
-          { type: "Mobile iOS", desc: "iPhone / iPad echte Geräte und Simulator-Tests" },
-          { type: "Mobile Android", desc: "Pixel / Samsung / Xiaomi Multi-Geräte-Abdeckung" }
+          {
+            type: "HTTP / REST API",
+            desc: "Umfassende HTTP-Schnittstellentests, unterstützt RESTful, GraphQL",
+          },
+          {
+            type: "gRPC-Dienste",
+            desc: "Hochleistungs-gRPC-Tests, Unary / Streaming",
+          },
+          {
+            type: "Browser-Tests",
+            desc: "Chrome / Firefox / Safari / Edge Cross-Browser",
+          },
+          {
+            type: "Mobile iOS",
+            desc: "iPhone / iPad echte Geräte und Simulator-Tests",
+          },
+          {
+            type: "Mobile Android",
+            desc: "Pixel / Samsung / Xiaomi Multi-Geräte-Abdeckung",
+          },
         ],
         stats: [
           { label: "Gesamt ausgeführt", value: "1.353" },
           { label: "Bestanden", value: "1.312" },
           { label: "Fehlgeschlagen", value: "28" },
-          { label: "Dauer", value: "4m 32s" }
-        ]
+          { label: "Dauer", value: "4m 32s" },
+        ],
       },
       report: {
         title: "AI erstellt professionellen Testbericht",
@@ -742,7 +871,7 @@ export const deDE = {
           { label: "Bestehensquote", value: "97,1%" },
           { label: "Abdeckung", value: "94,8%" },
           { label: "Gesamtfälle", value: "1.353" },
-          { label: "Defekte", value: "28" }
+          { label: "Defekte", value: "28" },
         ],
         chartTitle: "Testtyp-Verteilung",
         chartLabels: ["API", "UI", "iOS", "Android", "gRPC"],
@@ -751,69 +880,72 @@ export const deDE = {
           { module: "Zahlungsmodul", count: 12, severity: "Hoch" },
           { module: "Bestellmodul", count: 8, severity: "Mittel" },
           { module: "Benutzermodul", count: 5, severity: "Niedrig" },
-          { module: "Sonstige", count: 3, severity: "Niedrig" }
+          { module: "Sonstige", count: 3, severity: "Niedrig" },
         ],
         browserRecording: "Browser-Test-Aufzeichnung - Chrome",
         downloadReport: "Vollständigen Bericht herunterladen",
         shareReport: "Bericht teilen",
-        timeSaved: "Gesamtdauer 4 Min. 32 Sek. · 48+ Stunden manueller Arbeit eingespart"
-      }
-    },
-      errors: {
-        common: {
-          unauthorized: "Nicht angemeldet",
-          forbidden: "Zugriff verweigert",
-          requestFailed: "Anfrage fehlgeschlagen",
-          missingWorkspace: "Arbeitsbereich-Parameter fehlt",
-          workspaceForbidden: "Kein Zugriff auf diesen Arbeitsbereich",
-          adminRequired: "Administratorrechte erforderlich",
-          superadminRequired: "Super-Administratorrechte erforderlich"
-        },
-        auth: {
-          invalidCredentials: "E-Mail oder Passwort falsch",
-          defaultWorkspaceNotFound: "Standard-Arbeitsbereich nicht gefunden",
-          emailAlreadyRegistered: "E-Mail bereits registriert",
-          registrationDisabled: "Registrierung ist derzeit nicht verfügbar",
-          invitationInvalid: "Einladungscode ungültig oder bereits verwendet",
-          invitationExpired: "Einladungscode abgelaufen"
-        },
-        user: {
-          notFound: "Benutzer nicht gefunden",
-          emailInUse: "E-Mail bereits in Verwendung",
-          wrongPassword: "Falsches aktuelles Passwort"
-        },
-        workspace: {
-          notFound: "Arbeitsbereich nicht gefunden",
-          onlyOwnerCanUpdate: "Nur der Ersteller kann bearbeiten",
-          onlyOwnerCanDelete: "Nur der Ersteller kann löschen",
-          slugExists: "Slug existiert bereits",
-          slugReserved: "Diese ID ist systemreserviert, bitte verwenden Sie einen anderen Namen"
-        },
-        todo: {
-          notFound: "Aufgabe nicht gefunden"
-        },
-        testRequirement: {
-          notFound: "Testanforderung nicht gefunden",
-          createFetchFailed: "Datensatz nach Erstellung nicht abrufbar",
-          updateFetchFailed: "Datensatz nach Aktualisierung nicht abrufbar",
-          deleteChildrenFirst: "Bitte löschen Sie zuerst alle Unteranforderungen"
-        },
-        admin: {
-          cannotChangeOwnRole: "Eigene Rolle kann nicht geändert werden",
-          userNotFound: "Benutzer nicht gefunden",
-          usePersonalSettings: "Bitte ändern Sie Ihr Passwort in den persönlichen Einstellungen",
-          cannotDeleteSelf: "Eigenes Konto kann nicht gelöscht werden",
-          cannotDeleteSuperadmin: "Super-Admin kann nicht gelöscht werden",
-          emailAlreadyRegistered: "Diese E-Mail ist bereits registriert",
-          defaultWorkspaceDesc: "Standard-Arbeitsbereich",
-          workspaceSuffix: "s Arbeitsbereich",
-          sharedWorkspaceName: "Gemeinsamer Arbeitsbereich",
-          sharedWorkspaceDesc: "Systemweiter gemeinsamer Arbeitsbereich"
-        }
+        timeSaved:
+          "Gesamtdauer 4 Min. 32 Sek. · 48+ Stunden manueller Arbeit eingespart",
       },
+    },
+    errors: {
+      common: {
+        unauthorized: "Nicht angemeldet",
+        forbidden: "Zugriff verweigert",
+        requestFailed: "Anfrage fehlgeschlagen",
+        missingWorkspace: "Arbeitsbereich-Parameter fehlt",
+        workspaceForbidden: "Kein Zugriff auf diesen Arbeitsbereich",
+        adminRequired: "Administratorrechte erforderlich",
+        superadminRequired: "Super-Administratorrechte erforderlich",
+      },
+      auth: {
+        invalidCredentials: "E-Mail oder Passwort falsch",
+        defaultWorkspaceNotFound: "Standard-Arbeitsbereich nicht gefunden",
+        emailAlreadyRegistered: "E-Mail bereits registriert",
+        registrationDisabled: "Registrierung ist derzeit nicht verfügbar",
+        invitationInvalid: "Einladungscode ungültig oder bereits verwendet",
+        invitationExpired: "Einladungscode abgelaufen",
+      },
+      user: {
+        notFound: "Benutzer nicht gefunden",
+        emailInUse: "E-Mail bereits in Verwendung",
+        wrongPassword: "Falsches aktuelles Passwort",
+      },
+      workspace: {
+        notFound: "Arbeitsbereich nicht gefunden",
+        onlyOwnerCanUpdate: "Nur der Ersteller kann bearbeiten",
+        onlyOwnerCanDelete: "Nur der Ersteller kann löschen",
+        slugExists: "Slug existiert bereits",
+        slugReserved:
+          "Diese ID ist systemreserviert, bitte verwenden Sie einen anderen Namen",
+      },
+      todo: {
+        notFound: "Aufgabe nicht gefunden",
+      },
+      testRequirement: {
+        notFound: "Testanforderung nicht gefunden",
+        createFetchFailed: "Datensatz nach Erstellung nicht abrufbar",
+        updateFetchFailed: "Datensatz nach Aktualisierung nicht abrufbar",
+        deleteChildrenFirst: "Bitte löschen Sie zuerst alle Unteranforderungen",
+      },
+      admin: {
+        cannotChangeOwnRole: "Eigene Rolle kann nicht geändert werden",
+        userNotFound: "Benutzer nicht gefunden",
+        usePersonalSettings:
+          "Bitte ändern Sie Ihr Passwort in den persönlichen Einstellungen",
+        cannotDeleteSelf: "Eigenes Konto kann nicht gelöscht werden",
+        cannotDeleteSuperadmin: "Super-Admin kann nicht gelöscht werden",
+        emailAlreadyRegistered: "Diese E-Mail ist bereits registriert",
+        defaultWorkspaceDesc: "Standard-Arbeitsbereich",
+        workspaceSuffix: "s Arbeitsbereich",
+        sharedWorkspaceName: "Gemeinsamer Arbeitsbereich",
+        sharedWorkspaceDesc: "Systemweiter gemeinsamer Arbeitsbereich",
+      },
+    },
     footer: {
       copyright: "© 2026 TestOps AI. Alle Rechte vorbehalten.",
-      tagline: "AI-gestützte End-to-End-Testplattform"
+      tagline: "AI-gestützte End-to-End-Testplattform",
     },
     systemSettings: {
       passwordMinLength: "Passwort muss mindestens 4 Zeichen haben",
@@ -833,9 +965,11 @@ export const deDE = {
       generalTab: "Allgemeine Einstellungen",
       usersTab: "Benutzerverwaltung",
       allowRegistration: "Neue Benutzerregistrierung erlauben",
-      allowRegistrationDesc: "Bei Deaktivierung können sich neue Benutzer nicht registrieren",
+      allowRegistrationDesc:
+        "Bei Deaktivierung können sich neue Benutzer nicht registrieren",
       singleWorkspaceMode: "Einzelarbeitsbereich-Modus",
-      singleWorkspaceModeDesc: "Wenn aktiviert, teilen sich alle Benutzer denselben Arbeitsbereich, und die Arbeitsbereich-ID wird nicht in der URL angezeigt",
+      singleWorkspaceModeDesc:
+        "Wenn aktiviert, teilen sich alle Benutzer denselben Arbeitsbereich, und die Arbeitsbereich-ID wird nicht in der URL angezeigt",
       userList: "Benutzerliste",
       userRole: "Rolle",
       lastLoginAt: "Letzter Login",
@@ -848,7 +982,8 @@ export const deDE = {
       resetPassword: "Passwort zurücksetzen",
       deleteUser: "Benutzer löschen",
       confirmDelete: "Löschen bestätigen",
-      confirmDeleteDesc: "Sind Sie sicher, dass Sie den Benutzer {{name}} löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+      confirmDeleteDesc:
+        "Sind Sie sicher, dass Sie den Benutzer {{name}} löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
       resetPasswordTitle: "Passwort zurücksetzen",
       resetPasswordDesc: "Neues Passwort für Benutzer {{name}} setzen",
       newPassword: "Neues Passwort",
@@ -883,9 +1018,9 @@ export const deDE = {
       copyInvitationLink: "Link kopieren",
       deleteInvitation: "Löschen",
       expiresInHours: "Gültigkeit (Stunden)",
-      noExpiration: "Keine Ablaufzeit setzen"
-    }
-  }
+      noExpiration: "Keine Ablaufzeit setzen",
+    },
+  },
 };
 
 export type TranslationSchema = typeof deDE;

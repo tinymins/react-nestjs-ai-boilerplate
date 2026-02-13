@@ -1,16 +1,16 @@
 import "./index.css";
 
-import { httpBatchLink } from "@trpc/client";
-import { ConfigProvider, theme as antdTheme, App as AntdApp } from "antd";
 import { StyleProvider } from "@ant-design/cssinjs";
+import { httpBatchLink } from "@trpc/client";
+import { App as AntdApp, theme as antdTheme, ConfigProvider } from "antd";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { ThemeProvider, useThemeContext } from "./hooks";
 import i18n from "./lib/i18n";
 import { trpc } from "./lib/trpc";
-import { ThemeProvider, useThemeContext } from "./hooks";
 
 // 系统保留的共享空间 slug
 export const SYSTEM_SHARED_SLUG = "::SYSTEM_SHARED::";
@@ -36,11 +36,11 @@ const trpcClient = trpc.createClient({
         const workspaceSlug = getWorkspaceFromPath();
         return {
           ...(workspaceSlug ? { "x-workspace-id": workspaceSlug } : {}),
-          "x-lang": i18n.resolvedLanguage ?? i18n.language ?? "zh-CN"
+          "x-lang": i18n.resolvedLanguage ?? i18n.language ?? "zh-CN",
         };
-      }
-    })
-  ]
+      },
+    }),
+  ],
 });
 
 const rootElement = document.getElementById("root");
@@ -70,7 +70,7 @@ function AppWrapper() {
           algorithm:
             theme === "dark"
               ? antdTheme.darkAlgorithm
-              : antdTheme.defaultAlgorithm
+              : antdTheme.defaultAlgorithm,
         }}
       >
         <AntdApp>
@@ -90,5 +90,5 @@ window.__REACT_ROOT__.render(
         </ThemeProvider>
       </BrowserRouter>
     </I18nextProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

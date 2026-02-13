@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { trpc } from "../../lib/trpc";
+import { useNavigate } from "react-router-dom";
 import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
+import { trpc } from "../../lib/trpc";
 
 export default function DashboardIndexRedirect() {
   const navigate = useNavigate();
@@ -35,7 +35,9 @@ export default function DashboardIndexRedirect() {
     return (
       <div className="mx-auto w-full max-w-3xl px-6 py-12">
         <div className="card">
-          <h2 className="text-xl font-semibold">{t("dashboard.noWorkspace")}</h2>
+          <h2 className="text-xl font-semibold">
+            {t("dashboard.noWorkspace")}
+          </h2>
           <p className="mt-2 text-slate-500 dark:text-slate-300">
             {t("dashboard.createFirst")}
           </p>

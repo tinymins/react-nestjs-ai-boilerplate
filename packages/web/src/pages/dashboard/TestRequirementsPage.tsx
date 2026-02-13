@@ -1,53 +1,51 @@
-import { useState } from "react";
-import {
-  Table,
-  Button,
-  Tag,
-  Space,
-  Modal,
-  Form,
-  Input,
-  Select,
-  DatePicker,
-  InputNumber,
-  Popconfirm,
-  Tooltip,
-  Row,
-  Col,
-  Typography,
-  Drawer,
-  Tabs,
-  Divider,
-  Empty
-} from "antd";
-import {
-  PlusOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  EyeOutlined,
-  SearchOutlined,
-  ReloadOutlined,
-  FileTextOutlined,
-  CheckCircleOutlined,
-  ClockCircleOutlined,
-  ExclamationCircleOutlined,
-  CloseCircleOutlined,
-  TeamOutlined,
-  FolderOutlined,
-  TagsOutlined
-} from "@ant-design/icons";
-import type { ColumnsType } from "antd/es/table";
-import { useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import dayjs from "dayjs";
-import { useMessage } from "../../hooks";
-import { trpc } from "../../lib/trpc";
 import type {
   TestRequirement,
+  TestRequirementPriority,
   TestRequirementStatus,
   TestRequirementType,
-  TestRequirementPriority
 } from "@acme/types";
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  CloseCircleOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  EyeOutlined,
+  FileTextOutlined,
+  FolderOutlined,
+  PlusOutlined,
+  ReloadOutlined,
+  SearchOutlined,
+  TagsOutlined,
+} from "@ant-design/icons";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Divider,
+  Drawer,
+  Empty,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Table,
+  Tabs,
+  Tag,
+  Tooltip,
+  Typography,
+} from "antd";
+import type { ColumnsType } from "antd/es/table";
+import dayjs from "dayjs";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { useMessage } from "../../hooks";
+import { trpc } from "../../lib/trpc";
 
 const { TextArea } = Input;
 const { Text, Paragraph } = Typography;
@@ -61,38 +59,38 @@ const STATUS_CONFIG: Record<
   draft: {
     labelKey: "draft",
     color: "default",
-    icon: <FileTextOutlined />
+    icon: <FileTextOutlined />,
   },
   pending: {
     labelKey: "pending",
     color: "processing",
-    icon: <ClockCircleOutlined />
+    icon: <ClockCircleOutlined />,
   },
   approved: {
     labelKey: "approved",
     color: "cyan",
-    icon: <CheckCircleOutlined />
+    icon: <CheckCircleOutlined />,
   },
   in_progress: {
     labelKey: "in_progress",
     color: "blue",
-    icon: <ClockCircleOutlined />
+    icon: <ClockCircleOutlined />,
   },
   completed: {
     labelKey: "completed",
     color: "success",
-    icon: <CheckCircleOutlined />
+    icon: <CheckCircleOutlined />,
   },
   rejected: {
     labelKey: "rejected",
     color: "error",
-    icon: <CloseCircleOutlined />
+    icon: <CloseCircleOutlined />,
   },
   cancelled: {
     labelKey: "cancelled",
     color: "default",
-    icon: <CloseCircleOutlined />
-  }
+    icon: <CloseCircleOutlined />,
+  },
 };
 
 // 类型配置
@@ -106,7 +104,7 @@ const TYPE_CONFIG: Record<
   usability: { labelKey: "usability", color: "purple" },
   compatibility: { labelKey: "compatibility", color: "cyan" },
   integration: { labelKey: "integration", color: "geekblue" },
-  regression: { labelKey: "regression", color: "magenta" }
+  regression: { labelKey: "regression", color: "magenta" },
 };
 
 // 优先级配置
@@ -117,7 +115,7 @@ const PRIORITY_CONFIG: Record<
   critical: { labelKey: "critical", color: "red" },
   high: { labelKey: "high", color: "orange" },
   medium: { labelKey: "medium", color: "blue" },
-  low: { labelKey: "low", color: "green" }
+  low: { labelKey: "low", color: "green" },
 };
 
 export default function TestRequirementsPage() {
@@ -125,15 +123,26 @@ export default function TestRequirementsPage() {
   const message = useMessage();
   const { t } = useTranslation();
   // Helper to get testRequirements namespace translations
-  const tr = (key: string, options?: Record<string, unknown>) => t(`dashboard.testRequirements.${key}`, options);
+  const tr = (key: string, options?: Record<string, unknown>) =>
+    t(`dashboard.testRequirements.${key}`, options);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const [editingRecord, setEditingRecord] = useState<TestRequirement | null>(null);
-  const [viewingRecord, setViewingRecord] = useState<TestRequirement | null>(null);
+  const [editingRecord, setEditingRecord] = useState<TestRequirement | null>(
+    null,
+  );
+  const [viewingRecord, setViewingRecord] = useState<TestRequirement | null>(
+    null,
+  );
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [filterStatus, setFilterStatus] = useState<TestRequirementStatus | undefined>();
-  const [filterType, setFilterType] = useState<TestRequirementType | undefined>();
-  const [filterPriority, setFilterPriority] = useState<TestRequirementPriority | undefined>();
+  const [filterStatus, setFilterStatus] = useState<
+    TestRequirementStatus | undefined
+  >();
+  const [filterType, setFilterType] = useState<
+    TestRequirementType | undefined
+  >();
+  const [filterPriority, setFilterPriority] = useState<
+    TestRequirementPriority | undefined
+  >();
   const [pagination, setPagination] = useState({ page: 1, pageSize: 10 });
   const [form] = Form.useForm();
   const utils = trpc.useUtils();
@@ -146,9 +155,9 @@ export default function TestRequirementsPage() {
       type: filterType,
       priority: filterPriority,
       page: pagination.page,
-      pageSize: pagination.pageSize
+      pageSize: pagination.pageSize,
     },
-    { enabled: Boolean(workspace) }
+    { enabled: Boolean(workspace) },
   );
 
   // 创建
@@ -161,7 +170,7 @@ export default function TestRequirementsPage() {
     },
     onError: (error) => {
       message.error(error.message || tr("toastCreateFail"));
-    }
+    },
   });
 
   // 更新
@@ -175,7 +184,7 @@ export default function TestRequirementsPage() {
     },
     onError: (error) => {
       message.error(error.message || tr("toastUpdateFail"));
-    }
+    },
   });
 
   // 删除
@@ -186,7 +195,7 @@ export default function TestRequirementsPage() {
     },
     onError: (error) => {
       message.error(error.message || tr("toastDeleteFail"));
-    }
+    },
   });
 
   // 打开新建弹窗
@@ -196,7 +205,7 @@ export default function TestRequirementsPage() {
     form.setFieldsValue({
       type: "functional",
       status: "draft",
-      priority: "medium"
+      priority: "medium",
     });
     setIsModalOpen(true);
   };
@@ -207,7 +216,7 @@ export default function TestRequirementsPage() {
     form.setFieldsValue({
       ...record,
       dueDate: record.dueDate ? dayjs(record.dueDate) : undefined,
-      tags: record.tags?.join(",")
+      tags: record.tags?.join(","),
     });
     setIsModalOpen(true);
   };
@@ -230,7 +239,7 @@ export default function TestRequirementsPage() {
               .split(",")
               .map((t: string) => t.trim())
               .filter(Boolean)
-          : undefined
+          : undefined,
       };
 
       if (editingRecord) {
@@ -238,7 +247,7 @@ export default function TestRequirementsPage() {
       } else {
         await createMutation.mutateAsync(data);
       }
-    } catch (error) {
+    } catch (_error) {
       // Form validation error
     }
   };
@@ -258,7 +267,7 @@ export default function TestRequirementsPage() {
     total: listQuery.data?.total ?? 0,
     draft: 0,
     inProgress: 0,
-    completed: 0
+    completed: 0,
   };
 
   if (listQuery.data?.items) {
@@ -281,7 +290,7 @@ export default function TestRequirementsPage() {
         <Text strong style={{ color: "#1890ff", fontFamily: "monospace" }}>
           {code}
         </Text>
-      )
+      ),
     },
     {
       title: tr("requirementName"),
@@ -297,7 +306,7 @@ export default function TestRequirementsPage() {
             </Text>
           )}
         </Space>
-      )
+      ),
     },
     {
       title: tr("type"),
@@ -308,7 +317,7 @@ export default function TestRequirementsPage() {
         <Tag color={TYPE_CONFIG[type]?.color}>
           {tr(`typeLabels.${TYPE_CONFIG[type]?.labelKey}`)}
         </Tag>
-      )
+      ),
     },
     {
       title: tr("priority"),
@@ -319,7 +328,7 @@ export default function TestRequirementsPage() {
         <Tag color={PRIORITY_CONFIG[priority]?.color} style={{ margin: 0 }}>
           {tr(`priorityLabels.${PRIORITY_CONFIG[priority]?.labelKey}`)}
         </Tag>
-      )
+      ),
     },
     {
       title: tr("status"),
@@ -333,21 +342,21 @@ export default function TestRequirementsPage() {
         >
           {tr(`statusLabels.${STATUS_CONFIG[status]?.labelKey}`)}
         </Tag>
-      )
+      ),
     },
     {
       title: tr("creatorName"),
       dataIndex: "creatorName",
       key: "creatorName",
       width: 100,
-      render: (name: string | null) => name || "-"
+      render: (name: string | null) => name || "-",
     },
     {
       title: tr("assigneeName"),
       dataIndex: "assigneeName",
       key: "assigneeName",
       width: 100,
-      render: (name: string | null) => name || "-"
+      render: (name: string | null) => name || "-",
     },
     {
       title: tr("children"),
@@ -362,7 +371,7 @@ export default function TestRequirementsPage() {
           </Tag>
         ) : (
           <Text type="secondary">-</Text>
-        )
+        ),
     },
     {
       title: tr("createdTime"),
@@ -370,7 +379,7 @@ export default function TestRequirementsPage() {
       key: "createdAt",
       width: 160,
       render: (date: Date) =>
-        date ? dayjs(date).format("YYYY-MM-DD HH:mm") : "-"
+        date ? dayjs(date).format("YYYY-MM-DD HH:mm") : "-",
     },
     {
       title: tr("action"),
@@ -413,8 +422,8 @@ export default function TestRequirementsPage() {
             </Tooltip>
           </Popconfirm>
         </Space>
-      )
-    }
+      ),
+    },
   ];
 
   const statsCards = [
@@ -423,29 +432,29 @@ export default function TestRequirementsPage() {
       value: stats.total,
       icon: <FileTextOutlined />,
       className:
-        "bg-gradient-to-br from-stats-total-from to-stats-total-to dark:from-stats-total-from-dark dark:to-stats-total-to-dark"
+        "bg-gradient-to-br from-stats-total-from to-stats-total-to dark:from-stats-total-from-dark dark:to-stats-total-to-dark",
     },
     {
       title: tr("titleDraft"),
       value: stats.draft,
       icon: <EditOutlined />,
       className:
-        "bg-gradient-to-br from-stats-draft-from to-stats-draft-to dark:from-stats-draft-from-dark dark:to-stats-draft-to-dark"
+        "bg-gradient-to-br from-stats-draft-from to-stats-draft-to dark:from-stats-draft-from-dark dark:to-stats-draft-to-dark",
     },
     {
       title: tr("titleInProgress"),
       value: stats.inProgress,
       icon: <ClockCircleOutlined />,
       className:
-        "bg-gradient-to-br from-stats-progress-from to-stats-progress-to dark:from-stats-progress-from-dark dark:to-stats-progress-to-dark"
+        "bg-gradient-to-br from-stats-progress-from to-stats-progress-to dark:from-stats-progress-from-dark dark:to-stats-progress-to-dark",
     },
     {
       title: tr("titleDone"),
       value: stats.completed,
       icon: <CheckCircleOutlined />,
       className:
-        "bg-gradient-to-br from-stats-done-from to-stats-done-to dark:from-stats-done-from-dark dark:to-stats-done-to-dark"
-    }
+        "bg-gradient-to-br from-stats-done-from to-stats-done-to dark:from-stats-done-from-dark dark:to-stats-done-to-dark",
+    },
   ];
 
   return (
@@ -460,7 +469,9 @@ export default function TestRequirementsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-white/90 text-sm mb-2">{card.title}</div>
-                <div className="text-white text-3xl font-semibold">{card.value}</div>
+                <div className="text-white text-3xl font-semibold">
+                  {card.value}
+                </div>
               </div>
               <div className="text-white/80 text-2xl">{card.icon}</div>
             </div>
@@ -488,7 +499,7 @@ export default function TestRequirementsPage() {
               onChange={setFilterStatus}
               options={Object.entries(STATUS_CONFIG).map(([key, val]) => ({
                 value: key,
-                label: tr(`statusLabels.${val.labelKey}`)
+                label: tr(`statusLabels.${val.labelKey}`),
               }))}
             />
             <Select
@@ -499,7 +510,7 @@ export default function TestRequirementsPage() {
               onChange={setFilterType}
               options={Object.entries(TYPE_CONFIG).map(([key, val]) => ({
                 value: key,
-                label: tr(`typeLabels.${val.labelKey}`)
+                label: tr(`typeLabels.${val.labelKey}`),
               }))}
             />
             <Select
@@ -510,7 +521,7 @@ export default function TestRequirementsPage() {
               onChange={setFilterPriority}
               options={Object.entries(PRIORITY_CONFIG).map(([key, val]) => ({
                 value: key,
-                label: tr(`priorityLabels.${val.labelKey}`)
+                label: tr(`priorityLabels.${val.labelKey}`),
               }))}
             />
           </Space>
@@ -540,7 +551,7 @@ export default function TestRequirementsPage() {
             showSizeChanger: true,
             showQuickJumper: true,
             showTotal: (total) => tr("totalCount", { count: total }),
-            onChange: (page, pageSize) => setPagination({ page, pageSize })
+            onChange: (page, pageSize) => setPagination({ page, pageSize }),
           }}
           rowClassName={(_, index) =>
             index % 2 === 0 ? "bg-gray-50 dark:bg-gray-800/30" : ""
@@ -576,11 +587,15 @@ export default function TestRequirementsPage() {
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item name="type" label={tr("fieldType")} initialValue="functional">
+              <Form.Item
+                name="type"
+                label={tr("fieldType")}
+                initialValue="functional"
+              >
                 <Select
                   options={Object.entries(TYPE_CONFIG).map(([key, val]) => ({
                     value: key,
-                    label: tr(`typeLabels.${val.labelKey}`)
+                    label: tr(`typeLabels.${val.labelKey}`),
                   }))}
                 />
               </Form.Item>
@@ -601,17 +616,27 @@ export default function TestRequirementsPage() {
 
           <Row gutter={16}>
             <Col span={8}>
-              <Form.Item name="priority" label={tr("fieldPriority")} initialValue="medium">
+              <Form.Item
+                name="priority"
+                label={tr("fieldPriority")}
+                initialValue="medium"
+              >
                 <Select
-                  options={Object.entries(PRIORITY_CONFIG).map(([key, val]) => ({
-                    value: key,
-                    label: tr(`priorityLabels.${val.labelKey}`)
-                  }))}
+                  options={Object.entries(PRIORITY_CONFIG).map(
+                    ([key, val]) => ({
+                      value: key,
+                      label: tr(`priorityLabels.${val.labelKey}`),
+                    }),
+                  )}
                 />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item name="status" label={tr("fieldStatus")} initialValue="draft">
+              <Form.Item
+                name="status"
+                label={tr("fieldStatus")}
+                initialValue="draft"
+              >
                 <Select
                   options={Object.entries(STATUS_CONFIG).map(([key, val]) => ({
                     value: key,
@@ -620,14 +645,17 @@ export default function TestRequirementsPage() {
                         {val.icon}
                         {tr(`statusLabels.${val.labelKey}`)}
                       </Space>
-                    )
+                    ),
                   }))}
                 />
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item name="dueDate" label={tr("fieldDueDate")}>
-                <DatePicker style={{ width: "100%" }} placeholder={tr("dueDatePlaceholder")} />
+                <DatePicker
+                  style={{ width: "100%" }}
+                  placeholder={tr("dueDatePlaceholder")}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -645,7 +673,10 @@ export default function TestRequirementsPage() {
             </Col>
             <Col span={12}>
               <Form.Item name="tags" label={tr("fieldTags")}>
-                <Input placeholder={tr("tagsPlaceholder")} prefix={<TagsOutlined />} />
+                <Input
+                  placeholder={tr("tagsPlaceholder")}
+                  prefix={<TagsOutlined />}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -692,10 +723,14 @@ export default function TestRequirementsPage() {
                 icon={STATUS_CONFIG[viewingRecord.status]?.icon}
                 color={STATUS_CONFIG[viewingRecord.status]?.color}
               >
-                {tr(`statusLabels.${STATUS_CONFIG[viewingRecord.status]?.labelKey}`)}
+                {tr(
+                  `statusLabels.${STATUS_CONFIG[viewingRecord.status]?.labelKey}`,
+                )}
               </Tag>
               <Tag color={PRIORITY_CONFIG[viewingRecord.priority]?.color}>
-                {tr(`priorityLabels.${PRIORITY_CONFIG[viewingRecord.priority]?.labelKey}`)}
+                {tr(
+                  `priorityLabels.${PRIORITY_CONFIG[viewingRecord.priority]?.labelKey}`,
+                )}
               </Tag>
             </div>
 
@@ -706,16 +741,22 @@ export default function TestRequirementsPage() {
                 <div className="space-y-3">
                   <div>
                     <Text type="secondary">{tr("fieldDesc")}：</Text>
-                    <Paragraph>{viewingRecord.description || tr("descEmpty")}</Paragraph>
+                    <Paragraph>
+                      {viewingRecord.description || tr("descEmpty")}
+                    </Paragraph>
                   </div>
                   <Row gutter={16}>
                     <Col span={12}>
                       <Text type="secondary">{tr("creator")}：</Text>
-                      <Text className="ml-2">{viewingRecord.creatorName || "-"}</Text>
+                      <Text className="ml-2">
+                        {viewingRecord.creatorName || "-"}
+                      </Text>
                     </Col>
                     <Col span={12}>
                       <Text type="secondary">{tr("assignee")}：</Text>
-                      <Text className="ml-2">{viewingRecord.assigneeName || "-"}</Text>
+                      <Text className="ml-2">
+                        {viewingRecord.assigneeName || "-"}
+                      </Text>
                     </Col>
                   </Row>
                   <Row gutter={16}>
@@ -741,7 +782,9 @@ export default function TestRequirementsPage() {
                       <Text type="secondary">{tr("createdAt")}：</Text>
                       <Text className="ml-2">
                         {viewingRecord.createdAt
-                          ? dayjs(viewingRecord.createdAt).format("YYYY-MM-DD HH:mm")
+                          ? dayjs(viewingRecord.createdAt).format(
+                              "YYYY-MM-DD HH:mm",
+                            )
                           : "-"}
                       </Text>
                     </Col>
@@ -793,7 +836,9 @@ export default function TestRequirementsPage() {
               >
                 {(viewingRecord.childrenCount ?? 0) > 0 ? (
                   <Text type="secondary">
-                    {tr("childrenCount", { count: viewingRecord.childrenCount ?? 0 })}
+                    {tr("childrenCount", {
+                      count: viewingRecord.childrenCount ?? 0,
+                    })}
                   </Text>
                 ) : (
                   <Empty description={tr("childrenEmpty")} />

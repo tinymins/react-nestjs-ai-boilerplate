@@ -29,17 +29,17 @@ export const yue = {
         critical: "嚴重",
         high: "高",
         medium: "中",
-        low: "低"
+        low: "低",
       },
       theme: {
         light: "淺色",
-        dark: "深色"
-      }
+        dark: "深色",
+      },
     },
     userMenu: {
       account: "賬戶設定",
       admin: "管理後台",
-      signOut: "登出"
+      signOut: "登出",
     },
     userSettings: {
       title: "賬戶設定",
@@ -69,7 +69,7 @@ export const yue = {
       confirmPasswordRequired: "請確認新密碼",
       confirmPasswordPlaceholder: "再輸入一次新密碼",
       passwordMismatch: "兩次密碼唔一樣",
-      changePassword: "改密碼"
+      changePassword: "改密碼",
     },
     createWorkspace: {
       title: "建立空間站",
@@ -86,7 +86,7 @@ export const yue = {
       slugPattern: "淨係可以用細楷英文字母、數字同連字符",
       slugExtra: "用嚟做訪問地址，例如：/dashboard/{{slug}}",
       descLabel: "描述",
-      descPlaceholder: "簡單描述吓呢個空間站..."
+      descPlaceholder: "簡單描述吓呢個空間站...",
     },
     nav: {
       items: [
@@ -94,10 +94,10 @@ export const yue = {
         { label: "解決方案", href: "/#solutions" },
         { label: "全流程", href: "/#workflow" },
         { label: "AI 能力", href: "/#ai" },
-        { label: "方案", href: "/#plans" }
+        { label: "方案", href: "/#plans" },
       ],
       login: "登入",
-      dashboard: "控制台"
+      dashboard: "控制台",
     },
     hero: {
       badge: "AI TestOps",
@@ -111,13 +111,13 @@ export const yue = {
         "✓ 需求解析搞掂 · 12 個場景",
         "✓ 生成測試矩陣 · 覆蓋率 92%",
         "→ 自動化回歸調度緊 · 18/24",
-        "→ 風險門禁評估緊 · 8%"
+        "→ 風險門禁評估緊 · 8%",
       ],
       metrics: [
         { label: "全流程自動化", value: "90%" },
         { label: "交付可視化", value: "100%" },
-        { label: "協作效率提升", value: "3x" }
-      ]
+        { label: "協作效率提升", value: "3x" },
+      ],
     },
     overview: {
       title: "令測試成為持續交付嘅核心引擎",
@@ -130,8 +130,8 @@ export const yue = {
           bullets: [
             "測試範圍自動生成同覆蓋建議",
             "測試資產沉澱成可複用知識庫",
-            "一鍵發佈門禁同質量看板"
-          ]
+            "一鍵發佈門禁同質量看板",
+          ],
         },
         {
           title: "統一質量運營視角",
@@ -139,68 +139,68 @@ export const yue = {
           bullets: [
             "測試活動進度同阻塞自動識別",
             "缺陷趨勢同回歸優先級建議",
-            "質量 KPI 持續優化"
-          ]
-        }
-      ]
+            "質量 KPI 持續優化",
+          ],
+        },
+      ],
     },
     pillars: {
       title: "平台能力矩陣",
       items: [
         {
           title: "需求驅動",
-          desc: "由 PRD/用戶故事自動生成測試範圍同覆蓋建議。"
+          desc: "由 PRD/用戶故事自動生成測試範圍同覆蓋建議。",
         },
         {
           title: "智能設計",
-          desc: "AI 自動補全用例、數據同斷言，支援模板複用。"
+          desc: "AI 自動補全用例、數據同斷言，支援模板複用。",
         },
         {
           title: "執行編排",
-          desc: "手工 + 自動化統一排期，實時反饋測試進度。"
+          desc: "手工 + 自動化統一排期，實時反饋測試進度。",
         },
         {
           title: "質量洞察",
-          desc: "風險熱力圖、缺陷趨勢、覆蓋率同質量門禁。"
+          desc: "風險熱力圖、缺陷趨勢、覆蓋率同質量門禁。",
         },
         {
           title: "知識沉澱",
-          desc: "測試資產沉澱成知識庫，持續優化。"
+          desc: "測試資產沉澱成知識庫，持續優化。",
         },
         {
           title: "治理合規",
-          desc: "流程審計、權限矩陣、交付可追溯。"
-        }
-      ]
+          desc: "流程審計、權限矩陣、交付可追溯。",
+        },
+      ],
     },
     flow: {
       title: "覆蓋全流程嘅 TestOps 引擎",
       steps: [
         {
           title: "需求錄入",
-          desc: "支援工單、PRD、API 文檔同需求模板，自動建立測試範圍。"
+          desc: "支援工單、PRD、API 文檔同需求模板，自動建立測試範圍。",
         },
         {
           title: "測試規劃",
-          desc: "AI 生成測試矩陣、風險評估同測試資源計劃。"
+          desc: "AI 生成測試矩陣、風險評估同測試資源計劃。",
         },
         {
           title: "測試設計",
-          desc: "由模型同歷史資產入面生成用例、數據同執行腳本。"
+          desc: "由模型同歷史資產入面生成用例、數據同執行腳本。",
         },
         {
           title: "測試執行",
-          desc: "統一調度自動化、手工、性能、安全測試活動。"
+          desc: "統一調度自動化、手工、性能、安全測試活動。",
         },
         {
           title: "缺陷管理",
-          desc: "智能聚類、根因分析、回歸建議同影響面評估。"
+          desc: "智能聚類、根因分析、回歸建議同影響面評估。",
         },
         {
           title: "測試報告",
-          desc: "自動生成多維度質量報告，支援發佈門禁。"
-        }
-      ]
+          desc: "自動生成多維度質量報告，支援發佈門禁。",
+        },
+      ],
     },
     testing: {
       badge: "AI 驅動測試",
@@ -209,28 +209,28 @@ export const yue = {
       capabilities: [
         {
           title: "HTTP / REST API",
-          desc: "全面嘅 HTTP 接口測試，支援 RESTful、GraphQL、WebSocket"
+          desc: "全面嘅 HTTP 接口測試，支援 RESTful、GraphQL、WebSocket",
         },
         {
           title: "gRPC",
-          desc: "高性能 gRPC 服務測試，支援 Unary、Streaming 調用"
+          desc: "高性能 gRPC 服務測試，支援 Unary、Streaming 調用",
         },
         {
           title: "移動端 UI",
-          desc: "iOS / Android 原生 App 自動化測試，支援真機同模擬器"
+          desc: "iOS / Android 原生 App 自動化測試，支援真機同模擬器",
         },
         {
           title: "瀏覽器測試",
-          desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器自動化測試"
+          desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器自動化測試",
         },
         {
           title: "Windows 桌面",
-          desc: "Windows 桌面應用自動化，支援 WinUI / WPF / Win32"
+          desc: "Windows 桌面應用自動化，支援 WinUI / WPF / Win32",
         },
         {
           title: "AI 智能規劃",
-          desc: "基於需求自動生成測試用例，智能識別測試場景同邊界條件"
-        }
+          desc: "基於需求自動生成測試用例，智能識別測試場景同邊界條件",
+        },
       ],
       aiFlowSteps: [
         { step: "需求文檔", icon: "📄" },
@@ -238,29 +238,29 @@ export const yue = {
         { step: "測試計畫", icon: "📋" },
         { step: "用例產生", icon: "✨" },
         { step: "自動執行", icon: "🚀" },
-        { step: "智能報告", icon: "📊" }
-      ]
+        { step: "智能報告", icon: "📊" },
+      ],
     },
     ai: {
       title: "AI 優先嘅核心能力",
       items: [
         {
           title: "需求理解引擎",
-          desc: "由上下文提取關鍵場景，生成測試範圍同風險標籤。"
+          desc: "由上下文提取關鍵場景，生成測試範圍同風險標籤。",
         },
         {
           title: "測試資產生成",
-          desc: "自動生成用例、數據、接口測試腳本同測試說明。"
+          desc: "自動生成用例、數據、接口測試腳本同測試說明。",
         },
         {
           title: "執行智能助手",
-          desc: "實時俾出阻塞原因、修復建議同回歸優先級。"
+          desc: "實時俾出阻塞原因、修復建議同回歸優先級。",
         },
         {
           title: "報告洞察",
-          desc: "生成管理層視角報告同發佈決策建議。"
-        }
-      ]
+          desc: "生成管理層視角報告同發佈決策建議。",
+        },
+      ],
     },
     integrations: {
       title: "無縫集成研發生態",
@@ -270,8 +270,8 @@ export const yue = {
         "Jenkins / GitHub Actions / Argo",
         "Postman / Playwright / Cypress",
         "SonarQube / Sentry / Datadog",
-        "企業 IM 同通知中台"
-      ]
+        "企業 IM 同通知中台",
+      ],
     },
     security: {
       title: "企業級安全同治理",
@@ -280,18 +280,18 @@ export const yue = {
         "數據加密同審計日誌",
         "多地域部署同容災",
         "合規流程同發佈門禁",
-        "資產版本管理同審批"
-      ]
+        "資產版本管理同審批",
+      ],
     },
     cta: {
       title: "開始建構 AI 驅動嘅測試全流程",
       desc: "令測試團隊成為研發交付嘅戰略引擎。",
       primary: "攞方案",
-      secondary: "申請試用"
+      secondary: "申請試用",
     },
     closing: {
       title: "令測試好似代碼噉持續進化",
-      subtitle: "AI TestOps · 連接需求、質量同交付嘅每一次迭代"
+      subtitle: "AI TestOps · 連接需求、質量同交付嘅每一次迭代",
     },
     login: {
       title: "登入 TestOps AI",
@@ -311,32 +311,32 @@ export const yue = {
       registrationDisabled: "系統暫時唔開放註冊",
       backToLogin: "返去登入",
       emailPlaceholder: "請輸入電郵",
-      passwordPlaceholder: "請輸入密碼"
+      passwordPlaceholder: "請輸入密碼",
     },
     pages: {
       notFound: {
         title: "頁面搞唔見",
         description: "不好意思，你訪問嘅頁面唔存在或已被移除",
         goHome: "返去首頁",
-        goBack: "返去上一頁"
+        goBack: "返去上一頁",
       },
       unauthorized: {
         title: "存取受限",
         description: "不好意思，你唔有權限存取呢個頁面",
         goHome: "返去首頁",
-        reLogin: "重新登入"
+        reLogin: "重新登入",
       },
       workspaceNotFound: {
         title: "空間站唔存在",
-        notFoundNamed: "搞唔到名叫 \"{{name}}\" 嘅空間站",
+        notFoundNamed: '搞唔到名叫 "{{name}}" 嘅空間站',
         notFoundGeneric: "搞唔到對應空間站",
-        goBack: "返去可用空間站"
+        goBack: "返去可用空間站",
       },
       dashboardNotFound: {
         title: "頁面唔存在",
         description: "不好意思，你訪問嘅頁面唔存在或已被移動",
-        goBack: "返去工作台"
-      }
+        goBack: "返去工作台",
+      },
     },
     dashboard: {
       title: "測試運營中心",
@@ -352,7 +352,7 @@ export const yue = {
       toLogin: "去登入",
       workspace: "工作空間",
       workspaceSwitcher: {
-        switchWorkspace: "切換空間站"
+        switchWorkspace: "切換空間站",
       },
       insightTitle: "質量洞察",
       insightDesc: "自動生成風險熱力圖、覆蓋率同發佈門禁建議。",
@@ -362,7 +362,7 @@ export const yue = {
       assistantItems: [
         "登入流程有異常波動，建議優先回歸",
         "新版本支付接口覆蓋唔夠 12%",
-        "移動端回歸缺陷收斂度提升咗 20%"
+        "移動端回歸缺陷收斂度提升咗 20%",
       ],
       menu: {
         workbench: "工作台",
@@ -398,20 +398,20 @@ export const yue = {
         summary: "🎯 完成摘要",
         noTodos: "暫時冇待辦",
         menuLabel: "📋 待辦清單",
-        defaultCategory: "自訂"
+        defaultCategory: "自訂",
       },
       defects: {
-        description: "追蹤缺陷同評估風險"
+        description: "追蹤缺陷同評估風險",
       },
       testDesign: {
         description: "設計同編寫測試用例",
         caseLibrary: "測試用例庫",
         newCase: "+ 新建用例",
-        totalCases: "共 {{count}} 條測試用例"
+        totalCases: "共 {{count}} 條測試用例",
       },
       settings: {
         title: "空間站設定",
-        subtitle: "管理 \"{{name}}\" 嘅配置同成員",
+        subtitle: '管理 "{{name}}" 嘅配置同成員',
         workspaceNotFound: "空間站唔存在",
         generalTab: "基本設定",
         membersTab: "成員管理",
@@ -428,7 +428,8 @@ export const yue = {
         descriptionPlaceholder: "簡單描述吓呢個空間站...",
         workspaceDeleted: "空間站已經刪除咗",
         confirmDeleteTitle: "確認刪除空間站",
-        confirmDeleteContent: "確定要刪除空間站 \"{{name}}\" 咩？呢個操作冇得撤銷㗎。",
+        confirmDeleteContent:
+          '確定要刪除空間站 "{{name}}" 咩？呢個操作冇得撤銷㗎。',
         confirmDeleteWarning: "所有相關數據（包括待辦事項）都會永久刪除。",
         confirmDeleteOk: "確認刪除",
         deleteWorkspace: "刪除空間站",
@@ -450,7 +451,7 @@ export const yue = {
         tableColumnActions: "操作",
         removeMemberComingSoon: "移除成員功能開發緊",
         inviteComingSoon: "邀請功能開發緊：將會向 {{email}} 發送邀請電郵",
-        workspaceOwner: "空間站建立者"
+        workspaceOwner: "空間站建立者",
       },
       requirements: {
         description: "管理同追蹤產品需求",
@@ -461,7 +462,7 @@ export const yue = {
         recentRequirements: "最近需求",
         sampleTitle1: "用戶登入模組優化",
         sampleTitle2: "支付接口升級",
-        sampleTitle3: "訂單查詢性能優化"
+        sampleTitle3: "訂單查詢性能優化",
       },
       execution: {
         description: "執行測試任務同睇結果",
@@ -469,28 +470,28 @@ export const yue = {
         running: "執行緊",
         passed: "通過",
         failed: "失敗",
-        blocked: "阻塞"
+        blocked: "阻塞",
       },
       automation: {
         description: "管理自動化測試腳本同資源",
         workspaceLabel: "工作空間",
         totalScripts: "腳本總數",
         successRate: "執行成功率",
-        avgDuration: "平均執行時間"
+        avgDuration: "平均執行時間",
       },
       reports: {
         description: "睇質量指標同生成報告",
         workspaceLabel: "工作空間",
         testCoverage: "測試覆蓋率",
         defectDensity: "缺陷密度",
-        automationRate: "自動化率"
+        automationRate: "自動化率",
       },
       testPlan: {
         description: "規劃同管理測試計劃",
         workspaceLabel: "工作空間",
         inProgress: "進行緊",
         completedThisWeek: "呢個禮拜完成",
-        avgCoverage: "平均覆蓋率"
+        avgCoverage: "平均覆蓋率",
       },
       testRequirements: {
         titleTotal: "總需求數",
@@ -557,7 +558,8 @@ export const yue = {
         toastUpdateFail: "更新失敗咗",
         toastDeleteSuccess: "刪除成功咗",
         toastDeleteFail: "刪除失敗咗",
-        markdownPlaceholder: "# 測試需求詳情\n\n## 測試目標\n描述測試嘅主要目標...\n\n## 測試範圍\n- 範圍項 1\n- 範圍項 2\n\n## 測試步驟\n1. 步驟一\n2. 步驟二\n\n## 預期結果\n描述預期嘅測試結果...",
+        markdownPlaceholder:
+          "# 測試需求詳情\n\n## 測試目標\n描述測試嘅主要目標...\n\n## 測試範圍\n- 範圍項 1\n- 範圍項 2\n\n## 測試步驟\n1. 步驟一\n2. 步驟二\n\n## 預期結果\n描述預期嘅測試結果...",
         statusLabels: {
           draft: "草稿",
           pending: "待審核",
@@ -565,7 +567,7 @@ export const yue = {
           in_progress: "進行緊",
           completed: "已完成",
           rejected: "已拒絕",
-          cancelled: "已取消"
+          cancelled: "已取消",
         },
         typeLabels: {
           functional: "功能測試",
@@ -574,15 +576,15 @@ export const yue = {
           usability: "易用性測試",
           compatibility: "兼容性測試",
           integration: "集成測試",
-          regression: "回歸測試"
+          regression: "回歸測試",
         },
         priorityLabels: {
           critical: "緊急",
           high: "高",
           medium: "中",
-          low: "低"
-        }
-      }
+          low: "低",
+        },
+      },
     },
     aiWorkflow: {
       aiAutoProcess: "AI 全自動流程",
@@ -591,7 +593,7 @@ export const yue = {
         desc: "拖曳文件去呢度，或者撳嚟揀文件",
         selectFile: "揀文件",
         sampleFile: "電商平台需求規格說明書_v3.2.pdf",
-        sampleMeta: "3.8 MB · 156 頁 · 包含 API 接口文檔"
+        sampleMeta: "3.8 MB · 156 頁 · 包含 API 接口文檔",
       },
       analyzing: {
         title: "AI 智能分析需求文檔",
@@ -602,16 +604,16 @@ export const yue = {
           "2. 商品管理模組",
           "3. 訂單處理模組",
           "4. 支付網關模組",
-          "5. 物流追蹤模組"
+          "5. 物流追蹤模組",
         ],
         stats: [
           { label: "功能模組", value: "28" },
           { label: "測試點", value: "186" },
           { label: "邊界條件", value: "42" },
-          { label: "API接口", value: "67" }
+          { label: "API接口", value: "67" },
         ],
         progress: "分析進度",
-        analyzing: "分析緊..."
+        analyzing: "分析緊...",
       },
       testPlan: {
         title: "AI 建立測試計劃",
@@ -622,34 +624,34 @@ export const yue = {
           {
             module: "用戶管理",
             priority: "高",
-            items: ["登入註冊", "權限控制", "個人資料", "OAuth集成"]
+            items: ["登入註冊", "權限控制", "個人資料", "OAuth集成"],
           },
           {
             module: "訂單處理",
             priority: "高",
-            items: ["建立訂單", "狀態流轉", "退款處理", "並發控制"]
+            items: ["建立訂單", "狀態流轉", "退款處理", "並發控制"],
           },
           {
             module: "支付網關",
             priority: "關鍵",
-            items: ["支付寶", "微信支付", "銀行卡", "退款邏輯"]
+            items: ["支付寶", "微信支付", "銀行卡", "退款邏輯"],
           },
           {
             module: "商品管理",
             priority: "中",
-            items: ["商品CRUD", "庫存管理", "價格計算", "分類管理"]
+            items: ["商品CRUD", "庫存管理", "價格計算", "分類管理"],
           },
           {
             module: "物流追蹤",
             priority: "中",
-            items: ["物流查詢", "狀態同步", "異常處理", "多渠道對接"]
+            items: ["物流查詢", "狀態同步", "異常處理", "多渠道對接"],
           },
           {
             module: "API網關",
             priority: "高",
-            items: ["限流熔斷", "認證鑒權", "日誌追蹤", "版本控制"]
-          }
-        ]
+            items: ["限流熔斷", "認證鑒權", "日誌追蹤", "版本控制"],
+          },
+        ],
       },
       generate: {
         title: "AI 智能生成測試用例",
@@ -664,76 +666,126 @@ export const yue = {
         scenarios: [
           {
             scenario: "正向流程測試",
-            desc: "用戶登入 → 瀏覽商品 → 加入購物車 → 落單支付"
+            desc: "用戶登入 → 瀏覽商品 → 加入購物車 → 落單支付",
           },
           {
             scenario: "異常流程測試",
-            desc: "網絡中斷、超時重試、並發衝突處理"
+            desc: "網絡中斷、超時重試、並發衝突處理",
           },
           {
             scenario: "邊界值測試",
-            desc: "最大購買數量、價格邊界、庫存臨界值"
+            desc: "最大購買數量、價格邊界、庫存臨界值",
           },
           {
             scenario: "安全性測試",
-            desc: "SQL注入、XSS攻擊、越權訪問檢測"
-          }
+            desc: "SQL注入、XSS攻擊、越權訪問檢測",
+          },
         ],
         boundaries: [
-          { field: "用戶名", min: "2字符", max: "32字符", special: "特殊字符過濾" },
+          {
+            field: "用戶名",
+            min: "2字符",
+            max: "32字符",
+            special: "特殊字符過濾",
+          },
           { field: "密碼", min: "8字符", max: "128字符", special: "強度驗證" },
-          { field: "商品價格", min: "0.01", max: "999999.99", special: "精度處理" },
+          {
+            field: "商品價格",
+            min: "0.01",
+            max: "999999.99",
+            special: "精度處理",
+          },
           { field: "購買數量", min: "1", max: "9999", special: "庫存校驗" },
-          { field: "優惠券金額", min: "1", max: "訂單金額", special: "疊加規則" },
-          { field: "收貨地址", min: "10字符", max: "200字符", special: "地址解析" }
+          {
+            field: "優惠券金額",
+            min: "1",
+            max: "訂單金額",
+            special: "疊加規則",
+          },
+          {
+            field: "收貨地址",
+            min: "10字符",
+            max: "200字符",
+            special: "地址解析",
+          },
         ],
         apis: [
           { method: "POST", path: "/api/v1/users/login", desc: "用戶登入接口" },
           { method: "GET", path: "/api/v1/products", desc: "商品列表查詢" },
           { method: "POST", path: "/api/v1/orders", desc: "建立訂單接口" },
-          { method: "PUT", path: "/api/v1/orders/:id/status", desc: "更新訂單狀態" },
-          { method: "DELETE", path: "/api/v1/cart/items/:id", desc: "刪除購物車商品" }
+          {
+            method: "PUT",
+            path: "/api/v1/orders/:id/status",
+            desc: "更新訂單狀態",
+          },
+          {
+            method: "DELETE",
+            path: "/api/v1/cart/items/:id",
+            desc: "刪除購物車商品",
+          },
         ],
         cases: "用例",
         browsers: [
           { browser: "Chrome", version: "v120+" },
           { browser: "Firefox", version: "v115+" },
           { browser: "Safari", version: "v17+" },
-          { browser: "Edge", version: "v118+" }
+          { browser: "Edge", version: "v118+" },
         ],
-        browserTests: ["頁面渲染測試", "交互響應測試", "表單驗證測試", "跨瀏覽器兼容性"],
+        browserTests: [
+          "頁面渲染測試",
+          "交互響應測試",
+          "表單驗證測試",
+          "跨瀏覽器兼容性",
+        ],
         iosPlatform: "iOS 平台",
         androidPlatform: "Android 平台",
         iosDevices: ["iPhone 15 Pro", "iPhone 14", "iPad Pro", "iPad Air"],
-        androidDevices: ["Pixel 8 Pro", "Samsung S24", "Xiaomi 14", "OPPO Find X7"],
+        androidDevices: [
+          "Pixel 8 Pro",
+          "Samsung S24",
+          "Xiaomi 14",
+          "OPPO Find X7",
+        ],
         summary: {
           types: [
             { type: "API 測試", count: 562 },
             { type: "瀏覽器 UI", count: 438 },
             { type: "移動端 iOS", count: 128 },
             { type: "移動端 Android", count: 139 },
-            { type: "性能壓測", count: 86 }
+            { type: "性能壓測", count: 86 },
           ],
           total: "1,353",
-          readyToExecute: "個測試用例已經生成咗，準備執行"
-        }
+          readyToExecute: "個測試用例已經生成咗，準備執行",
+        },
       },
       execute: {
         title: "AI 自動執行測試",
         desc: "多協議並行執行，實時監控測試進度",
         lanes: [
-          { type: "HTTP / REST API", desc: "全面嘅 HTTP 接口測試，支援 RESTful、GraphQL" },
-          { type: "gRPC 服務", desc: "高性能 gRPC 服務測試，Unary / Streaming" },
-          { type: "瀏覽器測試", desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器" },
+          {
+            type: "HTTP / REST API",
+            desc: "全面嘅 HTTP 接口測試，支援 RESTful、GraphQL",
+          },
+          {
+            type: "gRPC 服務",
+            desc: "高性能 gRPC 服務測試，Unary / Streaming",
+          },
+          {
+            type: "瀏覽器測試",
+            desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器",
+          },
           { type: "移動端 iOS", desc: "iPhone / iPad 真機同模擬器測試" },
-          { type: "移動端 Android", desc: "Pixel / Samsung / Xiaomi 多設備覆蓋" }
+          {
+            type: "移動端 Android",
+            desc: "Pixel / Samsung / Xiaomi 多設備覆蓋",
+          },
         ],
         stats: [
           { label: "總執行", value: "1,353" },
           { label: "通過", value: "1,312" },
           { label: "失敗", value: "28" },
-          { label: "耗時", value: "4分32秒" }
-        ]
+          { label: "耗時", value: "4分32秒" },
+        ],
       },
       report: {
         title: "AI 產出精美測試報告",
@@ -743,7 +795,7 @@ export const yue = {
           { label: "通過率", value: "97.1%" },
           { label: "覆蓋率", value: "94.8%" },
           { label: "總用例", value: "1,353" },
-          { label: "缺陷數", value: "28" }
+          { label: "缺陷數", value: "28" },
         ],
         chartTitle: "測試類型分佈",
         chartLabels: ["API", "UI", "iOS", "Android", "gRPC"],
@@ -752,13 +804,13 @@ export const yue = {
           { module: "支付模組", count: 12, severity: "高" },
           { module: "訂單模組", count: 8, severity: "中" },
           { module: "用戶模組", count: 5, severity: "低" },
-          { module: "其他", count: 3, severity: "低" }
+          { module: "其他", count: 3, severity: "低" },
         ],
         browserRecording: "瀏覽器測試錄屏 - Chrome",
         downloadReport: "下載完整報告",
         shareReport: "分享報告",
-        timeSaved: "全程耗時 4分32秒 · 慳咗人工 48+ 鐘頭"
-      }
+        timeSaved: "全程耗時 4分32秒 · 慳咗人工 48+ 鐘頭",
+      },
     },
     errors: {
       common: {
@@ -768,7 +820,7 @@ export const yue = {
         missingWorkspace: "缺少工作空間參數",
         workspaceForbidden: "冇權限訪問呢個工作空間",
         adminRequired: "需要管理員權限",
-        superadminRequired: "需要超級管理員權限"
+        superadminRequired: "需要超級管理員權限",
       },
       auth: {
         invalidCredentials: "賬號或者密碼錯咗",
@@ -776,28 +828,29 @@ export const yue = {
         emailAlreadyRegistered: "電郵已經註冊咗",
         registrationDisabled: "系統暫時唔開放註冊",
         invitationInvalid: "邀請碼無效或者已經用咗",
-        invitationExpired: "邀請碼已經過期"
+        invitationExpired: "邀請碼已經過期",
       },
       user: {
         notFound: "用戶唔存在",
         emailInUse: "電郵已經俾人用咗",
-        wrongPassword: "原密碼錯咗"
+        wrongPassword: "原密碼錯咗",
       },
       workspace: {
         notFound: "工作空間唔存在",
         onlyOwnerCanUpdate: "淨係建立者可以改",
         onlyOwnerCanDelete: "淨係建立者可以刪除",
         slugExists: "Slug 已經存在",
-        slugReserved: "呢個標識係系統保留嘅，請用其他名稱"
+        slugReserved: "呢個標識係系統保留嘅，請用其他名稱",
       },
       todo: {
-        notFound: "待辦唔存在"
+        notFound: "待辦唔存在",
       },
       testRequirement: {
         notFound: "測試需求唔存在",
         createFetchFailed: "建立之後搵唔到記錄",
         updateFetchFailed: "更新之後搵唔到記錄",
-        deleteChildrenFirst: "請先刪除所有子需求"      },
+        deleteChildrenFirst: "請先刪除所有子需求",
+      },
       admin: {
         cannotChangeOwnRole: "唔能改自己嘅角色",
         userNotFound: "用戶唔存在",
@@ -808,12 +861,12 @@ export const yue = {
         defaultWorkspaceDesc: "預設工作空間",
         workspaceSuffix: "嘅空間站",
         sharedWorkspaceName: "共享空間",
-        sharedWorkspaceDesc: "系統共享工作空間"
-      }
+        sharedWorkspaceDesc: "系統共享工作空間",
+      },
     },
     footer: {
       copyright: "© 2026 TestOps AI. All rights reserved.",
-      tagline: "AI 驅動嘅測試全流程平台"
+      tagline: "AI 驅動嘅測試全流程平台",
     },
     systemSettings: {
       title: "系統設定",
@@ -835,7 +888,8 @@ export const yue = {
       allowRegistration: "允許新用戶註冊",
       allowRegistrationDesc: "閂咗之後，新用戶就冇辦法註冊賬號",
       singleWorkspaceMode: "單一空間模式",
-      singleWorkspaceModeDesc: "開咗之後，所有用戶共用同一個工作空間，URL 入面唔會顯示空間 ID",
+      singleWorkspaceModeDesc:
+        "開咗之後，所有用戶共用同一個工作空間，URL 入面唔會顯示空間 ID",
       userList: "用戶列表",
       userRole: "角色",
       lastLoginAt: "最近登入",
@@ -883,9 +937,9 @@ export const yue = {
       copyInvitationLink: "複製連結",
       deleteInvitation: "刪除",
       expiresInHours: "有效期（鐘頭）",
-      noExpiration: "唔設定過期時間"
-    }
-  }
+      noExpiration: "唔設定過期時間",
+    },
+  },
 };
 
 export type TranslationSchema = typeof yue;

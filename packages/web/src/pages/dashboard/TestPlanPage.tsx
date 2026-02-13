@@ -21,10 +21,12 @@ export default function TestPlanPage() {
         {[
           { labelKey: "dashboard.testPlan.inProgress", value: "5" },
           { labelKey: "dashboard.testPlan.completedThisWeek", value: "12" },
-          { labelKey: "dashboard.testPlan.avgCoverage", value: "87%" }
+          { labelKey: "dashboard.testPlan.avgCoverage", value: "87%" },
         ].map((stat) => (
           <div key={stat.labelKey} className="card">
-            <p className="text-sm text-slate-500 dark:text-slate-400">{t(stat.labelKey)}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              {t(stat.labelKey)}
+            </p>
             <p className="mt-2 text-3xl font-semibold">{stat.value}</p>
           </div>
         ))}

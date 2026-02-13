@@ -1,6 +1,6 @@
+import type { User } from "@acme/types";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import type { User } from "@acme/types";
 import { trpc } from "../../lib/trpc";
 
 type WorkspacePageProps = {
@@ -42,7 +42,7 @@ export default function WorkspacePage({ user }: WorkspacePageProps) {
                 {stats.data?.[index] ?? "-"}
               </p>
             </div>
-          )
+          ),
         )}
       </div>
       <div className="grid gap-6 lg:grid-cols-2">

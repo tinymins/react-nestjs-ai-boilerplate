@@ -1,5 +1,5 @@
+import { Form, Input, Modal, Typography } from "antd";
 import { useState } from "react";
-import { Modal, Form, Input, Typography } from "antd";
 import { useTranslation } from "react-i18next";
 import { useMessage } from "../../hooks";
 import { trpc } from "../../lib/trpc";
@@ -91,11 +91,7 @@ export default function CreateWorkspaceModal({
       okText={t("createWorkspace.create")}
       cancelText={t("createWorkspace.cancel")}
     >
-      <Form
-        form={form}
-        layout="vertical"
-        className="mt-6"
-      >
+      <Form form={form} layout="vertical" className="mt-6">
         <Form.Item
           name="name"
           label={t("createWorkspace.nameLabel")}
@@ -118,7 +114,7 @@ export default function CreateWorkspaceModal({
             { required: true, message: t("createWorkspace.slugRequired") },
             {
               pattern: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-              message: t("createWorkspace.slugPattern")
+              message: t("createWorkspace.slugPattern"),
             },
           ]}
           extra={
@@ -136,10 +132,7 @@ export default function CreateWorkspaceModal({
           />
         </Form.Item>
 
-        <Form.Item
-          name="description"
-          label={t("createWorkspace.descLabel")}
-        >
+        <Form.Item name="description" label={t("createWorkspace.descLabel")}>
           <Input.TextArea
             placeholder={t("createWorkspace.descPlaceholder")}
             rows={3}

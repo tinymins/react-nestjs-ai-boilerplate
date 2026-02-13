@@ -28,17 +28,17 @@ export const jaJP = {
         critical: "緊急",
         high: "高",
         medium: "中",
-        low: "低"
+        low: "低",
       },
       theme: {
         light: "ライト",
-        dark: "ダーク"
-      }
+        dark: "ダーク",
+      },
     },
     userMenu: {
       account: "アカウント設定",
       admin: "管理画面",
-      signOut: "ログアウト"
+      signOut: "ログアウト",
     },
     userSettings: {
       title: "アカウント設定",
@@ -68,7 +68,7 @@ export const jaJP = {
       confirmPasswordRequired: "新しいパスワードを再入力してください",
       confirmPasswordPlaceholder: "新しいパスワードを再入力",
       passwordMismatch: "パスワードが一致しません",
-      changePassword: "パスワードを変更"
+      changePassword: "パスワードを変更",
     },
     createWorkspace: {
       title: "新規ワークスペース作成",
@@ -85,7 +85,7 @@ export const jaJP = {
       slugPattern: "小文字の英数字とハイフンのみ使用できます",
       slugExtra: "アクセスURLに使用されます。例：/dashboard/{{slug}}",
       descLabel: "説明",
-      descPlaceholder: "このワークスペースの簡単な説明..."
+      descPlaceholder: "このワークスペースの簡単な説明...",
     },
     nav: {
       items: [
@@ -93,10 +93,10 @@ export const jaJP = {
         { label: "ソリューション", href: "/#solutions" },
         { label: "ワークフロー", href: "/#workflow" },
         { label: "AI機能", href: "/#ai" },
-        { label: "プラン", href: "/#plans" }
+        { label: "プラン", href: "/#plans" },
       ],
       login: "ログイン",
-      dashboard: "ダッシュボード"
+      dashboard: "ダッシュボード",
     },
     hero: {
       badge: "AI TestOps",
@@ -110,13 +110,13 @@ export const jaJP = {
         "✓ 要件分析完了 · 12シナリオ",
         "✓ テストマトリクス生成 · カバレッジ92%",
         "→ 自動回帰テスト実行中 · 18/24",
-        "→ リスクゲート評価中 · 8%"
+        "→ リスクゲート評価中 · 8%",
       ],
       metrics: [
         { label: "全プロセス自動化", value: "90%" },
         { label: "デリバリー可視化", value: "100%" },
-        { label: "コラボレーション効率", value: "3x" }
-      ]
+        { label: "コラボレーション効率", value: "3x" },
+      ],
     },
     overview: {
       title: "テストを継続的デリバリーの中核エンジンに",
@@ -129,8 +129,8 @@ export const jaJP = {
           bullets: [
             "テストスコープの自動生成とカバレッジ提案",
             "テスト資産を再利用可能なナレッジベースとして蓄積",
-            "ワンクリックでリリースゲートと品質ダッシュボードを公開"
-          ]
+            "ワンクリックでリリースゲートと品質ダッシュボードを公開",
+          ],
         },
         {
           title: "統合品質運用ビュー",
@@ -138,68 +138,68 @@ export const jaJP = {
           bullets: [
             "テスト活動の進捗とブロッカーを自動識別",
             "欠陥トレンドと回帰優先度の提案",
-            "品質KPIの継続的最適化"
-          ]
-        }
-      ]
+            "品質KPIの継続的最適化",
+          ],
+        },
+      ],
     },
     pillars: {
       title: "プラットフォーム機能マトリクス",
       items: [
         {
           title: "要件駆動",
-          desc: "PRD/ユーザーストーリーからテストスコープとカバレッジ提案を自動生成。"
+          desc: "PRD/ユーザーストーリーからテストスコープとカバレッジ提案を自動生成。",
         },
         {
           title: "インテリジェント設計",
-          desc: "AIがテストケース、データ、アサーションを自動補完。テンプレート再利用をサポート。"
+          desc: "AIがテストケース、データ、アサーションを自動補完。テンプレート再利用をサポート。",
         },
         {
           title: "実行オーケストレーション",
-          desc: "手動＋自動化テストを統一スケジューリング。リアルタイムでテスト進捗をフィードバック。"
+          desc: "手動＋自動化テストを統一スケジューリング。リアルタイムでテスト進捗をフィードバック。",
         },
         {
           title: "品質インサイト",
-          desc: "リスクヒートマップ、欠陥トレンド、カバレッジと品質ゲート。"
+          desc: "リスクヒートマップ、欠陥トレンド、カバレッジと品質ゲート。",
         },
         {
           title: "ナレッジ蓄積",
-          desc: "テスト資産をナレッジベースとして蓄積し、継続的に最適化。"
+          desc: "テスト資産をナレッジベースとして蓄積し、継続的に最適化。",
         },
         {
           title: "ガバナンス・コンプライアンス",
-          desc: "プロセス監査、権限マトリクス、デリバリー追跡可能性。"
-        }
-      ]
+          desc: "プロセス監査、権限マトリクス、デリバリー追跡可能性。",
+        },
+      ],
     },
     flow: {
       title: "全プロセスをカバーするTestOpsエンジン",
       steps: [
         {
           title: "要件入力",
-          desc: "チケット、PRD、APIドキュメント、要件テンプレートをサポート。テストスコープを自動確立。"
+          desc: "チケット、PRD、APIドキュメント、要件テンプレートをサポート。テストスコープを自動確立。",
         },
         {
           title: "テスト計画",
-          desc: "AIがテストマトリクス、リスク評価、テストリソース計画を生成。"
+          desc: "AIがテストマトリクス、リスク評価、テストリソース計画を生成。",
         },
         {
           title: "テスト設計",
-          desc: "モデルと過去の資産からテストケース、データ、実行スクリプトを生成。"
+          desc: "モデルと過去の資産からテストケース、データ、実行スクリプトを生成。",
         },
         {
           title: "テスト実行",
-          desc: "自動化、手動、パフォーマンス、セキュリティテスト活動を統一オーケストレーション。"
+          desc: "自動化、手動、パフォーマンス、セキュリティテスト活動を統一オーケストレーション。",
         },
         {
           title: "欠陥管理",
-          desc: "インテリジェントクラスタリング、根本原因分析、回帰提案と影響評価。"
+          desc: "インテリジェントクラスタリング、根本原因分析、回帰提案と影響評価。",
         },
         {
           title: "テストレポート",
-          desc: "多次元品質レポートを自動生成。リリースゲートをサポート。"
-        }
-      ]
+          desc: "多次元品質レポートを自動生成。リリースゲートをサポート。",
+        },
+      ],
     },
     testing: {
       badge: "AI駆動テスト",
@@ -208,28 +208,28 @@ export const jaJP = {
       capabilities: [
         {
           title: "HTTP / REST API",
-          desc: "包括的なHTTPインターフェーステスト。RESTful、GraphQL、WebSocketをサポート"
+          desc: "包括的なHTTPインターフェーステスト。RESTful、GraphQL、WebSocketをサポート",
         },
         {
           title: "gRPC",
-          desc: "高性能gRPCサービステスト。Unary、Streaming呼び出しをサポート"
+          desc: "高性能gRPCサービステスト。Unary、Streaming呼び出しをサポート",
         },
         {
           title: "モバイルUI",
-          desc: "iOS / Androidネイティブアプリ自動化テスト。実機とシミュレーターをサポート"
+          desc: "iOS / Androidネイティブアプリ自動化テスト。実機とシミュレーターをサポート",
         },
         {
           title: "ブラウザテスト",
-          desc: "Chrome / Firefox / Safari / Edgeクロスブラウザ自動化テスト"
+          desc: "Chrome / Firefox / Safari / Edgeクロスブラウザ自動化テスト",
         },
         {
           title: "Windowsデスクトップ",
-          desc: "Windowsデスクトップアプリ自動化。WinUI / WPF / Win32をサポート"
+          desc: "Windowsデスクトップアプリ自動化。WinUI / WPF / Win32をサポート",
         },
         {
           title: "AIインテリジェント計画",
-          desc: "要件に基づいてテストケースを自動生成。テストシナリオと境界条件をインテリジェントに識別"
-        }
+          desc: "要件に基づいてテストケースを自動生成。テストシナリオと境界条件をインテリジェントに識別",
+        },
       ],
       aiFlowSteps: [
         { step: "要件ドキュメント", icon: "📄" },
@@ -237,29 +237,29 @@ export const jaJP = {
         { step: "テスト計画", icon: "📋" },
         { step: "ケース生成", icon: "✨" },
         { step: "自動実行", icon: "🚀" },
-        { step: "スマートレポート", icon: "📊" }
-      ]
+        { step: "スマートレポート", icon: "📊" },
+      ],
     },
     ai: {
       title: "AIファーストのコア機能",
       items: [
         {
           title: "要件理解エンジン",
-          desc: "コンテキストから重要なシナリオを抽出し、テストスコープとリスクラベルを生成。"
+          desc: "コンテキストから重要なシナリオを抽出し、テストスコープとリスクラベルを生成。",
         },
         {
           title: "テスト資産生成",
-          desc: "テストケース、データ、APIテストスクリプト、テスト説明を自動生成。"
+          desc: "テストケース、データ、APIテストスクリプト、テスト説明を自動生成。",
         },
         {
           title: "実行インテリジェントアシスタント",
-          desc: "ブロック原因、修正提案、回帰優先度をリアルタイムで提供。"
+          desc: "ブロック原因、修正提案、回帰優先度をリアルタイムで提供。",
         },
         {
           title: "レポートインサイト",
-          desc: "管理層視点のレポートとリリース決定提案を生成。"
-        }
-      ]
+          desc: "管理層視点のレポートとリリース決定提案を生成。",
+        },
+      ],
     },
     integrations: {
       title: "開発エコシステムとシームレスに統合",
@@ -269,8 +269,8 @@ export const jaJP = {
         "Jenkins / GitHub Actions / Argo",
         "Postman / Playwright / Cypress",
         "SonarQube / Sentry / Datadog",
-        "企業IM・通知プラットフォーム"
-      ]
+        "企業IM・通知プラットフォーム",
+      ],
     },
     security: {
       title: "エンタープライズグレードのセキュリティとガバナンス",
@@ -279,18 +279,19 @@ export const jaJP = {
         "データ暗号化と監査ログ",
         "マルチリージョンデプロイと災害復旧",
         "コンプライアンスプロセスとリリースゲート",
-        "資産バージョン管理と承認"
-      ]
+        "資産バージョン管理と承認",
+      ],
     },
     cta: {
       title: "AI駆動のテスト全プロセスを構築開始",
       desc: "テストチームを開発デリバリーの戦略的エンジンに。",
       primary: "ソリューションを取得",
-      secondary: "トライアルを申請"
+      secondary: "トライアルを申請",
     },
     closing: {
       title: "テストをコードのように継続的に進化させる",
-      subtitle: "AI TestOps · 要件、品質、デリバリーのすべてのイテレーションを接続"
+      subtitle:
+        "AI TestOps · 要件、品質、デリバリーのすべてのイテレーションを接続",
     },
     login: {
       title: "TestOps AIにログイン",
@@ -310,32 +311,34 @@ export const jaJP = {
       registrationDisabled: "現在、新規登録は受け付けておりません",
       backToLogin: "ログインに戻る",
       emailPlaceholder: "メールアドレスを入力",
-      passwordPlaceholder: "パスワードを入力"
+      passwordPlaceholder: "パスワードを入力",
     },
     pages: {
       notFound: {
         title: "ページが見つかりません",
-        description: "申し訳ございません、お探しのページは存在しないか削除されました",
+        description:
+          "申し訳ございません、お探しのページは存在しないか削除されました",
         goHome: "ホームへ",
-        goBack: "前のページへ"
+        goBack: "前のページへ",
       },
       unauthorized: {
         title: "アクセス拒否",
         description: "申し訳ございません、このページへのアクセス権がありません",
         goHome: "ホームへ",
-        reLogin: "再ログイン"
+        reLogin: "再ログイン",
       },
       workspaceNotFound: {
         title: "ワークスペースが見つかりません",
-        notFoundNamed: "\"{{name}}\" というワークスペースが見つかりません",
+        notFoundNamed: '"{{name}}" というワークスペースが見つかりません',
         notFoundGeneric: "該当のワークスペースが見つかりません",
-        goBack: "ワークスペース一覧へ"
+        goBack: "ワークスペース一覧へ",
       },
       dashboardNotFound: {
         title: "ページが存在しません",
-        description: "申し訳ございません、お探しのページは存在しないか移動されました",
-        goBack: "ダッシュボードへ"
-      }
+        description:
+          "申し訳ございません、お探しのページは存在しないか移動されました",
+        goBack: "ダッシュボードへ",
+      },
     },
     dashboard: {
       title: "テスト運用センター",
@@ -347,21 +350,28 @@ export const jaJP = {
       noWorkspaceSelected: "ワークスペース未選択",
       stats: ["要件プール", "実行中テスト", "リリースゲート"],
       promptTitle: "ログインしてください",
-      promptBody: "ログインするとテスト運用データとワークベンチを確認できます。",
+      promptBody:
+        "ログインするとテスト運用データとワークベンチを確認できます。",
       toLogin: "ログインする",
       workspace: "ワークスペース",
       workspaceSwitcher: {
-        switchWorkspace: "ワークスペースを切り替え"
+        switchWorkspace: "ワークスペースを切り替え",
       },
       insightTitle: "品質インサイト",
-      insightDesc: "リスクヒートマップ、カバレッジ、リリースゲート提案を自動生成。",
-      insightItems: ["要件カバレッジ92%", "回帰リスク8%", "ブロック3", "確認待ち5"],
+      insightDesc:
+        "リスクヒートマップ、カバレッジ、リリースゲート提案を自動生成。",
+      insightItems: [
+        "要件カバレッジ92%",
+        "回帰リスク8%",
+        "ブロック3",
+        "確認待ち5",
+      ],
       assistantTitle: "AI実行アシスタント",
       assistantDesc: "ブロック項目を自動識別し、修正提案と回帰優先度を生成。",
       assistantItems: [
         "ログインフローに異常な変動、優先的に回帰を推奨",
         "新バージョン決済APIのカバレッジ不足12%",
-        "モバイル回帰欠陥の収束率が20%向上"
+        "モバイル回帰欠陥の収束率が20%向上",
       ],
       menu: {
         workbench: "ワークベンチ",
@@ -397,20 +407,20 @@ export const jaJP = {
         summary: "🎯 完了サマリー",
         noTodos: "タスクはありません",
         menuLabel: "📋 タスクリスト",
-        defaultCategory: "カスタム"
+        defaultCategory: "カスタム",
       },
       defects: {
-        description: "欠陥を追跡しリスクを評価"
+        description: "欠陥を追跡しリスクを評価",
       },
       testDesign: {
         description: "テストケースを設計・作成",
         caseLibrary: "テストケースライブラリ",
         newCase: "+ 新規ケース作成",
-        totalCases: "全{{count}}件のテストケース"
+        totalCases: "全{{count}}件のテストケース",
       },
       settings: {
         title: "ワークスペース設定",
-        subtitle: "\"{{name}}\"の設定とメンバーを管理",
+        subtitle: '"{{name}}"の設定とメンバーを管理',
         workspaceNotFound: "ワークスペースが存在しません",
         generalTab: "基本設定",
         membersTab: "メンバー管理",
@@ -422,16 +432,20 @@ export const jaJP = {
         workspaceSlug: "ワークスペース識別子（URL）",
         workspaceSlugRequired: "識別子を入力してください",
         workspaceSlugPattern: "小文字の英数字とハイフンのみ使用できます",
-        workspaceSlugExtra: "アクセスURLに使用されます。例：/dashboard/my-project",
+        workspaceSlugExtra:
+          "アクセスURLに使用されます。例：/dashboard/my-project",
         description: "説明",
         descriptionPlaceholder: "このワークスペースの簡単な説明...",
         workspaceDeleted: "ワークスペースを削除しました",
         confirmDeleteTitle: "ワークスペース削除の確認",
-        confirmDeleteContent: "ワークスペース\"{{name}}\"を削除してもよろしいですか？この操作は取り消せません。",
-        confirmDeleteWarning: "すべての関連データ（タスクを含む）が完全に削除されます。",
+        confirmDeleteContent:
+          'ワークスペース"{{name}}"を削除してもよろしいですか？この操作は取り消せません。',
+        confirmDeleteWarning:
+          "すべての関連データ（タスクを含む）が完全に削除されます。",
         confirmDeleteOk: "削除を確認",
         deleteWorkspace: "ワークスペースを削除",
-        deleteWorkspaceDesc: "削除するとすべてのデータが完全に消去され、復元できません。",
+        deleteWorkspaceDesc:
+          "削除するとすべてのデータが完全に消去され、復元できません。",
         memberList: "メンバーリスト",
         memberListDesc: "ワークスペースメンバーと権限を管理",
         inviteMember: "メンバーを招待",
@@ -442,14 +456,15 @@ export const jaJP = {
         emailInvalid: "有効なメールアドレスを入力してください",
         role: "ロール",
         memberDefault: "メンバー（デフォルト）",
-        memberPermissionDesc: "メンバーはワークスペースのコンテンツを閲覧・編集できます",
+        memberPermissionDesc:
+          "メンバーはワークスペースのコンテンツを閲覧・編集できます",
         tableColumnMember: "メンバー",
         tableColumnRole: "ロール",
         tableColumnJoined: "参加日",
         tableColumnActions: "操作",
         removeMemberComingSoon: "メンバー削除機能は開発中です",
         inviteComingSoon: "招待機能開発中：{{email}}に招待メールを送信します",
-        workspaceOwner: "ワークスペースオーナー"
+        workspaceOwner: "ワークスペースオーナー",
       },
       requirements: {
         description: "製品要件を管理・追跡",
@@ -460,7 +475,7 @@ export const jaJP = {
         recentRequirements: "最近の要件",
         sampleTitle1: "ユーザーログインモジュールの最適化",
         sampleTitle2: "決済API アップグレード",
-        sampleTitle3: "注文検索パフォーマンス最適化"
+        sampleTitle3: "注文検索パフォーマンス最適化",
       },
       execution: {
         description: "テストタスクを実行し結果を確認",
@@ -468,28 +483,28 @@ export const jaJP = {
         running: "実行中",
         passed: "成功",
         failed: "失敗",
-        blocked: "ブロック"
+        blocked: "ブロック",
       },
       automation: {
         description: "自動化テストスクリプトとリソースを管理",
         workspaceLabel: "ワークスペース",
         totalScripts: "スクリプト総数",
         successRate: "実行成功率",
-        avgDuration: "平均実行時間"
+        avgDuration: "平均実行時間",
       },
       reports: {
         description: "品質指標を確認しレポートを生成",
         workspaceLabel: "ワークスペース",
         testCoverage: "テストカバレッジ",
         defectDensity: "欠陥密度",
-        automationRate: "自動化率"
+        automationRate: "自動化率",
       },
       testPlan: {
         description: "テスト計画を策定・管理",
         workspaceLabel: "ワークスペース",
         inProgress: "進行中",
         completedThisWeek: "今週完了",
-        avgCoverage: "平均カバレッジ"
+        avgCoverage: "平均カバレッジ",
       },
       testRequirements: {
         titleTotal: "総要件数",
@@ -556,7 +571,8 @@ export const jaJP = {
         toastUpdateFail: "更新に失敗しました",
         toastDeleteSuccess: "削除しました",
         toastDeleteFail: "削除に失敗しました",
-        markdownPlaceholder: "# テスト要件詳細\n\n## テスト目的\nテストの主な目的を説明...\n\n## テスト範囲\n- 範囲項目1\n- 範囲項目2\n\n## テスト手順\n1. 手順1\n2. 手順2\n\n## 期待結果\n期待されるテスト結果を説明...",
+        markdownPlaceholder:
+          "# テスト要件詳細\n\n## テスト目的\nテストの主な目的を説明...\n\n## テスト範囲\n- 範囲項目1\n- 範囲項目2\n\n## テスト手順\n1. 手順1\n2. 手順2\n\n## 期待結果\n期待されるテスト結果を説明...",
         statusLabels: {
           draft: "下書き",
           pending: "レビュー待ち",
@@ -564,7 +580,7 @@ export const jaJP = {
           in_progress: "進行中",
           completed: "完了",
           rejected: "却下",
-          cancelled: "キャンセル"
+          cancelled: "キャンセル",
         },
         typeLabels: {
           functional: "機能テスト",
@@ -573,15 +589,15 @@ export const jaJP = {
           usability: "ユーザビリティテスト",
           compatibility: "互換性テスト",
           integration: "結合テスト",
-          regression: "回帰テスト"
+          regression: "回帰テスト",
         },
         priorityLabels: {
           critical: "緊急",
           high: "高",
           medium: "中",
-          low: "低"
-        }
-      }
+          low: "低",
+        },
+      },
     },
     aiWorkflow: {
       aiAutoProcess: "AI全自動プロセス",
@@ -590,7 +606,7 @@ export const jaJP = {
         desc: "ファイルをドラッグ＆ドロップ、またはクリックして選択",
         selectFile: "ファイルを選択",
         sampleFile: "ECプラットフォーム要件仕様書_v3.2.pdf",
-        sampleMeta: "3.8 MB · 156ページ · APIドキュメント含む"
+        sampleMeta: "3.8 MB · 156ページ · APIドキュメント含む",
       },
       analyzing: {
         title: "AI要件ドキュメントのインテリジェント分析",
@@ -601,16 +617,16 @@ export const jaJP = {
           "2. 商品管理モジュール",
           "3. 注文処理モジュール",
           "4. 決済ゲートウェイモジュール",
-          "5. 物流追跡モジュール"
+          "5. 物流追跡モジュール",
         ],
         stats: [
           { label: "機能モジュール", value: "28" },
           { label: "テストポイント", value: "186" },
           { label: "境界条件", value: "42" },
-          { label: "APIインターフェース", value: "67" }
+          { label: "APIインターフェース", value: "67" },
         ],
         progress: "分析進捗",
-        analyzing: "分析中..."
+        analyzing: "分析中...",
       },
       testPlan: {
         title: "AIテスト計画作成",
@@ -621,34 +637,44 @@ export const jaJP = {
           {
             module: "ユーザー管理",
             priority: "高",
-            items: ["ログイン登録", "権限制御", "個人情報", "OAuth統合"]
+            items: ["ログイン登録", "権限制御", "個人情報", "OAuth統合"],
           },
           {
             module: "注文処理",
             priority: "高",
-            items: ["注文作成", "ステータス遷移", "返金処理", "同時実行制御"]
+            items: ["注文作成", "ステータス遷移", "返金処理", "同時実行制御"],
           },
           {
             module: "決済ゲートウェイ",
             priority: "クリティカル",
-            items: ["PayPay", "クレジットカード", "銀行振込", "返金ロジック"]
+            items: ["PayPay", "クレジットカード", "銀行振込", "返金ロジック"],
           },
           {
             module: "商品管理",
             priority: "中",
-            items: ["商品CRUD", "在庫管理", "価格計算", "カテゴリ管理"]
+            items: ["商品CRUD", "在庫管理", "価格計算", "カテゴリ管理"],
           },
           {
             module: "物流追跡",
             priority: "中",
-            items: ["物流照会", "ステータス同期", "例外処理", "マルチチャネル連携"]
+            items: [
+              "物流照会",
+              "ステータス同期",
+              "例外処理",
+              "マルチチャネル連携",
+            ],
           },
           {
             module: "APIゲートウェイ",
             priority: "高",
-            items: ["レート制限・サーキットブレーカー", "認証認可", "ログ追跡", "バージョン管理"]
-          }
-        ]
+            items: [
+              "レート制限・サーキットブレーカー",
+              "認証認可",
+              "ログ追跡",
+              "バージョン管理",
+            ],
+          },
+        ],
       },
       generate: {
         title: "AIテストケースのインテリジェント生成",
@@ -663,76 +689,138 @@ export const jaJP = {
         scenarios: [
           {
             scenario: "正常フローテスト",
-            desc: "ユーザーログイン → 商品閲覧 → カートに追加 → 注文決済"
+            desc: "ユーザーログイン → 商品閲覧 → カートに追加 → 注文決済",
           },
           {
             scenario: "異常フローテスト",
-            desc: "ネットワーク中断、タイムアウトリトライ、同時実行コンフリクト処理"
+            desc: "ネットワーク中断、タイムアウトリトライ、同時実行コンフリクト処理",
           },
           {
             scenario: "境界値テスト",
-            desc: "最大購入数量、価格境界、在庫臨界値"
+            desc: "最大購入数量、価格境界、在庫臨界値",
           },
           {
             scenario: "セキュリティテスト",
-            desc: "SQLインジェクション、XSS攻撃、権限昇格検出"
-          }
+            desc: "SQLインジェクション、XSS攻撃、権限昇格検出",
+          },
         ],
         boundaries: [
-          { field: "ユーザー名", min: "2文字", max: "32文字", special: "特殊文字フィルタ" },
-          { field: "パスワード", min: "8文字", max: "128文字", special: "強度検証" },
-          { field: "商品価格", min: "0.01", max: "999999.99", special: "精度処理" },
+          {
+            field: "ユーザー名",
+            min: "2文字",
+            max: "32文字",
+            special: "特殊文字フィルタ",
+          },
+          {
+            field: "パスワード",
+            min: "8文字",
+            max: "128文字",
+            special: "強度検証",
+          },
+          {
+            field: "商品価格",
+            min: "0.01",
+            max: "999999.99",
+            special: "精度処理",
+          },
           { field: "購入数量", min: "1", max: "9999", special: "在庫チェック" },
-          { field: "クーポン金額", min: "1", max: "注文金額", special: "併用ルール" },
-          { field: "配送先住所", min: "10文字", max: "200文字", special: "住所解析" }
+          {
+            field: "クーポン金額",
+            min: "1",
+            max: "注文金額",
+            special: "併用ルール",
+          },
+          {
+            field: "配送先住所",
+            min: "10文字",
+            max: "200文字",
+            special: "住所解析",
+          },
         ],
         apis: [
-          { method: "POST", path: "/api/v1/users/login", desc: "ユーザーログインAPI" },
+          {
+            method: "POST",
+            path: "/api/v1/users/login",
+            desc: "ユーザーログインAPI",
+          },
           { method: "GET", path: "/api/v1/products", desc: "商品一覧検索" },
           { method: "POST", path: "/api/v1/orders", desc: "注文作成API" },
-          { method: "PUT", path: "/api/v1/orders/:id/status", desc: "注文ステータス更新" },
-          { method: "DELETE", path: "/api/v1/cart/items/:id", desc: "カート商品削除" }
+          {
+            method: "PUT",
+            path: "/api/v1/orders/:id/status",
+            desc: "注文ステータス更新",
+          },
+          {
+            method: "DELETE",
+            path: "/api/v1/cart/items/:id",
+            desc: "カート商品削除",
+          },
         ],
         cases: "ケース",
         browsers: [
           { browser: "Chrome", version: "v120+" },
           { browser: "Firefox", version: "v115+" },
           { browser: "Safari", version: "v17+" },
-          { browser: "Edge", version: "v118+" }
+          { browser: "Edge", version: "v118+" },
         ],
-        browserTests: ["ページレンダリングテスト", "インタラクション応答テスト", "フォームバリデーションテスト", "クロスブラウザ互換性"],
+        browserTests: [
+          "ページレンダリングテスト",
+          "インタラクション応答テスト",
+          "フォームバリデーションテスト",
+          "クロスブラウザ互換性",
+        ],
         iosPlatform: "iOSプラットフォーム",
         androidPlatform: "Androidプラットフォーム",
         iosDevices: ["iPhone 15 Pro", "iPhone 14", "iPad Pro", "iPad Air"],
-        androidDevices: ["Pixel 8 Pro", "Samsung S24", "Xiaomi 14", "OPPO Find X7"],
+        androidDevices: [
+          "Pixel 8 Pro",
+          "Samsung S24",
+          "Xiaomi 14",
+          "OPPO Find X7",
+        ],
         summary: {
           types: [
             { type: "APIテスト", count: 562 },
             { type: "ブラウザUI", count: 438 },
             { type: "モバイルiOS", count: 128 },
             { type: "モバイルAndroid", count: 139 },
-            { type: "パフォーマンステスト", count: 86 }
+            { type: "パフォーマンステスト", count: 86 },
           ],
           total: "1,353",
-          readyToExecute: "件のテストケースを生成しました。実行準備完了"
-        }
+          readyToExecute: "件のテストケースを生成しました。実行準備完了",
+        },
       },
       execute: {
         title: "AIテスト自動実行",
         desc: "マルチプロトコル並列実行、リアルタイムでテスト進捗を監視",
         lanes: [
-          { type: "HTTP / REST API", desc: "包括的なHTTPインターフェーステスト、RESTful、GraphQLサポート" },
-          { type: "gRPCサービス", desc: "高性能gRPCサービステスト、Unary / Streaming" },
-          { type: "ブラウザテスト", desc: "Chrome / Firefox / Safari / Edgeクロスブラウザ" },
-          { type: "モバイルiOS", desc: "iPhone / iPad実機・シミュレーターテスト" },
-          { type: "モバイルAndroid", desc: "Pixel / Samsung / Xiaomiマルチデバイスカバレッジ" }
+          {
+            type: "HTTP / REST API",
+            desc: "包括的なHTTPインターフェーステスト、RESTful、GraphQLサポート",
+          },
+          {
+            type: "gRPCサービス",
+            desc: "高性能gRPCサービステスト、Unary / Streaming",
+          },
+          {
+            type: "ブラウザテスト",
+            desc: "Chrome / Firefox / Safari / Edgeクロスブラウザ",
+          },
+          {
+            type: "モバイルiOS",
+            desc: "iPhone / iPad実機・シミュレーターテスト",
+          },
+          {
+            type: "モバイルAndroid",
+            desc: "Pixel / Samsung / Xiaomiマルチデバイスカバレッジ",
+          },
         ],
         stats: [
           { label: "総実行", value: "1,353" },
           { label: "成功", value: "1,312" },
           { label: "失敗", value: "28" },
-          { label: "所要時間", value: "4分32秒" }
-        ]
+          { label: "所要時間", value: "4分32秒" },
+        ],
       },
       report: {
         title: "AI精緻なテストレポート作成",
@@ -742,7 +830,7 @@ export const jaJP = {
           { label: "成功率", value: "97.1%" },
           { label: "カバレッジ", value: "94.8%" },
           { label: "総ケース数", value: "1,353" },
-          { label: "欠陥数", value: "28" }
+          { label: "欠陥数", value: "28" },
         ],
         chartTitle: "テストタイプ分布",
         chartLabels: ["API", "UI", "iOS", "Android", "gRPC"],
@@ -751,69 +839,70 @@ export const jaJP = {
           { module: "決済モジュール", count: 12, severity: "高" },
           { module: "注文モジュール", count: 8, severity: "中" },
           { module: "ユーザーモジュール", count: 5, severity: "低" },
-          { module: "その他", count: 3, severity: "低" }
+          { module: "その他", count: 3, severity: "低" },
         ],
         browserRecording: "ブラウザテスト録画 - Chrome",
         downloadReport: "完全レポートをダウンロード",
         shareReport: "レポートを共有",
-        timeSaved: "全行程所要時間4分32秒 · 手作業48時間以上節約"
-      }
-    },
-      errors: {
-        common: {
-          unauthorized: "ログインが必要です",
-          forbidden: "アクセス権限がありません",
-          requestFailed: "リクエストに失敗しました",
-          missingWorkspace: "ワークスペースパラメーターがありません",
-          workspaceForbidden: "このワークスペースへのアクセス権限がありません",
-          adminRequired: "管理者権限が必要です",
-          superadminRequired: "スーパー管理者権限が必要です"
-        },
-        auth: {
-          invalidCredentials: "アカウントまたはパスワードが正しくありません",
-          defaultWorkspaceNotFound: "デフォルトのワークスペースが見つかりません",
-          emailAlreadyRegistered: "このメールアドレスは既に登録されています",
-          registrationDisabled: "現在、新規登録は受け付けておりません",
-          invitationInvalid: "招待コードが無効または使用済みです",
-          invitationExpired: "招待コードの有効期限が切れています"
-        },
-        user: {
-          notFound: "ユーザーが存在しません",
-          emailInUse: "このメールアドレスは既に使用されています",
-          wrongPassword: "現在のパスワードが正しくありません"
-        },
-        workspace: {
-          notFound: "ワークスペースが存在しません",
-          onlyOwnerCanUpdate: "オーナーのみ変更できます",
-          onlyOwnerCanDelete: "オーナーのみ削除できます",
-          slugExists: "この識別子は既に使用されています",
-          slugReserved: "この識別子はシステム予約語です。別の名前を使用してください"
-        },
-        todo: {
-          notFound: "タスクが存在しません"
-        },
-        testRequirement: {
-          notFound: "テスト要件が存在しません",
-          createFetchFailed: "作成後にレコードを取得できませんでした",
-          updateFetchFailed: "更新後にレコードを取得できませんでした",
-          deleteChildrenFirst: "先にすべての子要件を削除してください"
-        },
-        admin: {
-          cannotChangeOwnRole: "自分の役割を変更することはできません",
-          userNotFound: "ユーザーが存在しません",
-          usePersonalSettings: "個人設定でパスワードを変更してください",
-          cannotDeleteSelf: "自分のアカウントを削除することはできません",
-          cannotDeleteSuperadmin: "スーパー管理者を削除することはできません",
-          emailAlreadyRegistered: "このメールアドレスは既に登録されています",
-          defaultWorkspaceDesc: "デフォルトワークスペース",
-          workspaceSuffix: "のワークスペース",
-          sharedWorkspaceName: "共有ワークスペース",
-          sharedWorkspaceDesc: "システム共有ワークスペース"
-        }
+        timeSaved: "全行程所要時間4分32秒 · 手作業48時間以上節約",
       },
+    },
+    errors: {
+      common: {
+        unauthorized: "ログインが必要です",
+        forbidden: "アクセス権限がありません",
+        requestFailed: "リクエストに失敗しました",
+        missingWorkspace: "ワークスペースパラメーターがありません",
+        workspaceForbidden: "このワークスペースへのアクセス権限がありません",
+        adminRequired: "管理者権限が必要です",
+        superadminRequired: "スーパー管理者権限が必要です",
+      },
+      auth: {
+        invalidCredentials: "アカウントまたはパスワードが正しくありません",
+        defaultWorkspaceNotFound: "デフォルトのワークスペースが見つかりません",
+        emailAlreadyRegistered: "このメールアドレスは既に登録されています",
+        registrationDisabled: "現在、新規登録は受け付けておりません",
+        invitationInvalid: "招待コードが無効または使用済みです",
+        invitationExpired: "招待コードの有効期限が切れています",
+      },
+      user: {
+        notFound: "ユーザーが存在しません",
+        emailInUse: "このメールアドレスは既に使用されています",
+        wrongPassword: "現在のパスワードが正しくありません",
+      },
+      workspace: {
+        notFound: "ワークスペースが存在しません",
+        onlyOwnerCanUpdate: "オーナーのみ変更できます",
+        onlyOwnerCanDelete: "オーナーのみ削除できます",
+        slugExists: "この識別子は既に使用されています",
+        slugReserved:
+          "この識別子はシステム予約語です。別の名前を使用してください",
+      },
+      todo: {
+        notFound: "タスクが存在しません",
+      },
+      testRequirement: {
+        notFound: "テスト要件が存在しません",
+        createFetchFailed: "作成後にレコードを取得できませんでした",
+        updateFetchFailed: "更新後にレコードを取得できませんでした",
+        deleteChildrenFirst: "先にすべての子要件を削除してください",
+      },
+      admin: {
+        cannotChangeOwnRole: "自分の役割を変更することはできません",
+        userNotFound: "ユーザーが存在しません",
+        usePersonalSettings: "個人設定でパスワードを変更してください",
+        cannotDeleteSelf: "自分のアカウントを削除することはできません",
+        cannotDeleteSuperadmin: "スーパー管理者を削除することはできません",
+        emailAlreadyRegistered: "このメールアドレスは既に登録されています",
+        defaultWorkspaceDesc: "デフォルトワークスペース",
+        workspaceSuffix: "のワークスペース",
+        sharedWorkspaceName: "共有ワークスペース",
+        sharedWorkspaceDesc: "システム共有ワークスペース",
+      },
+    },
     footer: {
       copyright: "© 2026 TestOps AI. All rights reserved.",
-      tagline: "AI駆動のテスト全プロセスプラットフォーム"
+      tagline: "AI駆動のテスト全プロセスプラットフォーム",
     },
     systemSettings: {
       passwordMinLength: "パスワードは4文字以上必要です",
@@ -833,9 +922,11 @@ export const jaJP = {
       generalTab: "一般設定",
       usersTab: "ユーザー管理",
       allowRegistration: "新規ユーザー登録を許可",
-      allowRegistrationDesc: "無効にすると、新規ユーザーはアカウントを登録できません",
+      allowRegistrationDesc:
+        "無効にすると、新規ユーザーはアカウントを登録できません",
       singleWorkspaceMode: "シングルワークスペースモード",
-      singleWorkspaceModeDesc: "有効にすると、すべてのユーザーが同じワークスペースを共有し、URLにワークスペースIDは表示されません",
+      singleWorkspaceModeDesc:
+        "有効にすると、すべてのユーザーが同じワークスペースを共有し、URLにワークスペースIDは表示されません",
       userList: "ユーザーリスト",
       userRole: "ロール",
       lastLoginAt: "最終ログイン",
@@ -848,7 +939,8 @@ export const jaJP = {
       resetPassword: "パスワードをリセット",
       deleteUser: "ユーザーを削除",
       confirmDelete: "削除の確認",
-      confirmDeleteDesc: "ユーザー{{name}}を削除してもよろしいですか？この操作は取り消せません。",
+      confirmDeleteDesc:
+        "ユーザー{{name}}を削除してもよろしいですか？この操作は取り消せません。",
       resetPasswordTitle: "パスワードをリセット",
       resetPasswordDesc: "ユーザー{{name}}の新しいパスワードを設定",
       newPassword: "新しいパスワード",
@@ -883,9 +975,9 @@ export const jaJP = {
       copyInvitationLink: "リンクをコピー",
       deleteInvitation: "削除",
       expiresInHours: "有効期間（時間）",
-      noExpiration: "有効期限を設定しない"
-    }
-  }
+      noExpiration: "有効期限を設定しない",
+    },
+  },
 };
 
 export type TranslationSchema = typeof jaJP;

@@ -29,17 +29,17 @@ export const wuu = {
         critical: "急煞哉",
         high: "老高",
         medium: "中档",
-        low: "勿要紧"
+        low: "勿要紧",
       },
       theme: {
         light: "亮色",
-        dark: "暗色"
-      }
+        dark: "暗色",
+      },
     },
     userMenu: {
       account: "账户设置",
       admin: "管理后台",
-      signOut: "退出去"
+      signOut: "退出去",
     },
     userSettings: {
       title: "账户设置",
@@ -69,7 +69,7 @@ export const wuu = {
       confirmPasswordRequired: "请再写一遍新密码",
       confirmPasswordPlaceholder: "再写一遍新密码",
       passwordMismatch: "两遍密码对勿上",
-      changePassword: "改密码"
+      changePassword: "改密码",
     },
     createWorkspace: {
       title: "新开空间站",
@@ -86,7 +86,7 @@ export const wuu = {
       slugPattern: "只好写小写字母、数字帮连字符",
       slugExtra: "来末访问地址，比方讲：/dashboard/{{slug}}",
       descLabel: "描述",
-      descPlaceholder: "简单讲讲搿个空间站..."
+      descPlaceholder: "简单讲讲搿个空间站...",
     },
     nav: {
       items: [
@@ -94,10 +94,10 @@ export const wuu = {
         { label: "解决方案", href: "/#solutions" },
         { label: "全流程", href: "/#workflow" },
         { label: "AI 能力", href: "/#ai" },
-        { label: "方案", href: "/#plans" }
+        { label: "方案", href: "/#plans" },
       ],
       login: "登进去",
-      dashboard: "控制台"
+      dashboard: "控制台",
     },
     hero: {
       badge: "AI TestOps",
@@ -111,13 +111,13 @@ export const wuu = {
         "✓ 需求解析好哉 · 12 个场景",
         "✓ 生成测试矩阵 · 覆盖率 92%",
         "→ 自动化回归调度辰光 · 18/24",
-        "→ 风险门禁评估辰光 · 8%"
+        "→ 风险门禁评估辰光 · 8%",
       ],
       metrics: [
         { label: "全流程自动化", value: "90%" },
         { label: "交付好看哉", value: "100%" },
-        { label: "协作效率提高", value: "3x" }
-      ]
+        { label: "协作效率提高", value: "3x" },
+      ],
     },
     overview: {
       title: "拿测试弄成持续交付额核心引擎",
@@ -130,8 +130,8 @@ export const wuu = {
           bullets: [
             "测试范围自动生成帮覆盖建议",
             "测试资产沉淀成可复用知识库",
-            "一键发布门禁帮质量看板"
-          ]
+            "一键发布门禁帮质量看板",
+          ],
         },
         {
           title: "统一质量运营视角",
@@ -139,68 +139,68 @@ export const wuu = {
           bullets: [
             "测试活动进度帮阻塞自动识别",
             "缺陷趋势帮回归优先级建议",
-            "质量 KPI 持续优化"
-          ]
-        }
-      ]
+            "质量 KPI 持续优化",
+          ],
+        },
+      ],
     },
     pillars: {
       title: "平台能力矩阵",
       items: [
         {
           title: "需求驱动",
-          desc: "从 PRD/用户故事自动生成测试范围帮覆盖建议。"
+          desc: "从 PRD/用户故事自动生成测试范围帮覆盖建议。",
         },
         {
           title: "智能设计",
-          desc: "AI 自动补全用例、数据帮断言，支持模板复用。"
+          desc: "AI 自动补全用例、数据帮断言，支持模板复用。",
         },
         {
           title: "执行编排",
-          desc: "手工加上自动化统一排期，实时反馈测试进度。"
+          desc: "手工加上自动化统一排期，实时反馈测试进度。",
         },
         {
           title: "质量洞察",
-          desc: "风险热力图、缺陷趋势、覆盖率帮质量门禁。"
+          desc: "风险热力图、缺陷趋势、覆盖率帮质量门禁。",
         },
         {
           title: "知识沉淀",
-          desc: "测试资产沉淀成知识库，持续优化。"
+          desc: "测试资产沉淀成知识库，持续优化。",
         },
         {
           title: "治理合规",
-          desc: "流程审计、权限矩阵、交付好追溯。"
-        }
-      ]
+          desc: "流程审计、权限矩阵、交付好追溯。",
+        },
+      ],
     },
     flow: {
       title: "覆盖全流程额 TestOps 引擎",
       steps: [
         {
           title: "需求录入",
-          desc: "支持工单、PRD、API 文档帮需求模板，自动建立测试范围。"
+          desc: "支持工单、PRD、API 文档帮需求模板，自动建立测试范围。",
         },
         {
           title: "测试规划",
-          desc: "AI 生成测试矩阵、风险评估帮测试资源计划。"
+          desc: "AI 生成测试矩阵、风险评估帮测试资源计划。",
         },
         {
           title: "测试设计",
-          desc: "从模型帮历史资产浪头生成用例、数据帮执行脚本。"
+          desc: "从模型帮历史资产浪头生成用例、数据帮执行脚本。",
         },
         {
           title: "测试执行",
-          desc: "统一调度自动化、手工、性能、安全测试活动。"
+          desc: "统一调度自动化、手工、性能、安全测试活动。",
         },
         {
           title: "缺陷管理",
-          desc: "智能聚类、根因分析、回归建议帮影响面评估。"
+          desc: "智能聚类、根因分析、回归建议帮影响面评估。",
         },
         {
           title: "测试报告",
-          desc: "自动生成多维度质量报告，支持发布门禁。"
-        }
-      ]
+          desc: "自动生成多维度质量报告，支持发布门禁。",
+        },
+      ],
     },
     testing: {
       badge: "AI 驱动测试",
@@ -209,28 +209,28 @@ export const wuu = {
       capabilities: [
         {
           title: "HTTP / REST API",
-          desc: "全面额 HTTP 接口测试，支持 RESTful、GraphQL、WebSocket"
+          desc: "全面额 HTTP 接口测试，支持 RESTful、GraphQL、WebSocket",
         },
         {
           title: "gRPC",
-          desc: "高性能 gRPC 服务测试，支持 Unary、Streaming 调用"
+          desc: "高性能 gRPC 服务测试，支持 Unary、Streaming 调用",
         },
         {
           title: "移动端 UI",
-          desc: "iOS / Android 原生 App 自动化测试，支持真机帮模拟器"
+          desc: "iOS / Android 原生 App 自动化测试，支持真机帮模拟器",
         },
         {
           title: "浏览器测试",
-          desc: "Chrome / Firefox / Safari / Edge 跨浏览器自动化测试"
+          desc: "Chrome / Firefox / Safari / Edge 跨浏览器自动化测试",
         },
         {
           title: "Windows 桌面",
-          desc: "Windows 桌面应用自动化，支持 WinUI / WPF / Win32"
+          desc: "Windows 桌面应用自动化，支持 WinUI / WPF / Win32",
         },
         {
           title: "AI 智能规划",
-          desc: "基于需求自动生成测试用例，智能识别测试场景帮边界条件"
-        }
+          desc: "基于需求自动生成测试用例，智能识别测试场景帮边界条件",
+        },
       ],
       aiFlowSteps: [
         { step: "需求文档", icon: "📄" },
@@ -238,29 +238,29 @@ export const wuu = {
         { step: "测试计划", icon: "📋" },
         { step: "用例生成", icon: "✨" },
         { step: "自动执行", icon: "🚀" },
-        { step: "智能报告", icon: "📊" }
-      ]
+        { step: "智能报告", icon: "📊" },
+      ],
     },
     ai: {
       title: "AI 优先额核心能力",
       items: [
         {
           title: "需求理解引擎",
-          desc: "从上下文提取关键场景，生成测试范围帮风险标签。"
+          desc: "从上下文提取关键场景，生成测试范围帮风险标签。",
         },
         {
           title: "测试资产生成",
-          desc: "自动生成用例、数据、接口测试脚本帮测试说明。"
+          desc: "自动生成用例、数据、接口测试脚本帮测试说明。",
         },
         {
           title: "执行智能助手",
-          desc: "实时帮侬讲阻塞原因、修复建议帮回归优先级。"
+          desc: "实时帮侬讲阻塞原因、修复建议帮回归优先级。",
         },
         {
           title: "报告洞察",
-          desc: "生成管理层视角报告帮发布决策建议。"
-        }
-      ]
+          desc: "生成管理层视角报告帮发布决策建议。",
+        },
+      ],
     },
     integrations: {
       title: "无缝集成研发生态",
@@ -270,8 +270,8 @@ export const wuu = {
         "Jenkins / GitHub Actions / Argo",
         "Postman / Playwright / Cypress",
         "SonarQube / Sentry / Datadog",
-        "企业 IM 帮通知中台"
-      ]
+        "企业 IM 帮通知中台",
+      ],
     },
     security: {
       title: "企业级安全帮治理",
@@ -280,18 +280,18 @@ export const wuu = {
         "数据加密帮审计日志",
         "多地域部署帮容灾",
         "合规流程帮发布门禁",
-        "资产版本管理帮审批"
-      ]
+        "资产版本管理帮审批",
+      ],
     },
     cta: {
       title: "开始构建 AI 驱动额测试全流程",
       desc: "拿测试团队弄成研发交付额战略引擎。",
       primary: "拿方案",
-      secondary: "申请试用"
+      secondary: "申请试用",
     },
     closing: {
       title: "拿测试像代码一样持续进化",
-      subtitle: "AI TestOps · 连接需求、质量帮交付额每一趟迭代"
+      subtitle: "AI TestOps · 连接需求、质量帮交付额每一趟迭代",
     },
     login: {
       title: "登进 TestOps AI",
@@ -311,32 +311,32 @@ export const wuu = {
       registrationDisabled: "系统现在勿开放注册",
       backToLogin: "回去登录",
       emailPlaceholder: "请写邮箱",
-      passwordPlaceholder: "请写密码"
+      passwordPlaceholder: "请写密码",
     },
     pages: {
       notFound: {
         title: "页面寻勿着",
         description: "抱歉，侬访问的页面勿存在或已被移除",
         goHome: "回去首页",
-        goBack: "回去前一页"
+        goBack: "回去前一页",
       },
       unauthorized: {
         title: "访问受限",
         description: "抱歉，侬没有权限访问呃个页面",
         goHome: "回去首页",
-        reLogin: "重新登进"
+        reLogin: "重新登进",
       },
       workspaceNotFound: {
         title: "空间站勿存在",
-        notFoundNamed: "寻勿着名字叫 \"{{name}}\" 的空间站",
+        notFoundNamed: '寻勿着名字叫 "{{name}}" 的空间站',
         notFoundGeneric: "寻勿着对应空间站",
-        goBack: "回去可用空间站"
+        goBack: "回去可用空间站",
       },
       dashboardNotFound: {
         title: "页面勿存在",
         description: "抱歉，侬访问的页面勿存在或已被移动",
-        goBack: "回去工作台"
-      }
+        goBack: "回去工作台",
+      },
     },
     dashboard: {
       title: "测试运营中心",
@@ -352,7 +352,7 @@ export const wuu = {
       toLogin: "去登进",
       workspace: "工作空间",
       workspaceSwitcher: {
-        switchWorkspace: "切换空间站"
+        switchWorkspace: "切换空间站",
       },
       insightTitle: "质量洞察",
       insightDesc: "自动生成风险热力图、覆盖率帮发布门禁建议。",
@@ -362,7 +362,7 @@ export const wuu = {
       assistantItems: [
         "登录流程异常波动，建议优先回归",
         "新版本支付接口覆盖勿够 12%",
-        "移动端回归缺陷收敛度提高 20%"
+        "移动端回归缺陷收敛度提高 20%",
       ],
       menu: {
         workbench: "工作台",
@@ -398,20 +398,20 @@ export const wuu = {
         summary: "🎯 完成摘要",
         noTodos: "呒没待办",
         menuLabel: "📋 待办清单",
-        defaultCategory: "自定义"
+        defaultCategory: "自定义",
       },
       defects: {
-        description: "跟踪缺陷帮评估风险"
+        description: "跟踪缺陷帮评估风险",
       },
       testDesign: {
         description: "设计帮写测试用例",
         caseLibrary: "测试用例库",
         newCase: "+ 新开用例",
-        totalCases: "共 {{count}} 条测试用例"
+        totalCases: "共 {{count}} 条测试用例",
       },
       settings: {
         title: "空间站设置",
-        subtitle: "管理 \"{{name}}\" 额配置帮成员",
+        subtitle: '管理 "{{name}}" 额配置帮成员',
         workspaceNotFound: "空间站勿存在",
         generalTab: "基础设置",
         membersTab: "成员管理",
@@ -428,7 +428,8 @@ export const wuu = {
         descriptionPlaceholder: "简单讲讲搿个空间站...",
         workspaceDeleted: "空间站删脱哉",
         confirmDeleteTitle: "确认删脱空间站",
-        confirmDeleteContent: "确定要删脱空间站 \"{{name}}\" 伐？搿个操作撤勿回去额。",
+        confirmDeleteContent:
+          '确定要删脱空间站 "{{name}}" 伐？搿个操作撤勿回去额。',
         confirmDeleteWarning: "所有相关数据（包括待办事项）会永久删脱。",
         confirmDeleteOk: "确认删脱",
         deleteWorkspace: "删脱空间站",
@@ -450,7 +451,7 @@ export const wuu = {
         tableColumnActions: "操作",
         removeMemberComingSoon: "移除成员功能开发辰光",
         inviteComingSoon: "邀请功能开发辰光：会向 {{email}} 发送邀请邮件",
-        workspaceOwner: "空间站创建额人"
+        workspaceOwner: "空间站创建额人",
       },
       requirements: {
         description: "管理帮跟踪产品需求",
@@ -461,7 +462,7 @@ export const wuu = {
         recentRequirements: "最近需求",
         sampleTitle1: "用户登录模块优化",
         sampleTitle2: "支付接口升级",
-        sampleTitle3: "订单查询性能优化"
+        sampleTitle3: "订单查询性能优化",
       },
       execution: {
         description: "执行测试任务帮看结果",
@@ -469,28 +470,28 @@ export const wuu = {
         running: "执行辰光",
         passed: "通过哉",
         failed: "呒过",
-        blocked: "阻塞"
+        blocked: "阻塞",
       },
       automation: {
         description: "管理自动化测试脚本帮资源",
         workspaceLabel: "工作空间",
         totalScripts: "脚本总数",
         successRate: "执行成功率",
-        avgDuration: "平均执行辰光"
+        avgDuration: "平均执行辰光",
       },
       reports: {
         description: "看质量指标帮生成报告",
         workspaceLabel: "工作空间",
         testCoverage: "测试覆盖率",
         defectDensity: "缺陷密度",
-        automationRate: "自动化率"
+        automationRate: "自动化率",
       },
       testPlan: {
         description: "规划帮管理测试计划",
         workspaceLabel: "工作空间",
         inProgress: "进行辰光",
         completedThisWeek: "搿个礼拜弄好额",
-        avgCoverage: "平均覆盖率"
+        avgCoverage: "平均覆盖率",
       },
       testRequirements: {
         titleTotal: "总需求数",
@@ -557,7 +558,8 @@ export const wuu = {
         toastUpdateFail: "更新勿成功",
         toastDeleteSuccess: "删脱哉",
         toastDeleteFail: "删勿脱",
-        markdownPlaceholder: "# 测试需求详情\n\n## 测试目标\n讲讲测试额主要目标...\n\n## 测试范围\n- 范围项 1\n- 范围项 2\n\n## 测试步骤\n1. 第一步\n2. 第二步\n\n## 预期结果\n讲讲预期额测试结果...",
+        markdownPlaceholder:
+          "# 测试需求详情\n\n## 测试目标\n讲讲测试额主要目标...\n\n## 测试范围\n- 范围项 1\n- 范围项 2\n\n## 测试步骤\n1. 第一步\n2. 第二步\n\n## 预期结果\n讲讲预期额测试结果...",
         statusLabels: {
           draft: "草稿",
           pending: "待审核",
@@ -565,7 +567,7 @@ export const wuu = {
           in_progress: "进行辰光",
           completed: "弄好哉",
           rejected: "拒脱哉",
-          cancelled: "取消哉"
+          cancelled: "取消哉",
         },
         typeLabels: {
           functional: "功能测试",
@@ -574,15 +576,15 @@ export const wuu = {
           usability: "好用性测试",
           compatibility: "兼容性测试",
           integration: "集成测试",
-          regression: "回归测试"
+          regression: "回归测试",
         },
         priorityLabels: {
           critical: "急煞哉",
           high: "老高",
           medium: "中档",
-          low: "勿要紧"
-        }
-      }
+          low: "勿要紧",
+        },
+      },
     },
     aiWorkflow: {
       aiAutoProcess: "AI 全自动流程",
@@ -591,7 +593,7 @@ export const wuu = {
         desc: "拖文件到搿搭，或者点一下选文件",
         selectFile: "选文件",
         sampleFile: "电商平台需求规格说明书_v3.2.pdf",
-        sampleMeta: "3.8 MB · 156 页 · 包含 API 接口文档"
+        sampleMeta: "3.8 MB · 156 页 · 包含 API 接口文档",
       },
       analyzing: {
         title: "AI 智能分析需求文档",
@@ -602,16 +604,16 @@ export const wuu = {
           "2. 商品管理模块",
           "3. 订单处理模块",
           "4. 支付网关模块",
-          "5. 物流追踪模块"
+          "5. 物流追踪模块",
         ],
         stats: [
           { label: "功能模块", value: "28" },
           { label: "测试点", value: "186" },
           { label: "边界条件", value: "42" },
-          { label: "API接口", value: "67" }
+          { label: "API接口", value: "67" },
         ],
         progress: "分析进度",
-        analyzing: "分析辰光..."
+        analyzing: "分析辰光...",
       },
       testPlan: {
         title: "AI 创建测试计划",
@@ -622,34 +624,34 @@ export const wuu = {
           {
             module: "用户管理",
             priority: "高",
-            items: ["登录注册", "权限控制", "个人信息", "OAuth集成"]
+            items: ["登录注册", "权限控制", "个人信息", "OAuth集成"],
           },
           {
             module: "订单处理",
             priority: "高",
-            items: ["创建订单", "状态流转", "退款处理", "并发控制"]
+            items: ["创建订单", "状态流转", "退款处理", "并发控制"],
           },
           {
             module: "支付网关",
             priority: "关键",
-            items: ["支付宝", "微信支付", "银行卡", "退款逻辑"]
+            items: ["支付宝", "微信支付", "银行卡", "退款逻辑"],
           },
           {
             module: "商品管理",
             priority: "中",
-            items: ["商品CRUD", "库存管理", "价格计算", "分类管理"]
+            items: ["商品CRUD", "库存管理", "价格计算", "分类管理"],
           },
           {
             module: "物流追踪",
             priority: "中",
-            items: ["物流查询", "状态同步", "异常处理", "多渠道对接"]
+            items: ["物流查询", "状态同步", "异常处理", "多渠道对接"],
           },
           {
             module: "API网关",
             priority: "高",
-            items: ["限流熔断", "认证鉴权", "日志追踪", "版本控制"]
-          }
-        ]
+            items: ["限流熔断", "认证鉴权", "日志追踪", "版本控制"],
+          },
+        ],
       },
       generate: {
         title: "AI 智能生成测试用例",
@@ -664,76 +666,116 @@ export const wuu = {
         scenarios: [
           {
             scenario: "正向流程测试",
-            desc: "用户登进 → 看商品 → 放进购物车 → 下单付钞票"
+            desc: "用户登进 → 看商品 → 放进购物车 → 下单付钞票",
           },
           {
             scenario: "异常流程测试",
-            desc: "网络断脱、超时重试、并发冲突处理"
+            desc: "网络断脱、超时重试、并发冲突处理",
           },
           {
             scenario: "边界值测试",
-            desc: "最多买几个、价钿边界、库存临界值"
+            desc: "最多买几个、价钿边界、库存临界值",
           },
           {
             scenario: "安全性测试",
-            desc: "SQL注入、XSS攻击、越权访问检测"
-          }
+            desc: "SQL注入、XSS攻击、越权访问检测",
+          },
         ],
         boundaries: [
           { field: "用户名", min: "2字", max: "32字", special: "特殊字符过滤" },
           { field: "密码", min: "8字", max: "128字", special: "强度验证" },
-          { field: "商品价钿", min: "0.01", max: "999999.99", special: "精度处理" },
+          {
+            field: "商品价钿",
+            min: "0.01",
+            max: "999999.99",
+            special: "精度处理",
+          },
           { field: "买几个", min: "1", max: "9999", special: "库存校验" },
-          { field: "优惠券钞票", min: "1", max: "订单钞票", special: "叠加规则" },
-          { field: "收货地址", min: "10字", max: "200字", special: "地址解析" }
+          {
+            field: "优惠券钞票",
+            min: "1",
+            max: "订单钞票",
+            special: "叠加规则",
+          },
+          { field: "收货地址", min: "10字", max: "200字", special: "地址解析" },
         ],
         apis: [
           { method: "POST", path: "/api/v1/users/login", desc: "用户登进接口" },
           { method: "GET", path: "/api/v1/products", desc: "商品列表查询" },
           { method: "POST", path: "/api/v1/orders", desc: "创建订单接口" },
-          { method: "PUT", path: "/api/v1/orders/:id/status", desc: "更新订单状态" },
-          { method: "DELETE", path: "/api/v1/cart/items/:id", desc: "删脱购物车商品" }
+          {
+            method: "PUT",
+            path: "/api/v1/orders/:id/status",
+            desc: "更新订单状态",
+          },
+          {
+            method: "DELETE",
+            path: "/api/v1/cart/items/:id",
+            desc: "删脱购物车商品",
+          },
         ],
         cases: "用例",
         browsers: [
           { browser: "Chrome", version: "v120+" },
           { browser: "Firefox", version: "v115+" },
           { browser: "Safari", version: "v17+" },
-          { browser: "Edge", version: "v118+" }
+          { browser: "Edge", version: "v118+" },
         ],
-        browserTests: ["页面渲染测试", "交互响应测试", "表单验证测试", "跨浏览器兼容性"],
+        browserTests: [
+          "页面渲染测试",
+          "交互响应测试",
+          "表单验证测试",
+          "跨浏览器兼容性",
+        ],
         iosPlatform: "iOS 平台",
         androidPlatform: "Android 平台",
         iosDevices: ["iPhone 15 Pro", "iPhone 14", "iPad Pro", "iPad Air"],
-        androidDevices: ["Pixel 8 Pro", "Samsung S24", "Xiaomi 14", "OPPO Find X7"],
+        androidDevices: [
+          "Pixel 8 Pro",
+          "Samsung S24",
+          "Xiaomi 14",
+          "OPPO Find X7",
+        ],
         summary: {
           types: [
             { type: "API 测试", count: 562 },
             { type: "浏览器 UI", count: 438 },
             { type: "移动端 iOS", count: 128 },
             { type: "移动端 Android", count: 139 },
-            { type: "性能压测", count: 86 }
+            { type: "性能压测", count: 86 },
           ],
           total: "1,353",
-          readyToExecute: "个测试用例生成好哉，准备执行"
-        }
+          readyToExecute: "个测试用例生成好哉，准备执行",
+        },
       },
       execute: {
         title: "AI 自动执行测试",
         desc: "多协议并行执行，实时监控测试进度",
         lanes: [
-          { type: "HTTP / REST API", desc: "全面额 HTTP 接口测试，支持 RESTful、GraphQL" },
-          { type: "gRPC 服务", desc: "高性能 gRPC 服务测试，Unary / Streaming" },
-          { type: "浏览器测试", desc: "Chrome / Firefox / Safari / Edge 跨浏览器" },
+          {
+            type: "HTTP / REST API",
+            desc: "全面额 HTTP 接口测试，支持 RESTful、GraphQL",
+          },
+          {
+            type: "gRPC 服务",
+            desc: "高性能 gRPC 服务测试，Unary / Streaming",
+          },
+          {
+            type: "浏览器测试",
+            desc: "Chrome / Firefox / Safari / Edge 跨浏览器",
+          },
           { type: "移动端 iOS", desc: "iPhone / iPad 真机帮模拟器测试" },
-          { type: "移动端 Android", desc: "Pixel / Samsung / Xiaomi 多设备覆盖" }
+          {
+            type: "移动端 Android",
+            desc: "Pixel / Samsung / Xiaomi 多设备覆盖",
+          },
         ],
         stats: [
           { label: "总执行", value: "1,353" },
           { label: "通过", value: "1,312" },
           { label: "呒过", value: "28" },
-          { label: "辰光", value: "4分32秒" }
-        ]
+          { label: "辰光", value: "4分32秒" },
+        ],
       },
       report: {
         title: "AI 产出漂亮额测试报告",
@@ -743,7 +785,7 @@ export const wuu = {
           { label: "通过率", value: "97.1%" },
           { label: "覆盖率", value: "94.8%" },
           { label: "总用例", value: "1,353" },
-          { label: "缺陷数", value: "28" }
+          { label: "缺陷数", value: "28" },
         ],
         chartTitle: "测试类型分布",
         chartLabels: ["API", "UI", "iOS", "Android", "gRPC"],
@@ -752,13 +794,13 @@ export const wuu = {
           { module: "支付模块", count: 12, severity: "高" },
           { module: "订单模块", count: 8, severity: "中" },
           { module: "用户模块", count: 5, severity: "低" },
-          { module: "其他", count: 3, severity: "低" }
+          { module: "其他", count: 3, severity: "低" },
         ],
         browserRecording: "浏览器测试录屏 - Chrome",
         downloadReport: "下载完整报告",
         shareReport: "分享报告",
-        timeSaved: "全程要 4分32秒 · 省脱人工 48+ 钟头"
-      }
+        timeSaved: "全程要 4分32秒 · 省脱人工 48+ 钟头",
+      },
     },
     errors: {
       common: {
@@ -768,7 +810,7 @@ export const wuu = {
         missingWorkspace: "缺少工作空间参数",
         workspaceForbidden: "呒没权限访问搿个工作空间",
         adminRequired: "要管理员权限",
-        superadminRequired: "要超级管理员权限"
+        superadminRequired: "要超级管理员权限",
       },
       auth: {
         invalidCredentials: "账号或密码错脱哉",
@@ -776,28 +818,28 @@ export const wuu = {
         emailAlreadyRegistered: "邮箱注册过哉",
         registrationDisabled: "系统现在勿开放注册",
         invitationInvalid: "邀请码无效或者用过哉",
-        invitationExpired: "邀请码过期哉"
+        invitationExpired: "邀请码过期哉",
       },
       user: {
         notFound: "用户勿存在",
         emailInUse: "邮箱已经用过哉",
-        wrongPassword: "原密码错脱哉"
+        wrongPassword: "原密码错脱哉",
       },
       workspace: {
         notFound: "工作空间勿存在",
         onlyOwnerCanUpdate: "只有创建额人好改",
         onlyOwnerCanDelete: "只有创建额人好删脱",
         slugExists: "Slug 已经有哉",
-        slugReserved: "搿个标识系统保留额，请用其他名字"
+        slugReserved: "搿个标识系统保留额，请用其他名字",
       },
       todo: {
-        notFound: "待办勿存在"
+        notFound: "待办勿存在",
       },
       testRequirement: {
         notFound: "测试需求勿存在",
         createFetchFailed: "创建后查勿着记录",
         updateFetchFailed: "更新后查勿着记录",
-        deleteChildrenFirst: "请先删脱所有子需求"
+        deleteChildrenFirst: "请先删脱所有子需求",
       },
       admin: {
         cannotChangeOwnRole: "勿能改自己的角色",
@@ -809,12 +851,12 @@ export const wuu = {
         defaultWorkspaceDesc: "默认工作空间",
         workspaceSuffix: "的空间站",
         sharedWorkspaceName: "共享空间",
-        sharedWorkspaceDesc: "系统共享工作空间"
-      }
+        sharedWorkspaceDesc: "系统共享工作空间",
+      },
     },
     footer: {
       copyright: "© 2026 TestOps AI. All rights reserved.",
-      tagline: "AI 驱动额测试全流程平台"
+      tagline: "AI 驱动额测试全流程平台",
     },
     systemSettings: {
       title: "系统设置",
@@ -836,7 +878,8 @@ export const wuu = {
       allowRegistration: "允许新用户注册",
       allowRegistrationDesc: "关脱后，新用户注册勿了",
       singleWorkspaceMode: "单一空间模式",
-      singleWorkspaceModeDesc: "启用后，所有用户共享同一个工作空间，URL 浪头勿显示空间 ID",
+      singleWorkspaceModeDesc:
+        "启用后，所有用户共享同一个工作空间，URL 浪头勿显示空间 ID",
       userList: "用户列表",
       userRole: "角色",
       lastLoginAt: "上趟登进",
@@ -884,9 +927,9 @@ export const wuu = {
       copyInvitationLink: "拷链接",
       deleteInvitation: "删脱",
       expiresInHours: "有效期（钟头）",
-      noExpiration: "勿设置过期辰光"
-    }
-  }
+      noExpiration: "勿设置过期辰光",
+    },
+  },
 };
 
 export type WuuTranslationSchema = typeof wuu;

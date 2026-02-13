@@ -1,13 +1,13 @@
+import type { User } from "@acme/types";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import type { UploadProps } from "antd";
+import { Avatar, Button, Form, Input, Modal, Select, Tabs, Upload } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Avatar, Button, Form, Input, Modal, Select, Tabs, Upload } from "antd";
-import type { UploadProps } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useMessage } from "../../hooks";
-import type { User } from "@acme/types";
-import type { LangMode, ThemeMode } from "../../lib/types";
-import { trpc } from "../../lib/trpc";
 import { getAvatarColor, getAvatarInitial } from "../../lib/avatar";
+import { trpc } from "../../lib/trpc";
+import type { LangMode, ThemeMode } from "../../lib/types";
 
 type UserSettingsModalProps = {
   open: boolean;
@@ -28,17 +28,21 @@ export default function UserSettingsModal({
   themeMode,
   onUpdateUser,
   onChangeLangMode,
-  onChangeThemeMode
+  onChangeThemeMode,
 }: UserSettingsModalProps) {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const [passwordForm] = Form.useForm();
   const message = useMessage();
-  const profileQuery = trpc.user.getProfile.useQuery(undefined, { enabled: open });
+  const profileQuery = trpc.user.getProfile.useQuery(undefined, {
+    enabled: open,
+  });
   const updateMutation = trpc.user.updateProfile.useMutation();
   const deleteAvatarMutation = trpc.user.deleteAvatar.useMutation();
   const changePasswordMutation = trpc.user.changePassword.useMutation();
-  const [avatarValue, setAvatarValue] = useState<string | null>(user.settings?.avatarUrl ?? null);
+  const [avatarValue, setAvatarValue] = useState<string | null>(
+    user.settings?.avatarUrl ?? null,
+  );
   const [activeTab, setActiveTab] = useState("profile");
 
   const profile = profileQuery.data ?? user;
@@ -60,9 +64,18 @@ export default function UserSettingsModal({
       name: profile.name,
       email: profile.email,
       langMode: initialLangMode,
-      themeMode: initialThemeMode
+      themeMode: initialThemeMode,
     });
-  }, [open, profile.settings?.avatarUrl, profile.email, profile.name, initialLangMode, initialThemeMode, form, passwordForm]);
+  }, [
+    open,
+    profile.settings?.avatarUrl,
+    profile.email,
+    profile.name,
+    initialLangMode,
+    initialThemeMode,
+    form,
+    passwordForm,
+  ]);
 
   const uploadProps: UploadProps = useMemo(
     () => ({
@@ -78,9 +91,9 @@ export default function UserSettingsModal({
         };
         reader.readAsDataURL(file);
         return false;
-      }
+      },
     }),
-    [t]
+    [t, message.error],
   );
 
   const handleSave = async () => {
@@ -91,8 +104,8 @@ export default function UserSettingsModal({
       settings: {
         avatarUrl: avatarValue,
         langMode: values.langMode as LangMode,
-        themeMode: values.themeMode as ThemeMode
-      }
+        themeMode: values.themeMode as ThemeMode,
+      },
     };
 
     const updated = await updateMutation.mutateAsync(payload);
@@ -121,11 +134,11 @@ export default function UserSettingsModal({
     try {
       await changePasswordMutation.mutateAsync({
         oldPassword: values.oldPassword,
-        newPassword: values.newPassword
+        newPassword: values.newPassword,
       });
       passwordForm.resetFields();
       message.success(t("userSettings.passwordChanged"));
-    } catch (error) {
+    } catch (_error) {
       // 错误由 tRPC 错误处理器处理
     }
   };
@@ -144,7 +157,12 @@ export default function UserSettingsModal({
           <Upload {...uploadProps}>
             <Button size="small">{t("userSettings.uploadAvatar")}</Button>
           </Upload>
-          <Button size="small" danger disabled={!avatarValue} onClick={handleRemoveAvatar}>
+          <Button
+            size="small"
+            danger
+            disabled={!avatarValue}
+            onClick={handleRemoveAvatar}
+          >
             {t("userSettings.removeAvatar")}
           </Button>
         </div>
@@ -154,7 +172,9 @@ export default function UserSettingsModal({
         <Form.Item
           label={t("userSettings.userName")}
           name="name"
-          rules={[{ required: true, message: t("userSettings.userNameRequired") }]}
+          rules={[
+            { required: true, message: t("userSettings.userNameRequired") },
+          ]}
         >
           <Input placeholder={t("userSettings.userNamePlaceholder")} />
         </Form.Item>
@@ -180,7 +200,7 @@ export default function UserSettingsModal({
                 { value: "lzh", label: "文言文" },
                 { value: "wuu", label: "吴语" },
                 { value: "hak", label: "客家話" },
-                { value: "yue", label: "粥語" }
+                { value: "yue", label: "粥語" },
               ]}
             />
           </Form.Item>
@@ -190,7 +210,7 @@ export default function UserSettingsModal({
               options={[
                 { value: "auto", label: t("common.auto") },
                 { value: "light", label: t("common.light") },
-                { value: "dark", label: t("common.dark") }
+                { value: "dark", label: t("common.dark") },
               ]}
             />
           </Form.Item>
@@ -199,7 +219,11 @@ export default function UserSettingsModal({
 
       <div className="flex justify-end gap-2 mt-4">
         <Button onClick={onClose}>{t("common.cancel")}</Button>
-        <Button type="primary" loading={updateMutation.isPending} onClick={handleSave}>
+        <Button
+          type="primary"
+          loading={updateMutation.isPending}
+          onClick={handleSave}
+        >
           {t("common.save")}
         </Button>
       </div>
@@ -212,9 +236,16 @@ export default function UserSettingsModal({
         <Form.Item
           label={t("userSettings.currentPassword")}
           name="oldPassword"
-          rules={[{ required: true, message: t("userSettings.currentPasswordRequired") }]}
+          rules={[
+            {
+              required: true,
+              message: t("userSettings.currentPasswordRequired"),
+            },
+          ]}
         >
-          <Input.Password placeholder={t("userSettings.currentPasswordPlaceholder")} />
+          <Input.Password
+            placeholder={t("userSettings.currentPasswordPlaceholder")}
+          />
         </Form.Item>
 
         <Form.Item
@@ -222,10 +253,12 @@ export default function UserSettingsModal({
           name="newPassword"
           rules={[
             { required: true, message: t("userSettings.newPasswordRequired") },
-            { min: 6, message: t("userSettings.newPasswordMin") }
+            { min: 6, message: t("userSettings.newPasswordMin") },
           ]}
         >
-          <Input.Password placeholder={t("userSettings.newPasswordPlaceholder")} />
+          <Input.Password
+            placeholder={t("userSettings.newPasswordPlaceholder")}
+          />
         </Form.Item>
 
         <Form.Item
@@ -233,18 +266,25 @@ export default function UserSettingsModal({
           name="confirmPassword"
           dependencies={["newPassword"]}
           rules={[
-            { required: true, message: t("userSettings.confirmPasswordRequired") },
+            {
+              required: true,
+              message: t("userSettings.confirmPasswordRequired"),
+            },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue("newPassword") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error(t("userSettings.passwordMismatch")));
-              }
-            })
+                return Promise.reject(
+                  new Error(t("userSettings.passwordMismatch")),
+                );
+              },
+            }),
           ]}
         >
-          <Input.Password placeholder={t("userSettings.confirmPasswordPlaceholder")} />
+          <Input.Password
+            placeholder={t("userSettings.confirmPasswordPlaceholder")}
+          />
         </Form.Item>
       </Form>
 
@@ -282,7 +322,7 @@ export default function UserSettingsModal({
                 {t("userSettings.profileTab")}
               </span>
             ),
-            children: profileTab
+            children: profileTab,
           },
           {
             key: "password",
@@ -292,8 +332,8 @@ export default function UserSettingsModal({
                 {t("userSettings.passwordTab")}
               </span>
             ),
-            children: passwordTab
-          }
+            children: passwordTab,
+          },
         ]}
       />
     </Modal>

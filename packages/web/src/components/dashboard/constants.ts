@@ -156,7 +156,7 @@ export function getRouteFromKey(key: string): string | null {
 export function findMenuKeysByPath(path: string, basePath: string): string[] {
   const findKeys = (
     items: MenuItemConfig[],
-    parentKeys: string[] = []
+    parentKeys: string[] = [],
   ): string[] | null => {
     for (const item of items) {
       const currentKeys = [...parentKeys, item.key];
@@ -164,7 +164,11 @@ export function findMenuKeysByPath(path: string, basePath: string): string[] {
       // 检查当前项是否匹配
       if (item.routeSuffix !== null) {
         const fullPath = `${basePath}${item.routeSuffix}`;
-        if (path === fullPath || (item.routeSuffix === "" && (path === basePath || path === `${basePath}/`))) {
+        if (
+          path === fullPath ||
+          (item.routeSuffix === "" &&
+            (path === basePath || path === `${basePath}/`))
+        ) {
           return currentKeys;
         }
       }

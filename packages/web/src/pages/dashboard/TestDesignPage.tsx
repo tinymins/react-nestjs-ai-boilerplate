@@ -19,12 +19,19 @@ export default function TestDesignPage() {
       </div>
       <div className="card">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">{t("dashboard.testDesign.caseLibrary")}</h3>
-          <button type="button" className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700">
+          <h3 className="text-lg font-semibold">
+            {t("dashboard.testDesign.caseLibrary")}
+          </h3>
+          <button
+            type="button"
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700"
+          >
             {t("dashboard.testDesign.newCase")}
           </button>
         </div>
-        <p className="text-slate-500 dark:text-slate-300">{t("dashboard.testDesign.totalCases", { count: 186 })}</p>
+        <p className="text-slate-500 dark:text-slate-300">
+          {t("dashboard.testDesign.totalCases", { count: 186 })}
+        </p>
       </div>
     </div>
   );

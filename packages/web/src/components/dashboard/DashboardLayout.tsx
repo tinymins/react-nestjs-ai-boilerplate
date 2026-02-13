@@ -1,17 +1,30 @@
-import { useState, useEffect, useRef } from "react";
-import { Outlet, Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Avatar, Button, Dropdown, Menu, Drawer } from "antd";
-import { GlobalOutlined, BulbOutlined, PlusOutlined, SwapOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
 import type { User } from "@acme/types";
-import type { Theme, Lang, LangMode, ThemeMode } from "../../lib/types";
+import {
+  BulbOutlined,
+  CloseOutlined,
+  GlobalOutlined,
+  MenuOutlined,
+  PlusOutlined,
+  SwapOutlined,
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import { Avatar, Button, Drawer, Dropdown, Menu } from "antd";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
+import { getAvatarColor } from "../../lib/avatar";
+import { trpc } from "../../lib/trpc";
+import type { Lang, LangMode, Theme, ThemeMode } from "../../lib/types";
 import { LANG_NAMES } from "../../lib/types";
 import { WorkspaceNotFoundPage } from "../../pages";
-import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
-import { trpc } from "../../lib/trpc";
-import { UserMenu, UserSettingsModal, SystemSettingsModal } from "../account";
-import { getAvatarColor, getAvatarInitial } from "../../lib/avatar";
+import { SystemSettingsModal, UserMenu, UserSettingsModal } from "../account";
 import CreateWorkspaceModal from "./CreateWorkspaceModal";
 
 type DashboardLayoutProps = {
@@ -61,7 +74,11 @@ function WorkspaceSwitcher({
           <div className="flex items-center gap-3">
             <Avatar
               size={48}
-              style={{ backgroundColor: avatarColor, fontSize: 20, fontWeight: 600 }}
+              style={{
+                backgroundColor: avatarColor,
+                fontSize: 20,
+                fontWeight: 600,
+              }}
             >
               {initial}
             </Avatar>
@@ -99,8 +116,16 @@ function WorkspaceSwitcher({
               {ws.name}
             </span>
             {ws.slug === currentWorkspace && (
-              <svg className="ml-auto h-4 w-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              <svg
+                className="ml-auto h-4 w-4 text-emerald-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
               </svg>
             )}
           </div>
@@ -160,7 +185,13 @@ function WorkspaceSwitcher({
   );
 }
 
-import { menuConfig, findMenuKeysByPath, getRouteFromKey, getDefaultOpenKeys, type MenuItemConfig } from "./constants";
+import {
+  findMenuKeysByPath,
+  getDefaultOpenKeys,
+  getRouteFromKey,
+  type MenuItemConfig,
+  menuConfig,
+} from "./constants";
 
 export default function DashboardLayout({
   user,
@@ -188,8 +219,8 @@ export default function DashboardLayout({
         {
           onSuccess: (updatedUser) => {
             onUpdateUser(updatedUser);
-          }
-        }
+          },
+        },
       );
     }
   };
@@ -204,8 +235,8 @@ export default function DashboardLayout({
         {
           onSuccess: (updatedUser) => {
             onUpdateUser(updatedUser);
-          }
-        }
+          },
+        },
       );
     }
   };
@@ -213,21 +244,20 @@ export default function DashboardLayout({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useTranslation();
 
-  const langLabel =
-    langMode === "auto" ? t("common.auto") : LANG_NAMES[lang];
-  const themeLabel =
+  const _langLabel = langMode === "auto" ? t("common.auto") : LANG_NAMES[lang];
+  const _themeLabel =
     themeMode === "auto" ? t("common.auto") : t(`common.theme.${theme}`);
 
   const langItems = Object.entries(LANG_NAMES).map(([key, label]) => ({
     key,
-    label
+    label,
   }));
   langItems.unshift({ key: "auto", label: t("common.auto") });
 
   const themeItems = [
     { key: "auto", label: t("common.auto") },
     { key: "light", label: t("common.theme.light") },
-    { key: "dark", label: t("common.theme.dark") }
+    { key: "dark", label: t("common.theme.dark") },
   ];
   const location = useLocation();
   const navigate = useNavigate();
@@ -243,7 +273,10 @@ export default function DashboardLayout({
 
   // 检测 workspace 参数变化，设置过渡状态
   useEffect(() => {
-    if (prevWorkspaceRef.current !== workspace && prevWorkspaceRef.current !== undefined) {
+    if (
+      prevWorkspaceRef.current !== workspace &&
+      prevWorkspaceRef.current !== undefined
+    ) {
       setIsTransitioning(true);
 
       // 给缓存更新一个时间窗口，等待列表查询完成
@@ -294,7 +327,9 @@ export default function DashboardLayout({
   // 根据当前路径计算激活的菜单 keys
   const basePath = `/dashboard/${workspace}`;
   const selectedKeys = findMenuKeysByPath(location.pathname, basePath);
-  const [openKeys, setOpenKeys] = useState<string[]>(() => getDefaultOpenKeys(selectedKeys));
+  const [openKeys, setOpenKeys] = useState<string[]>(() =>
+    getDefaultOpenKeys(selectedKeys),
+  );
 
   // 当选中项变化时，自动展开父级菜单
   useEffect(() => {
@@ -303,7 +338,7 @@ export default function DashboardLayout({
       const newKeys = new Set([...prev, ...defaultOpenKeys]);
       return Array.from(newKeys);
     });
-  }, [selectedKeys.join(",")]);
+  }, [selectedKeys]);
 
   const handleWorkspaceChange = async (newWorkspace: string) => {
     // 跳转到新空间站的首页（工作台）
@@ -363,7 +398,10 @@ export default function DashboardLayout({
   if (workspacesQuery.isFetched && !workspaceExists && !isTransitioning) {
     return (
       <div className="h-screen w-screen overflow-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-        <WorkspaceNotFoundPage workspace={workspace} fallbackWorkspace={workspaces[0]?.slug} />
+        <WorkspaceNotFoundPage
+          workspace={workspace}
+          fallbackWorkspace={workspaces[0]?.slug}
+        />
       </div>
     );
   }
@@ -391,10 +429,9 @@ export default function DashboardLayout({
               onClick={({ key }) => handleMenuClick(key)}
               className="border-none bg-transparent"
               theme={theme === "dark" ? "dark" : "light"}
-              style={{ borderInlineEnd: 'none' }}
+              style={{ borderInlineEnd: "none" }}
             />
           </nav>
-
         </aside>
 
         {/* Main Content */}
@@ -413,19 +450,29 @@ export default function DashboardLayout({
                 trigger={["hover"]}
                 menu={{
                   items: langItems,
-                  onClick: ({ key }) => handleLangModeChange(key as LangMode)
+                  onClick: ({ key }) => handleLangModeChange(key as LangMode),
                 }}
               >
-                <Button size="middle" shape="circle" type="text" icon={<GlobalOutlined />} />
+                <Button
+                  size="middle"
+                  shape="circle"
+                  type="text"
+                  icon={<GlobalOutlined />}
+                />
               </Dropdown>
               <Dropdown
                 trigger={["hover"]}
                 menu={{
                   items: themeItems,
-                  onClick: ({ key }) => handleThemeModeChange(key as ThemeMode)
+                  onClick: ({ key }) => handleThemeModeChange(key as ThemeMode),
                 }}
               >
-                <Button size="middle" shape="circle" type="text" icon={<BulbOutlined />} />
+                <Button
+                  size="middle"
+                  shape="circle"
+                  type="text"
+                  icon={<BulbOutlined />}
+                />
               </Dropdown>
               <UserMenu
                 user={user}
@@ -515,7 +562,7 @@ export default function DashboardLayout({
               onClick={({ key }) => handleMenuClick(key)}
               className="border-none bg-transparent"
               theme={theme === "dark" ? "dark" : "light"}
-              style={{ borderInlineEnd: 'none' }}
+              style={{ borderInlineEnd: "none" }}
             />
           </nav>
         </div>

@@ -1,7 +1,7 @@
+import { deDE, enUS, hak, jaJP, lzh, wuu, yue, zhCN, zhTW } from "@acme/i18n";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
-import { zhCN, zhTW, lzh, wuu, hak, yue, enUS, jaJP, deDE } from "@acme/i18n";
 
 const resources = {
   "zh-CN": zhCN,
@@ -12,7 +12,7 @@ const resources = {
   lzh: lzh,
   wuu: wuu,
   hak: hak,
-  yue: yue
+  yue: yue,
 } as const;
 
 i18n
@@ -22,14 +22,14 @@ i18n
     resources,
     fallbackLng: "zh-CN",
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
     },
     detection: {
       order: ["cookie", "navigator", "htmlTag"],
       caches: ["cookie"],
-      cookieMinutes: 525600
+      cookieMinutes: 525600,
     },
-    returnObjects: true // 允许返回对象和数组
+    returnObjects: true, // 允许返回对象和数组
   });
 
 export default i18n;

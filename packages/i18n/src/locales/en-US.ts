@@ -30,17 +30,17 @@ export const enUS: TranslationSchema = {
         critical: "Critical",
         high: "High",
         medium: "Medium",
-        low: "Low"
+        low: "Low",
       },
       theme: {
         light: "Light",
-        dark: "Dark"
-      }
+        dark: "Dark",
+      },
     },
     userMenu: {
       account: "Account",
       admin: "Admin",
-      signOut: "Sign out"
+      signOut: "Sign out",
     },
     userSettings: {
       title: "Account Settings",
@@ -70,7 +70,7 @@ export const enUS: TranslationSchema = {
       confirmPasswordRequired: "Please confirm new password",
       confirmPasswordPlaceholder: "Confirm new password",
       passwordMismatch: "Passwords do not match",
-      changePassword: "Change Password"
+      changePassword: "Change Password",
     },
     createWorkspace: {
       title: "Create Workspace",
@@ -87,7 +87,7 @@ export const enUS: TranslationSchema = {
       slugPattern: "Only lowercase letters, numbers and hyphens allowed",
       slugExtra: "Used for access URL, e.g., /dashboard/{{slug}}",
       descLabel: "Description",
-      descPlaceholder: "Brief description of this workspace..."
+      descPlaceholder: "Brief description of this workspace...",
     },
     nav: {
       items: [
@@ -95,10 +95,10 @@ export const enUS: TranslationSchema = {
         { label: "Solutions", href: "/#solutions" },
         { label: "Workflow", href: "/#workflow" },
         { label: "AI Core", href: "/#ai" },
-        { label: "Plans", href: "/#plans" }
+        { label: "Plans", href: "/#plans" },
       ],
       login: "Sign in",
-      dashboard: "Console"
+      dashboard: "Console",
     },
     hero: {
       badge: "AI TestOps",
@@ -112,13 +112,13 @@ export const enUS: TranslationSchema = {
         "✓ Requirements parsed · 12 scenarios",
         "✓ Test matrix generated · 92% coverage",
         "→ Regression scheduled · 18/24",
-        "→ Release gate scoring · 8% risk"
+        "→ Release gate scoring · 8% risk",
       ],
       metrics: [
         { label: "End-to-end automation", value: "90%" },
         { label: "Delivery visibility", value: "100%" },
-        { label: "Efficiency uplift", value: "3x" }
-      ]
+        { label: "Efficiency uplift", value: "3x" },
+      ],
     },
     overview: {
       title: "Make testing the core engine of delivery",
@@ -131,8 +131,8 @@ export const enUS: TranslationSchema = {
           bullets: [
             "Auto-generate scope and coverage suggestions",
             "Reusable test knowledge base",
-            "One-click quality gates and dashboards"
-          ]
+            "One-click quality gates and dashboards",
+          ],
         },
         {
           title: "Unified quality operations",
@@ -140,68 +140,68 @@ export const enUS: TranslationSchema = {
           bullets: [
             "Live progress and blocker detection",
             "Defect trends and regression priority",
-            "Continuous quality KPI optimization"
-          ]
-        }
-      ]
+            "Continuous quality KPI optimization",
+          ],
+        },
+      ],
     },
     pillars: {
       title: "Capability matrix",
       items: [
         {
           title: "Requirement-led",
-          desc: "Generate scope and coverage from PRD or user stories."
+          desc: "Generate scope and coverage from PRD or user stories.",
         },
         {
           title: "Smart design",
-          desc: "Auto-generate cases, data, and assertions with templates."
+          desc: "Auto-generate cases, data, and assertions with templates.",
         },
         {
           title: "Execution orchestration",
-          desc: "Unified schedules for manual and automation with live updates."
+          desc: "Unified schedules for manual and automation with live updates.",
         },
         {
           title: "Quality insights",
-          desc: "Risk heatmap, defect trend, coverage, and quality gates."
+          desc: "Risk heatmap, defect trend, coverage, and quality gates.",
         },
         {
           title: "Knowledge accumulation",
-          desc: "Turn test assets into a continuous quality knowledge base."
+          desc: "Turn test assets into a continuous quality knowledge base.",
         },
         {
           title: "Governance",
-          desc: "Audit trails, permissions, and traceability."
-        }
-      ]
+          desc: "Audit trails, permissions, and traceability.",
+        },
+      ],
     },
     flow: {
       title: "Full-cycle TestOps workflow",
       steps: [
         {
           title: "Requirement intake",
-          desc: "Ingest tickets, PRDs, and API docs to build scope."
+          desc: "Ingest tickets, PRDs, and API docs to build scope.",
         },
         {
           title: "Planning",
-          desc: "AI generates test matrix, risk grading, and resourcing."
+          desc: "AI generates test matrix, risk grading, and resourcing.",
         },
         {
           title: "Design",
-          desc: "Generate cases, data, and scripts from models and history."
+          desc: "Generate cases, data, and scripts from models and history.",
         },
         {
           title: "Execution",
-          desc: "Orchestrate automation, manual, performance, security."
+          desc: "Orchestrate automation, manual, performance, security.",
         },
         {
           title: "Defects",
-          desc: "Cluster, analyze root cause, and prioritize regressions."
+          desc: "Cluster, analyze root cause, and prioritize regressions.",
         },
         {
           title: "Reporting",
-          desc: "Auto-generate quality reports and release gates."
-        }
-      ]
+          desc: "Auto-generate quality reports and release gates.",
+        },
+      ],
     },
     testing: {
       badge: "AI-Powered Testing",
@@ -210,28 +210,28 @@ export const enUS: TranslationSchema = {
       capabilities: [
         {
           title: "HTTP / REST API",
-          desc: "Comprehensive HTTP API testing with RESTful, GraphQL, and WebSocket support"
+          desc: "Comprehensive HTTP API testing with RESTful, GraphQL, and WebSocket support",
         },
         {
           title: "gRPC",
-          desc: "High-performance gRPC service testing with Unary and Streaming calls"
+          desc: "High-performance gRPC service testing with Unary and Streaming calls",
         },
         {
           title: "Mobile UI",
-          desc: "iOS / Android native app automation on real devices and simulators"
+          desc: "iOS / Android native app automation on real devices and simulators",
         },
         {
           title: "Browser Testing",
-          desc: "Cross-browser automation for Chrome / Firefox / Safari / Edge"
+          desc: "Cross-browser automation for Chrome / Firefox / Safari / Edge",
         },
         {
           title: "Windows Desktop",
-          desc: "Windows desktop automation with WinUI / WPF / Win32 support"
+          desc: "Windows desktop automation with WinUI / WPF / Win32 support",
         },
         {
           title: "AI Planning",
-          desc: "Auto-generate test cases from requirements with intelligent scenario and boundary detection"
-        }
+          desc: "Auto-generate test cases from requirements with intelligent scenario and boundary detection",
+        },
       ],
       aiFlowSteps: [
         { step: "Requirements", icon: "📄" },
@@ -239,29 +239,29 @@ export const enUS: TranslationSchema = {
         { step: "Test Plan", icon: "📋" },
         { step: "Case Generation", icon: "✨" },
         { step: "Auto Execute", icon: "🚀" },
-        { step: "Smart Report", icon: "📊" }
-      ]
+        { step: "Smart Report", icon: "📊" },
+      ],
     },
     ai: {
       title: "AI-first core capabilities",
       items: [
         {
           title: "Requirement intelligence",
-          desc: "Extract scenarios and risks from product context."
+          desc: "Extract scenarios and risks from product context.",
         },
         {
           title: "Asset generation",
-          desc: "Generate cases, data, API scripts, and test notes."
+          desc: "Generate cases, data, API scripts, and test notes.",
         },
         {
           title: "Execution copilot",
-          desc: "Diagnose blockers and prioritize regression paths."
+          desc: "Diagnose blockers and prioritize regression paths.",
         },
         {
           title: "Insightful reporting",
-          desc: "Executive-ready reports and release recommendations."
-        }
-      ]
+          desc: "Executive-ready reports and release recommendations.",
+        },
+      ],
     },
     integrations: {
       title: "Integrations with your stack",
@@ -271,8 +271,8 @@ export const enUS: TranslationSchema = {
         "Jenkins / GitHub Actions / Argo",
         "Postman / Playwright / Cypress",
         "SonarQube / Sentry / Datadog",
-        "Enterprise chat & notification hubs"
-      ]
+        "Enterprise chat & notification hubs",
+      ],
     },
     security: {
       title: "Enterprise-grade security",
@@ -281,18 +281,19 @@ export const enUS: TranslationSchema = {
         "Encryption and audit logging",
         "Multi-region deployment",
         "Compliance workflows & gates",
-        "Asset versioning & approvals"
-      ]
+        "Asset versioning & approvals",
+      ],
     },
     cta: {
       title: "Build AI-driven testing operations",
       desc: "Make QA the strategic engine for delivery.",
       primary: "Get a plan",
-      secondary: "Start trial"
+      secondary: "Start trial",
     },
     closing: {
       title: "Let testing evolve like code",
-      subtitle: "AI TestOps · Align requirements, quality, and delivery in every iteration"
+      subtitle:
+        "AI TestOps · Align requirements, quality, and delivery in every iteration",
     },
     login: {
       title: "Sign in to TestOps AI",
@@ -312,32 +313,34 @@ export const enUS: TranslationSchema = {
       registrationDisabled: "Registration is currently disabled",
       backToLogin: "Back to login",
       emailPlaceholder: "Enter your email",
-      passwordPlaceholder: "Enter your password"
+      passwordPlaceholder: "Enter your password",
     },
     pages: {
       notFound: {
         title: "Page not found",
-        description: "Sorry, the page you visited does not exist or has been removed",
+        description:
+          "Sorry, the page you visited does not exist or has been removed",
         goHome: "Go home",
-        goBack: "Go back"
+        goBack: "Go back",
       },
       unauthorized: {
         title: "Access denied",
         description: "Sorry, you do not have permission to access this page",
         goHome: "Go home",
-        reLogin: "Sign in again"
+        reLogin: "Sign in again",
       },
       workspaceNotFound: {
         title: "Workspace not found",
-        notFoundNamed: "Workspace \"{{name}}\" was not found",
+        notFoundNamed: 'Workspace "{{name}}" was not found',
         notFoundGeneric: "The requested workspace was not found",
-        goBack: "Back to workspaces"
+        goBack: "Back to workspaces",
       },
       dashboardNotFound: {
         title: "Page not found",
-        description: "Sorry, the page you visited does not exist or has been moved",
-        goBack: "Back to dashboard"
-      }
+        description:
+          "Sorry, the page you visited does not exist or has been moved",
+        goBack: "Back to dashboard",
+      },
     },
     dashboard: {
       title: "TestOps Command Center",
@@ -353,17 +356,24 @@ export const enUS: TranslationSchema = {
       toLogin: "Go to sign in",
       workspace: "Workspace",
       workspaceSwitcher: {
-        switchWorkspace: "Switch Workspace"
+        switchWorkspace: "Switch Workspace",
       },
       insightTitle: "Quality insights",
-      insightDesc: "Auto-generated risk heatmaps, coverage, and gate recommendations.",
-      insightItems: ["Coverage 92%", "Regression risk 8%", "Blockers 3", "Pending 5"],
+      insightDesc:
+        "Auto-generated risk heatmaps, coverage, and gate recommendations.",
+      insightItems: [
+        "Coverage 92%",
+        "Regression risk 8%",
+        "Blockers 3",
+        "Pending 5",
+      ],
       assistantTitle: "AI execution copilot",
-      assistantDesc: "Detect blockers, suggest fixes, and prioritize regression paths.",
+      assistantDesc:
+        "Detect blockers, suggest fixes, and prioritize regression paths.",
       assistantItems: [
         "Login flow anomaly detected; prioritize regression",
         "Payment API coverage dropped by 12%",
-        "Mobile regression defect convergence up 20%"
+        "Mobile regression defect convergence up 20%",
       ],
       menu: {
         workbench: "Workbench",
@@ -399,20 +409,20 @@ export const enUS: TranslationSchema = {
         summary: "🎯 Completion Summary",
         noTodos: "No todos yet",
         menuLabel: "📋 Todo List",
-        defaultCategory: "Custom"
+        defaultCategory: "Custom",
       },
       defects: {
-        description: "Track defects and assess risks"
+        description: "Track defects and assess risks",
       },
       testDesign: {
         description: "Design and write test cases",
         caseLibrary: "Test Case Library",
         newCase: "+ New Case",
-        totalCases: "{{count}} test cases total"
+        totalCases: "{{count}} test cases total",
       },
       settings: {
         title: "Workspace Settings",
-        subtitle: "Manage \"{{name}}\" configuration and members",
+        subtitle: 'Manage "{{name}}" configuration and members',
         workspaceNotFound: "Workspace not found",
         generalTab: "General",
         membersTab: "Members",
@@ -423,17 +433,21 @@ export const enUS: TranslationSchema = {
         workspaceNameLength: "Name length should be 1-50 characters",
         workspaceSlug: "Workspace Slug (URL)",
         workspaceSlugRequired: "Please enter slug",
-        workspaceSlugPattern: "Only lowercase letters, numbers and hyphens allowed",
+        workspaceSlugPattern:
+          "Only lowercase letters, numbers and hyphens allowed",
         workspaceSlugExtra: "Used in URL, e.g., /dashboard/my-project",
         description: "Description",
         descriptionPlaceholder: "Briefly describe this workspace...",
         workspaceDeleted: "Workspace deleted",
         confirmDeleteTitle: "Confirm Delete Workspace",
-        confirmDeleteContent: "Are you sure you want to delete workspace \"{{name}}\"? This action cannot be undone.",
-        confirmDeleteWarning: "All related data (including todos) will be permanently deleted.",
+        confirmDeleteContent:
+          'Are you sure you want to delete workspace "{{name}}"? This action cannot be undone.',
+        confirmDeleteWarning:
+          "All related data (including todos) will be permanently deleted.",
         confirmDeleteOk: "Delete",
         deleteWorkspace: "Delete Workspace",
-        deleteWorkspaceDesc: "Once deleted, all data will be permanently removed and cannot be recovered.",
+        deleteWorkspaceDesc:
+          "Once deleted, all data will be permanently removed and cannot be recovered.",
         memberList: "Team Members",
         memberListDesc: "Manage workspace members and permissions",
         inviteMember: "Invite Member",
@@ -450,8 +464,9 @@ export const enUS: TranslationSchema = {
         tableColumnJoined: "Joined",
         tableColumnActions: "Actions",
         removeMemberComingSoon: "Remove member feature coming soon",
-        inviteComingSoon: "Invite feature coming soon: Will send invitation to {{email}}",
-        workspaceOwner: "Workspace Owner"
+        inviteComingSoon:
+          "Invite feature coming soon: Will send invitation to {{email}}",
+        workspaceOwner: "Workspace Owner",
       },
       requirements: {
         description: "Manage and track product requirements",
@@ -462,7 +477,7 @@ export const enUS: TranslationSchema = {
         recentRequirements: "Recent Requirements",
         sampleTitle1: "User login optimization",
         sampleTitle2: "Payment API upgrade",
-        sampleTitle3: "Order query optimization"
+        sampleTitle3: "Order query optimization",
       },
       execution: {
         description: "Execute tests and view results",
@@ -470,28 +485,28 @@ export const enUS: TranslationSchema = {
         running: "Running",
         passed: "Passed",
         failed: "Failed",
-        blocked: "Blocked"
+        blocked: "Blocked",
       },
       automation: {
         description: "Manage automated test scripts and resources",
         workspaceLabel: "Workspace",
         totalScripts: "Total Scripts",
         successRate: "Success Rate",
-        avgDuration: "Avg Duration"
+        avgDuration: "Avg Duration",
       },
       reports: {
         description: "View quality metrics and generate reports",
         workspaceLabel: "Workspace",
         testCoverage: "Test Coverage",
         defectDensity: "Defect Density",
-        automationRate: "Automation Rate"
+        automationRate: "Automation Rate",
       },
       testPlan: {
         description: "Plan and manage test plans",
         workspaceLabel: "Workspace",
         inProgress: "In Progress",
         completedThisWeek: "Completed This Week",
-        avgCoverage: "Avg Coverage"
+        avgCoverage: "Avg Coverage",
       },
       testRequirements: {
         titleTotal: "Total",
@@ -558,7 +573,8 @@ export const enUS: TranslationSchema = {
         toastUpdateFail: "Update failed",
         toastDeleteSuccess: "Deleted successfully",
         toastDeleteFail: "Delete failed",
-        markdownPlaceholder: "# Test Requirement Details\n\n## Objective\nDescribe the test objective...\n\n## Scope\n- Scope item 1\n- Scope item 2\n\n## Steps\n1. Step one\n2. Step two\n\n## Expected Result\nDescribe expected results...",
+        markdownPlaceholder:
+          "# Test Requirement Details\n\n## Objective\nDescribe the test objective...\n\n## Scope\n- Scope item 1\n- Scope item 2\n\n## Steps\n1. Step one\n2. Step two\n\n## Expected Result\nDescribe expected results...",
         statusLabels: {
           draft: "Draft",
           pending: "Pending",
@@ -566,7 +582,7 @@ export const enUS: TranslationSchema = {
           in_progress: "In Progress",
           completed: "Completed",
           rejected: "Rejected",
-          cancelled: "Cancelled"
+          cancelled: "Cancelled",
         },
         typeLabels: {
           functional: "Functional",
@@ -575,15 +591,15 @@ export const enUS: TranslationSchema = {
           usability: "Usability",
           compatibility: "Compatibility",
           integration: "Integration",
-          regression: "Regression"
+          regression: "Regression",
         },
         priorityLabels: {
           critical: "Critical",
           high: "High",
           medium: "Medium",
-          low: "Low"
-        }
-      }
+          low: "Low",
+        },
+      },
     },
     aiWorkflow: {
       aiAutoProcess: "AI Fully Automated",
@@ -592,7 +608,7 @@ export const enUS: TranslationSchema = {
         desc: "Drag files here, or click to browse",
         selectFile: "Select File",
         sampleFile: "E-commerce Platform Requirements v3.2.pdf",
-        sampleMeta: "3.8 MB · 156 pages · Includes API docs"
+        sampleMeta: "3.8 MB · 156 pages · Includes API docs",
       },
       analyzing: {
         title: "AI Analyzing Requirements",
@@ -603,16 +619,16 @@ export const enUS: TranslationSchema = {
           "2. Product Management",
           "3. Order Processing",
           "4. Payment Gateway",
-          "5. Logistics Tracking"
+          "5. Logistics Tracking",
         ],
         stats: [
           { label: "Modules", value: "28" },
           { label: "Test Points", value: "186" },
           { label: "Boundaries", value: "42" },
-          { label: "API Endpoints", value: "67" }
+          { label: "API Endpoints", value: "67" },
         ],
         progress: "Analysis Progress",
-        analyzing: "Analyzing..."
+        analyzing: "Analyzing...",
       },
       testPlan: {
         title: "AI Creating Test Plan",
@@ -623,34 +639,34 @@ export const enUS: TranslationSchema = {
           {
             module: "User Mgmt",
             priority: "High",
-            items: ["Login/Register", "Access Control", "Profile", "OAuth"]
+            items: ["Login/Register", "Access Control", "Profile", "OAuth"],
           },
           {
             module: "Orders",
             priority: "High",
-            items: ["Create Order", "Status Flow", "Refunds", "Concurrency"]
+            items: ["Create Order", "Status Flow", "Refunds", "Concurrency"],
           },
           {
             module: "Payment",
             priority: "Critical",
-            items: ["Alipay", "WeChat Pay", "Bank Card", "Refund Logic"]
+            items: ["Alipay", "WeChat Pay", "Bank Card", "Refund Logic"],
           },
           {
             module: "Products",
             priority: "Medium",
-            items: ["CRUD", "Inventory", "Pricing", "Categories"]
+            items: ["CRUD", "Inventory", "Pricing", "Categories"],
           },
           {
             module: "Logistics",
             priority: "Medium",
-            items: ["Tracking", "Status Sync", "Exceptions", "Multi-channel"]
+            items: ["Tracking", "Status Sync", "Exceptions", "Multi-channel"],
           },
           {
             module: "API Gateway",
             priority: "High",
-            items: ["Rate Limit", "Auth", "Logging", "Versioning"]
-          }
-        ]
+            items: ["Rate Limit", "Auth", "Logging", "Versioning"],
+          },
+        ],
       },
       generate: {
         title: "AI Generating Test Cases",
@@ -663,66 +679,138 @@ export const enUS: TranslationSchema = {
         step5: "Mobile UI Test Case Generation",
         step6: "Case Generation Complete",
         scenarios: [
-          { scenario: "Positive Flow", desc: "Login → Browse → Add to Cart → Checkout" },
-          { scenario: "Exception Flow", desc: "Network interruption, timeout retry, concurrency" },
-          { scenario: "Boundary Testing", desc: "Max quantity, price limits, inventory threshold" },
-          { scenario: "Security Testing", desc: "SQL injection, XSS, privilege escalation" }
+          {
+            scenario: "Positive Flow",
+            desc: "Login → Browse → Add to Cart → Checkout",
+          },
+          {
+            scenario: "Exception Flow",
+            desc: "Network interruption, timeout retry, concurrency",
+          },
+          {
+            scenario: "Boundary Testing",
+            desc: "Max quantity, price limits, inventory threshold",
+          },
+          {
+            scenario: "Security Testing",
+            desc: "SQL injection, XSS, privilege escalation",
+          },
         ],
         boundaries: [
-          { field: "Username", min: "2 chars", max: "32 chars", special: "Special char filter" },
-          { field: "Password", min: "8 chars", max: "128 chars", special: "Strength check" },
-          { field: "Price", min: "0.01", max: "999999.99", special: "Precision handling" },
-          { field: "Quantity", min: "1", max: "9999", special: "Stock validation" },
-          { field: "Coupon", min: "1", max: "Order amount", special: "Stacking rules" },
-          { field: "Address", min: "10 chars", max: "200 chars", special: "Address parsing" }
+          {
+            field: "Username",
+            min: "2 chars",
+            max: "32 chars",
+            special: "Special char filter",
+          },
+          {
+            field: "Password",
+            min: "8 chars",
+            max: "128 chars",
+            special: "Strength check",
+          },
+          {
+            field: "Price",
+            min: "0.01",
+            max: "999999.99",
+            special: "Precision handling",
+          },
+          {
+            field: "Quantity",
+            min: "1",
+            max: "9999",
+            special: "Stock validation",
+          },
+          {
+            field: "Coupon",
+            min: "1",
+            max: "Order amount",
+            special: "Stacking rules",
+          },
+          {
+            field: "Address",
+            min: "10 chars",
+            max: "200 chars",
+            special: "Address parsing",
+          },
         ],
         apis: [
           { method: "POST", path: "/api/v1/users/login", desc: "User login" },
           { method: "GET", path: "/api/v1/products", desc: "Product list" },
           { method: "POST", path: "/api/v1/orders", desc: "Create order" },
-          { method: "PUT", path: "/api/v1/orders/:id/status", desc: "Update order status" },
-          { method: "DELETE", path: "/api/v1/cart/items/:id", desc: "Remove cart item" }
+          {
+            method: "PUT",
+            path: "/api/v1/orders/:id/status",
+            desc: "Update order status",
+          },
+          {
+            method: "DELETE",
+            path: "/api/v1/cart/items/:id",
+            desc: "Remove cart item",
+          },
         ],
         cases: "cases",
         browsers: [
           { browser: "Chrome", version: "v120+" },
           { browser: "Firefox", version: "v115+" },
           { browser: "Safari", version: "v17+" },
-          { browser: "Edge", version: "v118+" }
+          { browser: "Edge", version: "v118+" },
         ],
-        browserTests: ["Page Render", "Interaction Response", "Form Validation", "Cross-browser"],
+        browserTests: [
+          "Page Render",
+          "Interaction Response",
+          "Form Validation",
+          "Cross-browser",
+        ],
         iosPlatform: "iOS Platform",
         androidPlatform: "Android Platform",
         iosDevices: ["iPhone 15 Pro", "iPhone 14", "iPad Pro", "iPad Air"],
-        androidDevices: ["Pixel 8 Pro", "Samsung S24", "Xiaomi 14", "OPPO Find X7"],
+        androidDevices: [
+          "Pixel 8 Pro",
+          "Samsung S24",
+          "Xiaomi 14",
+          "OPPO Find X7",
+        ],
         summary: {
           types: [
             { type: "API Tests", count: 562 },
             { type: "Browser UI", count: 438 },
             { type: "iOS Mobile", count: 128 },
             { type: "Android Mobile", count: 139 },
-            { type: "Performance", count: 86 }
+            { type: "Performance", count: 86 },
           ],
           total: "1,353",
-          readyToExecute: "test cases generated, ready to execute"
-        }
+          readyToExecute: "test cases generated, ready to execute",
+        },
       },
       execute: {
         title: "AI Auto-executing Tests",
         desc: "Multi-protocol parallel execution with real-time monitoring",
         lanes: [
-          { type: "HTTP / REST API", desc: "Full HTTP testing, RESTful & GraphQL support" },
-          { type: "gRPC Services", desc: "High-performance gRPC testing, Unary / Streaming" },
-          { type: "Browser Tests", desc: "Chrome / Firefox / Safari / Edge cross-browser" },
+          {
+            type: "HTTP / REST API",
+            desc: "Full HTTP testing, RESTful & GraphQL support",
+          },
+          {
+            type: "gRPC Services",
+            desc: "High-performance gRPC testing, Unary / Streaming",
+          },
+          {
+            type: "Browser Tests",
+            desc: "Chrome / Firefox / Safari / Edge cross-browser",
+          },
           { type: "iOS Mobile", desc: "iPhone / iPad real device & simulator" },
-          { type: "Android Mobile", desc: "Pixel / Samsung / Xiaomi multi-device" }
+          {
+            type: "Android Mobile",
+            desc: "Pixel / Samsung / Xiaomi multi-device",
+          },
         ],
         stats: [
           { label: "Total", value: "1,353" },
           { label: "Passed", value: "1,312" },
           { label: "Failed", value: "28" },
-          { label: "Duration", value: "4m 32s" }
-        ]
+          { label: "Duration", value: "4m 32s" },
+        ],
       },
       report: {
         title: "AI Generating Test Report",
@@ -732,7 +820,7 @@ export const enUS: TranslationSchema = {
           { label: "Pass Rate", value: "97.1%" },
           { label: "Coverage", value: "94.8%" },
           { label: "Total Cases", value: "1,353" },
-          { label: "Defects", value: "28" }
+          { label: "Defects", value: "28" },
         ],
         chartTitle: "Test Type Distribution",
         chartLabels: ["API", "UI", "iOS", "Android", "gRPC"],
@@ -741,13 +829,13 @@ export const enUS: TranslationSchema = {
           { module: "Payment", count: 12, severity: "High" },
           { module: "Orders", count: 8, severity: "Medium" },
           { module: "Users", count: 5, severity: "Low" },
-          { module: "Other", count: 3, severity: "Low" }
+          { module: "Other", count: 3, severity: "Low" },
         ],
         browserRecording: "Browser Recording - Chrome",
         downloadReport: "Download Report",
         shareReport: "Share Report",
-        timeSaved: "Total time 4m 32s · Saved 48+ hours of manual work"
-      }
+        timeSaved: "Total time 4m 32s · Saved 48+ hours of manual work",
+      },
     },
     errors: {
       common: {
@@ -757,7 +845,7 @@ export const enUS: TranslationSchema = {
         missingWorkspace: "Missing workspace parameter",
         workspaceForbidden: "No permission to access this workspace",
         adminRequired: "Admin permission required",
-        superadminRequired: "Super admin permission required"
+        superadminRequired: "Super admin permission required",
       },
       auth: {
         invalidCredentials: "Invalid email or password",
@@ -765,28 +853,28 @@ export const enUS: TranslationSchema = {
         emailAlreadyRegistered: "Email already registered",
         registrationDisabled: "Registration is currently disabled",
         invitationInvalid: "Invitation code is invalid or already used",
-        invitationExpired: "Invitation code has expired"
+        invitationExpired: "Invitation code has expired",
       },
       user: {
         notFound: "User not found",
         emailInUse: "Email already in use",
-        wrongPassword: "Current password is incorrect"
+        wrongPassword: "Current password is incorrect",
       },
       workspace: {
         notFound: "Workspace not found",
         onlyOwnerCanUpdate: "Only the owner can update",
         onlyOwnerCanDelete: "Only the owner can delete",
         slugExists: "Slug already exists",
-        slugReserved: "This slug is reserved by the system"
+        slugReserved: "This slug is reserved by the system",
       },
       todo: {
-        notFound: "Todo not found"
+        notFound: "Todo not found",
       },
       testRequirement: {
         notFound: "Test requirement not found",
         createFetchFailed: "Unable to query record after creation",
         updateFetchFailed: "Unable to query record after update",
-        deleteChildrenFirst: "Please delete all child requirements first"
+        deleteChildrenFirst: "Please delete all child requirements first",
       },
       admin: {
         cannotChangeOwnRole: "Cannot change your own role",
@@ -798,12 +886,12 @@ export const enUS: TranslationSchema = {
         defaultWorkspaceDesc: "Default workspace",
         workspaceSuffix: "'s workspace",
         sharedWorkspaceName: "Shared Workspace",
-        sharedWorkspaceDesc: "System shared workspace"
-      }
+        sharedWorkspaceDesc: "System shared workspace",
+      },
     },
     footer: {
       copyright: "© 2026 TestOps AI. All rights reserved.",
-      tagline: "AI-first testing operations platform"
+      tagline: "AI-first testing operations platform",
     },
     systemSettings: {
       title: "System Settings",
@@ -825,7 +913,8 @@ export const enUS: TranslationSchema = {
       allowRegistration: "Allow New User Registration",
       allowRegistrationDesc: "When disabled, new users cannot register",
       singleWorkspaceMode: "Single Workspace Mode",
-      singleWorkspaceModeDesc: "When enabled, all users share one workspace and workspace ID is hidden from URL",
+      singleWorkspaceModeDesc:
+        "When enabled, all users share one workspace and workspace ID is hidden from URL",
       userList: "User List",
       userRole: "Role",
       lastLoginAt: "Last Login",
@@ -838,7 +927,8 @@ export const enUS: TranslationSchema = {
       resetPassword: "Reset Password",
       deleteUser: "Delete User",
       confirmDelete: "Confirm Delete",
-      confirmDeleteDesc: "Are you sure you want to delete user {{name}}? This action cannot be undone.",
+      confirmDeleteDesc:
+        "Are you sure you want to delete user {{name}}? This action cannot be undone.",
       resetPasswordTitle: "Reset Password",
       resetPasswordDesc: "Set a new password for user {{name}}",
       newPassword: "New Password",
@@ -873,7 +963,7 @@ export const enUS: TranslationSchema = {
       copyInvitationLink: "Copy Link",
       deleteInvitation: "Delete",
       expiresInHours: "Expires in (hours)",
-      noExpiration: "No expiration"
-    }
-  }
+      noExpiration: "No expiration",
+    },
+  },
 };

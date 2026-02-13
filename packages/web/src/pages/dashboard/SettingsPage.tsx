@@ -1,20 +1,29 @@
+import {
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  UserAddOutlined,
+} from "@ant-design/icons";
+import { Button, Card, Form, Input, Modal, Table, Tabs, Tag } from "antd";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Button, Card, Divider, Form, Input, Modal, Space, Table, Tag, Tabs } from "antd";
-import { DeleteOutlined, ExclamationCircleOutlined, PlusOutlined, UserAddOutlined } from "@ant-design/icons";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMessage } from "../../hooks";
 import { trpc } from "../../lib/trpc";
 import { SYSTEM_SHARED_SLUG } from "../../main";
 
 export default function SettingsPage() {
   const { t } = useTranslation();
-  const { workspace: workspaceSlugFromUrl } = useParams<{ workspace: string }>();
+  const { workspace: workspaceSlugFromUrl } = useParams<{
+    workspace: string;
+  }>();
   // 查询系统设置判断是否为单一空间模式
   const systemSettingsQuery = trpc.auth.systemSettings.useQuery();
-  const singleWorkspaceMode = systemSettingsQuery.data?.singleWorkspaceMode ?? false;
+  const singleWorkspaceMode =
+    systemSettingsQuery.data?.singleWorkspaceMode ?? false;
   // 在单一空间模式下使用系统共享空间，否则使用 URL 参数
-  const workspaceSlug = singleWorkspaceMode ? SYSTEM_SHARED_SLUG : workspaceSlugFromUrl;
+  const workspaceSlug = singleWorkspaceMode
+    ? SYSTEM_SHARED_SLUG
+    : workspaceSlugFromUrl;
 
   const navigate = useNavigate();
   const message = useMessage();
@@ -26,7 +35,7 @@ export default function SettingsPage() {
   // Queries
   const workspaceQuery = trpc.workspace.getBySlug.useQuery(
     { slug: workspaceSlug ?? "" },
-    { enabled: !!workspaceSlug }
+    { enabled: !!workspaceSlug },
   );
   const workspacesQuery = trpc.workspace.list.useQuery();
 
@@ -49,8 +58,9 @@ export default function SettingsPage() {
         // Update the workspace list cache with the new slug
         const currentList = utils.workspace.list.getData();
         if (currentList) {
-          utils.workspace.list.setData(undefined,
-            currentList.map(ws => ws.id === data.id ? data : ws)
+          utils.workspace.list.setData(
+            undefined,
+            currentList.map((ws) => (ws.id === data.id ? data : ws)),
           );
         }
 
@@ -66,7 +76,9 @@ export default function SettingsPage() {
       } else {
         // If slug didn't change, just invalidate normally
         await utils.workspace.list.invalidate();
-        await utils.workspace.getBySlug.invalidate({ slug: workspaceSlug ?? "" });
+        await utils.workspace.getBySlug.invalidate({
+          slug: workspaceSlug ?? "",
+        });
       }
     },
     onError: (error) => {
@@ -81,7 +93,9 @@ export default function SettingsPage() {
 
       // Navigate to first available workspace or home
       const workspaces = workspacesQuery.data ?? [];
-      const remainingWorkspace = workspaces.find((ws) => ws.slug !== workspaceSlug);
+      const remainingWorkspace = workspaces.find(
+        (ws) => ws.slug !== workspaceSlug,
+      );
       if (remainingWorkspace) {
         navigate(`/dashboard/${remainingWorkspace.slug}`);
       } else {
@@ -118,7 +132,9 @@ export default function SettingsPage() {
       content: (
         <div>
           <p>
-            {t("dashboard.settings.confirmDeleteContent", { name: workspace.name })}
+            {t("dashboard.settings.confirmDeleteContent", {
+              name: workspace.name,
+            })}
           </p>
           <p className="mt-2 text-red-600 dark:text-red-400">
             {t("dashboard.settings.confirmDeleteWarning")}
@@ -138,7 +154,7 @@ export default function SettingsPage() {
     try {
       const values = await inviteForm.validateFields();
       message.info(
-        t("dashboard.settings.inviteComingSoon", { email: values.email })
+        t("dashboard.settings.inviteComingSoon", { email: values.email }),
       );
       inviteForm.resetFields();
       setInviteModalOpen(false);
@@ -163,7 +179,7 @@ export default function SettingsPage() {
       title: t("dashboard.settings.tableColumnMember"),
       dataIndex: "name",
       key: "name",
-      render: (text: string, record: typeof mockMembers[0]) => (
+      render: (text: string, record: (typeof mockMembers)[0]) => (
         <div>
           <div className="font-medium">{text}</div>
           <div className="text-xs text-slate-500">{record.email}</div>
@@ -188,7 +204,7 @@ export default function SettingsPage() {
     {
       title: t("dashboard.settings.tableColumnActions"),
       key: "actions",
-      render: (_: unknown, record: typeof mockMembers[0]) =>
+      render: (_: unknown, record: (typeof mockMembers)[0]) =>
         record.role !== "owner" ? (
           <Button
             type="text"
@@ -216,7 +232,9 @@ export default function SettingsPage() {
   if (!workspace) {
     return (
       <div className="flex h-full items-center justify-center">
-        <div className="text-slate-500">{t("dashboard.settings.workspaceNotFound")}</div>
+        <div className="text-slate-500">
+          {t("dashboard.settings.workspaceNotFound")}
+        </div>
       </div>
     );
   }
@@ -241,11 +259,21 @@ export default function SettingsPage() {
               name="name"
               label={t("dashboard.settings.workspaceName")}
               rules={[
-                { required: true, message: t("dashboard.settings.workspaceNameRequired") },
-                { min: 1, max: 50, message: t("dashboard.settings.workspaceNameLength") },
+                {
+                  required: true,
+                  message: t("dashboard.settings.workspaceNameRequired"),
+                },
+                {
+                  min: 1,
+                  max: 50,
+                  message: t("dashboard.settings.workspaceNameLength"),
+                },
               ]}
             >
-              <Input placeholder={t("dashboard.settings.workspaceNamePlaceholder")} maxLength={50} />
+              <Input
+                placeholder={t("dashboard.settings.workspaceNamePlaceholder")}
+                maxLength={50}
+              />
             </Form.Item>
 
             {/* 单一空间模式下隐藏 slug 字段 */}
@@ -254,7 +282,10 @@ export default function SettingsPage() {
                 name="slug"
                 label={t("dashboard.settings.workspaceSlug")}
                 rules={[
-                  { required: true, message: t("dashboard.settings.workspaceSlugRequired") },
+                  {
+                    required: true,
+                    message: t("dashboard.settings.workspaceSlugRequired"),
+                  },
                   {
                     pattern: /^[a-z0-9-]+$/,
                     message: t("dashboard.settings.workspaceSlugPattern"),
@@ -278,7 +309,11 @@ export default function SettingsPage() {
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" onClick={handleSave} loading={updateMutation.isPending}>
+              <Button
+                type="primary"
+                onClick={handleSave}
+                loading={updateMutation.isPending}
+              >
                 {t("common.saveChanges")}
               </Button>
             </Form.Item>
@@ -293,7 +328,9 @@ export default function SettingsPage() {
         <Card>
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold">{t("dashboard.settings.memberList")}</h3>
+              <h3 className="text-lg font-semibold">
+                {t("dashboard.settings.memberList")}
+              </h3>
               <p className="text-sm text-slate-500">
                 {t("dashboard.settings.memberListDesc")}
               </p>
@@ -306,7 +343,11 @@ export default function SettingsPage() {
               {t("dashboard.settings.inviteMember")}
             </Button>
           </div>
-          <Table columns={memberColumns} dataSource={mockMembers} pagination={false} />
+          <Table
+            columns={memberColumns}
+            dataSource={mockMembers}
+            pagination={false}
+          />
 
           {/* Invite Member Modal */}
           <Modal
@@ -325,8 +366,14 @@ export default function SettingsPage() {
                 name="email"
                 label={t("dashboard.settings.emailAddress")}
                 rules={[
-                  { required: true, message: t("dashboard.settings.emailRequired") },
-                  { type: "email", message: t("dashboard.settings.emailInvalid") },
+                  {
+                    required: true,
+                    message: t("dashboard.settings.emailRequired"),
+                  },
+                  {
+                    type: "email",
+                    message: t("dashboard.settings.emailInvalid"),
+                  },
                 ]}
               >
                 <Input placeholder="user@example.com" />
@@ -336,7 +383,9 @@ export default function SettingsPage() {
                 label={t("dashboard.settings.role")}
                 initialValue="member"
               >
-                <Tag color="default">{t("dashboard.settings.memberDefault")}</Tag>
+                <Tag color="default">
+                  {t("dashboard.settings.memberDefault")}
+                </Tag>
                 <p className="mt-2 text-xs text-slate-500">
                   {t("dashboard.settings.memberPermissionDesc")}
                 </p>
@@ -347,33 +396,37 @@ export default function SettingsPage() {
       ),
     },
     // 单一空间模式下隐藏危险区域
-    ...(!singleWorkspaceMode ? [{
-      key: "danger",
-      label: t("dashboard.settings.dangerTab"),
-      children: (
-        <Card>
-          <div className="max-w-2xl space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold text-red-600 dark:text-red-400">
-                {t("dashboard.settings.deleteWorkspace")}
-              </h3>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-                {t("dashboard.settings.deleteWorkspaceDesc")}
-              </p>
-              <Button
-                danger
-                icon={<DeleteOutlined />}
-                onClick={handleDelete}
-                loading={deleteMutation.isPending}
-                className="mt-4"
-              >
-                {t("dashboard.settings.deleteWorkspace")}
-              </Button>
-            </div>
-          </div>
-        </Card>
-      ),
-    }] : []),
+    ...(!singleWorkspaceMode
+      ? [
+          {
+            key: "danger",
+            label: t("dashboard.settings.dangerTab"),
+            children: (
+              <Card>
+                <div className="max-w-2xl space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold text-red-600 dark:text-red-400">
+                      {t("dashboard.settings.deleteWorkspace")}
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                      {t("dashboard.settings.deleteWorkspaceDesc")}
+                    </p>
+                    <Button
+                      danger
+                      icon={<DeleteOutlined />}
+                      onClick={handleDelete}
+                      loading={deleteMutation.isPending}
+                      className="mt-4"
+                    >
+                      {t("dashboard.settings.deleteWorkspace")}
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ),
+          },
+        ]
+      : []),
   ];
 
   return (

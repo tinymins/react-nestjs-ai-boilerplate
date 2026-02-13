@@ -28,17 +28,17 @@ export const zhTW = {
         critical: "嚴重",
         high: "高",
         medium: "中",
-        low: "低"
+        low: "低",
       },
       theme: {
         light: "淺色",
-        dark: "深色"
-      }
+        dark: "深色",
+      },
     },
     userMenu: {
       account: "帳戶設定",
       admin: "管理後台",
-      signOut: "登出"
+      signOut: "登出",
     },
     userSettings: {
       title: "帳戶設定",
@@ -68,7 +68,7 @@ export const zhTW = {
       confirmPasswordRequired: "請確認新密碼",
       confirmPasswordPlaceholder: "再次輸入新密碼",
       passwordMismatch: "兩次密碼不一致",
-      changePassword: "修改密碼"
+      changePassword: "修改密碼",
     },
     createWorkspace: {
       title: "新建空間站",
@@ -85,7 +85,7 @@ export const zhTW = {
       slugPattern: "只能包含小寫字母、數字和連字號",
       slugExtra: "用於存取網址，例如：/dashboard/{{slug}}",
       descLabel: "描述",
-      descPlaceholder: "簡要描述這個空間站..."
+      descPlaceholder: "簡要描述這個空間站...",
     },
     systemSettings: {
       passwordMinLength: "密碼至少4位",
@@ -107,7 +107,8 @@ export const zhTW = {
       allowRegistration: "允許新使用者註冊",
       allowRegistrationDesc: "關閉後，新使用者將無法註冊帳號",
       singleWorkspaceMode: "單一空間模式",
-      singleWorkspaceModeDesc: "啟用後，所有使用者共用同一個工作空間，URL 中將不顯示空間 ID",
+      singleWorkspaceModeDesc:
+        "啟用後，所有使用者共用同一個工作空間，URL 中將不顯示空間 ID",
       userList: "使用者清單",
       userRole: "角色",
       lastLoginAt: "最近登入",
@@ -155,7 +156,7 @@ export const zhTW = {
       copyInvitationLink: "複製連結",
       deleteInvitation: "刪除",
       expiresInHours: "有效期（小時）",
-      noExpiration: "不設定到期時間"
+      noExpiration: "不設定到期時間",
     },
     nav: {
       items: [
@@ -163,10 +164,10 @@ export const zhTW = {
         { label: "解決方案", href: "/#solutions" },
         { label: "全流程", href: "/#workflow" },
         { label: "AI 能力", href: "/#ai" },
-        { label: "方案", href: "/#plans" }
+        { label: "方案", href: "/#plans" },
       ],
       login: "登入",
-      dashboard: "控制台"
+      dashboard: "控制台",
     },
     hero: {
       badge: "AI TestOps",
@@ -180,13 +181,13 @@ export const zhTW = {
         "✓ 需求解析完成 · 12 個場景",
         "✓ 產生測試矩陣 · 覆蓋率 92%",
         "→ 自動化回歸排程中 · 18/24",
-        "→ 風險門禁評估中 · 8%"
+        "→ 風險門禁評估中 · 8%",
       ],
       metrics: [
         { label: "全流程自動化", value: "90%" },
         { label: "交付可視化", value: "100%" },
-        { label: "協作效率提升", value: "3x" }
-      ]
+        { label: "協作效率提升", value: "3x" },
+      ],
     },
     overview: {
       title: "讓測試成為持續交付的核心引擎",
@@ -199,8 +200,8 @@ export const zhTW = {
           bullets: [
             "測試範圍自動產生與覆蓋建議",
             "測試資產沉澱為可複用知識庫",
-            "一鍵發布門禁與品質看板"
-          ]
+            "一鍵發布門禁與品質看板",
+          ],
         },
         {
           title: "統一品質運營視角",
@@ -208,68 +209,68 @@ export const zhTW = {
           bullets: [
             "測試活動進度與阻塞自動識別",
             "缺陷趨勢與回歸優先順序建議",
-            "品質 KPI 持續優化"
-          ]
-        }
-      ]
+            "品質 KPI 持續優化",
+          ],
+        },
+      ],
     },
     pillars: {
       title: "平台能力矩陣",
       items: [
         {
           title: "需求驅動",
-          desc: "從 PRD/使用者故事自動產生測試範圍與覆蓋建議。"
+          desc: "從 PRD/使用者故事自動產生測試範圍與覆蓋建議。",
         },
         {
           title: "智慧設計",
-          desc: "AI 自動補全用例、資料與斷言，支援範本複用。"
+          desc: "AI 自動補全用例、資料與斷言，支援範本複用。",
         },
         {
           title: "執行編排",
-          desc: "手動 + 自動化統一排程，即時回饋測試進度。"
+          desc: "手動 + 自動化統一排程，即時回饋測試進度。",
         },
         {
           title: "品質洞察",
-          desc: "風險熱力圖、缺陷趨勢、覆蓋率與品質門禁。"
+          desc: "風險熱力圖、缺陷趨勢、覆蓋率與品質門禁。",
         },
         {
           title: "知識沉澱",
-          desc: "測試資產沉澱為知識庫，持續優化。"
+          desc: "測試資產沉澱為知識庫，持續優化。",
         },
         {
           title: "治理合規",
-          desc: "流程稽核、權限矩陣、交付可追溯。"
-        }
-      ]
+          desc: "流程稽核、權限矩陣、交付可追溯。",
+        },
+      ],
     },
     flow: {
       title: "覆蓋全流程的 TestOps 引擎",
       steps: [
         {
           title: "需求錄入",
-          desc: "支援工單、PRD、API 文件與需求範本，自動建立測試範圍。"
+          desc: "支援工單、PRD、API 文件與需求範本，自動建立測試範圍。",
         },
         {
           title: "測試規劃",
-          desc: "AI 產生測試矩陣、風險評估與測試資源計畫。"
+          desc: "AI 產生測試矩陣、風險評估與測試資源計畫。",
         },
         {
           title: "測試設計",
-          desc: "從模型與歷史資產中產生用例、資料與執行腳本。"
+          desc: "從模型與歷史資產中產生用例、資料與執行腳本。",
         },
         {
           title: "測試執行",
-          desc: "統一排程自動化、手動、效能、安全測試活動。"
+          desc: "統一排程自動化、手動、效能、安全測試活動。",
         },
         {
           title: "缺陷管理",
-          desc: "智慧聚類、根因分析、回歸建議與影響面評估。"
+          desc: "智慧聚類、根因分析、回歸建議與影響面評估。",
         },
         {
           title: "測試報告",
-          desc: "自動產生多維度品質報告，支援發布門禁。"
-        }
-      ]
+          desc: "自動產生多維度品質報告，支援發布門禁。",
+        },
+      ],
     },
     testing: {
       badge: "AI 驅動測試",
@@ -278,28 +279,28 @@ export const zhTW = {
       capabilities: [
         {
           title: "HTTP / REST API",
-          desc: "全面的 HTTP 介面測試，支援 RESTful、GraphQL、WebSocket"
+          desc: "全面的 HTTP 介面測試，支援 RESTful、GraphQL、WebSocket",
         },
         {
           title: "gRPC",
-          desc: "高效能 gRPC 服務測試，支援 Unary、Streaming 呼叫"
+          desc: "高效能 gRPC 服務測試，支援 Unary、Streaming 呼叫",
         },
         {
           title: "行動端 UI",
-          desc: "iOS / Android 原生 App 自動化測試，支援真機和模擬器"
+          desc: "iOS / Android 原生 App 自動化測試，支援真機和模擬器",
         },
         {
           title: "瀏覽器測試",
-          desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器自動化測試"
+          desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器自動化測試",
         },
         {
           title: "Windows 桌面",
-          desc: "Windows 桌面應用程式自動化，支援 WinUI / WPF / Win32"
+          desc: "Windows 桌面應用程式自動化，支援 WinUI / WPF / Win32",
         },
         {
           title: "AI 智慧規劃",
-          desc: "基於需求自動產生測試用例，智慧識別測試場景和邊界條件"
-        }
+          desc: "基於需求自動產生測試用例，智慧識別測試場景和邊界條件",
+        },
       ],
       aiFlowSteps: [
         { step: "需求文件", icon: "📄" },
@@ -307,29 +308,29 @@ export const zhTW = {
         { step: "測試計畫", icon: "📋" },
         { step: "用例產生", icon: "✨" },
         { step: "自動執行", icon: "🚀" },
-        { step: "智慧報告", icon: "📊" }
-      ]
+        { step: "智慧報告", icon: "📊" },
+      ],
     },
     ai: {
       title: "AI 優先的核心能力",
       items: [
         {
           title: "需求理解引擎",
-          desc: "從上下文提取關鍵場景，產生測試範圍與風險標籤。"
+          desc: "從上下文提取關鍵場景，產生測試範圍與風險標籤。",
         },
         {
           title: "測試資產產生",
-          desc: "自動產生用例、資料、介面測試腳本與測試說明。"
+          desc: "自動產生用例、資料、介面測試腳本與測試說明。",
         },
         {
           title: "執行智慧助手",
-          desc: "即時提供阻塞原因、修復建議與回歸優先順序。"
+          desc: "即時提供阻塞原因、修復建議與回歸優先順序。",
         },
         {
           title: "報告洞察",
-          desc: "產生管理層視角報告與發布決策建議。"
-        }
-      ]
+          desc: "產生管理層視角報告與發布決策建議。",
+        },
+      ],
     },
     integrations: {
       title: "無縫整合研發生態",
@@ -339,8 +340,8 @@ export const zhTW = {
         "Jenkins / GitHub Actions / Argo",
         "Postman / Playwright / Cypress",
         "SonarQube / Sentry / Datadog",
-        "企業 IM 與通知中台"
-      ]
+        "企業 IM 與通知中台",
+      ],
     },
     security: {
       title: "企業級安全與治理",
@@ -349,18 +350,18 @@ export const zhTW = {
         "資料加密與稽核日誌",
         "多地域部署與容災",
         "合規流程與發布門禁",
-        "資產版本管理與審批"
-      ]
+        "資產版本管理與審批",
+      ],
     },
     cta: {
       title: "開始建構 AI 驅動的測試全流程",
       desc: "讓測試團隊成為研發交付的策略引擎。",
       primary: "取得方案",
-      secondary: "申請試用"
+      secondary: "申請試用",
     },
     closing: {
       title: "讓測試像程式碼一樣持續進化",
-      subtitle: "AI TestOps · 連接需求、品質與交付的每一次迭代"
+      subtitle: "AI TestOps · 連接需求、品質與交付的每一次迭代",
     },
     login: {
       title: "登入 TestOps AI",
@@ -380,32 +381,32 @@ export const zhTW = {
       registrationDisabled: "系統暫不開放註冊",
       backToLogin: "返回登入",
       emailPlaceholder: "請輸入電子郵件",
-      passwordPlaceholder: "請輸入密碼"
+      passwordPlaceholder: "請輸入密碼",
     },
     pages: {
       notFound: {
         title: "頁面走丟了",
         description: "抱歉，您造訪的頁面不存在或已被移除",
         goHome: "返回首頁",
-        goBack: "返回上一頁"
+        goBack: "返回上一頁",
       },
       unauthorized: {
         title: "存取受限",
         description: "抱歉，您沒有權限存取此頁面",
         goHome: "返回首頁",
-        reLogin: "重新登入"
+        reLogin: "重新登入",
       },
       workspaceNotFound: {
         title: "空間站不存在",
-        notFoundNamed: "未找到名為 \"{{name}}\" 的空間站",
+        notFoundNamed: '未找到名為 "{{name}}" 的空間站',
         notFoundGeneric: "未找到對應空間站",
-        goBack: "返回可用空間站"
+        goBack: "返回可用空間站",
       },
       dashboardNotFound: {
         title: "頁面不存在",
         description: "抱歉，您造訪的頁面不存在或已被移動",
-        goBack: "返回工作台"
-      }
+        goBack: "返回工作台",
+      },
     },
     dashboard: {
       title: "測試運營中心",
@@ -421,7 +422,7 @@ export const zhTW = {
       toLogin: "去登入",
       workspace: "工作空間",
       workspaceSwitcher: {
-        switchWorkspace: "切換空間站"
+        switchWorkspace: "切換空間站",
       },
       insightTitle: "品質洞察",
       insightDesc: "自動產生風險熱力圖、覆蓋率與發布門禁建議。",
@@ -431,7 +432,7 @@ export const zhTW = {
       assistantItems: [
         "登入流程異常波動，建議優先回歸",
         "新版本支付介面覆蓋不足 12%",
-        "行動端回歸缺陷收斂度提升 20%"
+        "行動端回歸缺陷收斂度提升 20%",
       ],
       menu: {
         workbench: "工作台",
@@ -467,20 +468,20 @@ export const zhTW = {
         summary: "🎯 完成摘要",
         noTodos: "暫無待辦",
         menuLabel: "📋 待辦清單",
-        defaultCategory: "自訂"
+        defaultCategory: "自訂",
       },
       defects: {
-        description: "追蹤缺陷和評估風險"
+        description: "追蹤缺陷和評估風險",
       },
       testDesign: {
         description: "設計和編寫測試用例",
         caseLibrary: "測試用例庫",
         newCase: "+ 新建用例",
-        totalCases: "共 {{count}} 條測試用例"
+        totalCases: "共 {{count}} 條測試用例",
       },
       settings: {
         title: "空間站設定",
-        subtitle: "管理 \"{{name}}\" 的設定和成員",
+        subtitle: '管理 "{{name}}" 的設定和成員',
         workspaceNotFound: "空間站不存在",
         generalTab: "基礎設定",
         membersTab: "成員管理",
@@ -497,7 +498,8 @@ export const zhTW = {
         descriptionPlaceholder: "簡要描述這個空間站...",
         workspaceDeleted: "空間站已刪除",
         confirmDeleteTitle: "確認刪除空間站",
-        confirmDeleteContent: "確定要刪除空間站 \"{{name}}\" 嗎？此操作無法復原。",
+        confirmDeleteContent:
+          '確定要刪除空間站 "{{name}}" 嗎？此操作無法復原。',
         confirmDeleteWarning: "所有相關資料（包括待辦事項）將被永久刪除。",
         confirmDeleteOk: "確認刪除",
         deleteWorkspace: "刪除空間站",
@@ -519,7 +521,7 @@ export const zhTW = {
         tableColumnActions: "操作",
         removeMemberComingSoon: "移除成員功能開發中",
         inviteComingSoon: "邀請功能開發中：將向 {{email}} 發送邀請郵件",
-        workspaceOwner: "空間站建立者"
+        workspaceOwner: "空間站建立者",
       },
       requirements: {
         description: "管理和追蹤產品需求",
@@ -530,7 +532,7 @@ export const zhTW = {
         recentRequirements: "最近需求",
         sampleTitle1: "使用者登入模組優化",
         sampleTitle2: "支付介面升級",
-        sampleTitle3: "訂單查詢效能優化"
+        sampleTitle3: "訂單查詢效能優化",
       },
       execution: {
         description: "執行測試任務和檢視結果",
@@ -538,28 +540,28 @@ export const zhTW = {
         running: "執行中",
         passed: "通過",
         failed: "失敗",
-        blocked: "阻塞"
+        blocked: "阻塞",
       },
       automation: {
         description: "管理自動化測試腳本和資源",
         workspaceLabel: "工作空間",
         totalScripts: "腳本總數",
         successRate: "執行成功率",
-        avgDuration: "平均執行時間"
+        avgDuration: "平均執行時間",
       },
       reports: {
         description: "檢視品質指標和產生報告",
         workspaceLabel: "工作空間",
         testCoverage: "測試覆蓋率",
         defectDensity: "缺陷密度",
-        automationRate: "自動化率"
+        automationRate: "自動化率",
       },
       testPlan: {
         description: "規劃和管理測試計畫",
         workspaceLabel: "工作空間",
         inProgress: "進行中",
         completedThisWeek: "本週完成",
-        avgCoverage: "平均覆蓋率"
+        avgCoverage: "平均覆蓋率",
       },
       testRequirements: {
         titleTotal: "總需求數",
@@ -626,7 +628,8 @@ export const zhTW = {
         toastUpdateFail: "更新失敗",
         toastDeleteSuccess: "刪除成功",
         toastDeleteFail: "刪除失敗",
-        markdownPlaceholder: "# 測試需求詳情\n\n## 測試目標\n描述測試的主要目標...\n\n## 測試範圍\n- 範圍項 1\n- 範圍項 2\n\n## 測試步驟\n1. 步驟一\n2. 步驟二\n\n## 預期結果\n描述預期的測試結果...",
+        markdownPlaceholder:
+          "# 測試需求詳情\n\n## 測試目標\n描述測試的主要目標...\n\n## 測試範圍\n- 範圍項 1\n- 範圍項 2\n\n## 測試步驟\n1. 步驟一\n2. 步驟二\n\n## 預期結果\n描述預期的測試結果...",
         statusLabels: {
           draft: "草稿",
           pending: "待審核",
@@ -634,7 +637,7 @@ export const zhTW = {
           in_progress: "進行中",
           completed: "已完成",
           rejected: "已拒絕",
-          cancelled: "已取消"
+          cancelled: "已取消",
         },
         typeLabels: {
           functional: "功能測試",
@@ -643,15 +646,15 @@ export const zhTW = {
           usability: "易用性測試",
           compatibility: "相容性測試",
           integration: "整合測試",
-          regression: "回歸測試"
+          regression: "回歸測試",
         },
         priorityLabels: {
           critical: "緊急",
           high: "高",
           medium: "中",
-          low: "低"
-        }
-      }
+          low: "低",
+        },
+      },
     },
     aiWorkflow: {
       aiAutoProcess: "AI 全自動流程",
@@ -660,7 +663,7 @@ export const zhTW = {
         desc: "拖曳檔案到這裡，或點擊選擇檔案",
         selectFile: "選擇檔案",
         sampleFile: "電商平台需求規格說明書_v3.2.pdf",
-        sampleMeta: "3.8 MB · 156 頁 · 包含 API 介面文件"
+        sampleMeta: "3.8 MB · 156 頁 · 包含 API 介面文件",
       },
       analyzing: {
         title: "AI 智慧分析需求文件",
@@ -671,16 +674,16 @@ export const zhTW = {
           "2. 商品管理模組",
           "3. 訂單處理模組",
           "4. 支付閘道模組",
-          "5. 物流追蹤模組"
+          "5. 物流追蹤模組",
         ],
         stats: [
           { label: "功能模組", value: "28" },
           { label: "測試點", value: "186" },
           { label: "邊界條件", value: "42" },
-          { label: "API介面", value: "67" }
+          { label: "API介面", value: "67" },
         ],
         progress: "分析進度",
-        analyzing: "分析中..."
+        analyzing: "分析中...",
       },
       testPlan: {
         title: "AI 建立測試計畫",
@@ -691,34 +694,34 @@ export const zhTW = {
           {
             module: "使用者管理",
             priority: "高",
-            items: ["登入註冊", "權限控制", "個人資訊", "OAuth整合"]
+            items: ["登入註冊", "權限控制", "個人資訊", "OAuth整合"],
           },
           {
             module: "訂單處理",
             priority: "高",
-            items: ["建立訂單", "狀態流轉", "退款處理", "並行控制"]
+            items: ["建立訂單", "狀態流轉", "退款處理", "並行控制"],
           },
           {
             module: "支付閘道",
             priority: "關鍵",
-            items: ["支付寶", "微信支付", "銀行卡", "退款邏輯"]
+            items: ["支付寶", "微信支付", "銀行卡", "退款邏輯"],
           },
           {
             module: "商品管理",
             priority: "中",
-            items: ["商品CRUD", "庫存管理", "價格計算", "分類管理"]
+            items: ["商品CRUD", "庫存管理", "價格計算", "分類管理"],
           },
           {
             module: "物流追蹤",
             priority: "中",
-            items: ["物流查詢", "狀態同步", "異常處理", "多通路對接"]
+            items: ["物流查詢", "狀態同步", "異常處理", "多通路對接"],
           },
           {
             module: "API閘道",
             priority: "高",
-            items: ["限流熔斷", "認證鑑權", "日誌追蹤", "版本控制"]
-          }
-        ]
+            items: ["限流熔斷", "認證鑑權", "日誌追蹤", "版本控制"],
+          },
+        ],
       },
       generate: {
         title: "AI 智慧產生測試用例",
@@ -733,76 +736,130 @@ export const zhTW = {
         scenarios: [
           {
             scenario: "正向流程測試",
-            desc: "使用者登入 → 瀏覽商品 → 加入購物車 → 下單支付"
+            desc: "使用者登入 → 瀏覽商品 → 加入購物車 → 下單支付",
           },
           {
             scenario: "異常流程測試",
-            desc: "網路中斷、逾時重試、並行衝突處理"
+            desc: "網路中斷、逾時重試、並行衝突處理",
           },
           {
             scenario: "邊界值測試",
-            desc: "最大購買數量、價格邊界、庫存臨界值"
+            desc: "最大購買數量、價格邊界、庫存臨界值",
           },
           {
             scenario: "安全性測試",
-            desc: "SQL注入、XSS攻擊、越權存取偵測"
-          }
+            desc: "SQL注入、XSS攻擊、越權存取偵測",
+          },
         ],
         boundaries: [
-          { field: "使用者名稱", min: "2字元", max: "32字元", special: "特殊字元過濾" },
+          {
+            field: "使用者名稱",
+            min: "2字元",
+            max: "32字元",
+            special: "特殊字元過濾",
+          },
           { field: "密碼", min: "8字元", max: "128字元", special: "強度驗證" },
-          { field: "商品價格", min: "0.01", max: "999999.99", special: "精確度處理" },
+          {
+            field: "商品價格",
+            min: "0.01",
+            max: "999999.99",
+            special: "精確度處理",
+          },
           { field: "購買數量", min: "1", max: "9999", special: "庫存校驗" },
-          { field: "優惠券金額", min: "1", max: "訂單金額", special: "疊加規則" },
-          { field: "收貨地址", min: "10字元", max: "200字元", special: "地址解析" }
+          {
+            field: "優惠券金額",
+            min: "1",
+            max: "訂單金額",
+            special: "疊加規則",
+          },
+          {
+            field: "收貨地址",
+            min: "10字元",
+            max: "200字元",
+            special: "地址解析",
+          },
         ],
         apis: [
-          { method: "POST", path: "/api/v1/users/login", desc: "使用者登入介面" },
+          {
+            method: "POST",
+            path: "/api/v1/users/login",
+            desc: "使用者登入介面",
+          },
           { method: "GET", path: "/api/v1/products", desc: "商品清單查詢" },
           { method: "POST", path: "/api/v1/orders", desc: "建立訂單介面" },
-          { method: "PUT", path: "/api/v1/orders/:id/status", desc: "更新訂單狀態" },
-          { method: "DELETE", path: "/api/v1/cart/items/:id", desc: "刪除購物車商品" }
+          {
+            method: "PUT",
+            path: "/api/v1/orders/:id/status",
+            desc: "更新訂單狀態",
+          },
+          {
+            method: "DELETE",
+            path: "/api/v1/cart/items/:id",
+            desc: "刪除購物車商品",
+          },
         ],
         cases: "用例",
         browsers: [
           { browser: "Chrome", version: "v120+" },
           { browser: "Firefox", version: "v115+" },
           { browser: "Safari", version: "v17+" },
-          { browser: "Edge", version: "v118+" }
+          { browser: "Edge", version: "v118+" },
         ],
-        browserTests: ["頁面渲染測試", "互動回應測試", "表單驗證測試", "跨瀏覽器相容性"],
+        browserTests: [
+          "頁面渲染測試",
+          "互動回應測試",
+          "表單驗證測試",
+          "跨瀏覽器相容性",
+        ],
         iosPlatform: "iOS 平台",
         androidPlatform: "Android 平台",
         iosDevices: ["iPhone 15 Pro", "iPhone 14", "iPad Pro", "iPad Air"],
-        androidDevices: ["Pixel 8 Pro", "Samsung S24", "Xiaomi 14", "OPPO Find X7"],
+        androidDevices: [
+          "Pixel 8 Pro",
+          "Samsung S24",
+          "Xiaomi 14",
+          "OPPO Find X7",
+        ],
         summary: {
           types: [
             { type: "API 測試", count: 562 },
             { type: "瀏覽器 UI", count: 438 },
             { type: "行動端 iOS", count: 128 },
             { type: "行動端 Android", count: 139 },
-            { type: "效能壓測", count: 86 }
+            { type: "效能壓測", count: 86 },
           ],
           total: "1,353",
-          readyToExecute: "個測試用例已產生，準備執行"
-        }
+          readyToExecute: "個測試用例已產生，準備執行",
+        },
       },
       execute: {
         title: "AI 自動執行測試",
         desc: "多協定並行執行，即時監控測試進度",
         lanes: [
-          { type: "HTTP / REST API", desc: "全面的 HTTP 介面測試，支援 RESTful、GraphQL" },
-          { type: "gRPC 服務", desc: "高效能 gRPC 服務測試，Unary / Streaming" },
-          { type: "瀏覽器測試", desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器" },
+          {
+            type: "HTTP / REST API",
+            desc: "全面的 HTTP 介面測試，支援 RESTful、GraphQL",
+          },
+          {
+            type: "gRPC 服務",
+            desc: "高效能 gRPC 服務測試，Unary / Streaming",
+          },
+          {
+            type: "瀏覽器測試",
+            desc: "Chrome / Firefox / Safari / Edge 跨瀏覽器",
+          },
           { type: "行動端 iOS", desc: "iPhone / iPad 真機與模擬器測試" },
-          { type: "行動端 Android", desc: "Pixel / Samsung / Xiaomi 多裝置覆蓋" }
+          {
+            type: "行動端 Android",
+            desc: "Pixel / Samsung / Xiaomi 多裝置覆蓋",
+          },
         ],
         stats: [
           { label: "總執行", value: "1,353" },
           { label: "通過", value: "1,312" },
           { label: "失敗", value: "28" },
-          { label: "耗時", value: "4m 32s" }
-        ]
+          { label: "耗時", value: "4m 32s" },
+        ],
       },
       report: {
         title: "AI 產出精美測試報告",
@@ -812,7 +869,7 @@ export const zhTW = {
           { label: "通過率", value: "97.1%" },
           { label: "覆蓋率", value: "94.8%" },
           { label: "總用例", value: "1,353" },
-          { label: "缺陷數", value: "28" }
+          { label: "缺陷數", value: "28" },
         ],
         chartTitle: "測試類型分布",
         chartLabels: ["API", "UI", "iOS", "Android", "gRPC"],
@@ -821,13 +878,13 @@ export const zhTW = {
           { module: "支付模組", count: 12, severity: "高" },
           { module: "訂單模組", count: 8, severity: "中" },
           { module: "使用者模組", count: 5, severity: "低" },
-          { module: "其他", count: 3, severity: "低" }
+          { module: "其他", count: 3, severity: "低" },
         ],
         browserRecording: "瀏覽器測試錄影 - Chrome",
         downloadReport: "下載完整報告",
         shareReport: "分享報告",
-        timeSaved: "全程耗時 4分32秒 · 節省人工 48+ 小時"
-      }
+        timeSaved: "全程耗時 4分32秒 · 節省人工 48+ 小時",
+      },
     },
     errors: {
       common: {
@@ -837,7 +894,7 @@ export const zhTW = {
         missingWorkspace: "缺少工作空間參數",
         workspaceForbidden: "無權限存取該工作空間",
         adminRequired: "需要管理員權限",
-        superadminRequired: "需要超級管理員權限"
+        superadminRequired: "需要超級管理員權限",
       },
       auth: {
         invalidCredentials: "帳號或密碼錯誤",
@@ -845,28 +902,28 @@ export const zhTW = {
         emailAlreadyRegistered: "電子郵件已註冊",
         registrationDisabled: "系統暫不開放註冊",
         invitationInvalid: "邀請碼無效或已被使用",
-        invitationExpired: "邀請碼已過期"
+        invitationExpired: "邀請碼已過期",
       },
       user: {
         notFound: "使用者不存在",
         emailInUse: "電子郵件已被使用",
-        wrongPassword: "原密碼錯誤"
+        wrongPassword: "原密碼錯誤",
       },
       workspace: {
         notFound: "工作空間不存在",
         onlyOwnerCanUpdate: "僅建立者可修改",
         onlyOwnerCanDelete: "僅建立者可刪除",
         slugExists: "Slug 已存在",
-        slugReserved: "該識別碼為系統保留，請使用其他名稱"
+        slugReserved: "該識別碼為系統保留，請使用其他名稱",
       },
       todo: {
-        notFound: "待辦不存在"
+        notFound: "待辦不存在",
       },
       testRequirement: {
         notFound: "測試需求不存在",
         createFetchFailed: "建立後無法查詢到記錄",
         updateFetchFailed: "更新後無法查詢到記錄",
-        deleteChildrenFirst: "請先刪除所有子需求"
+        deleteChildrenFirst: "請先刪除所有子需求",
       },
       admin: {
         cannotChangeOwnRole: "不能修改自己的角色",
@@ -878,14 +935,14 @@ export const zhTW = {
         defaultWorkspaceDesc: "預設工作空間",
         workspaceSuffix: "的空間站",
         sharedWorkspaceName: "共享空間",
-        sharedWorkspaceDesc: "系統共享工作空間"
-      }
+        sharedWorkspaceDesc: "系統共享工作空間",
+      },
     },
     footer: {
       copyright: "© 2026 TestOps AI. All rights reserved.",
-      tagline: "AI 驅動的測試全流程平台"
-    }
-  }
+      tagline: "AI 驅動的測試全流程平台",
+    },
+  },
 };
 
 export type TranslationSchemaZhTW = typeof zhTW;

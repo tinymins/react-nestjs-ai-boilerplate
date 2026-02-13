@@ -2,7 +2,7 @@ import "dotenv/config";
 
 import { eq, sql } from "drizzle-orm";
 import { db } from "./db/client";
-import { users, workspaces, workspaceMembers } from "./db/schema";
+import { users, workspaceMembers, workspaces } from "./db/schema";
 import { getMessage } from "./i18n";
 
 const seedUsers = [
@@ -10,14 +10,14 @@ const seedUsers = [
     name: "Admin",
     email: "admin@example.com",
     passwordHash: "password",
-    role: "superadmin"
+    role: "superadmin",
   },
   {
     name: "User",
     email: "user@example.com",
     passwordHash: "password",
-    role: "user"
-  }
+    role: "user",
+  },
 ];
 
 async function seed() {
@@ -108,17 +108,19 @@ async function seed() {
           slug: workspaceSlug,
           name: workspaceName,
           description: getMessage("zh-CN", "errors.admin.defaultWorkspaceDesc"),
-          ownerId: user.id
+          ownerId: user.id,
         })
         .returning();
 
       await db.insert(workspaceMembers).values({
         workspaceId: workspace.id,
         userId: user.id,
-        role: "owner"
+        role: "owner",
       });
 
-      console.log(`Created workspace "${workspaceName}" for user: ${user.email}`);
+      console.log(
+        `Created workspace "${workspaceName}" for user: ${user.email}`,
+      );
     }
   }
 

@@ -19,14 +19,34 @@ export default function ExecutionPage() {
       </div>
       <div className="grid gap-6 md:grid-cols-4">
         {[
-          { labelKey: "dashboard.execution.running", value: "18", color: "text-blue-600 dark:text-blue-400" },
-          { labelKey: "dashboard.execution.passed", value: "142", color: "text-green-600 dark:text-green-400" },
-          { labelKey: "dashboard.execution.failed", value: "8", color: "text-red-600 dark:text-red-400" },
-          { labelKey: "dashboard.execution.blocked", value: "3", color: "text-yellow-600 dark:text-yellow-400" }
+          {
+            labelKey: "dashboard.execution.running",
+            value: "18",
+            color: "text-blue-600 dark:text-blue-400",
+          },
+          {
+            labelKey: "dashboard.execution.passed",
+            value: "142",
+            color: "text-green-600 dark:text-green-400",
+          },
+          {
+            labelKey: "dashboard.execution.failed",
+            value: "8",
+            color: "text-red-600 dark:text-red-400",
+          },
+          {
+            labelKey: "dashboard.execution.blocked",
+            value: "3",
+            color: "text-yellow-600 dark:text-yellow-400",
+          },
         ].map((stat) => (
           <div key={stat.labelKey} className="card">
-            <p className="text-sm text-slate-500 dark:text-slate-400">{t(stat.labelKey)}</p>
-            <p className={`mt-2 text-3xl font-semibold ${stat.color}`}>{stat.value}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              {t(stat.labelKey)}
+            </p>
+            <p className={`mt-2 text-3xl font-semibold ${stat.color}`}>
+              {stat.value}
+            </p>
           </div>
         ))}
       </div>
