@@ -43,7 +43,7 @@ export class TestRequirementRouter {
     @Ctx() ctx: Context,
   ) {
     const query = input ?? { page: 1, pageSize: 20 };
-    return testRequirementService.list(ctx.workspace?.id, query);
+    return testRequirementService.list(ctx.workspace!.id, query);
   }
 
   @UseMiddlewares(requireWorkspace)
@@ -52,7 +52,7 @@ export class TestRequirementRouter {
     output: TestRequirementSchema.nullable(),
   })
   async getById(input: { id: string }, @Ctx() ctx: Context) {
-    return testRequirementService.getById(input.id, ctx.workspace?.id);
+    return testRequirementService.getById(input.id, ctx.workspace!.id);
   }
 
   @UseMiddlewares(requireWorkspace)
@@ -63,7 +63,7 @@ export class TestRequirementRouter {
   async getChildren(input: { parentId: string }, @Ctx() ctx: Context) {
     return testRequirementService.getChildren(
       input.parentId,
-      ctx.workspace?.id,
+      ctx.workspace!.id,
     );
   }
 
@@ -78,7 +78,7 @@ export class TestRequirementRouter {
   ) {
     return testRequirementService.create(
       input,
-      ctx.workspace?.id,
+      ctx.workspace!.id,
       ctx.userId,
       ctx.language,
     );
@@ -95,7 +95,7 @@ export class TestRequirementRouter {
   ) {
     return testRequirementService.update(
       input.id,
-      ctx.workspace?.id,
+      ctx.workspace!.id,
       input,
       ctx.language,
     );
@@ -112,7 +112,7 @@ export class TestRequirementRouter {
   ) {
     return testRequirementService.delete(
       input.id,
-      ctx.workspace?.id,
+      ctx.workspace!.id,
       ctx.language,
     );
   }

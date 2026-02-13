@@ -50,7 +50,7 @@ export class TodoRouter {
   @UseMiddlewares(requireWorkspace)
   @Query({ output: todoListOutput })
   async list(@Ctx() ctx: Context) {
-    return todoService.listByWorkspace(ctx.workspace?.id);
+    return todoService.listByWorkspace(ctx.workspace!.id);
   }
 
   @UseMiddlewares(requireWorkspace)
@@ -58,7 +58,7 @@ export class TodoRouter {
   async create(input: z.infer<typeof todoCreateInput>, @Ctx() ctx: Context) {
     return todoService.create(
       input,
-      ctx.workspace?.id,
+      ctx.workspace!.id,
       ctx.userId,
       ctx.language,
     );
@@ -67,12 +67,12 @@ export class TodoRouter {
   @UseMiddlewares(requireWorkspace)
   @Mutation({ input: todoUpdateInput, output: todoSchema })
   async update(input: z.infer<typeof todoUpdateInput>, @Ctx() ctx: Context) {
-    return todoService.update(input.id, ctx.workspace?.id, input, ctx.language);
+    return todoService.update(input.id, ctx.workspace!.id, input, ctx.language);
   }
 
   @UseMiddlewares(requireWorkspace)
   @Mutation({ input: todoDeleteInput, output: z.object({ id: z.string() }) })
   async delete(input: z.infer<typeof todoDeleteInput>, @Ctx() ctx: Context) {
-    return todoService.delete(input.id, ctx.workspace?.id, ctx.language);
+    return todoService.delete(input.id, ctx.workspace!.id, ctx.language);
   }
 }
