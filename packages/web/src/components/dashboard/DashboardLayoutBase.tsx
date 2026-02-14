@@ -7,12 +7,13 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Button, Drawer, Dropdown, Menu } from "antd";
+import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
 import { trpc } from "../../lib/trpc";
-import type { Lang, LangMode, Theme, ThemeMode } from "../../lib/types";
+import type { LangMode, ThemeMode } from "../../lib/types";
 import { LANG_NAMES } from "../../lib/types";
 import { SystemSettingsModal, UserMenu, UserSettingsModal } from "../account";
 import {
@@ -22,20 +23,24 @@ import {
   type MenuItemConfig,
   menuConfig,
 } from "./constants";
+import type { DashboardLayoutProps } from "./types";
 
-type SingleWorkspaceDashboardLayoutProps = {
-  user: User | null;
-  lang: Lang;
-  langMode: LangMode;
-  theme: Theme;
-  themeMode: ThemeMode;
-  onUpdateUser: (user: User) => void;
-  onLogout: () => void;
-  onChangeLangMode: (mode: LangMode) => void;
-  onChangeThemeMode: (mode: ThemeMode) => void;
-};
+export interface DashboardLayoutBaseProps extends DashboardLayoutProps {
+  /** Base path for navigation, e.g. "/dashboard" or "/dashboard/my-team" */
+  basePath: string;
+  /** Content rendered at the top of the sidebar (WorkspaceSwitcher or brand) */
+  sidebarHeader: ReactNode;
+  /** Content rendered at the top of the mobile drawer (WorkspaceSwitcher or brand) */
+  mobileDrawerHeader: ReactNode;
+  /** Additional modals (e.g. CreateWorkspaceModal) */
+  extraModals?: ReactNode;
+  /** Fallback UI when workspace is not found (only used in Multi mode) */
+  notFoundFallback?: ReactNode | null;
+  /** Whether workspace data is still loading */
+  isWorkspaceLoading?: boolean;
+}
 
-export default function SingleWorkspaceDashboardLayout({
+export default function DashboardLayoutBase({
   user,
   lang: _lang,
   langMode,
@@ -45,11 +50,22 @@ export default function SingleWorkspaceDashboardLayout({
   onLogout,
   onChangeLangMode,
   onChangeThemeMode,
-}: SingleWorkspaceDashboardLayoutProps) {
+  basePath,
+  sidebarHeader,
+  mobileDrawerHeader,
+  extraModals,
+  notFoundFallback,
+  isWorkspaceLoading,
+}: DashboardLayoutBaseProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [systemSettingsOpen, setSystemSettingsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const updateProfileMutation = trpc.user.updateProfile.useMutation();
+  const { t } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  // 处理主题切换，同时保存到后端
   const handleThemeModeChange = (mode: ThemeMode) => {
     onChangeThemeMode(mode);
     if (user) {
@@ -60,6 +76,7 @@ export default function SingleWorkspaceDashboardLayout({
     }
   };
 
+  // 处理语言切换，同时保存到后端
   const handleLangModeChange = (mode: LangMode) => {
     onChangeLangMode(mode);
     if (user) {
@@ -70,24 +87,19 @@ export default function SingleWorkspaceDashboardLayout({
     }
   };
 
-  const { t } = useTranslation();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // 语言下拉菜单选项
   const langItems = Object.entries(LANG_NAMES).map(([key, label]) => ({
     key,
     label,
   }));
   langItems.unshift({ key: "auto", label: t("common.auto") });
 
+  // 主题下拉菜单选项
   const themeItems = [
     { key: "auto", label: t("common.auto") },
-    { key: "light", label: t("common.light") },
-    { key: "dark", label: t("common.dark") },
+    { key: "light", label: t("common.theme.light") },
+    { key: "dark", label: t("common.theme.dark") },
   ];
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  // 获取工作空间列表（需要获取 shared 工作空间的 ID）
-  const workspacesQuery = trpc.workspace.list.useQuery();
 
   // 将 menuConfig 转换为 Ant Design Menu 的 items 格式
   const buildMenuItems = (items: MenuItemConfig[]): MenuProps["items"] => {
@@ -122,10 +134,9 @@ export default function SingleWorkspaceDashboardLayout({
   const menuItemConfigs = buildMenuItems(menuConfig);
 
   // 根据当前路径计算激活的菜单 keys
-  const basePath = "/dashboard";
   const selectedKeys = useMemo(
     () => findMenuKeysByPath(location.pathname, basePath),
-    [location.pathname],
+    [location.pathname, basePath],
   );
   const [openKeys, setOpenKeys] = useState<string[]>(() =>
     getDefaultOpenKeys(selectedKeys),
@@ -143,7 +154,7 @@ export default function SingleWorkspaceDashboardLayout({
   const handleMenuClick = (key: string) => {
     const routeSuffix = getRouteFromKey(key);
     if (routeSuffix !== null) {
-      navigate(`/dashboard${routeSuffix}`);
+      navigate(`${basePath}${routeSuffix}`);
       setMobileMenuOpen(false);
     }
   };
@@ -152,6 +163,7 @@ export default function SingleWorkspaceDashboardLayout({
     setOpenKeys(keys);
   };
 
+  // 未登录回退
   if (!user) {
     return (
       <div className="h-screen w-screen overflow-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
@@ -172,7 +184,8 @@ export default function SingleWorkspaceDashboardLayout({
     );
   }
 
-  if (workspacesQuery.isLoading) {
+  // 加载中骨架屏
+  if (isWorkspaceLoading) {
     return (
       <div className="h-screen w-screen overflow-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <WorkspaceRedirectSkeleton />
@@ -180,30 +193,37 @@ export default function SingleWorkspaceDashboardLayout({
     );
   }
 
+  // 工作空间不存在回退（仅 Multi 模式使用）
+  if (notFoundFallback) {
+    return (
+      <div className="h-screen w-screen overflow-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        {notFoundFallback}
+      </div>
+    );
+  }
+
+  const sidebarMenu = (
+    <Menu
+      mode="inline"
+      items={menuItemConfigs}
+      selectedKeys={selectedKeys}
+      openKeys={openKeys}
+      onOpenChange={handleOpenChange}
+      onClick={({ key }) => handleMenuClick(key)}
+      className="border-none bg-transparent"
+      theme={theme === "dark" ? "dark" : "light"}
+      style={{ borderInlineEnd: "none" }}
+    />
+  );
+
   return (
     <div className="h-screen w-screen overflow-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <div className="flex h-full w-full overflow-hidden">
-        {/* Sidebar - No WorkspaceSwitcher in single mode */}
+        {/* Sidebar */}
         <aside className="hidden h-full w-64 flex-shrink-0 flex-col border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 lg:flex">
-          {/* App Title instead of workspace switcher */}
-          <div className="border-b border-slate-200 dark:border-slate-800 px-4 py-4">
-            <div className="text-lg font-semibold text-slate-800 dark:text-slate-200">
-              {t("brand")}
-            </div>
-          </div>
-
+          {sidebarHeader}
           <nav className="flex-1 space-y-1 overflow-y-auto pt-2 text-sm">
-            <Menu
-              mode="inline"
-              items={menuItemConfigs}
-              selectedKeys={selectedKeys}
-              openKeys={openKeys}
-              onOpenChange={handleOpenChange}
-              onClick={({ key }) => handleMenuClick(key)}
-              className="border-none bg-transparent"
-              theme={theme === "dark" ? "dark" : "light"}
-              style={{ borderInlineEnd: "none" }}
-            />
+            {sidebarMenu}
           </nav>
         </aside>
 
@@ -277,6 +297,9 @@ export default function SingleWorkspaceDashboardLayout({
         </div>
       </div>
 
+      {/* Extra Modals (e.g. CreateWorkspaceModal) */}
+      {extraModals}
+
       {/* Mobile Drawer Menu */}
       <Drawer
         title={null}
@@ -296,25 +319,10 @@ export default function SingleWorkspaceDashboardLayout({
             />
           </div>
 
-          {/* App Title */}
-          <div className="border-b border-slate-200 dark:border-slate-800 px-4 py-4">
-            <div className="text-lg font-semibold text-slate-800 dark:text-slate-200">
-              {t("brand")}
-            </div>
-          </div>
+          {mobileDrawerHeader}
 
           <nav className="flex-1 overflow-y-auto pt-2 text-sm">
-            <Menu
-              mode="inline"
-              items={menuItemConfigs}
-              selectedKeys={selectedKeys}
-              openKeys={openKeys}
-              onOpenChange={handleOpenChange}
-              onClick={({ key }) => handleMenuClick(key)}
-              className="border-none bg-transparent"
-              theme={theme === "dark" ? "dark" : "light"}
-              style={{ borderInlineEnd: "none" }}
-            />
+            {sidebarMenu}
           </nav>
         </div>
       </Drawer>

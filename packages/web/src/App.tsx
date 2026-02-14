@@ -4,10 +4,7 @@ import { TRPCClientError } from "@trpc/client";
 import { App as AntdApp } from "antd";
 import { useCallback, useMemo } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import {
-  DashboardLayout,
-  SingleWorkspaceDashboardLayout,
-} from "./components/dashboard";
+import { DashboardLayout } from "./components/dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { HomePage, SiteLayout } from "./components/site";
 import { useAuth, useLang, useThemeContext } from "./hooks";
@@ -122,9 +119,7 @@ function AppContent() {
             {/* 单一空间模式：URL 不包含 workspace 参数 */}
             <Route
               path="/dashboard"
-              element={
-                <SingleWorkspaceDashboardLayout {...dashboardLayoutProps} />
-              }
+              element={<DashboardLayout.Single {...dashboardLayoutProps} />}
             >
               {dashboardChildRoutes(user)}
             </Route>
@@ -140,7 +135,7 @@ function AppContent() {
             <Route path="/dashboard" element={<DashboardIndexRedirect />} />
             <Route
               path="/dashboard/:workspace"
-              element={<DashboardLayout {...dashboardLayoutProps} />}
+              element={<DashboardLayout.Multi {...dashboardLayoutProps} />}
             >
               {dashboardChildRoutes(user)}
             </Route>
