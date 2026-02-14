@@ -406,14 +406,16 @@ export default function SystemSettingsModal({
   const invitationsTab = (
     <div className="space-y-4">
       <div className="flex items-center gap-4">
-        <InputNumber
-          placeholder={t("systemSettings.expiresInHours")}
-          min={1}
-          value={invitationExpiresHours}
-          onChange={(v) => setInvitationExpiresHours(v)}
-          addonAfter={t("systemSettings.hoursUnit")}
-          style={{ width: 180 }}
-        />
+        <Space.Compact>
+          <InputNumber
+            placeholder={t("systemSettings.expiresInHours")}
+            min={1}
+            value={invitationExpiresHours}
+            onChange={(v) => setInvitationExpiresHours(v)}
+            style={{ width: 140 }}
+          />
+          <Button disabled>{t("systemSettings.hoursUnit")}</Button>
+        </Space.Compact>
         <span className="text-slate-500 text-sm">
           {invitationExpiresHours ? "" : t("systemSettings.noExpiration")}
         </span>
@@ -468,7 +470,7 @@ export default function SystemSettingsModal({
         title={t("systemSettings.title")}
         footer={null}
         width={isSuperAdmin ? 900 : 500}
-        destroyOnClose
+        destroyOnHidden
       >
         <Tabs items={tabItems} />
       </Modal>

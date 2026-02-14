@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Button, Drawer, Dropdown, Menu } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { WorkspaceRedirectSkeleton } from "../../components/skeleton";
@@ -123,7 +123,10 @@ export default function SingleWorkspaceDashboardLayout({
 
   // 根据当前路径计算激活的菜单 keys
   const basePath = "/dashboard";
-  const selectedKeys = findMenuKeysByPath(location.pathname, basePath);
+  const selectedKeys = useMemo(
+    () => findMenuKeysByPath(location.pathname, basePath),
+    [location.pathname],
+  );
   const [openKeys, setOpenKeys] = useState<string[]>(() =>
     getDefaultOpenKeys(selectedKeys),
   );
@@ -281,9 +284,8 @@ export default function SingleWorkspaceDashboardLayout({
         closable={false}
         onClose={() => setMobileMenuOpen(false)}
         open={mobileMenuOpen}
-        width={280}
         className="lg:hidden"
-        styles={{ body: { padding: 0 } }}
+        styles={{ body: { padding: 0 }, wrapper: { width: 280 } }}
       >
         <div className="flex h-full flex-col bg-white dark:bg-slate-900">
           <div className="flex justify-end p-2">

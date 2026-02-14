@@ -2,7 +2,7 @@ import type { User } from "@acme/types";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import { Avatar, Button, Form, Input, Modal, Select, Tabs, Upload } from "antd";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMessage } from "../../hooks";
 import { getAvatarColor, getAvatarInitial } from "../../lib/avatar";
@@ -53,12 +53,17 @@ export default function UserSettingsModal({
   const initialLangMode = profile.settings?.langMode ?? langMode;
   const initialThemeMode = profile.settings?.themeMode ?? themeMode;
 
+  const hasOpenedRef = useRef(false);
+
   useEffect(() => {
     if (!open) {
-      setActiveTab("profile");
-      passwordForm.resetFields();
+      if (hasOpenedRef.current) {
+        setActiveTab("profile");
+        passwordForm.resetFields();
+      }
       return;
     }
+    hasOpenedRef.current = true;
     setAvatarValue(profile.settings?.avatarUrl ?? null);
     form.setFieldsValue({
       name: profile.name,

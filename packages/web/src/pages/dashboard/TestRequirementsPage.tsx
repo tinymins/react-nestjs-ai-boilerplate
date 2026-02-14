@@ -694,8 +694,8 @@ export default function TestRequirementsPage() {
           </Space>
         }
         placement="right"
-        width={640}
         open={isDetailOpen}
+        styles={{ wrapper: { width: 640 } }}
         onClose={() => {
           setIsDetailOpen(false);
           setViewingRecord(null);

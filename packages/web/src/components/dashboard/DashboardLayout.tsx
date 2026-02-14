@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Avatar, Button, Drawer, Dropdown, Menu } from "antd";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Link,
@@ -326,7 +326,10 @@ export default function DashboardLayout({
 
   // 根据当前路径计算激活的菜单 keys
   const basePath = `/dashboard/${workspace}`;
-  const selectedKeys = findMenuKeysByPath(location.pathname, basePath);
+  const selectedKeys = useMemo(
+    () => findMenuKeysByPath(location.pathname, basePath),
+    [location.pathname, basePath],
+  );
   const [openKeys, setOpenKeys] = useState<string[]>(() =>
     getDefaultOpenKeys(selectedKeys),
   );
@@ -523,9 +526,8 @@ export default function DashboardLayout({
         closable={false}
         onClose={() => setMobileMenuOpen(false)}
         open={mobileMenuOpen}
-        width={280}
         className="lg:hidden"
-        styles={{ body: { padding: 0 } }}
+        styles={{ body: { padding: 0 }, wrapper: { width: 280 } }}
       >
         <div className="flex h-full flex-col bg-white dark:bg-slate-900">
           {/* Close button */}
