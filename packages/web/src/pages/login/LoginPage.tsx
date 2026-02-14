@@ -58,6 +58,7 @@ export default function LoginPage({
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
         <Spin size="large" />
+        <Form form={form} className="hidden" />
       </div>
     );
   }
@@ -115,6 +116,7 @@ export default function LoginPage({
                 type="email"
                 placeholder={t("login.emailPlaceholder")}
                 size="large"
+                autoComplete="email"
               />
             </Form.Item>
 
@@ -126,6 +128,7 @@ export default function LoginPage({
               <Input.Password
                 placeholder={t("login.passwordPlaceholder")}
                 size="large"
+                autoComplete={mode === "login" ? "current-password" : "new-password"}
               />
             </Form.Item>
 
