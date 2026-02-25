@@ -233,8 +233,33 @@ EOF
 # 执行数据库迁移
 run_migration() {
     log_info "执行数据库迁移..."
-    ssh "$SERVER" "docker exec apps-server npx drizzle-kit push"
-    log_success "数据库迁移完成"
+
+    # 先尝试不带 --force 执行
+    local output
+    output=$(ssh "$SERVER" "docker exec apps-server npx drizzle-kit push 2>&1") || true
+    local exit_code=$?
+
+    echo "$output"
+
+    # 检测是否需要 --force（输出中包含相关关键词或非零退出码）
+    if echo "$output" | grep -qiE "force|data.?loss|truncate|drop|alter.*column.*type|would be deleted|abort"; then
+        log_warn "检测到可能需要 --force 参数（存在破坏性变更）"
+        read -r -p "$(echo -e "${YELLOW}[PROMPT]${NC} 是否使用 --force 重新执行迁移? [Y/n] ")" confirm
+        confirm=${confirm:-Y}
+        if [[ "$confirm" =~ ^[Yy]$ ]]; then
+            log_info "使用 --force 重新执行数据库迁移..."
+            ssh "$SERVER" "docker exec apps-server npx drizzle-kit push --force"
+            log_success "数据库迁移完成（--force）"
+        else
+            log_warn "已跳过 --force 迁移"
+            return 1
+        fi
+    elif [ $exit_code -ne 0 ]; then
+        log_error "数据库迁移失败（退出码: $exit_code）"
+        return 1
+    else
+        log_success "数据库迁移完成"
+    fi
 }
 
 # 检查服务器 .env 是否缺少新变量
