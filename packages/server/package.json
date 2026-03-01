@@ -11,7 +11,8 @@
     "build": "pnpm gen:trpc && nest build",
     "start": "node dist/main.js",
     "db:seed": "tsx src/seed.ts",
-    "db:migrate": "drizzle-kit push"
+    "db:migrate": "drizzle-kit push",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@acme/i18n": "workspace:*",

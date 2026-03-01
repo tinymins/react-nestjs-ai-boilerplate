@@ -7,9 +7,9 @@
     "dev:web": "pnpm -C packages/web dev",
     "dev:server": "pnpm -C packages/server dev",
     "build": "pnpm -C packages/server build && pnpm -C packages/web build",
-    "lint": "biome check .",
+    "lint": "biome check . && pnpm -r --no-bail typecheck",
     "format": "biome format . --write",
-    "typecheck": "biome check .",
+    "typecheck": "pnpm -r --no-bail typecheck",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
     "db:migrate": "pnpm -C packages/server db:migrate"
