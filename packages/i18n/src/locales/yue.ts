@@ -2,7 +2,9 @@
  * 粵語翻譯資源 (Cantonese / 广东话 / 白话)
  * 適用於廣東、香港、澳門及海外華人社區
  */
-export const yue = {
+import { TranslationSchema } from "../index.js";
+
+export const yue: TranslationSchema = {
   translation: {
     brand: "TestOps AI",
     common: {
@@ -941,5 +943,3 @@ export const yue = {
     },
   },
 };
-
-export type TranslationSchema = typeof yue;

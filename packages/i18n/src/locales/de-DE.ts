@@ -1,7 +1,9 @@
 /**
  * Deutsche Übersetzungsressourcen
  */
-export const deDE = {
+import { TranslationSchema } from "../index.js";
+
+export const deDE: TranslationSchema = {
   translation: {
     brand: "TestOps AI",
     common: {
@@ -1022,5 +1024,3 @@ export const deDE = {
     },
   },
 };
-
-export type TranslationSchema = typeof deDE;

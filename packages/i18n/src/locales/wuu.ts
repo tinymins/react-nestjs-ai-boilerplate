@@ -2,7 +2,9 @@
  * 吴语翻译资源（上海话/苏州话）
  * Wu Chinese translation resource (Shanghainese/Suzhounese)
  */
-export const wuu = {
+import { TranslationSchema } from "../index.js";
+
+export const wuu: TranslationSchema = {
   translation: {
     brand: "TestOps AI",
     common: {
@@ -931,5 +933,3 @@ export const wuu = {
     },
   },
 };
-
-export type WuuTranslationSchema = typeof wuu;

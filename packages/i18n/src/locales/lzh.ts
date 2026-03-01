@@ -2,7 +2,9 @@
  * 文言文翻譯資源
  * Classical Chinese / Literary Chinese Translation
  */
-export const lzh = {
+import { TranslationSchema } from "../index.js";
+
+export const lzh: TranslationSchema = {
   translation: {
     brand: "TestOps AI",
     common: {
@@ -892,5 +894,3 @@ export const lzh = {
     },
   },
 };
-
-export type LzhTranslationSchema = typeof lzh;

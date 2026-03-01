@@ -1,7 +1,9 @@
 /**
  * 客家話翻譯資源 (Hakka Chinese)
  */
-export const hak = {
+import { TranslationSchema } from "../index.js";
+
+export const hak: TranslationSchema = {
   translation: {
     brand: "TestOps AI",
     common: {
@@ -940,5 +942,3 @@ export const hak = {
     },
   },
 };
-
-export type TranslationSchema = typeof hak;

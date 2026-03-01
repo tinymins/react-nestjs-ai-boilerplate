@@ -1,7 +1,9 @@
 /**
  * 日本語翻訳リソース
  */
-export const jaJP = {
+import { TranslationSchema } from "../index.js";
+
+export const jaJP: TranslationSchema = {
   translation: {
     brand: "TestOps AI",
     common: {
@@ -979,5 +981,3 @@ export const jaJP = {
     },
   },
 };
-
-export type TranslationSchema = typeof jaJP;

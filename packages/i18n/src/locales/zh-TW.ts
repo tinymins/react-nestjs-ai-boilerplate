@@ -1,7 +1,9 @@
 /**
  * 繁體中文翻譯資源
  */
-export const zhTW = {
+import { TranslationSchema } from "../index.js";
+
+export const zhTW: TranslationSchema = {
   translation: {
     brand: "TestOps AI",
     common: {
@@ -944,5 +946,3 @@ export const zhTW = {
     },
   },
 };
-
-export type TranslationSchemaZhTW = typeof zhTW;
