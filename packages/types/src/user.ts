@@ -4,9 +4,34 @@ import { z } from "zod";
 export const UserRoleSchema = z.enum(["superadmin", "admin", "user"]);
 export type UserRole = z.infer<typeof UserRoleSchema>;
 
+// 支持的语言 (BCP 47 language tags)
+export const LangSchema = z.enum([
+  "zh-CN",
+  "zh-TW",
+  "en-US",
+  "ja-JP",
+  "de-DE",
+  "lzh",
+  "wuu",
+  "hak",
+  "yue",
+]);
+export type Lang = z.infer<typeof LangSchema>;
+
+// 语言模式：auto 或具体语言
+export const LangModeSchema = z.enum(["auto", ...LangSchema.options]);
+export type LangMode = z.infer<typeof LangModeSchema>;
+
 export const UserSettingsSchema = z.object({
   avatarUrl: z.string().nullable().optional(),
-  langMode: z.string().optional(),
+  // 历史数据可能存在不合法的 langMode 值，读取时自动回退为 "auto"
+  langMode: z
+    .string()
+    .transform((val): LangMode => {
+      const valid = LangModeSchema.safeParse(val);
+      return valid.success ? valid.data : "auto";
+    })
+    .optional(),
   themeMode: z.enum(["auto", "light", "dark"]).optional(),
 });
 

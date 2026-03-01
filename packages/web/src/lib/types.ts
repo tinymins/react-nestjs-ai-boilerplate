@@ -1,19 +1,9 @@
-export type { User, UserSettings } from "@acme/types";
+import type { Lang } from "@acme/types";
+
+export type { Lang, LangMode, User, UserSettings } from "@acme/types";
 
 export type Theme = "light" | "dark";
 export type ThemeMode = "auto" | Theme;
-
-export type Lang =
-  | "zh-CN"
-  | "zh-TW"
-  | "en-US"
-  | "ja-JP"
-  | "de-DE"
-  | "lzh"
-  | "wuu"
-  | "hak"
-  | "yue";
-export type LangMode = "auto" | Lang;
 
 /**
  * Language native names for display in language selectors
