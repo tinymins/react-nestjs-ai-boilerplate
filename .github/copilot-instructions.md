@@ -636,3 +636,14 @@ Before committing a new feature:
 - ✅ Frontend components use tRPC hooks
 - ✅ Run `pnpm db:migrate` to push schema changes
 - ✅ Test the feature end-to-end
+- ✅ Run `make lint` to ensure no lint/format errors
+
+### Mandatory Lint Check
+
+**Every code change must end with `make lint`**. Before finishing any task — whether it's a new feature, bug fix, refactor, or any file modification — always run:
+
+```bash
+make lint
+```
+
+Fix all reported errors before considering the task complete. No exceptions.

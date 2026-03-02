@@ -1,4 +1,4 @@
-.PHONY: init dev build docker help
+.PHONY: init dev build docker lint help
 
 # 读取环境变量（如果存在）
 -include .env
@@ -24,6 +24,7 @@ help: ## 显示帮助信息
 	@printf "  $(YELLOW)make init$(NC)   - 首次初始化项目（清理+安装+迁移+种子）\n"
 	@printf "  $(YELLOW)make dev$(NC)    - 启动开发环境（数据库+开发服务器）\n"
 	@printf "  $(YELLOW)make build$(NC)  - 编译生产版本\n"
+	@printf "  $(YELLOW)make lint$(NC)   - 代码检查（Biome lint & format）\n"
 	@printf "  $(YELLOW)make docker$(NC) - 构建并启动 Docker 容器\n"
 	@printf "$(BLUE)═══════════════════════════════════════$(NC)\n"
 
@@ -119,6 +120,11 @@ build: ## 编译生产版本
 	@printf "$(GREEN)�🔨 开始编译...$(NC)\n"
 	@pnpm build
 	@printf "$(GREEN)✓ 编译完成$(NC)\n"
+
+lint: ## 代码检查（Biome lint & format）
+	@printf "$(GREEN)🔍 代码检查中...$(NC)\n"
+	@pnpm lint
+	@printf "$(GREEN)✓ 代码检查通过$(NC)\n"
 
 docker: ## 构建 Docker 容器
 	@printf "$(GREEN)🐳 构建 Docker 镜像...$(NC)\n"
