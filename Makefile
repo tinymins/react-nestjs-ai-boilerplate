@@ -1,5 +1,6 @@
 .PHONY: init dev dev-miniapp build build-miniapp docker prod tsc lint help
 
+
 # 读取环境变量（如果存在）
 -include .env
 
@@ -25,6 +26,7 @@ help: ## 显示帮助信息
 	@printf "  $(YELLOW)make init$(NC)        - 首次初始化项目（安装依赖+启动服务+同步Schema）\n"
 	@printf "  $(YELLOW)make dev$(NC)         - 启动开发环境（数据库+开发服务器）\n"
 	@printf "  $(YELLOW)make dev-miniapp$(NC) - 仅启动小程序开发监听\n"
+	@printf "  $(YELLOW)make dev:kill$(NC)    - 终止所有开发进程并停止 Docker 容器\n"
 	@printf "  $(YELLOW)make build$(NC)       - 编译生产版本（server + web）\n"
 	@printf "  $(YELLOW)make build-miniapp$(NC) - 编译小程序\n"
 	@printf "  $(YELLOW)make docker$(NC)      - 构建所有 Docker 镜像\n"
@@ -99,6 +101,9 @@ dev: ## 启动开发环境（数据库+开发服务器）
 	@printf "$(GREEN)✓ 数据库、MinIO 和 Redis 已启动$(NC)\n"
 	@printf "$(YELLOW)启动开发服务器...$(NC)\n"
 	@pnpm dev
+
+dev\:kill: ## 终止所有开发进程并停止 Docker 容器
+	@bash scripts/dev-kill.sh
 
 dev-miniapp: ## 仅启动小程序开发监听（编译至 dist/，用微信开发者工具导入）
 	@printf "$(GREEN)🚀 启动小程序开发监听...$(NC)\n"

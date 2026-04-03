@@ -10,8 +10,8 @@ export interface ToastMessage {
 }
 
 export interface ToasterProps {
-  messages: ToastMessage[];
-  onRemove: (id: string) => void;
+  items: ToastMessage[];
+  onClose: (id: string) => void;
 }
 
 const typeClasses: Record<ToastType, string> = {
@@ -53,16 +53,16 @@ function ToastItem({
   );
 }
 
-export function Toaster({ messages, onRemove }: ToasterProps) {
-  if (messages.length === 0) return null;
+export function Toaster({ items, onClose }: ToasterProps) {
+  if (!items || items.length === 0) return null;
 
   return (
     <div className="fixed top-4 right-4 z-[9999] flex flex-col gap-2">
-      {messages.map((msg) => (
+      {items.map((msg) => (
         <ToastItem
           key={msg.id}
           message={msg}
-          onRemove={() => onRemove(msg.id)}
+          onRemove={() => onClose(msg.id)}
         />
       ))}
     </div>
