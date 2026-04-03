@@ -96,20 +96,23 @@ ssh <server> "cd /mnt/docker/apps && docker compose up -d"
 ```
 
 等待所有容器启动：
-- `apps-postgres` - PostgreSQL 数据库
-- `apps-server` - NestJS 后端
-- `apps-web` - Nginx + React 前端
+- `apps-db` - PostgreSQL 数据库
+- `apps-redis` - Redis 缓存
+- `apps-minio` - MinIO 对象存储
+- `apps-minio-init` - MinIO 初始化（运行后退出）
+- `apps-db-migrate` - 数据库迁移（运行后退出）
+- `apps-server` - Hono 后端
+- `apps-web` - React SSR 前端 (Bun)
 
 ### 7. 初始化数据库
 
-首次部署需要执行数据库迁移和种子数据：
+首次部署时，`db-migrate` 服务会自动在 `docker compose up` 时执行 Prisma 迁移。
+
+如需手动执行数据库迁移：
 
 ```bash
-# 执行数据库迁移（创建表结构）
-ssh <server> "docker exec apps-server npx drizzle-kit push"
-
-# 执行种子数据（创建默认用户和工作空间）
-ssh <server> "docker exec apps-server npx tsx src/seed.ts"
+# 执行数据库迁移（通过 db-migrate 服务）
+ssh <server> "cd /mnt/docker/apps && docker compose run --rm db-migrate"
 ```
 
 ### 8. 验证部署
@@ -128,21 +131,12 @@ ssh <server> "cd /mnt/docker/apps && docker compose logs --tail=50 server"
 
 | 服务 | 默认端口 | 环境变量 | 说明 |
 |------|---------|---------|------|
-| 前端 | 8080 | `WEB_PORT` | React 应用 (通过 Nginx) |
+| 前端 | 8080 | `WEB_PORT` | React SSR 应用 (Bun) |
 | 后端 | 不暴露 | `SERVER_PORT` | 需启用 debug 叠加文件（见下方说明） |
 | 数据库 | 不暴露 | `DB_PORT` | 需启用 debug 叠加文件（见下方说明） |
-| tRPC | ${WEB_PORT}/trpc | - | API 端点 (通过 Nginx 代理) |
+| tRPC | ${WEB_PORT}/trpc | - | API 端点 (通过前端代理) |
 
 > **注意**: 如端口被占用，修改 `.env` 文件中对应的端口变量即可。
-
-## 默认账号
-
-初始化后可使用以下账号登录：
-
-| 邮箱 | 密码 | 角色 |
-|------|------|------|
-| admin@example.com | password | 超级管理员 |
-| user@example.com | password | 普通用户 |
 
 ## 更新部署
 
@@ -164,7 +158,7 @@ ssh <server> "docker load -i /tmp/apps-docker-images.tar && \
   docker compose up -d"
 
 # 4. 如有数据库变更，执行迁移
-ssh <server> "docker exec apps-server npx drizzle-kit push"
+ssh <server> "cd /mnt/docker/apps && docker compose run --rm db-migrate"
 ```
 
 ## 重置数据库
@@ -175,11 +169,10 @@ ssh <server> "docker exec apps-server npx drizzle-kit push"
 ssh <server> "cd /mnt/docker/apps && \
   docker compose down && \
   rm -rf .data && \
-  docker compose up -d && \
-  sleep 10 && \
-  docker exec apps-server npx drizzle-kit push && \
-  docker exec apps-server npx tsx src/seed.ts"
+  docker compose up -d"
 ```
+
+`db-migrate` 服务会在启动时自动执行 Prisma 迁移。
 
 ## 常见问题
 
@@ -195,7 +188,7 @@ WEB_PORT=8180
 ### 暴露后端/数据库端口（可选）
 
 默认仅前端暴露端口到宿主机，后端和数据库通过 Docker 内网通信（更安全）。
-前端 Nginx 自动代理 `/trpc` 请求到后端，无需额外暴露。
+前端自动代理 `/trpc` 请求到后端，无需额外暴露。
 
 如需直接访问后端 API 或用数据库工具（DBeaver、pgAdmin）连接调试，在 `.env` 中添加：
 
