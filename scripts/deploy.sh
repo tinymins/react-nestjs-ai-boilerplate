@@ -171,17 +171,17 @@ upload_configs() {
     # 检查远程目录是否存在
     ssh "$SERVER" "mkdir -p ${REMOTE_DIR}"
 
-    # 检查 docker-compose.yml 是否存在，不存在则上传
-    if ! ssh "$SERVER" "test -f ${REMOTE_DIR}/docker-compose.yml"; then
-        log_info "上传 docker-compose.yml..."
-        scp docker-compose.yml "${SERVER}:${REMOTE_DIR}/"
+    # 检查 docker/docker-compose.yml 是否存在，不存在则上传
+    if ! ssh "$SERVER" "test -f ${REMOTE_DIR}/docker/docker-compose.yml"; then
+        log_info "上传 docker/docker-compose.yml..."
+        scp docker/docker-compose.yml "${SERVER}:${REMOTE_DIR}/"
     else
-        log_info "docker-compose.yml 已存在，跳过上传"
+        log_info "docker/docker-compose.yml 已存在，跳过上传"
     fi
 
-    # 上传 docker-compose.debug.yml（叠加文件，始终更新）
-    if [ -f "docker-compose.debug.yml" ]; then
-        scp docker-compose.debug.yml "${SERVER}:${REMOTE_DIR}/"
+    # 上传 docker/docker-compose.debug.yml（叠加文件，始终更新）
+    if [ -f "docker/docker-compose.debug.yml" ]; then
+        scp docker/docker-compose.debug.yml "${SERVER}:${REMOTE_DIR}/"
     fi
 
     # 检查 .env 是否存在，不存在则上传 .env.example

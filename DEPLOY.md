@@ -59,8 +59,8 @@ rm /tmp/apps-docker-images.tar
 从本地上传配置文件：
 
 ```bash
-# 上传 docker-compose.yml
-scp docker-compose.yml <server>:/mnt/docker/apps/
+# 上传 docker/docker-compose.yml
+scp docker/docker-compose.yml <server>:/mnt/docker/apps/
 
 # 上传环境变量文件（使用 .env.example 作为模板）
 scp .env.example <server>:/mnt/docker/apps/.env
@@ -84,7 +84,7 @@ POSTGRES_DB=apps_db
 WEB_PORT=8080
 
 # 暴露后端/数据库端口到宿主机（可选，取消注释启用）
-# COMPOSE_FILE=docker-compose.yml:docker-compose.debug.yml
+# COMPOSE_FILE=docker/docker-compose.yml:docker/docker-compose.debug.yml
 # SERVER_PORT=4000
 # DB_PORT=5432
 ```
@@ -193,7 +193,7 @@ WEB_PORT=8180
 如需直接访问后端 API 或用数据库工具（DBeaver、pgAdmin）连接调试，在 `.env` 中添加：
 
 ```env
-COMPOSE_FILE=docker-compose.yml:docker-compose.debug.yml
+COMPOSE_FILE=docker/docker-compose.yml:docker/docker-compose.debug.yml
 SERVER_PORT=4000
 DB_PORT=5432
 ```

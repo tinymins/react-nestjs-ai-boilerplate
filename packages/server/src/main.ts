@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "./env";
 
 import { serve } from "@hono/node-server";
 import { trpcServer } from "@hono/trpc-server";
@@ -16,8 +16,14 @@ async function bootstrap() {
 
   const app = new Hono();
 
+  const port =
+    Number(process.env.SERVER_PORT) || Number(process.env.PORT) || 4000;
+  const webPort = Number(process.env.WEB_PORT) || 5173;
+
+  // CORS: 优先使用 CORS_ORIGIN 环境变量，否则从 WEB_PORT 自动推导
   const corsOrigins = (
-    process.env.CORS_ORIGIN ?? "http://localhost:5173,http://localhost:4173"
+    process.env.CORS_ORIGIN ??
+    `http://localhost:${webPort},http://127.0.0.1:${webPort}`
   )
     .split(",")
     .map((o) => o.trim())
@@ -56,7 +62,6 @@ async function bootstrap() {
 
   app.route("/upload", uploadRouter);
 
-  const port = Number(process.env.PORT) || 4000;
   serve({ fetch: app.fetch, port, hostname: "0.0.0.0" }, () => {
     const appLogger = new Logger("HonoApplication");
     appLogger.log(

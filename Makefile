@@ -11,7 +11,8 @@
 SERVER_IMAGE := apps-server
 WEB_IMAGE := apps-web
 MIGRATE_IMAGE := apps-server-migrate
-COMPOSE_FILE := docker-compose.yml
+COMPOSE_DEV := docker compose -f docker/docker-compose.dev.yml --env-file .env
+COMPOSE_PROD := docker compose -f docker/docker-compose.yml
 
 # 颜色输出
 GREEN  := \033[0;32m
@@ -67,16 +68,16 @@ init: ## 首次初始化项目（安装依赖+启动服务+同步Schema）
 	@printf "$(GREEN)✓ 依赖安装完成$(NC)\n"
 	@printf "\n"
 	@printf "$(YELLOW)🐳 [4/6] 启动数据库容器...$(NC)\n"
-	@docker-compose up -d db minio redis
+	@$(COMPOSE_DEV) up -d
 	@printf "$(GREEN)✓ 数据库、MinIO 和 Redis 已启动$(NC)\n"
 	@printf "\n"
 	@printf "$(YELLOW)⏳ [5/6] 等待数据库就绪...$(NC)\n"
 	@sleep 5
-	@docker-compose exec -T db pg_isready -U postgres > /dev/null 2>&1 || sleep 3
+	@$(COMPOSE_DEV) exec -T db pg_isready -U postgres > /dev/null 2>&1 || sleep 3
 	@printf "$(GREEN)✓ 数据库就绪$(NC)\n"
 	@printf "\n"
 	@printf "$(YELLOW)🪣 [5b] 初始化 MinIO 存储桶...$(NC)\n"
-	@docker-compose run --rm minio-init
+	@$(COMPOSE_DEV) run --rm minio-init
 	@printf "$(GREEN)✓ MinIO 存储桶已就绪$(NC)\n"
 	@printf "\n"
 	@printf "$(YELLOW)🗃️  [6/6] 同步数据库 Schema...$(NC)\n"
@@ -96,8 +97,7 @@ init: ## 首次初始化项目（安装依赖+启动服务+同步Schema）
 
 dev: ## 启动开发环境（数据库+开发服务器）
 	@printf "$(GREEN)🚀 启动开发环境...$(NC)\n"
-	@docker-compose up -d db minio redis
-	@docker-compose run --rm minio-init 2>/dev/null || true
+	@$(COMPOSE_DEV) up -d
 	@printf "$(GREEN)✓ 数据库、MinIO 和 Redis 已启动$(NC)\n"
 	@printf "$(YELLOW)启动开发服务器...$(NC)\n"
 	@pnpm dev
@@ -135,12 +135,12 @@ docker: ## 构建所有 Docker 镜像（server / migrate / web）
 
 prod: docker ## 构建镜像并启动完整生产栈（db + minio + migrate + server + web）
 	@printf "$(GREEN)🚀 启动生产环境...$(NC)\n"
-	@docker-compose up -d db minio
-	@docker-compose run --rm minio-init
-	@docker-compose up -d server web
+	@$(COMPOSE_PROD) up -d db minio
+	@$(COMPOSE_PROD) run --rm minio-init
+	@$(COMPOSE_PROD) up -d server web
 	@printf "$(GREEN)✓ 生产环境已启动$(NC)\n"
-	@printf "  Server : http://localhost:4000\n"
-	@printf "  Web    : http://localhost:8080\n"
+	@printf "  Server : http://localhost:$${SERVER_PORT:-4000}\n"
+	@printf "  Web    : http://localhost:$${WEB_PORT:-8080}\n"
 
 tsc: ## TypeScript 类型检查（所有包）
 	@pnpm -r --parallel run typecheck

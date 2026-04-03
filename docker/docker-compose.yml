@@ -1,13 +1,29 @@
 services:
+  # PostgreSQL 数据库
+  db:
+    image: postgres:18
+    container_name: apps-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-apps_db}
+    volumes:
+      - ./${DATA_LOCAL_PATH:-data}/postgres:/var/lib/postgresql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # Redis — 分布式限流 / 缓存
   redis:
     image: redis:7-alpine
     container_name: apps-redis
     command: redis-server --save 60 1 --loglevel warning
-    ports:
-      - "6379:6379"
     volumes:
-      - ./.data/redis:/data
+      - ./${DATA_LOCAL_PATH:-data}/redis:/data
     networks:
       - app-network
     healthcheck:
@@ -17,27 +33,7 @@ services:
       retries: 5
     restart: unless-stopped
 
-  # PostgreSQL 数据库
-  db:
-    image: postgres:18
-    container_name: apps-postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-apps_db}
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./.data/postgres:/var/lib/postgresql
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # MinIO — S3-compatible object storage (dev / staging)
+  # MinIO — S3-compatible object storage
   minio:
     image: minio/minio:latest
     container_name: apps-minio
@@ -45,11 +41,8 @@ services:
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
-    ports:
-      - "9000:9000"   # S3 API
-      - "9001:9001"   # MinIO Console (http://localhost:9001)
     volumes:
-      - ./.data/minio:/data
+      - ./${DATA_LOCAL_PATH:-data}/minio:/data
     networks:
       - app-network
     healthcheck:
@@ -58,7 +51,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # One-shot container that creates the bucket and sets it to public-read
   minio-init:
     image: minio/mc:latest
     container_name: apps-minio-init
@@ -81,7 +73,7 @@ services:
     image: apps-server-migrate:latest
     container_name: apps-db-migrate
     build:
-      context: .
+      context: ..
       dockerfile: packages/server/Dockerfile
       target: migrate
     environment:
@@ -98,13 +90,12 @@ services:
     image: apps-server:latest
     container_name: apps-server
     build:
-      context: .
+      context: ..
       dockerfile: packages/server/Dockerfile
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-apps_db}
       NODE_ENV: production
       PORT: 4000
-      # Storage (MinIO — S3 compatible)
       STORAGE_PROVIDER: s3
       STORAGE_ENDPOINT: http://minio:9000
       STORAGE_REGION: us-east-1
@@ -115,7 +106,7 @@ services:
       STORAGE_PATH_STYLE: "true"
       REDIS_URL: redis://redis:6379
     ports:
-      - "4000:4000"
+      - "${SERVER_PORT:-4000}:4000"
     depends_on:
       db:
         condition: service_healthy
@@ -134,15 +125,14 @@ services:
     image: apps-web:latest
     container_name: apps-web
     build:
-      context: .
+      context: ..
       dockerfile: packages/web/Dockerfile
     environment:
       - NODE_ENV=production
       - PORT=3000
-      # 后端 API 地址（Docker 内部网络，由 server.mjs 代理 /trpc 和 /upload）
       - API_URL=http://server:4000
     ports:
-      - "8080:3000"
+      - "${WEB_PORT:-8080}:3000"
     depends_on:
       - server
     networks:

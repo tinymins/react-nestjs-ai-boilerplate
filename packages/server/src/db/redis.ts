@@ -3,7 +3,8 @@ import { Logger } from "@/logger";
 
 const logger = new Logger("Redis");
 
-const redisUrl = process.env.REDIS_URL ?? "redis://localhost:6379";
+const redisPort = Number(process.env.REDIS_PORT) || 6379;
+const redisUrl = process.env.REDIS_URL ?? `redis://localhost:${redisPort}`;
 
 export const redisClient = new Redis(redisUrl, {
   lazyConnect: true,
