@@ -1,152 +1,80 @@
-import type { UserRole } from "@acme/types";
-import { TRPCError } from "@trpc/server";
-import type { MiddlewareResult } from "@trpc/server/unstable-core-do-not-import";
-import { and, eq, or } from "drizzle-orm";
-import { users, workspaceMembers, workspaces } from "../db/schema";
-import { getMessage } from "../i18n";
-import type { Context } from "./context";
+import { db } from "@/db/client";
+import { AppError } from "./errors";
+import { protectedProcedure } from "./init";
 
-export const requireUser = async ({
-  ctx,
-  next,
-}: {
-  ctx: Context;
-  next: (opts?: { ctx?: Context }) => Promise<MiddlewareResult<Context>>;
-}): Promise<MiddlewareResult<Context>> => {
-  if (!ctx.userId) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: getMessage(ctx.language, "errors.common.unauthorized"),
+/**
+ * A protected procedure that also resolves and validates workspace membership.
+ * Puts `workspace` on ctx. Use in workspace-scoped routes.
+ */
+export const workspaceProtectedProcedure = protectedProcedure.use(
+  async ({ ctx, next }) => {
+    if (!ctx.workspaceKey) {
+      throw AppError.badRequest(ctx.language, "errors.common.missingWorkspace");
+    }
+
+    const isUuid = (value: string) =>
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+        value,
+      );
+
+    const workspace = await db.workspace.findFirst({
+      where: isUuid(ctx.workspaceKey)
+        ? { OR: [{ id: ctx.workspaceKey }, { slug: ctx.workspaceKey }] }
+        : { slug: ctx.workspaceKey },
+      include: { members: { where: { userId: ctx.userId }, take: 1 } },
     });
-  }
-  return next();
-};
 
-/** 要求管理员权限 (admin 或 superadmin) */
-export const requireAdmin = async ({
-  ctx,
-  next,
-}: {
-  ctx: Context;
-  next: (opts?: { ctx?: Context }) => Promise<MiddlewareResult<Context>>;
-}): Promise<MiddlewareResult<Context>> => {
-  if (!ctx.userId) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: getMessage(ctx.language, "errors.common.unauthorized"),
-    });
-  }
+    if (!workspace) {
+      throw AppError.notFound(ctx.language, "errors.workspace.notFound");
+    }
 
-  const [user] = await ctx.db
-    .select({ role: users.role })
-    .from(users)
-    .where(eq(users.id, ctx.userId))
-    .limit(1);
+    if (workspace.members.length === 0) {
+      throw AppError.forbidden(
+        ctx.language,
+        "errors.common.workspaceForbidden",
+      );
+    }
+
+    const { members: _members, ...workspaceData } = workspace;
+    return next({ ctx: { ...ctx, workspace: workspaceData } });
+  },
+);
+
+/**
+ * Requires admin or superadmin role.
+ * Resolves userRole on ctx.
+ */
+export const adminProcedure = protectedProcedure.use(async ({ ctx, next }) => {
+  const user = await db.user.findUnique({
+    where: { id: ctx.userId },
+    select: { role: true },
+  });
 
   if (!user || !["admin", "superadmin"].includes(user.role)) {
-    throw new TRPCError({
-      code: "FORBIDDEN",
-      message: getMessage(ctx.language, "errors.common.adminRequired"),
-    });
+    throw AppError.forbidden(ctx.language, "errors.common.adminRequired");
   }
 
-  return next({ ctx: { ...ctx, userRole: user.role as UserRole } });
-};
+  return next({ ctx: { ...ctx, userRole: user.role } });
+});
 
-/** 要求超级管理员权限 (superadmin only) */
-export const requireSuperAdmin = async ({
-  ctx,
-  next,
-}: {
-  ctx: Context;
-  next: (opts?: { ctx?: Context }) => Promise<MiddlewareResult<Context>>;
-}): Promise<MiddlewareResult<Context>> => {
-  if (!ctx.userId) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: getMessage(ctx.language, "errors.common.unauthorized"),
+/**
+ * Requires superadmin role only.
+ * Resolves userRole on ctx.
+ */
+export const superAdminProcedure = protectedProcedure.use(
+  async ({ ctx, next }) => {
+    const user = await db.user.findUnique({
+      where: { id: ctx.userId },
+      select: { role: true },
     });
-  }
 
-  const [user] = await ctx.db
-    .select({ role: users.role })
-    .from(users)
-    .where(eq(users.id, ctx.userId))
-    .limit(1);
+    if (!user || user.role !== "superadmin") {
+      throw AppError.forbidden(
+        ctx.language,
+        "errors.common.superadminRequired",
+      );
+    }
 
-  if (!user || user.role !== "superadmin") {
-    throw new TRPCError({
-      code: "FORBIDDEN",
-      message: getMessage(ctx.language, "errors.common.superadminRequired"),
-    });
-  }
-
-  return next({ ctx: { ...ctx, userRole: user.role as UserRole } });
-};
-
-export const requireWorkspace = async ({
-  ctx,
-  next,
-}: {
-  ctx: Context;
-  next: (opts?: { ctx?: Context }) => Promise<MiddlewareResult<Context>>;
-}): Promise<MiddlewareResult<Context>> => {
-  if (!ctx.userId) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: getMessage(ctx.language, "errors.common.unauthorized"),
-    });
-  }
-
-  if (!ctx.workspaceKey) {
-    throw new TRPCError({
-      code: "BAD_REQUEST",
-      message: getMessage(ctx.language, "errors.common.missingWorkspace"),
-    });
-  }
-
-  const isUuid = (value: string) =>
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
-      value,
-    );
-
-  const workspaceWhere = isUuid(ctx.workspaceKey)
-    ? or(
-        eq(workspaces.id, ctx.workspaceKey),
-        eq(workspaces.slug, ctx.workspaceKey),
-      )
-    : eq(workspaces.slug, ctx.workspaceKey);
-
-  const [workspace] = await ctx.db
-    .select()
-    .from(workspaces)
-    .where(workspaceWhere)
-    .limit(1);
-
-  if (!workspace) {
-    throw new TRPCError({
-      code: "NOT_FOUND",
-      message: getMessage(ctx.language, "errors.workspace.notFound"),
-    });
-  }
-
-  const [membership] = await ctx.db
-    .select()
-    .from(workspaceMembers)
-    .where(
-      and(
-        eq(workspaceMembers.workspaceId, workspace.id),
-        eq(workspaceMembers.userId, ctx.userId),
-      ),
-    )
-    .limit(1);
-
-  if (!membership) {
-    throw new TRPCError({
-      code: "FORBIDDEN",
-      message: getMessage(ctx.language, "errors.common.workspaceForbidden"),
-    });
-  }
-
-  return next({ ctx: { ...ctx, workspace } });
-};
+    return next({ ctx: { ...ctx, userRole: user.role } });
+  },
+);

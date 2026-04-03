@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@acme/types": ["../types/src/index.ts"],
+      "@acme/i18n": ["../i18n/src/index.ts"],
+      "@/*": ["./src/*"]
+    }
+  }
+}

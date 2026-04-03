@@ -1,93 +1,63 @@
-import { UserSchema, UserSettingsPatchSchema } from "@acme/types";
-import { Logger } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
-import { z } from "zod";
-import { getMessage } from "../../i18n";
-import type { Context } from "../../trpc/context";
 import {
-  Ctx,
-  Mutation,
-  Query,
-  Router,
-  UseMiddlewares,
-} from "../../trpc/decorators";
-import { requireUser } from "../../trpc/middlewares";
-import { toUserOutput, userService } from "./user.service";
+  ChangePasswordInputSchema,
+  ChangePasswordOutputSchema,
+  UserProfileOutputSchema,
+  UserUpdateInputSchema,
+} from "@acme/types";
+import { z } from "zod";
+import { storage } from "@/storage/index";
+import { AppError } from "@/trpc/errors";
+import { protectedProcedure, router } from "@/trpc/init";
+import { toUserOutput } from "./user.mapper";
+import { userService } from "./user.service";
 
-export const userProfileOutput = UserSchema;
+export const userRouter = router({
+  getProfile: protectedProcedure
+    .input(z.void())
+    .output(UserProfileOutputSchema)
+    .query(async ({ ctx }) => {
+      const user = await userService.getById(ctx.userId);
+      if (!user) {
+        throw AppError.notFound(ctx.language, "errors.user.notFound");
+      }
+      return toUserOutput(user);
+    }),
 
-export const userUpdateInput = z.object({
-  name: z.string().min(1).optional(),
-  email: z.string().email().optional(),
-  settings: UserSettingsPatchSchema.nullable().optional(),
+  updateProfile: protectedProcedure
+    .input(UserUpdateInputSchema)
+    .output(UserProfileOutputSchema)
+    .mutation(async ({ input, ctx }) => {
+      const updated = await userService.updateProfile(
+        ctx.userId,
+        { name: input.name, email: input.email, settings: input.settings },
+        ctx.language,
+      );
+      return toUserOutput(updated);
+    }),
+
+  deleteAvatar: protectedProcedure
+    .input(z.void())
+    .output(UserProfileOutputSchema)
+    .mutation(async ({ ctx }) => {
+      const { updated, previousAvatarKey } = await userService.deleteAvatar(
+        ctx.userId,
+      );
+      if (previousAvatarKey) {
+        storage.deleteFile(previousAvatarKey).catch(() => {});
+      }
+      return toUserOutput(updated);
+    }),
+
+  changePassword: protectedProcedure
+    .input(ChangePasswordInputSchema)
+    .output(ChangePasswordOutputSchema)
+    .mutation(async ({ input, ctx }) => {
+      await userService.changePassword(
+        ctx.userId,
+        input.currentPassword,
+        input.newPassword,
+        ctx.language,
+      );
+      return { success: true };
+    }),
 });
-
-export const changePasswordInput = z.object({
-  oldPassword: z.string().min(1),
-  newPassword: z.string().min(6),
-});
-
-@Router({ alias: "user" })
-export class UserRouter {
-  private readonly logger = new Logger(UserRouter.name);
-
-  constructor() {
-    this.logger.log("UserRouter registered");
-  }
-  @Query({ output: userProfileOutput })
-  @UseMiddlewares(requireUser)
-  async getProfile(@Ctx() ctx: Context) {
-    const user = await userService.getById(ctx.userId!);
-    if (!user) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-        message: getMessage(ctx.language, "errors.user.notFound"),
-      });
-    }
-    return toUserOutput(user);
-  }
-
-  @Mutation({ input: userUpdateInput, output: userProfileOutput })
-  @UseMiddlewares(requireUser)
-  async updateProfile(
-    input: z.infer<typeof userUpdateInput>,
-    @Ctx() ctx: Context,
-  ) {
-    const updated = await userService.updateProfile(
-      ctx.userId!,
-      {
-        name: input.name,
-        email: input.email,
-        settings: input.settings,
-      },
-      ctx.language,
-    );
-    return toUserOutput(updated);
-  }
-
-  @Mutation({ output: userProfileOutput })
-  @UseMiddlewares(requireUser)
-  async deleteAvatar(@Ctx() ctx: Context) {
-    const updated = await userService.deleteAvatar(ctx.userId!, ctx.language);
-    return toUserOutput(updated);
-  }
-
-  @Mutation({
-    input: changePasswordInput,
-    output: z.object({ success: z.boolean() }),
-  })
-  @UseMiddlewares(requireUser)
-  async changePassword(
-    input: z.infer<typeof changePasswordInput>,
-    @Ctx() ctx: Context,
-  ) {
-    await userService.changePassword(
-      ctx.userId!,
-      input.oldPassword,
-      input.newPassword,
-      ctx.sessionId,
-      ctx.language,
-    );
-    return { success: true };
-  }
-}

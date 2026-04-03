@@ -1,49 +1,51 @@
 import type { UserSettings } from "@acme/types";
-import { TRPCError } from "@trpc/server";
-import { and, eq, ne } from "drizzle-orm";
-import { db } from "../../db/client";
-import { sessions, users } from "../../db/schema";
-import { getMessage, type Language } from "../../i18n";
-
-export const toUserOutput = (user: typeof users.$inferSelect) => ({
-  id: user.id,
-  name: user.name,
-  email: user.email,
-  role: user.role as "admin" | "user",
-  settings: (user.settings as UserSettings | null) ?? null,
-});
+import { db } from "@/db/client";
+import { Prisma, type User } from "@/generated/prisma/client/client";
+import type { Language } from "@/i18n";
+import { AppError } from "@/trpc/errors";
+import { hashPassword, verifyPassword } from "@/utils/password";
 
 export class UserService {
+  async create(
+    input: { name: string; email: string; passwordHash: string },
+    tx?: Prisma.TransactionClient,
+  ) {
+    const client = tx ?? db;
+    return client.user.create({
+      data: {
+        name: input.name,
+        email: input.email,
+        passwordHash: input.passwordHash,
+        role: "user",
+      },
+    });
+  }
+
   async getById(userId: string) {
-    const [user] = await db
-      .select()
-      .from(users)
-      .where(eq(users.id, userId))
-      .limit(1);
-    return user ?? null;
+    return db.user.findUnique({ where: { id: userId } });
   }
 
   async getByEmail(email: string) {
-    const [user] = await db
-      .select()
-      .from(users)
-      .where(eq(users.email, email))
-      .limit(1);
-    return user ?? null;
+    return db.user.findUnique({ where: { email } });
   }
 
   async checkEmailExists(email: string, excludeUserId?: string) {
-    const conditions = excludeUserId
-      ? and(eq(users.email, email), ne(users.id, excludeUserId))
-      : eq(users.email, email);
+    const user = await db.user.findFirst({
+      where: {
+        email,
+        ...(excludeUserId ? { id: { not: excludeUserId } } : {}),
+      },
+      select: { id: true },
+    });
+    return !!user;
+  }
 
-    const [existing] = await db
-      .select({ id: users.id })
-      .from(users)
-      .where(conditions)
-      .limit(1);
-
-    return !!existing;
+  private async getCurrentSettings(userId: string): Promise<UserSettings> {
+    const current = await db.user.findUnique({
+      where: { id: userId },
+      select: { settings: true },
+    });
+    return (current?.settings as UserSettings | null) ?? {};
   }
 
   async updateProfile(
@@ -58,125 +60,82 @@ export class UserService {
     if (updates.email) {
       const emailExists = await this.checkEmailExists(updates.email, userId);
       if (emailExists) {
-        throw new TRPCError({
-          code: "BAD_REQUEST",
-          message: getMessage(language, "errors.user.emailInUse"),
-        });
+        throw AppError.badRequest(language, "errors.user.emailInUse");
       }
     }
 
-    const dbUpdates: Partial<typeof users.$inferInsert> = {};
-    if (updates.name !== undefined) dbUpdates.name = updates.name.trim();
-    if (updates.email !== undefined) dbUpdates.email = updates.email.trim();
+    const data: Prisma.UserUpdateInput = {};
+    if (updates.name !== undefined) data.name = updates.name.trim();
+    if (updates.email !== undefined) data.email = updates.email.trim();
 
     if (updates.settings !== undefined) {
       if (updates.settings === null) {
-        dbUpdates.settings = null;
+        data.settings = Prisma.DbNull;
       } else {
-        const [current] = await db
-          .select({ settings: users.settings })
-          .from(users)
-          .where(eq(users.id, userId))
-          .limit(1);
-        const currentSettings =
-          (current?.settings as UserSettings | null) ?? {};
-        dbUpdates.settings = { ...currentSettings, ...updates.settings };
+        const currentSettings = await this.getCurrentSettings(userId);
+        data.settings = { ...currentSettings, ...updates.settings };
       }
     }
 
-    if (Object.keys(dbUpdates).length === 0) {
+    if (Object.keys(data).length === 0) {
       const user = await this.getById(userId);
       if (!user) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: getMessage(language, "errors.user.notFound"),
-        });
+        throw AppError.notFound(language, "errors.user.notFound");
       }
       return user;
     }
 
-    const [updated] = await db
-      .update(users)
-      .set(dbUpdates)
-      .where(eq(users.id, userId))
-      .returning();
-
-    if (!updated) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-        message: getMessage(language, "errors.user.notFound"),
-      });
-    }
-
-    return updated;
+    return db.user.update({ where: { id: userId }, data });
   }
 
-  async deleteAvatar(userId: string, language: Language) {
-    const [current] = await db
-      .select({ settings: users.settings })
-      .from(users)
-      .where(eq(users.id, userId))
-      .limit(1);
+  async updateAvatarKey(
+    userId: string,
+    avatarKey: string,
+  ): Promise<{
+    updated: User;
+    previousAvatarKey: string | null;
+  }> {
+    const { updated, previousValue: previousAvatarKey } =
+      await this.patchAvatarKey(userId, avatarKey);
+    return { updated, previousAvatarKey };
+  }
 
-    const currentSettings = (current?.settings as UserSettings | null) ?? {};
-    const nextSettings = { ...currentSettings, avatarUrl: null };
+  async deleteAvatar(userId: string): Promise<{
+    updated: User;
+    previousAvatarKey: string | null;
+  }> {
+    const { updated, previousValue: previousAvatarKey } =
+      await this.patchAvatarKey(userId, null);
+    return { updated, previousAvatarKey };
+  }
 
-    const [updated] = await db
-      .update(users)
-      .set({ settings: nextSettings })
-      .where(eq(users.id, userId))
-      .returning();
-
-    if (!updated) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-        message: getMessage(language, "errors.user.notFound"),
-      });
-    }
-
-    return updated;
+  private async patchAvatarKey(userId: string, value: string | null) {
+    const currentSettings = await this.getCurrentSettings(userId);
+    const previousValue = currentSettings.avatarKey ?? null;
+    const nextSettings = { ...currentSettings, avatarKey: value };
+    const updated = await db.user.update({
+      where: { id: userId },
+      data: { settings: nextSettings },
+    });
+    return { updated, previousValue };
   }
 
   async changePassword(
     userId: string,
-    oldPassword: string,
+    currentPassword: string,
     newPassword: string,
-    currentSessionId: string | undefined,
     language: Language,
   ) {
-    const user = await this.getById(userId);
-    if (!user) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-        message: getMessage(language, "errors.user.notFound"),
-      });
-    }
-
-    // 验证旧密码
-    if (user.passwordHash !== oldPassword) {
-      throw new TRPCError({
-        code: "BAD_REQUEST",
-        message: getMessage(language, "errors.user.wrongPassword"),
-      });
-    }
-
-    // 更新密码
-    const [updated] = await db
-      .update(users)
-      .set({ passwordHash: newPassword })
-      .where(eq(users.id, userId))
-      .returning();
-
-    // 删除其他 session（强制其他设备重新登录）
-    if (currentSessionId) {
-      await db
-        .delete(sessions)
-        .where(
-          and(eq(sessions.userId, userId), ne(sessions.id, currentSessionId)),
-        );
-    }
-
-    return updated;
+    const user = await db.user.findUnique({ where: { id: userId } });
+    if (!user) throw AppError.notFound(language, "errors.user.notFound");
+    const valid = await verifyPassword(currentPassword, user.passwordHash);
+    if (!valid)
+      throw AppError.badRequest(language, "errors.auth.invalidCredentials");
+    const newHash = await hashPassword(newPassword);
+    await db.user.update({
+      where: { id: userId },
+      data: { passwordHash: newHash },
+    });
   }
 }
 

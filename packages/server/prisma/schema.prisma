@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  superadmin
+  admin
+  user
+}
+
+enum WorkspaceMemberRole {
+  owner
+  admin
+  member
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  settings     Json?
+  role         UserRole @default(user)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  sessions         Session[]
+  workspaceMembers WorkspaceMember[]
+
+  createdInvitationCodes InvitationCode[] @relation("InvitationCodeCreator")
+  usedInvitationCodes    InvitationCode[] @relation("InvitationCodeUsedBy")
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  expiresAt DateTime @map("expires_at") @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId], name: "sessions_user_id_idx")
+  @@index([expiresAt], name: "sessions_expires_at_idx")
+  @@map("sessions")
+}
+
+model Workspace {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  members WorkspaceMember[]
+
+  @@map("workspaces")
+}
+
+model WorkspaceMember {
+  id          String              @id @default(uuid())
+  workspaceId String              @map("workspace_id")
+  userId      String              @map("user_id")
+  role        WorkspaceMemberRole @default(member)
+  createdAt   DateTime            @default(now()) @map("created_at") @db.Timestamptz
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId], name: "workspace_members_workspace_user_uidx")
+  @@map("workspace_members")
+}
+
+/// WeChat Mini Program users — stored separately from the main User table.
+model WechatUser {
+  id          String   @id @default(uuid())
+  openid      String   @unique
+  unionid     String?
+  phoneNumber String?  @map("phone_number")
+  name        String?
+  avatarKey   String?  @map("avatar_key")
+  settings    Json?
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  sessions WechatSession[]
+
+  @@map("wechat_users")
+}
+
+model WechatSession {
+  id           String     @id @default(uuid())
+  wechatUserId String     @map("wechat_user_id")
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz
+  expiresAt    DateTime   @map("expires_at") @db.Timestamptz
+
+  wechatUser WechatUser @relation(fields: [wechatUserId], references: [id])
+
+  @@index([wechatUserId], name: "wechat_sessions_user_id_idx")
+  @@index([expiresAt], name: "wechat_sessions_expires_at_idx")
+  @@map("wechat_sessions")
+}
+
+model SystemSettings {
+  id                  String   @id @default(uuid())
+  allowRegistration   Boolean  @default(true) @map("allow_registration")
+  singleWorkspaceMode Boolean  @default(false) @map("single_workspace_mode")
+  createdAt           DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt           DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("system_settings")
+}
+
+model InvitationCode {
+  id        String    @id @default(uuid())
+  code      String    @unique
+  createdBy String    @map("created_by")
+  usedBy    String?   @map("used_by")
+  usedAt    DateTime? @map("used_at") @db.Timestamptz
+  expiresAt DateTime? @map("expires_at") @db.Timestamptz
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  creator User  @relation("InvitationCodeCreator", fields: [createdBy], references: [id])
+  usedByUser User? @relation("InvitationCodeUsedBy", fields: [usedBy], references: [id])
+
+  @@map("invitation_codes")
+}

@@ -1,13 +1,10 @@
-import type { TranslationSchema } from "@acme/i18n";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const i18nModule = require("@acme/i18n") as typeof import("@acme/i18n");
+import { en, type TranslationSchema, zh } from "@acme/i18n";
 
 export type Language = "zh" | "en";
 
 const resources = {
-  zh: i18nModule.zh,
-  en: i18nModule.en,
+  zh,
+  en,
 } as const;
 
 type TranslationRoot = TranslationSchema["translation"];
@@ -16,6 +13,7 @@ export const normalizeLanguage = (value?: string): Language => {
   if (!value) return "zh";
   const lower = value.toLowerCase();
   if (lower.startsWith("en")) return "en";
+  if (lower.startsWith("zh")) return "zh";
   return "zh";
 };
 

@@ -1,3 +1,2 @@
-export * from "./admin.module";
-export * from "./admin.router";
-export * from "./admin.service";
+export { adminRouter } from "./admin.router";
+export { adminService } from "./admin.service";

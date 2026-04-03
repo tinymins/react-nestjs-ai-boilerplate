@@ -1,8 +1,5 @@
-// Import all module routers to register them
-import "./admin";
-import "./auth";
-import "./hello";
-import "./test-requirement";
-import "./todo";
-import "./user";
-import "./workspace";
+export { adminRouter } from "./admin/admin.router";
+export { authRouter } from "./auth/auth.router";
+export { userRouter } from "./user/user.router";
+export { wechatRouter } from "./wechat/wechat.router";
+export { workspaceRouter } from "./workspace/workspace.router";

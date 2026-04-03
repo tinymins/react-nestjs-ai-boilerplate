@@ -1,7 +1,18 @@
-// Import all modules to register their routers
-import "../modules";
-import { createAppRouter } from "./router.builder";
+import {
+  adminRouter,
+  authRouter,
+  userRouter,
+  wechatRouter,
+  workspaceRouter,
+} from "@/modules/index";
+import { router } from "./init";
 
-export const appRouter = createAppRouter();
+export const appRouter = router({
+  auth: authRouter,
+  user: userRouter,
+  workspace: workspaceRouter,
+  wechat: wechatRouter,
+  admin: adminRouter,
+});
 
 export type AppRouter = typeof appRouter;

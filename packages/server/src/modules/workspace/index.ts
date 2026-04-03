@@ -1,3 +1,2 @@
-export * from "./workspace.module";
-export * from "./workspace.router";
-export * from "./workspace.service";
+export { workspaceRouter } from "./workspace.router";
+export { workspaceService } from "./workspace.service";
