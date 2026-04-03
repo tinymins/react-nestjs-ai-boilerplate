@@ -357,7 +357,7 @@ export function Form({
               .filter(([, v]) => v)
               .map(([k, v]) => ({
                 name: k,
-                errors: [v as string],
+                errors: [v!],
               }));
             onFinishFailed?.({ errorFields });
           }

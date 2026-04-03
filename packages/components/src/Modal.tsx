@@ -352,6 +352,7 @@ export function Modal({
   const portalTarget = resolvedContainer?.current ?? document.body;
 
   return createPortal(
+    // biome-ignore lint/a11y/noStaticElementInteractions: overlay mask click-to-dismiss
     <div
       className={cn(
         isInline

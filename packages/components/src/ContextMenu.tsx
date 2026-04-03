@@ -344,6 +344,7 @@ export function ContextMenu({ items, children, className }: ContextMenuProps) {
   }, []);
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: intentional context-menu wrapper
     <div
       className={cn("contents", className)}
       onContextMenu={handleContextMenu}

@@ -11,8 +11,8 @@
 SERVER_IMAGE := apps-server
 WEB_IMAGE := apps-web
 MIGRATE_IMAGE := apps-server-migrate
-COMPOSE_DEV := docker compose -f docker/docker-compose.dev.yml --env-file .env
-COMPOSE_PROD := docker compose -f docker/docker-compose.yml
+COMPOSE_DEV := docker compose -p ai-stack -f docker/docker-compose.dev.yml --env-file .env
+COMPOSE_PROD := docker compose -p ai-stack -f docker/docker-compose.yml
 
 # 颜色输出
 GREEN  := \033[0;32m

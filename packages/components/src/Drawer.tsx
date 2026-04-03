@@ -180,6 +180,7 @@ export function Drawer({
       style={{ zIndex }}
     >
       {/* Mask */}
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: overlay mask click-to-dismiss */}
       <div
         className="absolute inset-0 bg-black/45 backdrop-blur-sm"
         style={{
@@ -190,6 +191,7 @@ export function Drawer({
         onClick={maskClosable ? onClose : undefined}
       />
       {/* Panel */}
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: dialog panel stopPropagation */}
       <div
         ref={panelRef}
         className={cn(

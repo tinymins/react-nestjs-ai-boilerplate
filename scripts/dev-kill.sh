@@ -94,7 +94,7 @@ fi
 
 # ── 停止 Docker 容器 ────────────────────────────────────
 echo -e "${YELLOW}🐳 停止 Docker 容器...${NC}"
-docker compose -f "$ROOT_DIR/docker/docker-compose.dev.yml" --env-file "$ROOT_DIR/.env" down 2>/dev/null && {
+docker compose -p ai-stack -f "$ROOT_DIR/docker/docker-compose.dev.yml" --env-file "$ROOT_DIR/.env" down 2>/dev/null && {
   echo -e "${GREEN}✓ Docker 容器已停止${NC}"
 } || {
   echo -e "${GREEN}✓ 没有正在运行的容器${NC}"
