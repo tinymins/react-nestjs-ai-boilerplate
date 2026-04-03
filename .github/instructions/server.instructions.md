@@ -5,7 +5,19 @@ applyTo: "packages/server/**"
 
 # Server Patterns
 
-## Service Pattern
+## Module Structure
+
+Each module follows a consistent file layout:
+
+```
+modules/[feature]/
+  [feature].mapper.ts   # DB entity -> API output transformation
+  [feature].service.ts  # Business logic + Prisma queries
+  [feature].router.ts   # tRPC router with procedures
+  index.ts              # Re-exports mapper + service + router
+```
+
+## Mapper Pattern
 
 ```typescript
 // user.mapper.ts — transform Prisma rows to output shapes
@@ -21,30 +33,54 @@ export const toUserOutput = (user: User) => ({
 });
 ```
 
+- Prisma types imported from `@/generated/prisma/client/client`
+- `toXxxOutput()` lives in its own **`xxx.mapper.ts`** file — never expose raw Prisma rows
+- JSON fields (like `settings`) need explicit casting to their typed shape
+
+## Service Pattern
+
 ```typescript
 // user.service.ts
 import { db } from "@/db/client";
+import type { Prisma } from "@/generated/prisma/client/client";
 
 export class UserService {
   async getById(userId: string) {
     return db.user.findUnique({ where: { id: userId } });
+  }
+
+  async create(
+    input: { name: string; email: string; passwordHash: string },
+    tx?: Prisma.TransactionClient,
+  ) {
+    const client = tx ?? db;
+    return client.user.create({
+      data: {
+        name: input.name,
+        email: input.email,
+        passwordHash: input.passwordHash,
+        role: "user",
+      },
+    });
   }
 }
 
 export const userService = new UserService();
 ```
 
-- Prisma types imported from `@/generated/prisma/client/client`
-- `toXxxOutput()` lives in its own **`xxx.mapper.ts`** file — never expose raw Prisma rows
 - Export singleton: `export const xService = new XService()`
+- Support optional transactions: `tx?: Prisma.TransactionClient`
 - Use `@/` path aliases, not relative paths
 
 ## tRPC Router Pattern
 
 ```typescript
+import { z } from "zod";
 import { protectedProcedure, router } from "@/trpc/init";
 import { AppError } from "@/trpc/errors";
 import { UserProfileOutputSchema, UserUpdateInputSchema } from "@acme/types";
+import { userService } from "./user.service";
+import { toUserOutput } from "./user.mapper";
 
 export const userRouter = router({
   getProfile: protectedProcedure
@@ -65,20 +101,54 @@ export const userRouter = router({
 
 ## Procedures
 
-| Procedure | Use case |
-|-----------|----------|
-| `publicProcedure` | No auth required |
-| `protectedProcedure` | Requires `ctx.userId` (from `@/trpc/init`) |
-| `workspaceProtectedProcedure` | Requires workspace membership (from `@/trpc/middlewares`) |
+| Procedure | Use case | Import from |
+|-----------|----------|-------------|
+| `publicProcedure` | No auth required | `@/trpc/init` |
+| `protectedProcedure` | Requires `ctx.userId` | `@/trpc/init` |
+| `wechatProtectedProcedure` | Requires `ctx.wechatUserId` | `@/trpc/init` |
+| `workspaceProtectedProcedure` | Requires workspace membership | `@/trpc/middlewares` |
+| `adminProcedure` | Requires admin or superadmin role | `@/trpc/middlewares` |
+| `superAdminProcedure` | Requires superadmin role only | `@/trpc/middlewares` |
 
-Errors: `AppError.notFound()` · `AppError.badRequest()` · `AppError.unauthorized()` · `AppError.forbidden()` · `AppError.tooManyRequests()`
+### Admin Procedures
 
-All `AppError` factories require **two** args: `(language: Language, i18nKey: string)` — e.g. `AppError.notFound(ctx.language, "errors.user.notFound")`.
+```typescript
+import { adminProcedure, superAdminProcedure } from "@/trpc/middlewares";
+
+export const adminRouter = router({
+  // admin + superadmin can access
+  getSystemSettings: adminProcedure
+    .output(SystemSettingsOutputSchema)
+    .query(async () => { /* ... */ }),
+
+  // superadmin only
+  listUsers: superAdminProcedure
+    .output(z.array(AdminUserSchema))
+    .query(async () => { /* ... */ }),
+
+  updateUserRole: superAdminProcedure
+    .input(UpdateUserRoleInputSchema)
+    .mutation(async ({ input, ctx }) => { /* ... */ }),
+});
+```
+
+## Error Handling
+
+Errors: `AppError.notFound()` / `AppError.badRequest()` / `AppError.unauthorized()` / `AppError.forbidden()` / `AppError.tooManyRequests()`
+
+All `AppError` factories require **two** args: `(language: Language, i18nKey: string)`:
+
+```typescript
+throw AppError.notFound(ctx.language, "errors.user.notFound");
+throw AppError.forbidden(ctx.language, "errors.common.adminRequired");
+```
 
 ## Registering a Router
 
 ```typescript
 // trpc/router.ts
+import { featureRouter } from "@/modules/feature";
+
 export const appRouter = router({
   feature: featureRouter, // add here
 });
@@ -104,7 +174,7 @@ pnpm --filter @acme/server db:generate  # regenerate Prisma client
 pnpm --filter @acme/server db:migrate   # create migration files + apply (production)
 ```
 
-DB is PostgreSQL 18 running in Docker. Start it with `docker-compose up -d db minio`.
+DB is PostgreSQL 18 running in Docker. Start it with `docker compose up -d db minio`.
 
 ## Logger
 
@@ -115,6 +185,23 @@ logger.log("message");   // INFO
 logger.warn("message");  // WARN
 logger.error("message"); // ERROR
 ```
+
+## Cookie-Based Sessions
+
+Authentication uses HTTP-only cookies (`SESSION_ID`), not JWT tokens:
+
+```typescript
+import { setSessionCookie, clearSessionCookie } from "@/utils/session";
+
+// Login: set session cookie
+const sessionId = await authService.createSession(user.id);
+setSessionCookie(ctx.resHeaders, sessionId);
+
+// Logout: clear session cookie
+clearSessionCookie(ctx.resHeaders);
+```
+
+Session resolution happens in `@/utils/request-auth.ts` via `resolveRequestAuth(headers)`.
 
 ## Storage
 

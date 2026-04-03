@@ -13,6 +13,7 @@ All shared types and Zod schemas live in `packages/types/src/`.
 |------|---------|
 | `user.ts` | User entity schema + types |
 | `workspace.ts` | Workspace entity schema + types |
+| `admin.ts` | Admin schemas (AdminUser, SystemSettings, InvitationCode) |
 | `api.ts` | API I/O schemas (input/output for tRPC procedures) |
 | `index.ts` | Re-exports everything |
 
@@ -31,7 +32,7 @@ export const UserSchema = z.object({
   id: z.string(),
   name: z.string(),
   email: z.string().email(),
-  role: z.enum(["admin", "user"]),
+  role: z.enum(["superadmin", "admin", "user"]),
   settings: UserSettingsSchema.nullable().optional(),
 });
 
