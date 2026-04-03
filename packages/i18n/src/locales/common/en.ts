@@ -1,0 +1,50 @@
+import type { CommonSchema } from "./zh.js";
+
+export const commonEn: CommonSchema = {
+  errors: {
+    unauthorized: "Not logged in",
+    forbidden: "No permission to access",
+    requestFailed: "Request failed",
+    missingWorkspace: "Missing workspace parameter",
+    workspaceForbidden: "No permission to access this workspace",
+    invalidFileType: "Only JPEG, PNG, WebP and GIF images are allowed",
+    fileTooLarge: "File too large (max 5 MB)",
+  },
+  validation: {
+    fields: {
+      email: "Email",
+      password: "Password",
+      name: "Name",
+      slug: "Slug",
+      username: "Username",
+      title: "Title",
+      description: "Description",
+      content: "Content",
+    },
+  },
+  ui: {
+    save: "Save",
+    cancel: "Cancel",
+    login: "Login",
+    backToHome: "Back to home",
+    backToPrevious: "Go back",
+    signIn: "Sign in again",
+    uploadPhoto: "Upload photo",
+    removePhoto: "Remove photo",
+    followSystem: "Follow system",
+    language: "Language",
+    theme: "Theme",
+    light: "Light",
+    dark: "Dark",
+    notFoundTitle: "Page not found",
+    notFoundDesc:
+      "Sorry, the page you visited does not exist or has been removed",
+    unauthorizedTitle: "Access denied",
+    unauthorizedDesc: "Sorry, you do not have permission to access this page",
+    welcome: "Welcome",
+    homeDesc: "This is a scaffold project, homepage placeholder.",
+    getStarted: "Get started",
+    langZh: "中文",
+    langEn: "English",
+  },
+};

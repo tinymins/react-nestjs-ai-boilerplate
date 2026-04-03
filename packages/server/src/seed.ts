@@ -99,7 +99,7 @@ async function seed() {
 
     if (!existingMembership) {
       // 为用户创建默认工作空间
-      const workspaceName = `${seedUser.name}${getMessage("zh-CN", "errors.admin.workspaceSuffix")}`;
+      const workspaceName = `${seedUser.name}${getMessage("zh", "workspace.defaultNameSuffix")}`;
       const workspaceSlug = seedUser.name.toLowerCase();
 
       const [workspace] = await db
@@ -107,7 +107,7 @@ async function seed() {
         .values({
           slug: workspaceSlug,
           name: workspaceName,
-          description: getMessage("zh-CN", "errors.admin.defaultWorkspaceDesc"),
+          description: getMessage("zh", "workspace.defaultDesc"),
           ownerId: user.id,
         })
         .returning();

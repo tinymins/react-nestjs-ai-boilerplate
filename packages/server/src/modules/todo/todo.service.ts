@@ -36,7 +36,7 @@ export class TodoService {
         title: input.title,
         category:
           input.category ??
-          getMessage(language ?? "zh-CN", "dashboard.todoList.defaultCategory"),
+          getMessage(language ?? "zh", "dashboard.todoList.defaultCategory"),
         createdBy,
       })
       .returning();

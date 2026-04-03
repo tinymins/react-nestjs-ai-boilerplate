@@ -1,18 +1,11 @@
-import { deDE, enUS, hak, jaJP, lzh, wuu, yue, zhCN, zhTW } from "@acme/i18n";
+import { en, zh } from "@acme/i18n";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 const resources = {
-  "zh-CN": zhCN,
-  "zh-TW": zhTW,
-  "en-US": enUS,
-  "ja-JP": jaJP,
-  "de-DE": deDE,
-  lzh: lzh,
-  wuu: wuu,
-  hak: hak,
-  yue: yue,
+  zh: zh,
+  en: en,
 } as const;
 
 i18n
@@ -20,7 +13,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "en-US",
+    fallbackLng: "zh",
     interpolation: {
       escapeValue: false,
     },
@@ -29,7 +22,7 @@ i18n
       caches: ["cookie"],
       cookieMinutes: 525600,
     },
-    returnObjects: true, // 允许返回对象和数组
+    returnObjects: true,
   });
 
 export default i18n;
