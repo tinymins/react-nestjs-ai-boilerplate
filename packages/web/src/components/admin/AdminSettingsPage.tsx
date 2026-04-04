@@ -1,6 +1,7 @@
 import {
   Button,
   Input,
+  InputNumber,
   Modal,
   Select,
   ShieldOutlined,
@@ -409,22 +410,25 @@ export default function AdminSettingsPage() {
     <div className="space-y-4">
       <div className="flex items-center gap-3 flex-wrap">
         <div className="flex items-center gap-2">
-          <Input
-            type="number"
+          <InputNumber
             placeholder={t("systemSettings.expiresInHours")}
-            value={invitationExpiresHours}
-            onChange={(e) => setInvitationExpiresHours(e.target.value)}
-            className="w-32"
+            value={
+              invitationExpiresHours
+                ? Number.parseInt(invitationExpiresHours, 10)
+                : null
+            }
+            onChange={(v) =>
+              setInvitationExpiresHours(v !== null ? String(v) : "")
+            }
+            min={0}
+            addonAfter={t("systemSettings.hoursUnit")}
+            className="w-40"
           />
-          <span className="text-sm text-[var(--text-muted)]">
-            {t("systemSettings.hoursUnit")}
-          </span>
         </div>
         <span className="text-xs text-[var(--text-muted)]">
           {invitationExpiresHours ? "" : t("systemSettings.noExpiration")}
         </span>
         <Button
-          size="small"
           onClick={handleGenerateInvitation}
           disabled={generateInvitationMutation.isPending}
         >

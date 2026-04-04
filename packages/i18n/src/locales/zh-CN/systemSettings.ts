@@ -20,7 +20,7 @@ const systemSettings = {
   addUserDesc: "创建一个新用户账号",
   addUserSuccess: "用户添加成功",
   generateInvitation: "生成邀请链接",
-  expiresInHours: "过期时间（小时）",
+  expiresInHours: "过期时间",
   hoursUnit: "小时",
   noExpiration: "永不过期",
   role: "角色",

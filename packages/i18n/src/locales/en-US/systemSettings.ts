@@ -20,7 +20,7 @@ const systemSettings = {
   addUserDesc: "Create a new user account",
   addUserSuccess: "User added successfully",
   generateInvitation: "Generate Invitation Link",
-  expiresInHours: "Expires in (hours)",
+  expiresInHours: "Expires in",
   hoursUnit: "hours",
   noExpiration: "No expiration",
   role: "Role",

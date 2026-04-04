@@ -21,7 +21,7 @@ const systemSettings = {
   addUserDesc: "新しいユーザーアカウントを作成",
   addUserSuccess: "ユーザーが正常に追加されました",
   generateInvitation: "招待リンクを生成",
-  expiresInHours: "有効期限（時間）",
+  expiresInHours: "有効期限",
   hoursUnit: "時間",
   noExpiration: "有効期限なし",
   role: "役割",
