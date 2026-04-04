@@ -4,7 +4,7 @@ pub mod settings;
 
 pub use login::{login, AuthOutput, UserDto};
 pub use register::register;
-pub use settings::{logout, system_settings};
+pub use settings::{logout, registration_status, system_settings};
 
 use std::sync::Arc;
 

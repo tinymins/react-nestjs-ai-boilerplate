@@ -1,5 +1,10 @@
 import { createQuery, createMutation } from "@/lib/rust-api-runtime";
-import type { User, UserUpdateInput } from "@acme/types";
+import type {
+  User,
+  UserUpdateInput,
+  ChangePasswordInput,
+  ChangePasswordOutput,
+} from "@acme/types";
 
 export const userApi = {
   getProfile: createQuery<void, User>({
@@ -12,5 +17,8 @@ export const userApi = {
   deleteAvatar: createMutation<void, User>({
     method: "DELETE",
     path: "/api/user/avatar",
+  }),
+  changePassword: createMutation<ChangePasswordInput, ChangePasswordOutput>({
+    path: "/api/user/change-password",
   }),
 };

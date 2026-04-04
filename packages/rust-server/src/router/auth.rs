@@ -11,4 +11,8 @@ pub fn build_auth_routes() -> Router<Arc<AppState>> {
         .route("/api/auth/register", post(auth::register))
         .route("/api/auth/logout", post(auth::logout))
         .route("/api/auth/system-settings", get(auth::system_settings))
+        .route(
+            "/api/auth/registration-status",
+            get(auth::registration_status),
+        )
 }

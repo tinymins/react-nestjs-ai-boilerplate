@@ -6,7 +6,7 @@ use axum::Json;
 use serde::Serialize;
 
 use crate::db::entities::workspaces;
-use crate::db::repos::workspace_repo::WorkspaceRepo;
+use crate::db::repos::workspace_repo::{WorkspaceRepo, SYSTEM_SHARED_SLUG};
 use crate::error::{ApiResponse, AppError};
 use crate::handlers::auth::AuthUser;
 use crate::AppState;
@@ -18,6 +18,7 @@ pub struct WorkspaceOutput {
     pub slug: String,
     pub name: String,
     pub description: Option<String>,
+    pub owner_id: Option<String>,
     pub created_at: String,
 }
 
@@ -28,12 +29,23 @@ impl From<workspaces::Model> for WorkspaceOutput {
             slug: w.slug,
             name: w.name,
             description: w.description,
+            owner_id: w.owner_id,
             created_at: w
                 .created_at
                 .map(|dt| dt.to_rfc3339())
                 .unwrap_or_default(),
         }
     }
+}
+
+fn slugify(value: &str) -> String {
+    let s: String = value
+        .to_lowercase()
+        .trim()
+        .chars()
+        .map(|c| if c.is_alphanumeric() { c } else { '-' })
+        .collect();
+    s.trim_matches('-').to_string()
 }
 
 pub async fn list_workspaces(
@@ -128,8 +140,13 @@ pub async fn create_workspace(
             .collect()
     });
 
-    let ws = match WorkspaceRepo::create_with_owner(&state.db, &body.name, &slug, &auth_user.user_id)
-        .await
+    let ws = match WorkspaceRepo::create_with_owner(
+        &state.db,
+        &body.name,
+        &slug,
+        &auth_user.user_id,
+    )
+    .await
     {
         Ok(ws) => ws,
         Err(e) => {
@@ -143,6 +160,121 @@ pub async fn create_workspace(
     Json(ApiResponse {
         success: true,
         data: Some(WorkspaceOutput::from(ws)),
+        error: None,
+    })
+    .into_response()
+}
+
+pub async fn get_workspace_by_slug(
+    State(state): State<Arc<AppState>>,
+    auth_user: AuthUser,
+    axum::extract::Path(slug): axum::extract::Path<String>,
+) -> Response {
+    let workspace = match WorkspaceRepo::find_by_slug(&state.db, &slug).await {
+        Ok(Some(ws)) => ws,
+        Ok(None) => return AppError::NotFound("Workspace not found".into()).into_response(),
+        Err(e) => return e.into_response(),
+    };
+
+    let is_member = match WorkspaceRepo::is_member(&state.db, &workspace.id, &auth_user.user_id)
+        .await
+    {
+        Ok(b) => b,
+        Err(e) => return e.into_response(),
+    };
+    if !is_member {
+        return AppError::NotFound("Workspace not found".into()).into_response();
+    }
+
+    Json(ApiResponse {
+        success: true,
+        data: Some(WorkspaceOutput::from(workspace)),
+        error: None,
+    })
+    .into_response()
+}
+
+#[derive(serde::Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UpdateWorkspaceInput {
+    pub name: Option<String>,
+    pub slug: Option<String>,
+    pub description: Option<String>,
+}
+
+pub async fn update_workspace(
+    State(state): State<Arc<AppState>>,
+    auth_user: AuthUser,
+    axum::extract::Path(workspace_id): axum::extract::Path<String>,
+    Json(body): Json<UpdateWorkspaceInput>,
+) -> Response {
+    let workspace = match WorkspaceRepo::find_by_id(&state.db, &workspace_id).await {
+        Ok(Some(ws)) => ws,
+        Ok(None) => return AppError::NotFound("Workspace not found".into()).into_response(),
+        Err(e) => return e.into_response(),
+    };
+
+    if workspace.owner_id.as_deref() != Some(&auth_user.user_id) {
+        return AppError::Forbidden("Only workspace owner can update".into()).into_response();
+    }
+
+    // If slug is being changed, validate it
+    if let Some(ref new_slug) = body.slug {
+        let slug = slugify(new_slug);
+        if slug == SYSTEM_SHARED_SLUG {
+            return AppError::BadRequest("Reserved workspace slug".into()).into_response();
+        }
+        // Check uniqueness
+        if let Ok(Some(existing)) = WorkspaceRepo::find_by_slug(&state.db, &slug).await {
+            if existing.id != workspace.id {
+                return AppError::Conflict("Workspace slug already exists".into()).into_response();
+            }
+        }
+    }
+
+    let updated = match WorkspaceRepo::update(
+        &state.db,
+        &workspace_id,
+        body.name,
+        body.slug.map(|s| slugify(&s)),
+        body.description,
+    )
+    .await
+    {
+        Ok(ws) => ws,
+        Err(e) => return e.into_response(),
+    };
+
+    Json(ApiResponse {
+        success: true,
+        data: Some(WorkspaceOutput::from(updated)),
+        error: None,
+    })
+    .into_response()
+}
+
+pub async fn delete_workspace(
+    State(state): State<Arc<AppState>>,
+    auth_user: AuthUser,
+    axum::extract::Path(workspace_id): axum::extract::Path<String>,
+) -> Response {
+    let workspace = match WorkspaceRepo::find_by_id(&state.db, &workspace_id).await {
+        Ok(Some(ws)) => ws,
+        Ok(None) => return AppError::NotFound("Workspace not found".into()).into_response(),
+        Err(e) => return e.into_response(),
+    };
+
+    if workspace.owner_id.as_deref() != Some(&auth_user.user_id) {
+        return AppError::Forbidden("Only workspace owner can delete".into()).into_response();
+    }
+
+    if let Err(e) = WorkspaceRepo::delete(&state.db, &workspace_id).await {
+        return e.into_response();
+    }
+
+    Json(ApiResponse {
+        success: true,
+        data: Some(serde_json::json!({ "id": workspace_id })),
         error: None,
     })
     .into_response()

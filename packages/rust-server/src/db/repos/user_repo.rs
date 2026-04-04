@@ -38,6 +38,21 @@ impl UserRepo {
         Ok(active.update(db).await?)
     }
 
+    pub async fn update_password(
+        db: &DatabaseConnection,
+        user_id: &str,
+        password_hash: &str,
+    ) -> Result<(), AppError> {
+        let user = users::Entity::find_by_id(user_id)
+            .one(db)
+            .await?
+            .ok_or_else(|| AppError::NotFound("user not found".into()))?;
+        let mut active: users::ActiveModel = user.into();
+        active.password_hash = Set(password_hash.to_string());
+        active.update(db).await?;
+        Ok(())
+    }
+
     pub async fn clear_avatar_key(
         db: &DatabaseConnection,
         user_id: &str,

@@ -85,4 +85,17 @@ impl AuthRepo {
             .await?;
         Ok(())
     }
+
+    pub async fn delete_other_sessions(
+        db: &DatabaseConnection,
+        user_id: &str,
+        keep_session_id: &str,
+    ) -> Result<(), AppError> {
+        sessions::Entity::delete_many()
+            .filter(sessions::Column::UserId.eq(user_id))
+            .filter(sessions::Column::Id.ne(keep_session_id))
+            .exec(db)
+            .await?;
+        Ok(())
+    }
 }

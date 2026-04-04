@@ -30,6 +30,7 @@ model User {
 
   sessions         Session[]
   workspaceMembers WorkspaceMember[]
+  ownedWorkspaces  Workspace[]
 
   createdInvitationCodes InvitationCode[] @relation("InvitationCodeCreator")
   usedInvitationCodes    InvitationCode[] @relation("InvitationCodeUsedBy")
@@ -55,8 +56,10 @@ model Workspace {
   slug        String   @unique
   name        String
   description String?
+  ownerId     String?  @map("owner_id")
   createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
 
+  owner   User?              @relation(fields: [ownerId], references: [id])
   members WorkspaceMember[]
 
   @@map("workspaces")

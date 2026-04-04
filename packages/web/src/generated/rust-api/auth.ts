@@ -3,6 +3,7 @@ import type {
   AuthOutput,
   LoginInput,
   RegisterInput,
+  RegistrationStatus,
   SystemSettings,
 } from "@acme/types";
 
@@ -18,5 +19,8 @@ export const authApi = {
   }),
   systemSettings: createQuery<void, SystemSettings>({
     path: "/api/auth/system-settings",
+  }),
+  registrationStatus: createQuery<void, RegistrationStatus>({
+    path: "/api/auth/registration-status",
   }),
 };

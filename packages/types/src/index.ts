@@ -21,27 +21,23 @@ export type {
   AuthOutput,
   ChangePasswordInput,
   ChangePasswordOutput,
-  CreateWorkspaceInput,
   LoginInput,
   LogoutOutput,
   RegisterInput,
-  UpdateWorkspaceInput,
+  RegistrationStatus,
   UserProfileOutput,
   UserUpdateInput,
-  WorkspaceOutput,
 } from "./api";
 export {
   AuthOutputSchema,
   ChangePasswordInputSchema,
   ChangePasswordOutputSchema,
-  CreateWorkspaceInputSchema,
   LoginInputSchema,
   LogoutOutputSchema,
   RegisterInputSchema,
-  UpdateWorkspaceInputSchema,
+  RegistrationStatusSchema,
   UserProfileOutputSchema,
   UserUpdateInputSchema,
-  WorkspaceOutputSchema,
 } from "./api";
 export type {
   Lang,
@@ -70,5 +66,17 @@ export {
   WechatLoginInputSchema,
   WechatUserSchema,
 } from "./wechat";
-export type { Workspace } from "./workspace";
-export { slugify, WorkspaceSchema } from "./workspace";
+export type {
+  CreateWorkspaceInput,
+  DeleteWorkspaceInput,
+  UpdateWorkspaceInput,
+  Workspace,
+} from "./workspace";
+export {
+  CreateWorkspaceInputSchema,
+  DeleteWorkspaceInputSchema,
+  SYSTEM_SHARED_SLUG,
+  slugify,
+  UpdateWorkspaceInputSchema,
+  WorkspaceSchema,
+} from "./workspace";

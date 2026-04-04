@@ -7,6 +7,7 @@ use axum::Json;
 use serde::Serialize;
 
 use crate::db::entities::system_settings;
+use crate::db::repos::admin_repo::AdminRepo;
 use crate::db::repos::auth_repo::AuthRepo;
 use crate::error::ApiResponse;
 use crate::AppState;
@@ -76,6 +77,37 @@ pub async fn system_settings(State(state): State<Arc<AppState>>) -> Response {
     Json(ApiResponse {
         success: true,
         data: Some(output),
+        error: None,
+    })
+    .into_response()
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct RegistrationStatusOutput {
+    pub allowed: bool,
+    pub is_first_user: bool,
+}
+
+pub async fn registration_status(State(state): State<Arc<AppState>>) -> Response {
+    let user_count = match AuthRepo::count_users(&state.db).await {
+        Ok(n) => n,
+        Err(e) => return e.into_response(),
+    };
+    let is_first_user = user_count == 0;
+
+    let settings = AdminRepo::get_system_settings(&state.db).await;
+    let allowed = match settings {
+        Ok(s) => s.allow_registration || is_first_user,
+        Err(_) => is_first_user,
+    };
+
+    Json(ApiResponse {
+        success: true,
+        data: Some(RegistrationStatusOutput {
+            allowed,
+            is_first_user,
+        }),
         error: None,
     })
     .into_response()

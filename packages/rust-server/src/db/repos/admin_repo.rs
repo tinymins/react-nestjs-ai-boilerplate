@@ -1,10 +1,10 @@
 use chrono::Utc;
-use sea_orm::*;
 use sea_orm::prelude::DateTimeWithTimeZone;
+use sea_orm::*;
 use uuid::Uuid;
 
 use crate::db::entities::{
-    invitation_codes, sessions, system_settings, users,
+    invitation_codes, sessions, system_settings, users, workspace_members, workspaces,
     users::UserRole,
 };
 use crate::error::AppError;
@@ -51,9 +51,9 @@ impl AdminRepo {
 
         let password_hash =
             hash_password(password).map_err(|e| AppError::Internal(format!("Hash error: {e}")))?;
-        let id = Uuid::new_v4().to_string();
-        let active = users::ActiveModel {
-            id: Set(id.clone()),
+        let user_id = Uuid::new_v4().to_string();
+        let user_active = users::ActiveModel {
+            id: Set(user_id.clone()),
             name: Set(name.to_string()),
             email: Set(email.to_string()),
             password_hash: Set(password_hash),
@@ -61,8 +61,58 @@ impl AdminRepo {
             settings: Set(None),
             created_at: Set(Some(Utc::now().into())),
         };
-        users::Entity::insert(active).exec(db).await?;
-        users::Entity::find_by_id(id)
+        users::Entity::insert(user_active).exec(db).await?;
+
+        // Auto-create personal workspace
+        let workspace_name = format!("{name}'s workspace");
+        let base_slug = name
+            .to_lowercase()
+            .trim()
+            .replace(|c: char| !c.is_alphanumeric() && c != '-', "-");
+        let base_slug = if base_slug.is_empty() {
+            "workspace".to_string()
+        } else {
+            base_slug
+        };
+
+        // Ensure unique slug
+        let mut slug = base_slug.clone();
+        let mut suffix = 1u32;
+        loop {
+            let existing = workspaces::Entity::find()
+                .filter(workspaces::Column::Slug.eq(&slug))
+                .one(db)
+                .await?;
+            if existing.is_none() {
+                break;
+            }
+            slug = format!("{base_slug}-{suffix}");
+            suffix += 1;
+        }
+
+        let ws_id = Uuid::new_v4().to_string();
+        let ws_active = workspaces::ActiveModel {
+            id: Set(ws_id.clone()),
+            slug: Set(slug),
+            name: Set(workspace_name),
+            description: Set(None),
+            owner_id: Set(Some(user_id.clone())),
+            created_at: Set(Some(Utc::now().into())),
+        };
+        workspaces::Entity::insert(ws_active).exec(db).await?;
+
+        let member_active = workspace_members::ActiveModel {
+            id: Set(Uuid::new_v4().to_string()),
+            workspace_id: Set(ws_id),
+            user_id: Set(user_id.clone()),
+            role: Set(workspace_members::WorkspaceMemberRole::Owner),
+            created_at: Set(Some(Utc::now().into())),
+        };
+        workspace_members::Entity::insert(member_active)
+            .exec(db)
+            .await?;
+
+        users::Entity::find_by_id(user_id)
             .one(db)
             .await?
             .ok_or_else(|| AppError::Internal("Failed to fetch created user".into()))
@@ -114,12 +164,41 @@ impl AdminRepo {
             ));
         }
 
-        // Delete user sessions first
+        // 1. Delete user's sessions
         sessions::Entity::delete_many()
             .filter(sessions::Column::UserId.eq(user_id))
             .exec(db)
             .await?;
 
+        // 2. Get workspaces owned by user
+        let owned_workspaces = workspaces::Entity::find()
+            .filter(workspaces::Column::OwnerId.eq(user_id))
+            .all(db)
+            .await?;
+
+        let owned_ws_ids: Vec<String> = owned_workspaces.iter().map(|w| w.id.clone()).collect();
+
+        if !owned_ws_ids.is_empty() {
+            // 3. Delete members of owned workspaces
+            workspace_members::Entity::delete_many()
+                .filter(workspace_members::Column::WorkspaceId.is_in(owned_ws_ids.clone()))
+                .exec(db)
+                .await?;
+
+            // 4. Delete owned workspaces
+            workspaces::Entity::delete_many()
+                .filter(workspaces::Column::Id.is_in(owned_ws_ids))
+                .exec(db)
+                .await?;
+        }
+
+        // 5. Delete user's memberships in other workspaces
+        workspace_members::Entity::delete_many()
+            .filter(workspace_members::Column::UserId.eq(user_id))
+            .exec(db)
+            .await?;
+
+        // 6. Delete user
         users::Entity::delete_by_id(user_id).exec(db).await?;
         Ok(())
     }
@@ -223,6 +302,36 @@ impl AdminRepo {
         invitation_codes::Entity::delete_by_id(row.id)
             .exec(db)
             .await?;
+        Ok(())
+    }
+
+    pub async fn validate_invitation_code(
+        db: &DatabaseConnection,
+        code: &str,
+    ) -> Result<Option<invitation_codes::Model>, AppError> {
+        let row = invitation_codes::Entity::find()
+            .filter(invitation_codes::Column::Code.eq(code))
+            .filter(invitation_codes::Column::UsedBy.is_null())
+            .one(db)
+            .await?;
+        Ok(row)
+    }
+
+    pub async fn use_invitation_code(
+        db: &DatabaseConnection,
+        code: &str,
+        used_by: &str,
+    ) -> Result<(), AppError> {
+        let row = invitation_codes::Entity::find()
+            .filter(invitation_codes::Column::Code.eq(code))
+            .one(db)
+            .await?
+            .ok_or_else(|| AppError::NotFound("Invitation code not found".into()))?;
+
+        let mut active: invitation_codes::ActiveModel = row.into();
+        active.used_by = Set(Some(used_by.to_string()));
+        active.used_at = Set(Some(Utc::now().into()));
+        active.update(db).await?;
         Ok(())
     }
 }
