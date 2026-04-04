@@ -20,6 +20,25 @@ const workspace = {
   retryLater: "Bitte versuchen Sie es später erneut",
   empty: "Noch keine Workspaces",
   createFirst: "Bitte erstellen Sie zuerst einen Workspace",
+  settings: "Workspace-Einstellungen",
+  settingsSubtitle: "Einstellungen für {{name}} verwalten",
+  generalTab: "Allgemein",
+  dangerTab: "Gefahrenzone",
+  nameRequired: "Name ist erforderlich",
+  slugRequired: "Slug ist erforderlich",
+  slugPattern:
+    "Slug darf nur Kleinbuchstaben, Zahlen und Bindestriche enthalten",
+  saveChanges: "Änderungen speichern",
+  deleteWorkspace: "Workspace löschen",
+  deleteWorkspaceDesc:
+    "Diese Aktion kann nicht rückgängig gemacht werden. Der Workspace und alle zugehörigen Daten werden dauerhaft gelöscht.",
+  confirmDeleteTitle: "Löschen bestätigen",
+  confirmDeleteContent:
+    'Möchten Sie den Workspace "{{name}}" wirklich löschen?',
+  confirmDeleteWarning: "Diese Aktion kann nicht rückgängig gemacht werden!",
+  deleteSuccess: "Workspace gelöscht",
+  saveSuccess: "Einstellungen gespeichert",
+  notFound: "Workspace nicht gefunden",
 };
 
 export default workspace;

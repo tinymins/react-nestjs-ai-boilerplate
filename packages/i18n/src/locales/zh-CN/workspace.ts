@@ -20,6 +20,22 @@ const workspace = {
   retryLater: "请稍后重试",
   empty: "暂无工作空间",
   createFirst: "请先创建工作空间",
+  settings: "空间设置",
+  settingsSubtitle: "管理 {{name}} 空间的设置",
+  generalTab: "通用",
+  dangerTab: "危险区域",
+  nameRequired: "名称不能为空",
+  slugRequired: "Slug 不能为空",
+  slugPattern: "Slug 只能包含小写字母、数字和连字符",
+  saveChanges: "保存修改",
+  deleteWorkspace: "删除空间",
+  deleteWorkspaceDesc: "此操作不可逆，将删除空间及所有相关数据。",
+  confirmDeleteTitle: "确认删除",
+  confirmDeleteContent: "确定要删除空间「{{name}}」吗？",
+  confirmDeleteWarning: "此操作不可恢复！",
+  deleteSuccess: "空间已删除",
+  saveSuccess: "设置已保存",
+  notFound: "未找到空间",
 };
 
 export default workspace;
