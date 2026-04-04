@@ -4,6 +4,8 @@
 # 通过 --env-file 读取根目录 .env：
 #   docker compose -f docker/docker-compose.dev.yml --env-file .env up -d
 
+name: apps
+
 services:
   db:
     image: postgres:18
