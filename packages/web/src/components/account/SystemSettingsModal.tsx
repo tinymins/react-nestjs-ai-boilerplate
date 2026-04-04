@@ -122,6 +122,25 @@ export default function SystemSettingsModal({
 
   const [activeTab, setActiveTab] = useState("general");
 
+  // Local state for General tab — only saved on OK
+  const [localAllowRegistration, setLocalAllowRegistration] = useState<
+    boolean | null
+  >(null);
+  const [localSingleWorkspaceMode, setLocalSingleWorkspaceMode] = useState<
+    boolean | null
+  >(null);
+
+  // Sync local state when settings are fetched
+  const effectiveAllowRegistration =
+    localAllowRegistration ?? settingsQuery.data?.allowRegistration ?? true;
+  const effectiveSingleWorkspaceMode =
+    localSingleWorkspaceMode ??
+    settingsQuery.data?.singleWorkspaceMode ??
+    false;
+
+  const hasGeneralChanges =
+    localAllowRegistration !== null || localSingleWorkspaceMode !== null;
+
   const [resetPasswordModal, setResetPasswordModal] = useState<{
     open: boolean;
     userId: string;
@@ -146,17 +165,33 @@ export default function SystemSettingsModal({
     string | null
   >(null);
 
-  const handleToggleRegistration = async (checked: boolean) => {
-    await updateSettingsMutation.mutateAsync({ allowRegistration: checked });
+  const handleSaveGeneral = async () => {
+    const updates: Record<string, boolean> = {};
+    if (localAllowRegistration !== null) {
+      updates.allowRegistration = localAllowRegistration;
+    }
+    if (localSingleWorkspaceMode !== null) {
+      updates.singleWorkspaceMode = localSingleWorkspaceMode;
+    }
+    if (Object.keys(updates).length === 0) {
+      onClose();
+      return;
+    }
+    await updateSettingsMutation.mutateAsync(updates);
     settingsQuery.refetch();
+    if (localSingleWorkspaceMode !== null) {
+      authApi.systemSettings.invalidate(queryClient);
+    }
+    setLocalAllowRegistration(null);
+    setLocalSingleWorkspaceMode(null);
     message.success(t("systemSettings.saveSuccess"));
+    onClose();
   };
 
-  const handleToggleSingleWorkspaceMode = async (checked: boolean) => {
-    await updateSettingsMutation.mutateAsync({ singleWorkspaceMode: checked });
-    settingsQuery.refetch();
-    authApi.systemSettings.invalidate(queryClient);
-    message.success(t("systemSettings.saveSuccess"));
+  const handleCancelGeneral = () => {
+    setLocalAllowRegistration(null);
+    setLocalSingleWorkspaceMode(null);
+    onClose();
   };
 
   const handleChangeRole = async (userId: string, role: UserRole) => {
@@ -250,7 +285,14 @@ export default function SystemSettingsModal({
     <>
       <Modal
         open={open}
-        onCancel={onClose}
+        onCancel={handleCancelGeneral}
+        onOk={handleSaveGeneral}
+        okText={t("common.confirm")}
+        cancelText={t("common.cancel")}
+        okButtonProps={{
+          disabled: !hasGeneralChanges,
+          loading: updateSettingsMutation.isPending,
+        }}
         title={t("systemSettings.title")}
         width={isSuperAdmin ? 800 : 520}
       >
@@ -287,9 +329,8 @@ export default function SystemSettingsModal({
                 </p>
               </div>
               <Toggle
-                checked={settingsQuery.data?.allowRegistration ?? true}
-                onChange={handleToggleRegistration}
-                disabled={updateSettingsMutation.isPending}
+                checked={effectiveAllowRegistration}
+                onChange={setLocalAllowRegistration}
               />
             </div>
             {isSuperAdmin &&
@@ -304,9 +345,8 @@ export default function SystemSettingsModal({
                     </p>
                   </div>
                   <Toggle
-                    checked={settingsQuery.data?.singleWorkspaceMode ?? false}
-                    onChange={handleToggleSingleWorkspaceMode}
-                    disabled={updateSettingsMutation.isPending}
+                    checked={effectiveSingleWorkspaceMode}
+                    onChange={setLocalSingleWorkspaceMode}
                   />
                 </div>
               )}
