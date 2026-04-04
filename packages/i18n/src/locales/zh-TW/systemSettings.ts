@@ -1,5 +1,14 @@
 const systemSettings = {
   title: "系統設定",
+  intro: {
+    headline: "管理系統配置，控制使用者註冊與存取權限",
+    description:
+      "在此集中管理系統級設定，包括註冊策略、工作空間模式、使用者帳號和邀請碼。所有改動即時生效。",
+    feat1: "註冊策略配置",
+    feat2: "使用者角色管理",
+    feat3: "邀請碼生成",
+    feat4: "工作空間模式",
+  },
   userManagement: "使用者管理",
   invitationCodes: "邀請碼",
   allowRegistration: "允許註冊",

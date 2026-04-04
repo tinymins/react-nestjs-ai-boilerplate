@@ -1,5 +1,14 @@
 const systemSettings = {
   title: "Systemeinstellungen",
+  intro: {
+    headline: "Systemkonfiguration und Zugriffssteuerung verwalten",
+    description:
+      "Verwalten Sie zentral alle Systemeinstellungen, einschließlich Registrierungsrichtlinien, Workspace-Modi, Benutzerkonten und Einladungscodes. Alle Änderungen werden sofort wirksam.",
+    feat1: "Registrierungsrichtlinien",
+    feat2: "Benutzerrollenverwaltung",
+    feat3: "Einladungscodes",
+    feat4: "Workspace-Modus",
+  },
   userManagement: "Benutzerverwaltung",
   invitationCodes: "Einladungscodes",
   allowRegistration: "Registrierung erlauben",

@@ -1,5 +1,14 @@
 const systemSettings = {
   title: "システム設定",
+  intro: {
+    headline: "システム構成とアクセス制御を管理",
+    description:
+      "登録ポリシー、ワークスペースモード、ユーザーアカウント、招待コードなどのシステムレベルの設定を一元管理します。すべての変更は即座に反映されます。",
+    feat1: "登録ポリシー設定",
+    feat2: "ユーザーロール管理",
+    feat3: "招待コード生成",
+    feat4: "ワークスペースモード",
+  },
   userManagement: "ユーザー管理",
   invitationCodes: "招待コード",
   allowRegistration: "登録を許可",

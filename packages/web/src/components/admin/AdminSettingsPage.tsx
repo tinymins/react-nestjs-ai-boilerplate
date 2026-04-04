@@ -1,6 +1,14 @@
-import { Button, Input, Modal, Select, Tabs } from "@acme/components";
+import {
+  Button,
+  Input,
+  Modal,
+  Select,
+  ShieldOutlined,
+  Tabs,
+} from "@acme/components";
 import type { AdminUser, InvitationCode, UserRole } from "@acme/types";
 import { useQueryClient } from "@tanstack/react-query";
+import { KeyRound, ToggleRight, UserPlus, Users } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { adminApi, authApi } from "@/generated/rust-api";
@@ -545,6 +553,44 @@ export default function AdminSettingsPage() {
   return (
     <>
       <div>
+        {/* Intro Banner */}
+        <div className="mb-5 rounded-xl border border-violet-100 bg-gradient-to-br from-violet-50 to-indigo-50 p-5 dark:border-violet-800/30 dark:from-violet-950/20 dark:to-indigo-950/20">
+          <div className="flex items-start gap-4">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-violet-500/15 dark:bg-violet-500/25">
+              <ShieldOutlined
+                className="text-violet-600 dark:text-violet-400"
+                style={{ fontSize: 22 }}
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="mb-1 font-semibold text-gray-900 dark:text-gray-100">
+                {t("systemSettings.intro.headline")}
+              </h3>
+              <p className="mb-3 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                {t("systemSettings.intro.description")}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-100 bg-white px-3 py-1 text-xs text-violet-700 dark:border-violet-800/40 dark:bg-violet-950/50 dark:text-violet-300">
+                  <ToggleRight size={11} />
+                  {t("systemSettings.intro.feat1")}
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-100 bg-white px-3 py-1 text-xs text-violet-700 dark:border-violet-800/40 dark:bg-violet-950/50 dark:text-violet-300">
+                  <Users size={11} />
+                  {t("systemSettings.intro.feat2")}
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-100 bg-white px-3 py-1 text-xs text-violet-700 dark:border-violet-800/40 dark:bg-violet-950/50 dark:text-violet-300">
+                  <KeyRound size={11} />
+                  {t("systemSettings.intro.feat3")}
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-100 bg-white px-3 py-1 text-xs text-violet-700 dark:border-violet-800/40 dark:bg-violet-950/50 dark:text-violet-300">
+                  <UserPlus size={11} />
+                  {t("systemSettings.intro.feat4")}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <h1 className="text-xl font-semibold text-[var(--text-primary)] mb-6">
           {t("systemSettings.title")}
         </h1>

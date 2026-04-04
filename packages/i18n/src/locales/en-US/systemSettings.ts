@@ -1,5 +1,14 @@
 const systemSettings = {
   title: "System Settings",
+  intro: {
+    headline: "Manage system configuration and access control",
+    description:
+      "Centrally manage system-level settings including registration policies, workspace modes, user accounts, and invitation codes. All changes take effect immediately.",
+    feat1: "Registration Policy",
+    feat2: "User Role Management",
+    feat3: "Invitation Codes",
+    feat4: "Workspace Mode",
+  },
   userManagement: "User Management",
   invitationCodes: "Invitation Codes",
   allowRegistration: "Allow Registration",
