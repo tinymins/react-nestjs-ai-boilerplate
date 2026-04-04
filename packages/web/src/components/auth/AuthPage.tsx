@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router";
 import { authApi } from "@/generated/rust-api";
-import { useAuth } from "@/hooks";
+import { useAuth, useSystemSettings } from "@/hooks";
 
 type LoginPageProps = {
   initialMode?: "login" | "register";
@@ -13,6 +13,7 @@ type LoginPageProps = {
 export default function AuthPage({ initialMode = "login" }: LoginPageProps) {
   const { t } = useTranslation();
   const { login, isAuthed, isLoading } = useAuth();
+  const { singleWorkspaceMode } = useSystemSettings();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const loginMutation = authApi.login.useMutation();
@@ -48,7 +49,11 @@ export default function AuthPage({ initialMode = "login" }: LoginPageProps) {
     const result = await mutation.mutateAsync({ email, password });
     login(result.user as User);
     didNavigate.current = true;
-    navigate(redirect || `/dashboard/${result.defaultWorkspaceSlug}`);
+    if (singleWorkspaceMode) {
+      navigate(redirect || "/dashboard/shared");
+    } else {
+      navigate(redirect || `/dashboard/${result.defaultWorkspaceSlug}`);
+    }
   };
 
   const switchMode = () => {

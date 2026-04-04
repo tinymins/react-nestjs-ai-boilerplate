@@ -3,7 +3,12 @@ import { useTranslation } from "react-i18next";
 import { Outlet, useNavigate, useParams } from "react-router";
 import { UserMenu } from "@/components/account";
 import { WorkspaceRedirectSkeleton } from "@/components/skeleton";
-import { useAuth, useWorkspaceList, WorkspaceContext } from "@/hooks";
+import {
+  useAuth,
+  useSystemSettings,
+  useWorkspaceList,
+  WorkspaceContext,
+} from "@/hooks";
 import CreateWorkspaceModal from "./CreateWorkspaceModal";
 import SidebarNav from "./SidebarNav";
 import WorkspaceSwitcher from "./WorkspaceSwitcher";
@@ -31,6 +36,7 @@ export default function DashboardLayout() {
   const navigate = useNavigate();
   const [createOpen, setCreateOpen] = useState(false);
   const { workspaces, isLoading } = useWorkspaceList();
+  const { singleWorkspaceMode } = useSystemSettings();
 
   if (isLoading) {
     return <WorkspaceRedirectSkeleton />;
@@ -48,13 +54,21 @@ export default function DashboardLayout() {
 
       {/* Sidebar */}
       <aside className="glass-sidebar w-60 shrink-0 flex flex-col z-10">
-        {/* Workspace switcher — top */}
+        {/* Workspace switcher or brand header — top */}
         <div className="border-b border-[var(--border-base)]">
-          <WorkspaceSwitcher
-            workspaces={workspaces}
-            currentSlug={currentSlug}
-            onCreateNew={() => setCreateOpen(true)}
-          />
+          {singleWorkspaceMode ? (
+            <div className="px-4 py-4">
+              <span className="text-sm font-semibold text-[var(--text-primary)]">
+                FULLSTACK.RS
+              </span>
+            </div>
+          ) : (
+            <WorkspaceSwitcher
+              workspaces={workspaces}
+              currentSlug={currentSlug}
+              onCreateNew={() => setCreateOpen(true)}
+            />
+          )}
         </div>
 
         {/* Navigation area — grows */}
@@ -81,14 +95,16 @@ export default function DashboardLayout() {
         )}
       </main>
 
-      <CreateWorkspaceModal
-        open={createOpen}
-        onClose={() => setCreateOpen(false)}
-        onSuccess={(ws) => {
-          setCreateOpen(false);
-          navigate(`/dashboard/${ws.slug}`);
-        }}
-      />
+      {!singleWorkspaceMode && (
+        <CreateWorkspaceModal
+          open={createOpen}
+          onClose={() => setCreateOpen(false)}
+          onSuccess={(ws) => {
+            setCreateOpen(false);
+            navigate(`/dashboard/${ws.slug}`);
+          }}
+        />
+      )}
     </div>
   );
 }

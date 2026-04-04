@@ -1,6 +1,6 @@
 mod login;
 mod register;
-mod settings;
+pub mod settings;
 
 pub use login::{login, AuthOutput, UserDto};
 pub use register::register;

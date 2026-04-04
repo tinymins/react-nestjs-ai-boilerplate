@@ -40,6 +40,38 @@ pub async fn list_workspaces(
     State(state): State<Arc<AppState>>,
     auth_user: AuthUser,
 ) -> Response {
+    // In single workspace mode, ensure user has access to the shared workspace
+    {
+        use crate::db::entities::system_settings;
+        use crate::db::entities::workspace_members::WorkspaceMemberRole;
+        use crate::handlers::auth::settings::resolve_single_workspace_mode;
+        use sea_orm::EntityTrait;
+
+        let row = system_settings::Entity::find()
+            .one(&state.db)
+            .await
+            .ok()
+            .flatten();
+        let db_value = row.map(|s| s.single_workspace_mode).unwrap_or(false);
+        let (effective, _) = resolve_single_workspace_mode(db_value);
+
+        if effective {
+            // Auto-provision: ensure shared workspace exists and user is a member
+            match WorkspaceRepo::get_or_create_shared(&state.db, &auth_user.user_id).await {
+                Ok(shared_ws) => {
+                    let _ = WorkspaceRepo::add_member(
+                        &state.db,
+                        &shared_ws.id,
+                        &auth_user.user_id,
+                        WorkspaceMemberRole::Member,
+                    )
+                    .await;
+                }
+                Err(e) => return e.into_response(),
+            }
+        }
+    }
+
     let workspaces = match WorkspaceRepo::list_by_user(&state.db, &auth_user.user_id).await {
         Ok(ws) => ws,
         Err(e) => return e.into_response(),
@@ -66,6 +98,27 @@ pub async fn create_workspace(
     auth_user: AuthUser,
     Json(body): Json<CreateWorkspaceInput>,
 ) -> Response {
+    // Block workspace creation in single workspace mode
+    {
+        use crate::db::entities::system_settings;
+        use crate::handlers::auth::settings::resolve_single_workspace_mode;
+        use sea_orm::EntityTrait;
+
+        let row = system_settings::Entity::find()
+            .one(&state.db)
+            .await
+            .ok()
+            .flatten();
+        let db_value = row.map(|s| s.single_workspace_mode).unwrap_or(false);
+        let (effective, _) = resolve_single_workspace_mode(db_value);
+        if effective {
+            return AppError::BadRequest(
+                "Cannot create workspaces in single workspace mode".into(),
+            )
+            .into_response();
+        }
+    }
+
     let slug = body.slug.unwrap_or_else(|| {
         body.name
             .to_lowercase()

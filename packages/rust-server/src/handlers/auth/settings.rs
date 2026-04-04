@@ -37,6 +37,18 @@ pub async fn logout(State(state): State<Arc<AppState>>, headers: HeaderMap) -> R
 pub struct SystemSettingsOutput {
     pub allow_registration: bool,
     pub single_workspace_mode: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub single_workspace_mode_overridden: Option<bool>,
+}
+
+/// Check if SINGLE_WORKSPACE_MODE_OVERRIDE env var is set.
+/// Returns (effective_value, is_overridden).
+pub fn resolve_single_workspace_mode(db_value: bool) -> (bool, bool) {
+    match std::env::var("SINGLE_WORKSPACE_MODE_OVERRIDE").ok().as_deref() {
+        Some("true") => (true, true),
+        Some("false") => (false, true),
+        _ => (db_value, false),
+    }
 }
 
 pub async fn system_settings(State(state): State<Arc<AppState>>) -> Response {
@@ -48,16 +60,17 @@ pub async fn system_settings(State(state): State<Arc<AppState>>) -> Response {
         .ok()
         .flatten();
 
-    let output = match row {
-        Some(s) => SystemSettingsOutput {
-            allow_registration: s.allow_registration,
-            single_workspace_mode: s.single_workspace_mode,
-        },
-        // Default: allow registration, no single workspace mode
-        None => SystemSettingsOutput {
-            allow_registration: true,
-            single_workspace_mode: false,
-        },
+    let (db_allow, db_single) = match &row {
+        Some(s) => (s.allow_registration, s.single_workspace_mode),
+        None => (true, false),
+    };
+
+    let (effective_single, is_overridden) = resolve_single_workspace_mode(db_single);
+
+    let output = SystemSettingsOutput {
+        allow_registration: db_allow,
+        single_workspace_mode: effective_single,
+        single_workspace_mode_overridden: if is_overridden { Some(true) } else { None },
     };
 
     Json(ApiResponse {

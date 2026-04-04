@@ -4,6 +4,7 @@ import { UserRoleSchema } from "./user";
 export const SystemSettingsSchema = z.object({
   allowRegistration: z.boolean(),
   singleWorkspaceMode: z.boolean(),
+  singleWorkspaceModeOverridden: z.boolean().optional(),
 });
 
 export const SystemSettingsPatchSchema = SystemSettingsSchema.partial();

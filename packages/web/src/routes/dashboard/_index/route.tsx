@@ -2,17 +2,26 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { WorkspaceRedirectSkeleton } from "@/components/skeleton";
-import { useWorkspaceList } from "@/hooks";
+import { useSystemSettings, useWorkspaceList } from "@/hooks";
 
 export default function DashboardIndexRoute() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { workspaces, isLoading } = useWorkspaceList();
+  const { singleWorkspaceMode } = useSystemSettings();
 
   useEffect(() => {
+    if (isLoading) return;
+
+    if (singleWorkspaceMode) {
+      // In single workspace mode, always go to the shared workspace
+      navigate("/dashboard/shared", { replace: true });
+      return;
+    }
+
     if (!workspaces || workspaces.length === 0) return;
     navigate(`/dashboard/${workspaces[0].slug}`, { replace: true });
-  }, [navigate, workspaces]);
+  }, [navigate, workspaces, isLoading, singleWorkspaceMode]);
 
   if (isLoading) {
     return <WorkspaceRedirectSkeleton />;

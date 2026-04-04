@@ -1,8 +1,9 @@
 import { Button, Input, Modal, Select } from "@acme/components";
 import type { AdminUser, InvitationCode, User, UserRole } from "@acme/types";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { adminApi } from "@/generated/rust-api";
+import { adminApi, authApi } from "@/generated/rust-api";
 import { message } from "@/lib/message";
 import { RustApiError } from "@/lib/rust-api-runtime";
 
@@ -97,6 +98,7 @@ export default function SystemSettingsModal({
 }: SystemSettingsModalProps) {
   const { t } = useTranslation();
   const isSuperAdmin = user.role === "superadmin";
+  const queryClient = useQueryClient();
 
   const settingsQuery = adminApi.getSystemSettings.useQuery({
     enabled: open,
@@ -153,6 +155,7 @@ export default function SystemSettingsModal({
   const handleToggleSingleWorkspaceMode = async (checked: boolean) => {
     await updateSettingsMutation.mutateAsync({ singleWorkspaceMode: checked });
     settingsQuery.refetch();
+    authApi.systemSettings.invalidate(queryClient);
     message.success(t("systemSettings.saveSuccess"));
   };
 

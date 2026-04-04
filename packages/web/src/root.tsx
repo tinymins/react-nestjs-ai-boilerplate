@@ -9,6 +9,7 @@ import { MessageProvider } from "./components/providers/MessageProvider";
 import {
   AuthProvider,
   LangProvider,
+  SystemSettingsProvider,
   ThemeProvider,
   useAuth,
   useLang,
@@ -64,8 +65,10 @@ function Providers({ children }: { children: ReactNode }) {
             <LangProvider>
               <MessageProvider>
                 <AuthProvider>
-                  <ThemeLangSync />
-                  {children}
+                  <SystemSettingsProvider>
+                    <ThemeLangSync />
+                    {children}
+                  </SystemSettingsProvider>
                 </AuthProvider>
               </MessageProvider>
             </LangProvider>
