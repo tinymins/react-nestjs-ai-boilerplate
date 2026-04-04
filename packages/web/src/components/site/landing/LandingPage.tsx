@@ -185,7 +185,7 @@ export default function LandingPage() {
                 <>
                   <Link
                     to="/dashboard"
-                    className="hidden sm:flex items-center px-4 py-1.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-lg shadow-sm transition-all"
+                    className="hidden sm:flex items-center px-4 py-1.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-lg shadow-sm transition-all whitespace-nowrap"
                   >
                     {t("nav.dashboard")}
                   </Link>
