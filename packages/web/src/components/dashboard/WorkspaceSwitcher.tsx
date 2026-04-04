@@ -52,11 +52,11 @@ export default function WorkspaceSwitcher({
           ...workspaces.map((ws) => ({
             key: ws.id,
             label: (
-              <span className="flex items-center gap-2.5">
+              <span className="flex w-full items-center gap-2.5">
                 <WsIcon name={ws.name} size="sm" />
                 <span className="truncate">{ws.name}</span>
                 {ws.slug === currentSlug && (
-                  <span className="ml-auto text-xs text-[var(--text-muted)]">
+                  <span className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center text-xs text-[var(--text-muted)]">
                     ✓
                   </span>
                 )}

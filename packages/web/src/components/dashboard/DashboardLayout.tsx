@@ -116,7 +116,7 @@ export default function DashboardLayout() {
       </div>
     </div>
   ) : (
-    <div className="border-b border-[var(--border-base)]">
+    <div className="border-b border-[var(--border-base)] p-2">
       <WorkspaceSwitcher
         workspaces={workspaces}
         currentSlug={currentSlug}
