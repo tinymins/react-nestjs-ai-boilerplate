@@ -6,8 +6,6 @@ use axum::Json;
 use chrono::Utc;
 use serde::Deserialize;
 
-use crate::db::entities::users::UserRole;
-use crate::db::entities::workspace_members::WorkspaceMemberRole;
 use crate::db::repos::admin_repo::AdminRepo;
 use crate::db::repos::auth_repo::AuthRepo;
 use crate::db::repos::workspace_repo::WorkspaceRepo;
@@ -98,9 +96,9 @@ pub async fn register(
 
     // First user becomes superadmin
     let role = if is_first_user {
-        UserRole::Superadmin
+        "superadmin"
     } else {
-        UserRole::User
+        "user"
     };
 
     let user =
@@ -131,7 +129,7 @@ pub async fn register(
                     &state.db,
                     &ws.id,
                     &user_id_str,
-                    WorkspaceMemberRole::Member,
+                    "member",
                 )
                 .await
                 {

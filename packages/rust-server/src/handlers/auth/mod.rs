@@ -11,7 +11,6 @@ use std::sync::Arc;
 use axum::extract::FromRequestParts;
 use axum::http::HeaderMap;
 
-use crate::db::entities::users::UserRole;
 use crate::db::repos::auth_repo::AuthRepo;
 use crate::db::repos::user_repo::UserRepo;
 use crate::error::AppError;
@@ -26,7 +25,7 @@ pub struct SessionAuth {
 pub struct AuthUser {
     pub user_id: String,
     pub session_id: String,
-    pub role: UserRole,
+    pub role: String,
 }
 
 impl FromRequestParts<Arc<AppState>> for AuthUser {

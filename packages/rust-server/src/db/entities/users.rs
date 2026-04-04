@@ -1,21 +1,10 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum, Serialize, Deserialize)]
-#[sea_orm(rs_type = "String", db_type = "Enum", enum_name = "UserRole")]
-pub enum UserRole {
-    #[sea_orm(string_value = "superadmin")]
-    Superadmin,
-    #[sea_orm(string_value = "admin")]
-    Admin,
-    #[sea_orm(string_value = "user")]
-    User,
-}
-
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel, Serialize, Deserialize)]
 #[sea_orm(table_name = "users")]
 pub struct Model {
-    #[sea_orm(primary_key, auto_increment = false, column_type = "Text")]
+    #[sea_orm(primary_key, auto_increment = false, column_type = "Uuid")]
     pub id: String,
     #[sea_orm(column_type = "Text")]
     pub name: String,
@@ -25,7 +14,8 @@ pub struct Model {
     pub password_hash: String,
     #[sea_orm(column_type = "JsonBinary", nullable)]
     pub settings: Option<Json>,
-    pub role: UserRole,
+    #[sea_orm(column_type = "Text")]
+    pub role: String,
     pub created_at: Option<DateTimeWithTimeZone>,
 }
 

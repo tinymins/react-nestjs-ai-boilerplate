@@ -1,31 +1,17 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, PartialEq, Eq, EnumIter, DeriveActiveEnum, Serialize, Deserialize)]
-#[sea_orm(
-    rs_type = "String",
-    db_type = "Enum",
-    enum_name = "WorkspaceMemberRole"
-)]
-pub enum WorkspaceMemberRole {
-    #[sea_orm(string_value = "owner")]
-    Owner,
-    #[sea_orm(string_value = "admin")]
-    Admin,
-    #[sea_orm(string_value = "member")]
-    Member,
-}
-
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel, Serialize, Deserialize)]
 #[sea_orm(table_name = "workspace_members")]
 pub struct Model {
-    #[sea_orm(primary_key, auto_increment = false, column_type = "Text")]
+    #[sea_orm(primary_key, auto_increment = false, column_type = "Uuid")]
     pub id: String,
-    #[sea_orm(column_type = "Text")]
+    #[sea_orm(column_type = "Uuid")]
     pub workspace_id: String,
-    #[sea_orm(column_type = "Text")]
+    #[sea_orm(column_type = "Uuid")]
     pub user_id: String,
-    pub role: WorkspaceMemberRole,
+    #[sea_orm(column_type = "Text")]
+    pub role: String,
     pub created_at: Option<DateTimeWithTimeZone>,
 }
 

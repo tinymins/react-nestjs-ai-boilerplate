@@ -2,7 +2,6 @@ use chrono::Utc;
 use sea_orm::*;
 use uuid::Uuid;
 
-use crate::db::entities::workspace_members::WorkspaceMemberRole;
 use crate::db::entities::{workspace_members, workspaces};
 use crate::error::AppError;
 
@@ -56,7 +55,7 @@ impl WorkspaceRepo {
             id: Set(Uuid::new_v4().to_string()),
             workspace_id: Set(ws_id.clone()),
             user_id: Set(user_id.to_string()),
-            role: Set(WorkspaceMemberRole::Owner),
+            role: Set("owner".to_string()),
             created_at: Set(Some(Utc::now().into())),
         };
         workspace_members::Entity::insert(member).exec(db).await?;
@@ -139,7 +138,7 @@ impl WorkspaceRepo {
             id: Set(Uuid::new_v4().to_string()),
             workspace_id: Set(ws_id.clone()),
             user_id: Set(user_id.to_string()),
-            role: Set(WorkspaceMemberRole::Owner),
+            role: Set("owner".to_string()),
             created_at: Set(Some(Utc::now().into())),
         };
         workspace_members::Entity::insert(member).exec(db).await?;
@@ -155,7 +154,7 @@ impl WorkspaceRepo {
         db: &DatabaseConnection,
         workspace_id: &str,
         user_id: &str,
-        role: WorkspaceMemberRole,
+        role: &str,
     ) -> Result<(), AppError> {
         let existing = workspace_members::Entity::find()
             .filter(workspace_members::Column::WorkspaceId.eq(workspace_id))
@@ -171,7 +170,7 @@ impl WorkspaceRepo {
             id: Set(Uuid::new_v4().to_string()),
             workspace_id: Set(workspace_id.to_string()),
             user_id: Set(user_id.to_string()),
-            role: Set(role),
+            role: Set(role.to_string()),
             created_at: Set(Some(Utc::now().into())),
         };
         workspace_members::Entity::insert(member).exec(db).await?;

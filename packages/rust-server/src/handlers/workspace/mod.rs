@@ -55,7 +55,6 @@ pub async fn list_workspaces(
     // In single workspace mode, ensure user has access to the shared workspace
     {
         use crate::db::entities::system_settings;
-        use crate::db::entities::workspace_members::WorkspaceMemberRole;
         use crate::handlers::auth::settings::resolve_single_workspace_mode;
         use sea_orm::EntityTrait;
 
@@ -75,7 +74,7 @@ pub async fn list_workspaces(
                         &state.db,
                         &shared_ws.id,
                         &auth_user.user_id,
-                        WorkspaceMemberRole::Member,
+                        "member",
                     )
                     .await;
                 }

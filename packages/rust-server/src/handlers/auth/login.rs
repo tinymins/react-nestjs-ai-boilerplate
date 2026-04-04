@@ -6,7 +6,7 @@ use axum::response::{IntoResponse, Response};
 use axum::Json;
 use serde::{Deserialize, Serialize};
 
-use crate::db::entities::users::{self, UserRole};
+use crate::db::entities::users;
 use crate::db::repos::auth_repo::AuthRepo;
 use crate::db::repos::workspace_repo::WorkspaceRepo;
 use crate::error::{ApiResponse, AppError};
@@ -41,11 +41,7 @@ impl From<users::Model> for UserDto {
             id: u.id,
             name: u.name,
             email: u.email,
-            role: match u.role {
-                UserRole::Superadmin => "superadmin".to_string(),
-                UserRole::Admin => "admin".to_string(),
-                UserRole::User => "user".to_string(),
-            },
+            role: u.role,
             settings: u.settings,
         }
     }

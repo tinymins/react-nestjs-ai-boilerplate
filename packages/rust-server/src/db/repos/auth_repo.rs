@@ -4,7 +4,7 @@ use tracing::error;
 use uuid::Uuid;
 
 use crate::db::entities::sessions;
-use crate::db::entities::users::{self, UserRole};
+use crate::db::entities::users;
 use crate::error::AppError;
 
 pub struct AuthRepo;
@@ -29,7 +29,7 @@ impl AuthRepo {
         name: &str,
         email: &str,
         password_hash: &str,
-        role: UserRole,
+        role: &str,
     ) -> Result<users::Model, AppError> {
         let id = Uuid::new_v4().to_string();
         let active = users::ActiveModel {
@@ -37,7 +37,7 @@ impl AuthRepo {
             name: Set(name.to_string()),
             email: Set(email.to_string()),
             password_hash: Set(password_hash.to_string()),
-            role: Set(role),
+            role: Set(role.to_string()),
             settings: Set(None),
             created_at: Set(Some(Utc::now().into())),
         };

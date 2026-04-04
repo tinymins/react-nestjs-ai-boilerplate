@@ -5,7 +5,6 @@ use uuid::Uuid;
 
 use crate::db::entities::{
     invitation_codes, sessions, system_settings, users, workspace_members, workspaces,
-    users::UserRole,
 };
 use crate::error::AppError;
 use crate::services::auth::hash_password;
@@ -39,7 +38,7 @@ impl AdminRepo {
         name: &str,
         email: &str,
         password: &str,
-        role: UserRole,
+        role: &str,
     ) -> Result<users::Model, AppError> {
         let existing = users::Entity::find()
             .filter(users::Column::Email.eq(email))
@@ -57,7 +56,7 @@ impl AdminRepo {
             name: Set(name.to_string()),
             email: Set(email.to_string()),
             password_hash: Set(password_hash),
-            role: Set(role),
+            role: Set(role.to_string()),
             settings: Set(None),
             created_at: Set(Some(Utc::now().into())),
         };
@@ -105,7 +104,7 @@ impl AdminRepo {
             id: Set(Uuid::new_v4().to_string()),
             workspace_id: Set(ws_id),
             user_id: Set(user_id.clone()),
-            role: Set(workspace_members::WorkspaceMemberRole::Owner),
+            role: Set("owner".to_string()),
             created_at: Set(Some(Utc::now().into())),
         };
         workspace_members::Entity::insert(member_active)
@@ -121,7 +120,7 @@ impl AdminRepo {
     pub async fn update_user_role(
         db: &DatabaseConnection,
         user_id: &str,
-        role: UserRole,
+        role: &str,
     ) -> Result<users::Model, AppError> {
         let user = users::Entity::find_by_id(user_id)
             .one(db)
@@ -129,7 +128,7 @@ impl AdminRepo {
             .ok_or_else(|| AppError::NotFound("User not found".into()))?;
 
         let mut active: users::ActiveModel = user.into();
-        active.role = Set(role);
+        active.role = Set(role.to_string());
         let updated = active.update(db).await?;
         Ok(updated)
     }
@@ -158,7 +157,7 @@ impl AdminRepo {
             .await?
             .ok_or_else(|| AppError::NotFound("User not found".into()))?;
 
-        if user.role == UserRole::Superadmin {
+        if user.role == "superadmin" {
             return Err(AppError::Forbidden(
                 "Cannot delete superadmin account".into(),
             ));

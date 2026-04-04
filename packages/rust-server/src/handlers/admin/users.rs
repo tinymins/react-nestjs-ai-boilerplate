@@ -5,7 +5,6 @@ use axum::response::{IntoResponse, Response};
 use axum::Json;
 use serde::{Deserialize, Serialize};
 
-use crate::db::entities::users::UserRole;
 use crate::db::repos::admin_repo::AdminRepo;
 use crate::error::{ApiResponse, AppError};
 use crate::handlers::auth::AuthUser;
@@ -24,19 +23,9 @@ pub struct AdminUserOutput {
     pub created_at: String,
 }
 
-fn role_to_string(role: &UserRole) -> String {
-    match role {
-        UserRole::Superadmin => "superadmin".to_string(),
-        UserRole::Admin => "admin".to_string(),
-        UserRole::User => "user".to_string(),
-    }
-}
-
-fn string_to_role(s: &str) -> Result<UserRole, AppError> {
+fn validate_role(s: &str) -> Result<&str, AppError> {
     match s {
-        "superadmin" => Ok(UserRole::Superadmin),
-        "admin" => Ok(UserRole::Admin),
-        "user" => Ok(UserRole::User),
+        "superadmin" | "admin" | "user" => Ok(s),
         _ => Err(AppError::BadRequest(format!("Invalid role: {s}"))),
     }
 }
@@ -56,7 +45,7 @@ pub async fn list_users(
             id: user.id.clone(),
             name: user.name.clone(),
             email: user.email.clone(),
-            role: role_to_string(&user.role),
+            role: user.role.clone(),
             last_login_at: last_login.map(|dt| dt.to_rfc3339()),
             created_at: user
                 .created_at
@@ -90,8 +79,8 @@ pub async fn create_user(
     require_superadmin(&auth_user)?;
 
     let role = match &input.role {
-        Some(r) => string_to_role(r)?,
-        None => UserRole::User,
+        Some(r) => validate_role(r)?,
+        None => "user",
     };
 
     let user = AdminRepo::create_user(&state.db, &input.name, &input.email, &input.password, role)
@@ -101,7 +90,7 @@ pub async fn create_user(
         id: user.id.clone(),
         name: user.name.clone(),
         email: user.email.clone(),
-        role: role_to_string(&user.role),
+        role: user.role.clone(),
         last_login_at: None,
         created_at: user
             .created_at
@@ -137,7 +126,7 @@ pub async fn update_user_role(
         ));
     }
 
-    let role = string_to_role(&input.role)?;
+    let role = validate_role(&input.role)?;
     let user = AdminRepo::update_user_role(&state.db, &input.user_id, role).await?;
 
     let last_login = AdminRepo::get_last_login_at(&state.db, &user.id).await?;
@@ -145,7 +134,7 @@ pub async fn update_user_role(
         id: user.id.clone(),
         name: user.name.clone(),
         email: user.email.clone(),
-        role: role_to_string(&user.role),
+        role: user.role.clone(),
         last_login_at: last_login.map(|dt| dt.to_rfc3339()),
         created_at: user
             .created_at
