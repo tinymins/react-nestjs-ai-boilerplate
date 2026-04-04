@@ -10,6 +10,7 @@ const dashboard = {
     settingsGroup: {
       _: "設定",
       generalSettings: "一般設定",
+      adminSettings: "管理画面",
     },
   },
 };

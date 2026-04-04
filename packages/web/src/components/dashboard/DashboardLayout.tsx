@@ -3,7 +3,6 @@ import {
   Avatar,
   Button,
   CloseOutlined,
-  ControlOutlined,
   Drawer,
   Dropdown,
   LogoutOutlined,
@@ -14,7 +13,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useNavigate, useParams } from "react-router";
 import ProfileSettingsModal from "@/components/account/ProfileSettingsModal";
-import SystemSettingsModal from "@/components/account/SystemSettingsModal";
 import { WorkspaceRedirectSkeleton } from "@/components/skeleton";
 import {
   useAuth,
@@ -51,7 +49,6 @@ export default function DashboardLayout() {
   const { t } = useTranslation();
   const [createOpen, setCreateOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [systemSettingsOpen, setSystemSettingsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { workspaces, isLoading } = useWorkspaceList();
   const { singleWorkspaceMode } = useSystemSettings();
@@ -66,7 +63,6 @@ export default function DashboardLayout() {
 
   const workspaceNotFound = currentSlug && currentWorkspace === null;
 
-  const isAdmin = user?.role === "admin" || user?.role === "superadmin";
   const displayName = user ? user.name || user.email : "";
   const avatarInitial = user
     ? (user.name || user.email || "?").charAt(0).toUpperCase()
@@ -99,15 +95,6 @@ export default function DashboardLayout() {
       icon: <UserOutlined style={{ color: "#1677ff" }} />,
       label: t("userMenu.profileSettings"),
     },
-    ...(isAdmin
-      ? [
-          {
-            key: "systemSettings",
-            icon: <ControlOutlined style={{ color: "#722ed1" }} />,
-            label: t("userMenu.admin"),
-          } as const,
-        ]
-      : []),
     {
       key: "logout",
       icon: <LogoutOutlined style={{ color: "#ff4d4f" }} />,
@@ -119,7 +106,6 @@ export default function DashboardLayout() {
     key,
   }) => {
     if (key === "settings") setSettingsOpen(true);
-    if (key === "systemSettings") setSystemSettingsOpen(true);
     if (key === "logout") logout();
   };
 
@@ -249,13 +235,6 @@ export default function DashboardLayout() {
           onClose={() => setSettingsOpen(false)}
           user={user}
           onUpdateUser={updateUser}
-        />
-      )}
-      {user && isAdmin && (
-        <SystemSettingsModal
-          open={systemSettingsOpen}
-          onClose={() => setSystemSettingsOpen(false)}
-          user={user}
         />
       )}
       {!singleWorkspaceMode && (

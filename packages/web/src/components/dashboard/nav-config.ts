@@ -55,6 +55,12 @@ export const menuConfig: MenuItemConfig[] = [
         routeSuffix: "/settings",
         requiredRole: "admin",
       },
+      {
+        key: "adminSettings",
+        labelKey: "settingsGroup.adminSettings",
+        routeSuffix: "/admin",
+        requiredRole: "admin",
+      },
     ],
   },
 ];

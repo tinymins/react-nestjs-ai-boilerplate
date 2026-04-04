@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { resolveAvatarUrl } from "@/lib/avatar";
 import ProfileSettingsModal from "./ProfileSettingsModal";
-import SystemSettingsModal from "./SystemSettingsModal";
 
 type UserMenuProps = {
   user: User;
@@ -24,9 +23,7 @@ export default function UserMenu({
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [systemSettingsOpen, setSystemSettingsOpen] = useState(false);
   const displayName = user.name || user.email;
-  const isAdmin = user.role === "admin" || user.role === "superadmin";
 
   const items: DropdownMenuItem[] = [
     {
@@ -64,18 +61,6 @@ export default function UserMenu({
         setSettingsOpen(true);
       },
     },
-    ...(isAdmin
-      ? [
-          {
-            key: "admin",
-            label: t("userMenu.admin"),
-            onClick: () => {
-              setOpen(false);
-              setSystemSettingsOpen(true);
-            },
-          },
-        ]
-      : []),
     {
       key: "logout",
       label: t("userMenu.signOut"),
@@ -119,14 +104,6 @@ export default function UserMenu({
         user={user}
         onUpdateUser={onUpdateUser}
       />
-
-      {isAdmin && (
-        <SystemSettingsModal
-          open={systemSettingsOpen}
-          onClose={() => setSystemSettingsOpen(false)}
-          user={user}
-        />
-      )}
     </>
   );
 }

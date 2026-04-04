@@ -10,6 +10,7 @@ const dashboard = {
     settingsGroup: {
       _: "Einstellungen",
       generalSettings: "Allgemein",
+      adminSettings: "Verwaltung",
     },
   },
 };

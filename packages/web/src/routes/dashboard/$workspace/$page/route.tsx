@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
+import AdminSettingsPage from "@/components/admin/AdminSettingsPage";
 import { PAGE_NAMES } from "@/components/dashboard/nav-config";
 import WorkspaceSettingsPage from "@/components/workspace/WorkspaceSettingsPage";
 
@@ -9,6 +10,10 @@ export default function DemoPageRoute() {
 
   if (page === "settings") {
     return <WorkspaceSettingsPage />;
+  }
+
+  if (page === "admin") {
+    return <AdminSettingsPage />;
   }
 
   const pageName =

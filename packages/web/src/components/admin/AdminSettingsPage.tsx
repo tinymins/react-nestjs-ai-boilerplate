@@ -1,17 +1,12 @@
 import { Button, Input, Modal, Select, Tabs } from "@acme/components";
-import type { AdminUser, InvitationCode, User, UserRole } from "@acme/types";
+import type { AdminUser, InvitationCode, UserRole } from "@acme/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { adminApi, authApi } from "@/generated/rust-api";
+import { useAuth } from "@/hooks";
 import { message } from "@/lib/message";
 import { RustApiError } from "@/lib/rust-api-runtime";
-
-type SystemSettingsModalProps = {
-  open: boolean;
-  onClose: () => void;
-  user: User;
-};
 
 function RoleBadge({ role }: { role: UserRole }) {
   const { t } = useTranslation();
@@ -66,20 +61,22 @@ function Toggle({
   checked,
   onChange,
   disabled,
+  loading,
 }: {
   checked: boolean;
   onChange: (v: boolean) => void;
   disabled?: boolean;
+  loading?: boolean;
 }) {
   return (
     <button
       type="button"
       role="switch"
       aria-checked={checked}
-      disabled={disabled}
+      disabled={disabled || loading}
       onClick={() => onChange(!checked)}
-      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
-        checked ? "bg-blue-600" : "bg-zinc-300 dark:bg-zinc-600"
+      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+        checked ? "bg-[var(--accent)]" : "bg-zinc-300 dark:bg-zinc-600"
       }`}
     >
       <span
@@ -91,22 +88,18 @@ function Toggle({
   );
 }
 
-export default function SystemSettingsModal({
-  open,
-  onClose,
-  user,
-}: SystemSettingsModalProps) {
+export default function AdminSettingsPage() {
   const { t } = useTranslation();
-  const isSuperAdmin = user.role === "superadmin";
+  const { user } = useAuth();
   const queryClient = useQueryClient();
 
-  const settingsQuery = adminApi.getSystemSettings.useQuery({
-    enabled: open,
-  });
+  const isSuperAdmin = user?.role === "superadmin";
+
+  const settingsQuery = adminApi.getSystemSettings.useQuery();
   const updateSettingsMutation = adminApi.updateSystemSettings.useMutation();
 
   const usersQuery = adminApi.listUsers.useQuery({
-    enabled: open && isSuperAdmin,
+    enabled: !!isSuperAdmin,
   });
   const updateRoleMutation = adminApi.updateUserRole.useMutation();
   const forceResetPasswordMutation = adminApi.forceResetPassword.useMutation();
@@ -114,32 +107,13 @@ export default function SystemSettingsModal({
   const createUserMutation = adminApi.createUser.useMutation();
 
   const invitationsQuery = adminApi.listInvitationCodes.useQuery({
-    enabled: open && isSuperAdmin,
+    enabled: !!isSuperAdmin,
   });
   const generateInvitationMutation =
     adminApi.generateInvitationCode.useMutation();
   const deleteInvitationMutation = adminApi.deleteInvitationCode.useMutation();
 
   const [activeTab, setActiveTab] = useState("general");
-
-  // Local state for General tab — only saved on OK
-  const [localAllowRegistration, setLocalAllowRegistration] = useState<
-    boolean | null
-  >(null);
-  const [localSingleWorkspaceMode, setLocalSingleWorkspaceMode] = useState<
-    boolean | null
-  >(null);
-
-  // Sync local state when settings are fetched
-  const effectiveAllowRegistration =
-    localAllowRegistration ?? settingsQuery.data?.allowRegistration ?? true;
-  const effectiveSingleWorkspaceMode =
-    localSingleWorkspaceMode ??
-    settingsQuery.data?.singleWorkspaceMode ??
-    false;
-
-  const hasGeneralChanges =
-    localAllowRegistration !== null || localSingleWorkspaceMode !== null;
 
   const [resetPasswordModal, setResetPasswordModal] = useState<{
     open: boolean;
@@ -165,33 +139,18 @@ export default function SystemSettingsModal({
     string | null
   >(null);
 
-  const handleSaveGeneral = async () => {
-    const updates: Record<string, boolean> = {};
-    if (localAllowRegistration !== null) {
-      updates.allowRegistration = localAllowRegistration;
-    }
-    if (localSingleWorkspaceMode !== null) {
-      updates.singleWorkspaceMode = localSingleWorkspaceMode;
-    }
-    if (Object.keys(updates).length === 0) {
-      onClose();
-      return;
-    }
-    await updateSettingsMutation.mutateAsync(updates);
+  if (!user) return null;
+
+  const handleToggleSetting = async (
+    key: "allowRegistration" | "singleWorkspaceMode",
+    value: boolean,
+  ) => {
+    await updateSettingsMutation.mutateAsync({ [key]: value });
     settingsQuery.refetch();
-    if (localSingleWorkspaceMode !== null) {
+    if (key === "singleWorkspaceMode") {
       authApi.systemSettings.invalidate(queryClient);
     }
-    setLocalAllowRegistration(null);
-    setLocalSingleWorkspaceMode(null);
     message.success(t("systemSettings.saveSuccess"));
-    onClose();
-  };
-
-  const handleCancelGeneral = () => {
-    setLocalAllowRegistration(null);
-    setLocalSingleWorkspaceMode(null);
-    onClose();
   };
 
   const handleChangeRole = async (userId: string, role: UserRole) => {
@@ -283,8 +242,9 @@ export default function SystemSettingsModal({
           </p>
         </div>
         <Toggle
-          checked={effectiveAllowRegistration}
-          onChange={setLocalAllowRegistration}
+          checked={settingsQuery.data?.allowRegistration ?? true}
+          onChange={(v) => handleToggleSetting("allowRegistration", v)}
+          loading={updateSettingsMutation.isPending}
         />
       </div>
       {isSuperAdmin && !settingsQuery.data?.singleWorkspaceModeOverridden && (
@@ -298,8 +258,9 @@ export default function SystemSettingsModal({
             </p>
           </div>
           <Toggle
-            checked={effectiveSingleWorkspaceMode}
-            onChange={setLocalSingleWorkspaceMode}
+            checked={settingsQuery.data?.singleWorkspaceMode ?? false}
+            onChange={(v) => handleToggleSetting("singleWorkspaceMode", v)}
+            loading={updateSettingsMutation.isPending}
           />
         </div>
       )}
@@ -583,32 +544,27 @@ export default function SystemSettingsModal({
 
   return (
     <>
-      <Modal
-        open={open}
-        onCancel={handleCancelGeneral}
-        onOk={handleSaveGeneral}
-        okText={t("common.confirm")}
-        cancelText={t("common.cancel")}
-        okButtonProps={{
-          disabled: !hasGeneralChanges,
-          loading: updateSettingsMutation.isPending,
-        }}
-        title={t("systemSettings.title")}
-        width={isSuperAdmin ? 800 : 520}
-      >
+      <div className="mx-auto max-w-4xl">
+        <h1 className="text-xl font-semibold text-[var(--text-primary)] mb-6">
+          {t("systemSettings.title")}
+        </h1>
         <Tabs
           className="[&_[role=tabpanel]]:mt-4"
           items={tabItems}
           activeKey={activeTab}
           onChange={setActiveTab}
         />
-      </Modal>
+      </div>
 
       {/* Reset Password Modal */}
       <Modal
         open={resetPasswordModal.open}
         onCancel={() => {
-          setResetPasswordModal({ open: false, userId: "", userName: "" });
+          setResetPasswordModal({
+            open: false,
+            userId: "",
+            userName: "",
+          });
           setNewPassword("");
         }}
         title={t("systemSettings.resetPasswordTitle")}
@@ -659,7 +615,12 @@ export default function SystemSettingsModal({
         open={addUserModal}
         onCancel={() => {
           setAddUserModal(false);
-          setAddUserForm({ name: "", email: "", password: "", role: "user" });
+          setAddUserForm({
+            name: "",
+            email: "",
+            password: "",
+            role: "user",
+          });
         }}
         title={t("systemSettings.addUserTitle")}
       >
@@ -674,7 +635,10 @@ export default function SystemSettingsModal({
             <Input
               value={addUserForm.name}
               onChange={(e) =>
-                setAddUserForm((f) => ({ ...f, name: e.target.value }))
+                setAddUserForm((f) => ({
+                  ...f,
+                  name: e.target.value,
+                }))
               }
               placeholder={t("systemSettings.usernamePlaceholder")}
             />
@@ -687,7 +651,10 @@ export default function SystemSettingsModal({
               type="email"
               value={addUserForm.email}
               onChange={(e) =>
-                setAddUserForm((f) => ({ ...f, email: e.target.value }))
+                setAddUserForm((f) => ({
+                  ...f,
+                  email: e.target.value,
+                }))
               }
               placeholder={t("systemSettings.emailPlaceholder")}
             />
@@ -700,7 +667,10 @@ export default function SystemSettingsModal({
               type="password"
               value={addUserForm.password}
               onChange={(e) =>
-                setAddUserForm((f) => ({ ...f, password: e.target.value }))
+                setAddUserForm((f) => ({
+                  ...f,
+                  password: e.target.value,
+                }))
               }
               placeholder={t("systemSettings.passwordPlaceholder")}
             />
@@ -712,11 +682,20 @@ export default function SystemSettingsModal({
             <Select
               value={addUserForm.role}
               onChange={(role) =>
-                setAddUserForm((f) => ({ ...f, role: role as UserRole }))
+                setAddUserForm((f) => ({
+                  ...f,
+                  role: role as UserRole,
+                }))
               }
               options={[
-                { value: "user", label: t("systemSettings.roleUser") },
-                { value: "admin", label: t("systemSettings.roleAdmin") },
+                {
+                  value: "user",
+                  label: t("systemSettings.roleUser"),
+                },
+                {
+                  value: "admin",
+                  label: t("systemSettings.roleAdmin"),
+                },
                 {
                   value: "superadmin",
                   label: t("systemSettings.roleSuperAdmin"),
