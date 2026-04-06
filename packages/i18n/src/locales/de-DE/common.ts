@@ -20,7 +20,7 @@ const common = {
   language: "Sprache",
   theme: "Design",
   welcome: "Willkommen",
-  homeDesc: "Dies ist ein Gerüstprojekt, Platzhalter für die Startseite.",
+  homeDesc: "Full-Stack Rust + React Boilerplate, sofort einsatzbereit.",
   getStarted: "Loslegen",
   saveSuccess: "Erfolgreich gespeichert",
   saveFailed: "Speichern fehlgeschlagen",
@@ -42,7 +42,7 @@ const common = {
     notFoundTitle: "Seite nicht gefunden — AI Stack",
     homeTitle: "AI Stack — AI Full-Stack-Anwendungsvorlage",
     homeDescription:
-      "Eine Full-Stack-Anwendungsvorlage basierend auf TypeScript. tRPC · React 19 · Hono · Prisma · PostgreSQL.",
+      "Ein Full-Stack-Boilerplate mit Rust (Axum) + React 19 + PostgreSQL. Auth · Workspaces · i18n · Docker.",
     homeOgTitle: "AI Stack — AI Full-Stack-Vorlage",
   },
   lang: {

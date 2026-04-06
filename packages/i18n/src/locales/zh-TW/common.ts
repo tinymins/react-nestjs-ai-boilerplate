@@ -20,7 +20,7 @@ const common = {
   language: "語言",
   theme: "主題",
   welcome: "歡迎使用",
-  homeDesc: "這是一個腳手架專案，首頁佔位符。",
+  homeDesc: "Rust + React 全端開發模板，開箱即用。",
   getStarted: "開始使用",
   saveSuccess: "儲存成功",
   saveFailed: "儲存失敗",
@@ -41,7 +41,7 @@ const common = {
     notFoundTitle: "頁面不存在 — AI Stack",
     homeTitle: "AI Stack — AI 全棧應用模板",
     homeDescription:
-      "基於 TypeScript 的全棧應用模板。tRPC · React 19 · Hono · Prisma · PostgreSQL.",
+      "基於 Rust (Axum) + React 19 + PostgreSQL 的全端開發模板。認證 · 工作空間 · 國際化 · Docker 部署。",
     homeOgTitle: "AI Stack — AI 全棧應用模板",
   },
   lang: {

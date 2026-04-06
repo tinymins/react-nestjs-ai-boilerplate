@@ -20,8 +20,7 @@ const common = {
   language: "言語",
   theme: "テーマ",
   welcome: "ようこそ",
-  homeDesc:
-    "これはスキャフォールドプロジェクトのホームページプレースホルダーです。",
+  homeDesc: "フルスタック Rust + React ボイラープレート、すぐに使えます。",
   getStarted: "はじめる",
   saveSuccess: "保存しました",
   saveFailed: "保存に失敗しました",
@@ -45,7 +44,7 @@ const common = {
     notFoundTitle: "ページが見つかりません — AI Stack",
     homeTitle: "AI Stack — AI フルスタックアプリケーションテンプレート",
     homeDescription:
-      "TypeScript ベースのフルスタックアプリケーションテンプレート。tRPC · React 19 · Hono · Prisma · PostgreSQL.",
+      "Rust (Axum) + React 19 + PostgreSQL のフルスタックボイラープレート。認証 · ワークスペース · i18n · Docker。",
     homeOgTitle: "AI Stack — AI フルスタックテンプレート",
   },
   lang: {

@@ -1,6 +1,6 @@
-# rs-fullstack — Full-Stack Web Application
+# rs-fullstack — Full-Stack Rust + React Boilerplate
 
-Rust + React 全栈 Monorepo 应用，使用 pnpm workspaces 管理。
+Production-ready full-stack boilerplate: Rust (Axum) backend + React 19 SPA, managed as a pnpm monorepo. Ships with authentication, multi-workspace, i18n (5 languages), dark mode, WASM modules, and one-command Docker deployment.
 
 ## 技术栈
 
@@ -35,6 +35,7 @@ make init     # 首次初始化（破坏性操作，会重建数据库）
 make dev      # 启动开发环境（DB + 开发服务器）
 make build    # 生产构建
 make docker   # Docker 构建
+make deploy   # 一键部署到服务器
 make lint     # Biome lint + typecheck
 make gen:api  # 从 Rust 生成 TypeScript 类型
 ```
