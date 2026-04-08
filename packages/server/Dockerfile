@@ -44,7 +44,7 @@ COPY prisma.config.ts ./
 RUN npm install prisma@7 --save-dev 2>/dev/null
 
 # Rust binary (pre-built release — cargo build --release runs before docker build)
-COPY packages/server/target/release/rs-fullstack-server /usr/local/bin/
+COPY target/release/rs-fullstack-server /usr/local/bin/
 
 # Frontend static files
 COPY --from=web-builder /app/packages/web/build/client /app/web
